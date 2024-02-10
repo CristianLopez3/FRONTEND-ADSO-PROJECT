@@ -5,7 +5,7 @@ Hi there, let's go and take a look...
 ### Tailwindcss configuration
 ```npm
   npm i -D tailwindcss postcss autoprefixer
-  npx tailwindcss init
+  npx tailwindcss init -p
 ```
 
 ### resources links

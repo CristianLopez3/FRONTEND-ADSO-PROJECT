@@ -6,7 +6,7 @@ import DarkMode from "./DarkMode";
 export default function Navbar() {
   return (
     <>
-      <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200">
+      <div className="shadow-md bg-white dark:bg-gray-800 dark:text-white duration-200">
         <div className="container py-3 sm:py-1 ">
           <div className="flex justify-between items-center">
             <div>

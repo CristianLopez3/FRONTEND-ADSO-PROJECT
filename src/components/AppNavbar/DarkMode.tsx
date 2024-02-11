@@ -25,6 +25,8 @@ export default function DarkMode() {
       localStorage.setItem("theme", "light");
     }
   }, [theme]);
+
+  
   return (
     <>
       <div className="relative ">
@@ -35,9 +37,7 @@ export default function DarkMode() {
           onClick={() =>
             setTheme((data) => (data === "dark" ? "light" : "dark"))
           }
-          className={`${stylesDark}  ${
-            theme === "dark" ? "opacity-0" : "opacity-100"
-          } `}
+          className={`${stylesDark}  ${theme === "dark" ? "opacity-0" : "opacity-100"} `}
         />
         <img
           src={darkPng}

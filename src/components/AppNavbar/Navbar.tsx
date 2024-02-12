@@ -44,7 +44,7 @@ export default function Navbar() {
                   href="#"
                   className="inline-block py-4 px-4 hover:text-primary duration-200"
                 >
-                  Contact
+                  Book
                 </a>
               </li>
             </ul>

@@ -1,5 +1,6 @@
 import Navbar from "../../components/AppNavbar/Navbar";
 import Hero from "./Hero";
+import Menu from './Menu';
 
 export default function Landing() {
   return (
@@ -8,6 +9,9 @@ export default function Landing() {
         <Navbar />
         <Hero />
       </header>
+      <main>
+        <Menu />
+      </main>
     </>
   );
 }

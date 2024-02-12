@@ -3,6 +3,7 @@ import Food1 from "../../../assets/biryani2.png";
 import Food2 from "../../../assets/biryani3.png";
 import Food3 from "../../../assets/biryani5.png";
 import { useState } from "react";
+import Button from "../../../components/Button";
 
 type Image = {
   id: number;
@@ -49,14 +50,12 @@ export default function Hero() {
               Welcome to Menu EASY
             </h1>
             <p className="text-sm">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore
-              repudiandae molestiae voluptatibus alias temporibus, voluptate
-              magni sed doloribus nam ex?
+              Welcome to MenuEASY Experience exquisite flavors, warm
+              hospitality, and unforgettable moments with us. Let's dine
+              together today!
             </p>
             <div className="">
-              <button className="bg-primary text-black px-4 py-2 rounded hover:scale-105 duration-200">
-                Book Now
-              </button>
+              <Button content="Book Now" variant="primary"  />
             </div>
           </article>
           {/* Sección de imágenes */}

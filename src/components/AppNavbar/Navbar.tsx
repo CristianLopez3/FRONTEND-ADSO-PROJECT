@@ -1,60 +1,33 @@
-import Logo from "../../assets/food-logo.png";
-import { MdMenuBook } from "react-icons/md";
-import DarkMode from "./DarkMode";
+import { useState } from "react";
+import { MdOutlineFastfood } from "react-icons/md";
+import HamburgerButton from "./HamburgerButton";
+import MenuLinks from "./MenuLinks";
+
 
 export default function Navbar() {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+
+  const handleHamburgerMenu = () => {
+    openMenu ? setOpenMenu(false) : setOpenMenu(true);
+  };
+
   return (
-    <nav className="shadow-2xl bg-white dark:bg-gray-800 dark:text-white duration-200">
-      <div className="container py-3 md:py-1 ">
-        <div className="flex justify-between items-center">
-          <div>
-            <a
-              href="#"
-              className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold"
-            >
-              <img src={Logo} alt="MenuEASY" className="w-10" />
-              MenuEASY
-            </a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div>
-              <DarkMode />
-            </div>
-
-            <ul className=" hidden md:flex gap-4">
-              <li>
-                <a
-                  href="#"
-                  className="inline-block py-4 px-4 hover:text-primary duration-200"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="inline-block py-4 px-4 hover:text-primary duration-200"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="inline-block py-4 px-4 hover:text-primary duration-200"
-                >
-                  Book
-                </a>
-              </li>
-            </ul>
-            <button className="flex gap-2 bg-gradient-to-r from-primary to-third text-white px-4 py-2 rounded-full hover:scale-105 duration-300 md:hidden">
-              Book
-              <MdMenuBook className="text-xl text-white drop-shadow-sm cursor-pointer" />
-            </button>
-          </div>
+    <div className="container max-w-6xl mx-auto px-6 py-12 ">
+      <nav className="relative flex justify-between items-center font-bold text-secondary">
+        <h2 className="flex items-center gap-2 text-2xl">
+          <MdOutlineFastfood />
+          Menu EASY
+        </h2>
+        <MenuLinks variant="desktop" />
+        {/*  Hamburger Button */}
+        <div className="md:hidden">
+          <HamburgerButton openMenu={openMenu} handleHamburgerMenu={handleHamburgerMenu} />
         </div>
-      </div>
-    </nav>
+      </nav>
+      {/*  Mobile Menu */}
+      {openMenu && (
+        <MenuLinks variant="mobile" />
+      )}
+    </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-6 py-12 ">
+    <div className="container mx-auto px-6 py-12 ">
       <nav className="relative flex justify-between items-center font-bold text-secondary">
         <h2 className="flex items-center gap-2 text-2xl">
           <MdOutlineFastfood />

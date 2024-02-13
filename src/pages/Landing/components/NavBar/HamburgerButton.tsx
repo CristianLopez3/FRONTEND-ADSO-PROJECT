@@ -1,4 +1,4 @@
-import './hamburgerButton.styles.css';
+import "./hamburgerButton.styles.css";
 
 type HamburgerButtonProps = {
   openMenu: boolean;
@@ -15,7 +15,7 @@ export default function HamburgerButton({
       type="button"
       className={`${
         openMenu ? "open" : ""
-      } z-40 block hamburger md:hidden focus:outline-none`}
+      } z-[50] block hamburger md:hidden focus:outline-none`}
       onClick={handleHamburgerMenu}
     >
       <span className="hamburger-top"></span>

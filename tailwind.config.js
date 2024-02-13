@@ -4,15 +4,19 @@ export default {
   darkMode: "class",
   theme: {
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
-      xl: '1440px',
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
     },
     extend: {
+      boxShadow: {
+        "3xl": "0px -12px 191px -43px rgba(0,0,0,0.75)",
+      },
       colors: {
         primary: "#ff8700",
         secondary: "#3D3B40",
+        grayLight: "rgb(242 243 248)",
         third: "#ff8710",
       },
       container: {

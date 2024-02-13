@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Button from "../../../components/Button";
+import Button from "../../../../components/Button";
+import { button } from "../../../../theme";
 
 const menuTypes = [
   {
@@ -31,12 +31,14 @@ export default function MenuNav({
 }: MenuNavProps) {
   return (
     <>
-      <div className="flex  w-full">
+      <div className="flex flex-row w-full gap-2 overflow-x-scroll ">
         {menuTypes.map((item) => {
           return (
             <Button
               key={item.id}
-              variant={menuActive === item.type ? "black" : "empty"}
+              variant={
+                menuActive === item.type ? button.active : button.inactive
+              }
               content={item.type}
               onClick={() => handleMenuActive(item.type)}
             />

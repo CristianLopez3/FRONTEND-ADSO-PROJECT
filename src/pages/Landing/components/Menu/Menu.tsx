@@ -1,6 +1,5 @@
 import { useState } from "react";
 import MenuNav from "./MenuNav";
-import MenuCard from "./MenuCard";
 
 export default function Menu() {
   const [menuActive, setMenuActive] = useState<string>("Lunches");

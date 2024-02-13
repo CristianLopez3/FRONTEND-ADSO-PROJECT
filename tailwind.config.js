@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      'sans': ['Ubuntu', 'system-ui'],
+      'serif': ['Ubuntu', 'Georgia']
+    },
     screens: {
       sm: "480px",
       md: "768px",

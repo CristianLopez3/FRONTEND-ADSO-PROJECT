@@ -25,7 +25,7 @@ export default function MenuLinks({ variant }: MenuLinksProps) {
   }
 
   return (
-    <div className="hidden h-10 md:flex md:space-x-8">
+    <div className="hidden h-12 items-center md:flex md:space-x-8">
       {menuLinks.map((item) => {
         return (
           <div className="group" key={item.length * Math.random() * 100}>

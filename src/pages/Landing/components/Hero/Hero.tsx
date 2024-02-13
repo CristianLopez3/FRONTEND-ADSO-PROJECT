@@ -1,25 +1,26 @@
-import heroImg from "../../../../assets/hero.jpg";
-import Button from "../../../../components/Button";
-import { FaStar } from "react-icons/fa";
+import Button from "../../../../components/ui/Button";
 import { button } from "../../../../theme";
+import "./hero.styles.css";
 
 export default function Hero() {
   return (
     <section id="hero">
-      <div className="container mx-auto p-2">
-        <div className="flex flex-col justify-between items-center md:flex-row my-12">
-          <article className="pl-0  text-center  flex flex-col items-center md:inline-block md:text-left md:pl-8">
-            <h1 className="text-5xl font-bold mb-8 ">Welcome to MenuEASY</h1>
-            <div className="w-1/2">
-              <Button variant={button.lg_primary} content="Book" />
-            </div>
-          </article>
-          <article className="hidden md:flex">
-            <img src={heroImg} alt="A resturant" />
-          </article>
+      <div className="flex flex-col justify-center items-center p-2 min-h-screen">
+        <h1 className="text-center text-4xl md:text-6xl text-white font-bold mb-8 ">
+          Welcome to MenuEASY
+        </h1>
+        <div className="w-full px-2 md:w-[60%] mx-auto  mb-4">
+          <p className="text-center text-grayLight ">
+            Discover delicious dishes made simple. From classic comfort foods to
+            modern delights, indulge in flavors that will tantalize your taste
+            buds. Join us for a dining experience that's easy and delightful at
+            Menu Easy.
+          </p>
+        </div>
+        <div className="w-1/2 md:1/2">
+          <Button variant={button.lg_primary} content="Book" />
         </div>
       </div>
-      {/* <FaStar color="orange" className="text-2xl" /> */}
     </section>
   );
 }

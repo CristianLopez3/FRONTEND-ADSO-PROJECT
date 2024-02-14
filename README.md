@@ -24,3 +24,5 @@ Hi there, let's go and take a look...
 * https://dribbble.com/shots/18979770-Restaurant-Website
 
 * https://the1894lodge.com/
+
+* https://react.keepdesign.io/docs/getting-started/Introduction

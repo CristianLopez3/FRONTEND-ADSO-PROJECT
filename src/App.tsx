@@ -1,13 +1,13 @@
 import "./index.css";
+import Booking from "./pages/Landing/components/Booking";
 import Landing from "./pages/Landing";
-import Input from "./components/ui/Input";
 
 function App() {
   return (
     <div className="relative">
-      {/* <Landing /> */}
+      <Landing />
       <div className="mt-10 ml-10">
-        <Input />
+        <Booking />
       </div>
     </div>
   );

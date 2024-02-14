@@ -17,7 +17,7 @@ export default function Hero() {
             Menu Easy.
           </p>
         </div>
-        <div className="w-1/2 md:1/2">
+        <div className="w-1/2 md:w-1/4">
           <Button variant={button.lg_primary} content="Book" />
         </div>
       </div>

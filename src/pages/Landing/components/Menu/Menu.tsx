@@ -3,7 +3,7 @@ import MenuNav from "./MenuNav";
 import MenuCard from "./MenuCard";
 import { dataMenus } from "./Data";
 
-export default function Menu() {
+const Menu = () => {
   const [menuActive, setMenuActive] = useState<string>("Lunches");
 
   function handleMenuActive(menu: string): void {
@@ -29,4 +29,6 @@ export default function Menu() {
       </div>
     </section>
   );
-}
+};
+
+export default Menu;

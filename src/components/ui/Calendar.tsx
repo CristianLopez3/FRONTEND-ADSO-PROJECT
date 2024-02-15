@@ -6,7 +6,7 @@ type CalendarProps = {
   styles?: string;
 };
 
-const Calendar = ({ styles}: CalendarProps) => {
+const Calendar = ({ styles }: CalendarProps) => {
   const [date, setDate] = useState(null);
   return (
     <DatePicker placeholder="Date / Month / Year" className={styles}>

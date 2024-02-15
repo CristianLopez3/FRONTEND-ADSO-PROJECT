@@ -25,10 +25,10 @@ type MenuNavProps = {
   handleMenuActive: (value: string) => void;
 };
 
-export default function MenuNav({
+const  MenuNav = ({
   menuActive,
   handleMenuActive,
-}: MenuNavProps) {
+}: MenuNavProps) => {
   return (
     <>
       <div className="flex flex-row w-full gap-2 overflow-x-scroll ">
@@ -48,3 +48,5 @@ export default function MenuNav({
     </>
   );
 }
+
+export default MenuNav;

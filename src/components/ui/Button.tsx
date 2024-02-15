@@ -6,12 +6,12 @@ type ButtonProps = {
   children?: ReactNode;
 } & ComponentPropsWithoutRef<"button">;
 
-export default function Button({
+const  Button = ({
   variant,
   content,
   children,
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   return (
     <button className={variant} {...props}>
       {content}
@@ -19,3 +19,5 @@ export default function Button({
     </button>
   );
 }
+
+export default Button;

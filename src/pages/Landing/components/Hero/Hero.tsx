@@ -2,7 +2,7 @@ import Button from "../../../../components/ui/Button";
 import { button } from "../../../../theme";
 import "./hero.styles.css";
 
-export default function Hero() {
+const  Hero = ()  => {
   return (
     <section id="hero">
       <div className="flex flex-col justify-center items-center p-2 min-h-screen">
@@ -24,3 +24,5 @@ export default function Hero() {
     </section>
   );
 }
+
+export default Hero;

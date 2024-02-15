@@ -1,6 +1,7 @@
 import Navbar from "../../components/layout/NavBar";
 import Hero from "./components/Hero";
 import Menu from "./components/Menu";
+import Booking from "./components/Booking";
 import MobileNav from "../../components/layout/MobileNav";
 
 export default function Landing() {
@@ -12,6 +13,7 @@ export default function Landing() {
       </header>
       <main>
         <Menu />
+        <Booking />
       </main>
       <MobileNav />
     </div>

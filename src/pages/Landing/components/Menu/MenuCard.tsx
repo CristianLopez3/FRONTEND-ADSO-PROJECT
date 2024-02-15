@@ -16,15 +16,8 @@ export default function MenuCard({
 }: MenuCardProps) {
   return (
     <>
-      <div className="max-w-sm md:max-w-66 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
-        <div className="flex items-center justify-between px-4 py-2 bg-primary">
-          
-          <h3 className="text-lg font-bold text-white">{price}</h3>
-          
-          <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
-            left: <span className="ml-2 px-2 py-1 rounded bg-secondary text-white">{quantity}</span>
-          </button>
-        </div>
+      <div key={title} className="max-w-sm md:max-w-66 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
+     
 
         <img
           className="object-conver w-full h-44 mb-2"
@@ -40,6 +33,11 @@ export default function MenuCard({
             {description}.
           </p>
         </div>
+
+        <div className="flex items-center justify-between px-4 py-2 border-t ">
+          <h3 className="text-lg font-bold text-black">{price}</h3>
+        </div>
+
       </div>
     </>
   );

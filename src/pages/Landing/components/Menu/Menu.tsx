@@ -18,6 +18,7 @@ export default function Menu() {
         <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-x-2 gap-5 mt-12">
           {dataMenus.map((item) => (
             <MenuCard
+              key={item.title}
               description={item.description}
               price={30000}
               title={item.title}

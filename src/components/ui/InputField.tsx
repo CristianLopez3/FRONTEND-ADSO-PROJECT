@@ -19,7 +19,7 @@ const InputField = ({
 }: InputFieldProps) => {
 
   return (
-    <div>
+    <div key={id}>
       <Label
         htmlFor={id}
         value={name}

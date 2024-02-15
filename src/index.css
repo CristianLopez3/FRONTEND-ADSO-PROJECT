@@ -13,3 +13,7 @@
     @apply text-3xl font-bold text-center;
   }
 }
+
+.container-section {
+  @apply container mx-auto;
+}

@@ -11,8 +11,8 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Ubuntu", "system-ui"],
-      serif: ["Ubuntu", "Georgia"],
+      sans: ["Poppins", "system-ui"],
+      serif: ["Poppins", "Georgia"],
     },
     screens: {
       sm: "480px",

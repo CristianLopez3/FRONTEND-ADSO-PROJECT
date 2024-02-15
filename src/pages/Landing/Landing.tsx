@@ -5,7 +5,7 @@ import MobileNav from "../../components/layout/MobileNav";
 
 export default function Landing() {
   return (
-    <div className="relative">
+    <div className="relative pb-24">
       <header>
         <Navbar />
         <Hero />

@@ -5,8 +5,7 @@ import Landing from "./pages/Landing";
 function App() {
   return (
     <div className="relative">
-      <Landing />
-      <div className="mt-10 ml-10">
+      <div className="mt-10">
         <Booking />
       </div>
     </div>

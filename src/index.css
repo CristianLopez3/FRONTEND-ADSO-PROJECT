@@ -6,3 +6,10 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+
+@layer base {
+  h2{
+    @apply text-3xl font-bold text-center;
+  }
+}

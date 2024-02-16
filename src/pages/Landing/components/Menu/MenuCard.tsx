@@ -28,15 +28,15 @@ const MenuCard = ({
           />
         </figure>
 
-        <article className="flex justify-center items-center px-4 py-2 w-3/4  bg-white">
-          <div>
+        <article className="flex justify-center  items-center px-4 py-2 w-full  bg-white">
+          <div className="w-full p-2">
             <h3 className="text-xl font-bold text-gray-800 uppercase dark:text-white">
               {title}
             </h3>
             <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
               {description}.
             </p>
-            <div className="flex items-center justify-end px-4">
+            <div className="flex items-center mt-6 justify-end px-4">
               <h3 className="text-lg font-bold text-black">${price}</h3>
             </div>
           </div>

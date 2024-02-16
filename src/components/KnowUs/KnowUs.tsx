@@ -1,4 +1,4 @@
-import Img from "../../../../assets/patrick.jpg";
+import Img from "../../assets/patrick.jpg";
 
 const KnowUs = () => {
   return (

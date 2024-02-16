@@ -15,7 +15,7 @@ const Menu = () => {
       <div className="container mx-auto">
         <MenuNav menuActive={menuActive} handleMenuActive={handleMenuActive} />
         {/* With a map and a filter, I'm going to filter by category the data given by the API */}
-        <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-x-2 gap-5 mt-12">
+        <article className="grid grid-cols-1 md:grid-cols-2  gap-5 mt-12">
           {dataMenus.map((item) => (
             <MenuCard
               key={item.title}

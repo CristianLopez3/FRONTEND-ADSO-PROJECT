@@ -1,4 +1,4 @@
-import ImgMenu from "../../../../assets/bg-desktop.jpg";
+import ImgMenu from "../../../../assets/bg-mobile.jpg";
 import { type Menu } from "../../../../types/Menu";
 // https://dribbble.com/shots/21617600-Restaurant-Landing-Page-Design-UI
 
@@ -17,26 +17,30 @@ const MenuCard = ({
     <>
       <div
         key={title}
-        className="max-w-sm md:max-w-66 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800"
+        // className="max-w-sm md:max-w-66 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800"
+        className="relative max-w-11/12 md:max-w-11/12 flex  overflow-hidden  rounded-md shadow-xl dark:bg-gray-800"
       >
-        <img
-          className="object-conver w-full h-44 mb-2"
-          src={ImgMenu}
-          alt="Hamburger"
-        />
+        <figure className="w-1/3 h-full">
+          <img
+            className="object-cover h-36 w-full"
+            src={ImgMenu}
+            alt="Hamburger"
+          />
+        </figure>
 
-        <div className="px-4 py-2">
-          <h3 className="text-xl font-bold text-gray-800 uppercase dark:text-white">
-            {title}
-          </h3>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {description}.
-          </p>
-        </div>
-
-        <div className="flex items-center justify-between px-4 py-2 border-t ">
-          <h3 className="text-lg font-bold text-black">{price}</h3>
-        </div>
+        <article className="flex justify-center items-center px-4 py-2 w-3/4  bg-white">
+          <div>
+            <h3 className="text-xl font-bold text-gray-800 uppercase dark:text-white">
+              {title}
+            </h3>
+            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              {description}.
+            </p>
+            <div className="flex items-center justify-end px-4">
+              <h3 className="text-lg font-bold text-black">${price}</h3>
+            </div>
+          </div>
+        </article>
       </div>
     </>
   );

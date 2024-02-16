@@ -9,6 +9,11 @@
 
 
 @layer base {
+  
+  body{
+    @apply bg-secondary ;
+  }
+
   h2{
     @apply text-3xl font-bold text-center;
   }
@@ -16,4 +21,12 @@
 
 .container-section {
   @apply container mx-auto;
+}
+
+.navbar-container {
+  @apply fixed top-0 left-0 z-[100] w-full h-auto bg-black  rounded border-secondary
+}
+
+.span-primary {
+  @apply bg-primary;
 }

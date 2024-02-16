@@ -11,9 +11,9 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 z-[100] w-full h-auto bg-grayLight  rounded border-secondary ">
+    <div className="navbar-container ">
       <div className="container mx-auto px-6 py-6">
-        <nav className="relative flex justify-between items-center font-bold text-secondary">
+        <nav className="relative flex justify-between items-center font-bold text-white">
           <h2 className="flex items-center gap-2 text-2xl">
             <MdOutlineFastfood />
             Menu EASY

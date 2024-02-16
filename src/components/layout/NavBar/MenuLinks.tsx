@@ -9,7 +9,7 @@ export default function MenuLinks({ variant }: MenuLinksProps) {
     return (
       <div
         id="menu"
-        className="absolute z-[45] top-0 bottom-0 left-0 flex flex-col self-end  w-full min-h-screen py-1 pt-40 pl-12 space-y-3 text-lg text-white uppercase bg-secondary"
+        className="absolute z-[45] top-0 bottom-0 left-0 flex flex-col self-end  w-full min-h-screen py-1 pt-40 pl-12 space-y-3 text-lg text-white uppercase bg-black"
       >
         {menuLinks.map((item) => (
           <a

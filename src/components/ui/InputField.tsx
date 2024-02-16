@@ -23,7 +23,7 @@ const InputField = ({
       <Label
         htmlFor={id}
         value={name}
-        className={`text-base text-secondary mb-2 ${styles}`}
+        className={`text-white text-base mb-2 ${styles}`}
       />
       <TextInput
         id={id}

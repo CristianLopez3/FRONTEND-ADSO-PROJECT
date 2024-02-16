@@ -11,12 +11,14 @@
 @layer base {
   
   body{
-    @apply bg-secondary ;
+    @apply bg-secondary overflow-x-hidden ;
   }
+
 
   h2{
     @apply text-3xl font-bold text-center;
   }
+
 }
 
 .container-section {

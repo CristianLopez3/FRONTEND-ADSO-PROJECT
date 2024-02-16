@@ -3,8 +3,8 @@ import FormBooking from "./FormBooking";
 const Booking = () => {
   return (
     <section>
-      <div className="container-section">
-        <h2 className="text-white">Book A Reservation</h2>
+      <div className="container-section bg-white py-16 rounded-lg">
+        <h2 className="text-black mb-12">Book A Reservation</h2>
         <article className="w-[90%] mx-auto">
           <FormBooking />
         </article>

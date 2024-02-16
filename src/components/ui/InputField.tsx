@@ -7,6 +7,7 @@ type InputFieldProps = {
   id: string;
   type?: string;
   styles?: string;
+  colorText?: string;
 };
 
 const InputField = ({
@@ -16,6 +17,7 @@ const InputField = ({
   id,
   type = "text",
   styles,
+  colorText = "black"
 }: InputFieldProps) => {
 
   return (
@@ -23,7 +25,7 @@ const InputField = ({
       <Label
         htmlFor={id}
         value={name}
-        className={`text-white text-base mb-2 ${styles}`}
+        className={`capitalize text-${colorText} text-base mb-2 ${styles}`}
       />
       <TextInput
         id={id}

@@ -1,15 +1,16 @@
+import { Outlet } from "react-router";
 import "./index.css";
+import Navbar from "./components/layout/NavBar";
+import Footer from "./components/layout/Footer";
+
 // import Booking from "./pages/Landing/components/Booking";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
 
 function App() {
   return (
     <>
-      <div className="relative">
-        <div className="mt-10">{/* <Landing /> */}</div>
-      </div>
-      <Login />
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
   );
 }

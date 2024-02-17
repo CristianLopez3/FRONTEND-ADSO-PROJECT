@@ -1,16 +1,16 @@
-import Navbar from "../components/layout/NavBar";
+// import Navbar from "../components/layout/NavBar";
 import Hero from "../components/Hero";
 import Menu from "../components/Menu";
 import Booking from "../components/Booking";
 import MobileNav from "../components/layout/MobileNav";
 import KnowUs from "../components/KnowUs";
-import Footer from "../components/layout/Footer/Footer";
+// import Footer from "../components/layout/Footer/Footer";
 
 const Landing = () => {
   return (
     <div className="relative pb-0">
       <header>
-        <Navbar />
+        {/* <Navbar /> */}
         <Hero />
       </header>
       <main>
@@ -18,7 +18,7 @@ const Landing = () => {
         <Booking />
         <KnowUs />
       </main>
-      <Footer />
+      {/* <Footer /> */}
       <MobileNav />
     </div>
   );

@@ -1,17 +1,18 @@
-import { At, Key, SignIn } from "phosphor-react";
+import { At, Key, SignIn, ArrowLeft } from "phosphor-react";
 import Img from "../assets/bg-mobile.jpg";
 import InputIcon from "../components/ui/InputIcon";
+import { Link } from "react-router-dom";
 
 
 const Login = () => {
+
   return (
     <div className={styles.main}>
       <section className={styles.section}>
         <div className="p-6 md:p-20">
           <h2 className="font-mono mb-5 text-4xl font-bold"> Login </h2>
           <p className="max-w-sm mb-12 font-sans font-light text-gray-600">
-            Log in to your account to upload or downlaod pictures, videos or
-            music.
+            Log in to your account if you are an employee
           </p>
           <InputIcon icon={<At />} placeholder="email" id="email" name="email" type="email" styles="mb-6" />
           <InputIcon icon={<Key />} placeholder="password" id="password" name="password" type="password" />
@@ -35,7 +36,10 @@ const Login = () => {
           className="w-[430px] hidden md:block"
         />
 
-
+        <Link to="/">
+        
+          <ArrowLeft className="absolute top-[27px] left-[20px] md:top-[20px] md:left-[20px]" size={28}/>
+        </Link>
       </section>
     </div>
   );

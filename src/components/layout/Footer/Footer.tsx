@@ -25,12 +25,12 @@ const Footer = () => {
         <p className="flex items-center">
           {isOpen ? (
             <>
-              <div className="w-4 h-4 bg-green-900 border border-black rounded-full mr-2" />
+              <span className="w-4 h-4 bg-green-900 border border-black rounded-full mr-2" />
               Open Now
             </>
           ) : (
             <>
-              <div className="w-4 h-4 bg-red-900 border-black rounded-full mr-2" />
+              <span className="w-4 h-4 bg-red-900 border-black rounded-full mr-2" />
               Closed
             </>
           )}

@@ -17,6 +17,7 @@
 .hamburger-middle,
 .hamburger-bottom {
   position: absolute;
+  z-index: 900;
   width: 23px;
   height: 2px;
   top: 4px;

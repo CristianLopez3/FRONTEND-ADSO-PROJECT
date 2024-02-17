@@ -11,7 +11,7 @@ const Menu = () => {
   }
 
   return (
-    <section className="pt-2 dark:bg-secondary text-white mb-20">
+    <section id="menu" className="mt-[100px] pt-2 dark:bg-secondary text-white mb-20">
       <div className="container mx-auto">
         <MenuNav menuActive={menuActive} handleMenuActive={handleMenuActive} />
         {/* With a map and a filter, I'm going to filter by category the data given by the API */}

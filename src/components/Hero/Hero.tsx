@@ -1,6 +1,5 @@
-import Button from "../ui/Button";
-import { button } from "../../theme";
 import "./hero.styles.css";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -21,8 +20,8 @@ const Hero = () => {
               delightful at Menu Easy.
             </p>
           </div>
-          <div className="block mx-auto w-1/2 md:w-1/4">
-            <Button variant={`${button.lg_primary} mx-0`} content="Book" />
+          <div className="flex items-center justify-center mx-auto w-1/2 md:w-1/4">
+            <Link className={`bg-white py-2 px-12 rounded-md hover:opacity-80 duration-200`} to="/menu">Menu</Link>
           </div>
         </div>
       </div>

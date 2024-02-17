@@ -15,7 +15,7 @@ export default function HamburgerButton({
       type="button"
       className={`${
         openMenu ? "open" : ""
-      } z-[50] block hamburger md:hidden focus:outline-none`}
+      } z-[900] block hamburger md:hidden focus:outline-none`}
       onClick={handleHamburgerMenu}
     >
       <span className="hamburger-top"></span>

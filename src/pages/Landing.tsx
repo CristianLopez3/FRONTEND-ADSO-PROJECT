@@ -1,9 +1,9 @@
 import Navbar from "../components/layout/NavBar";
-import Hero from "../components/Hero";
+import Hero from "../components/Landing/Hero";
 // import Menu from "../components/Menu";
-import Booking from "../components/Booking";
+import Booking from "../components/Landing/Booking";
 import MobileNav from "../components/layout/MobileNav";
-import KnowUs from "../components/KnowUs";
+import KnowUs from "../components/Landing/KnowUs";
 import Footer from "../components/layout/Footer/Footer";
 import { Outlet } from "react-router";
 

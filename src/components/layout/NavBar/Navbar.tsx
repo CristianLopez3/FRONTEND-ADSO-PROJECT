@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MdOutlineFastfood } from "react-icons/md";
 import HamburgerButton from "./HamburgerButton";
 import MenuLinks from "./MenuLinks";
-import { Link, useNavigation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState<boolean>(false);

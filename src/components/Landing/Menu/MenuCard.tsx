@@ -1,6 +1,5 @@
-import ImgMenu from "../../assets/bg-mobile.jpg";
-import { type Menu } from "../../types/Menu";
-// https://dribbble.com/shots/21617600-Restaurant-Landing-Page-Design-UI
+import ImgMenu from "../../../assets/bg-mobile.jpg";
+import { type Menu } from "../../../types/Menu";
 
 type MenuCardProps = Menu;
 

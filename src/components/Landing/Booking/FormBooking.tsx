@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputField from "../ui/InputField";
+import InputField from "../../ui/InputField";
 const FormBooking = () => {
   const [people, setPeople] = useState<number>(0);
 

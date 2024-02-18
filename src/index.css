@@ -11,11 +11,11 @@
 @layer base {
   
   html { 
-    @apply my-0 py-0
+    @apply m-0 p-0
   }
 
   body{
-    @apply bg-secondary overflow-x-hidden ;
+    @apply bg-secondary overflow-x-hidden m-0 p-0 ;
   }
 
 

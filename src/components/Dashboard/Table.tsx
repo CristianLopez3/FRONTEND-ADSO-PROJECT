@@ -7,18 +7,18 @@ const Table = () => {
       <div className="overflow-auto rounded-lg shadow hidden lg:block">
         <table className="w-full rounded-lg">
           <thead className="bg-grayLight border-b-2 border-grayDark">
-            <tr className="text-left">
-              <th className="p-3 text-sm font-semibold tracking-wide w-20">
+            <tr className="text-left w-full">
+              <th className="p-3 text-sm font-semibold tracking-wide w-[10%]">
                 No.
               </th>
-              <th className="p-3 text-sm font-semibold tracking-wide ">Name</th>
-              <th className="p-3 text-sm font-semibold tracking-wide w-32">
+              <th className="p-3 text-sm font-semibold tracking-wide w-[40%]">Name</th>
+              <th className="p-3 text-sm font-semibold tracking-wide w-[20%]">
                 Date
               </th>
-              <th className="p-3 text-sm font-semibold tracking-wide w-24">
+              <th className="p-3 text-sm font-semibold tracking-wide w-[20%]">
                 Time
               </th>
-              <th className="p-3 text-sm font-semibold tracking-wide w-24">
+              <th className="p-3 text-sm font-semibold tracking-wide w-[10%]">
                 Actions
               </th>
             </tr>
@@ -28,7 +28,7 @@ const Table = () => {
               <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
                 1000
               </td>
-              <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+              <td className="p-3 text-sm text-gray-700 whitespace-nowrap text-balance ">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Reiciendis, cupiditate.
               </td>

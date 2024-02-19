@@ -21,7 +21,7 @@ const Sidebar = () => {
     <>
       <aside
         className={`${
-          open ? "w-72 p-5" : "w-16 p-4"
+          open ? "w-full md:w-72 p-5" : "w-16 p-4"
         } relative border-r h-screen  bg-white transition-all`}
       >
         <ArrowLeft

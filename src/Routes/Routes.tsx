@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Menu from "../components/Landing/Menu";
 import Booking from "../components/Landing/Booking";
 import Dashboard from "../pages/Dashboard";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,9 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />
+    element: <DashboardLayout />,
+    children: [
+      {path: "", element: <Dashboard />}
+    ]
   }
 ]);

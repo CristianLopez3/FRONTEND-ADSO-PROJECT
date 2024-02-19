@@ -20,10 +20,12 @@ const Login = () => {
           <div className="flex flex-col items-center justify-between mt-6 space-y-6 lg:flex-row lg:space-y-0"
           >
             <div className="font-thing text-black">Forgot Password</div>
+            <Link to="/dashboard">
             <button className={styles.button}>
               <span>Next</span>
               <SignIn />
             </button>
+            </Link>
           </div>
 
           <div className="mt-12 border-b border-b-grayDark"></div>

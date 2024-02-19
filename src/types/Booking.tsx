@@ -1,7 +1,6 @@
 export type Booking = {
+  id: number;
   name: string;
-  cellphone: BigInt ;
   date: string;
   time: string;
-  people: number;
 }

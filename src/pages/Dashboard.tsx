@@ -4,9 +4,9 @@ import { Booking } from "../types/Booking";
 import TableRow from "../components/Dashboard/TableRowBooking";
 
 const dummyData: Array<Booking> = [
-  { id: 1, name: "John Doe", date: "01-02-2002", time: "09:30" },
-  { id: 2, name: "Jane Smith", date: "01-02-2002", time: "10:15" },
-  { id: 3, name: "Michael Johnson", date: "01-02-2002", time: "20:00" },
+  { id: 1, name: "John Doe", date: "2002-01-02", time: "09:30" },
+  { id: 2, name: "Jane Smith", date: "2002-04-02", time: "10:15" },
+  { id: 3, name: "Michael Johnson", date: "2002-08-02", time: "20:00" },
 ];
 
 

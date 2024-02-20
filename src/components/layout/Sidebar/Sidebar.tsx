@@ -8,7 +8,7 @@ type MenuLink = {
 };
 
 const Sidebar = () => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const menus: MenuLink[] = [
     { title: "Dashboard", icon: <DotsNine size={20} /> },
     { title: "User", icon: <User size={20} /> },

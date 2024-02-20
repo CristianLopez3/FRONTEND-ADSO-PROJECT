@@ -1,4 +1,3 @@
-import { MdOutlineFastfood } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {
   RiAccountCircleFill,
@@ -20,10 +19,10 @@ const DashboardNavbar = ({}: DashboardNavbarProps) => {
             </h2>
           </Link>
 
-          <button className="text-gray-800 bg-gray-200 px-4 py-2 md:py-4 md:px-6 rounded-2xl flex gap-4 items-center">
-            <RiAccountCircleFill size={32} className="hidden md:block" />
-            Cristian
-            <RiArrowDropDownLine size={32} />
+          <button className="hidden sm:flex text-gray-800 bg-gray-200 px-4 py-2 md:py-4 md:px-6 rounded-2xl flex gap-4 items-center">
+            <RiAccountCircleFill size={32}  />
+            <span className="hidden md:block">Navbar</span>
+            <RiArrowDropDownLine size={32} className="hidden md:block" />
           </button>
         </nav>
       </div>

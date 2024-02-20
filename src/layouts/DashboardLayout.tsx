@@ -12,7 +12,7 @@ const DashboardLayout = () => {
     <>
       <div className="relative md:static flex bg-white">
         <Sidebar />
-        <div className="w-full p-12 bg-black h-screen">
+        <div className="w-full p-2 md:p-12 bg-black h-screen">
           <div className="w-full p-2 bg-white rounded-3xl h-full  overflow-y-scroll">
             <header>
               <DashboardNavbar />

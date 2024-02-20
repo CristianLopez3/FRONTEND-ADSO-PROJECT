@@ -38,6 +38,9 @@
   .btn.btn-danger {
     @apply text-white bg-red-600 shadow-red-400/40;
   }
+  .btn.btn-warning {
+    @apply text-white bg-yellow-400 shadow-yellow-400/40;
+  }
   .row-table {
     @apply p-3 text-sm text-gray-700 whitespace-nowrap;
   }

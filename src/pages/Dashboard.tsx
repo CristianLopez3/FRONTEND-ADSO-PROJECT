@@ -1,8 +1,7 @@
-// Dashboard.tsx
-import MyTable from "../components/Dashboard/MyTable";
+import MyTable from "../components/Dashboard/Table";
 import MobileItem from "../components/Dashboard/MobileItem";
 import { Booking } from "../types/Booking";
-import TableRow from "../components/Dashboard/TableRow";
+import TableRow from "../components/Dashboard/TableRowBooking";
 
 const dummyData: Array<Booking> = [
   { id: 1, name: "John Doe", date: "01-02-2002", time: "09:30" },
@@ -26,7 +25,7 @@ const Dashboard = () => {
         ]}
 
         renderRowItems={(item: Booking, index) => (
-          <TableRow item={item} key={index} />
+          <TableRow id={item.id} date={item.date} name={item.name} time={item.time} key={index} />
         )}
 
         renderMobileItems={(item: Booking, index) => (

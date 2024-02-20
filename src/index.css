@@ -15,7 +15,7 @@
   }
 
   body{
-    @apply bg-secondary overflow-x-hidden m-0 p-0 ;
+    @apply bg-black overflow-x-hidden m-0 p-0 ;
   }
 
 
@@ -41,16 +41,16 @@
   .row-table {
     @apply p-3 text-sm text-gray-700 whitespace-nowrap;
   }
+  .container-section {
+    @apply container mx-auto;
+  }
+  
+  .navbar-container {
+    @apply fixed top-0 left-0 z-[100] w-full h-auto bg-black  rounded border-secondary
+  }
+  .span-primary {
+    @apply bg-primary;
+  }
 }
 
-.container-section {
-  @apply container mx-auto;
-}
 
-.navbar-container {
-  @apply fixed top-0 left-0 z-[100] w-full h-auto bg-black  rounded border-secondary
-}
-
-.span-primary {
-  @apply bg-primary;
-}

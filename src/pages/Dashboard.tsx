@@ -13,7 +13,7 @@ const dummyData: Array<Booking> = [
 
 const Dashboard = () => {
   return (
-    <main className="container mx-auto">
+    <main className="px-2 md:px-20 mx-auto">
       <MyTable
         data={dummyData}
         columns={[

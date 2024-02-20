@@ -9,12 +9,12 @@ type Props = {
 
 const TableHeader: React.FC<Props> = ({ columns }) => {
   return (
-    <thead className="bg-grayLight border-b-2 border-grayDark">
+    <thead className="bg-black ">
       <tr className="text-left w-full">
         {columns.map((column, index) => (
           <th
             key={index}
-            className={`p-3 text-sm font-semibold tracking-wide w-[${column.width}]`}
+            className={`p-3 text-white text-sm font-semibold tracking-wide w-[${column.width}]`}
           >
             {column.title}
           </th>

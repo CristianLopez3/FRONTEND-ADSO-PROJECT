@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar-container ">
+    <div className="navbar-container">
       <div className="container mx-auto px-6 py-6">
         <nav className="relative flex justify-between items-center font-bold text-white">
           <Link to="/">

@@ -1,5 +1,5 @@
 export type Menu = {
-  // id: BigInteger;
+  id: number | string;
   title: string;
   description: string;
   price: number;

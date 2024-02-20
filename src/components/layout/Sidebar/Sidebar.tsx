@@ -1,4 +1,4 @@
-import { User, ArrowFatLineRight, Book, Alarm, DotsNine } from "phosphor-react";
+import { User, Book, Alarm, DotsNine } from "phosphor-react";
 import { PiArrowFatRightFill } from "react-icons/pi";
 import { type ReactNode, useState } from "react";
 
@@ -37,7 +37,7 @@ const Sidebar = () => {
 
           <div className="pt-10 pb-12 md:pt-10 flex justify-center font-bold  items-center gap-x-4">
             {open ? (
-              <div className="flex gap-x-4 items-center origin-left">
+              <div className="text-left flex gap-x-4 items-center origin-left">
                 <DotsNine color="#fff" className="font-bold" size={24} />
                 <h1>MenuEASY</h1>
               </div>
@@ -50,7 +50,7 @@ const Sidebar = () => {
             {menus.map((item, index) => (
               <li
                 key={index}
-                className={`text-gray-200 font-semibold text-sm flex items-center gap-x-4 cursor-pointer  rounded-md hover:bg-grayDark`}
+                className={`text-gray-200 font-semibold text-sm flex items-center gap-x-4 cursor-pointer py-2 rounded-md hover:bg-grayDark`}
               >
                 {open ? (
                   <div className="flex items-center justify-center gap-4">

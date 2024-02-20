@@ -2,8 +2,6 @@ import { ReactNode } from "react";
 import TableHeader, { Column } from "./TableHeader";
 
 
-
-
 type TableProps<T> = {
   data: T[];
   columns: Column[];
@@ -11,7 +9,7 @@ type TableProps<T> = {
   renderMobileItems: (item: T, index: number | string) => ReactNode;
 };
 
-const MyTable = <T,>({
+const Table = <T,>({
   data,
   columns,
   renderRowItems,
@@ -34,4 +32,4 @@ const MyTable = <T,>({
   );
 };
 
-export default MyTable;
+export default Table;

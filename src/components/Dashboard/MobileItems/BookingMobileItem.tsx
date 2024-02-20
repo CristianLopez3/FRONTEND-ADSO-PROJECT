@@ -1,10 +1,10 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Booking } from "../../types/Booking";
+import { Booking } from "../../../types/Booking";
 
-export type MobileItemProps = Booking;
+export type BookingMobileItemProps = Booking;
 
-const MobileItem: React.FC<MobileItemProps> = ({
+const BookingMobileItem: React.FC<BookingMobileItemProps> = ({
   id,
   name,
   date,
@@ -29,4 +29,4 @@ const MobileItem: React.FC<MobileItemProps> = ({
   );
 };
 
-export default MobileItem;
+export default BookingMobileItem;

@@ -1,7 +1,7 @@
-import MyTable from "../components/Dashboard/Table";
-import MobileItem from "../components/Dashboard/MobileItem";
-import { Booking } from "../types/Booking";
-import TableRow from "../components/Dashboard/TableRowBooking";
+import MyTable from "../../components/Dashboard/Table";
+import BookingMobileItem from "../../components/Dashboard/MobileItems/BookingMobileItem";
+import { Booking } from "../../types/Booking";
+import TableRowBooking from "../../components/Dashboard/Rows/TableRowBooking";
 
 const dummyData: Array<Booking> = [
   { id: 1, name: "John Doe", date: "2002-01-02", time: "09:30" },
@@ -25,11 +25,11 @@ const Dashboard = () => {
         ]}
 
         renderRowItems={(item: Booking, index) => (
-          <TableRow id={item.id} date={item.date} name={item.name} time={item.time} key={index} />
+          <TableRowBooking id={item.id} date={item.date} name={item.name} time={item.time} key={index} />
         )}
 
         renderMobileItems={(item: Booking, index) => (
-          <MobileItem
+          <BookingMobileItem
             key={index}
             id={item.id}
             name={item.name}

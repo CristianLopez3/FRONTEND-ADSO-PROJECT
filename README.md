@@ -33,3 +33,4 @@ Hi there, let's go and take a look...
 * [Keep Components](https://react.keepdesign.io/docs/getting-started/Introduction)
 * [phosporicons](https://phosphoricons.com/)
 * [Teddy Tutorials](https://www.youtube.com/watch?v=ZEB3VCbXQHA&ab_channel=TeddySmith)
+* [Tailwind Gradient Generator](https://tailwindcomponents.com/gradient-generator/)

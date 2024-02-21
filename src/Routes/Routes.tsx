@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Reservations from "../pages/Dashboard/Reservations";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Menus from "../pages/Dashboard/Menus";
+import Users from "../pages/Dashboard/Users";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,8 @@ export const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {path: "", element: <Dashboard />},
-      {path: "booking", element: <Reservations />},
+      {path: "users", element: <Users />},
+      {path: "reservations", element: <Reservations />},
       {path: "menus", element: <Menus />}
     ]
   }

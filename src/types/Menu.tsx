@@ -1,4 +1,4 @@
-export type Menu = {
+export interface Menu {
   id: number | string;
   title: string;
   description: string;

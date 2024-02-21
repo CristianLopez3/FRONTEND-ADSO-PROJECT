@@ -1,7 +1,7 @@
 import Table from "../../components/Dashboard/Table";
 import { Menu } from "../../types/Menu";
 import MenuMobileItem from "../../components/Dashboard/MobileItems/MenuMobileItem";
-import TableRowMenu from "../../components/Dashboard/Rows/TableRowMenu";
+import MenuTableRow from "../../components/Dashboard/Rows/MenuTableRow";
 
 const dummyData: Array<Menu> = [
   { id: 1, title: "Hot Potatoes", description: "potatoes with sault and sauce to patner", price: 2000, quantity: 20 },
@@ -26,7 +26,7 @@ const Menus = () => {
       ]}
 
       renderRowItems={(item: Menu, index) => (
-        <TableRowMenu id={item.id} description={item.description} title={item.title} price={item.price} quantity={item.quantity} key={index} />
+        <MenuTableRow id={item.id} description={item.description} title={item.title} price={item.price} quantity={item.quantity} key={index} />
       )}
     
       renderMobileItems={(item: Menu, index) => (

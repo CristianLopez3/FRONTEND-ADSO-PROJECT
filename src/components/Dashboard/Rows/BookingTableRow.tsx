@@ -6,9 +6,9 @@ import Modal from "../../ui/Modal";
 import UpdateBookingContent from "../Modals/UpdateBookingContent";
 import DeleteContent from "../Modals/DeleteContent";
 
-type TableRowProps = Booking;
+type BookingTableRowProps = Booking;
 
-const TableRowBooking = ({ date, id, name, time }: TableRowProps) => {
+const BookingTableRow = ({ date, id, name, time }: BookingTableRowProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -55,4 +55,4 @@ const TableRowBooking = ({ date, id, name, time }: TableRowProps) => {
   );
 };
 
-export default TableRowBooking;
+export default BookingTableRow;

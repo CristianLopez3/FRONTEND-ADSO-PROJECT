@@ -6,15 +6,15 @@ import Modal from "../../ui/Modal";
 import UpdateMenuContent from "../Modals/UpdateMenuContent";
 import DeleteContent from "../Modals/DeleteContent";
 
-type TableRowMenuProps = Menu;
+type MenuTableRowProps = Menu;
 
-const TableRowMenu = ({
+const MenuTableRow = ({
   id,
   title,
   description,
   price,
   quantity,
-}: TableRowMenuProps) => {
+}: MenuTableRowProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -72,4 +72,4 @@ const TableRowMenu = ({
   );
 };
 
-export default TableRowMenu;
+export default MenuTableRow;

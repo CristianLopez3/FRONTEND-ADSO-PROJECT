@@ -3,7 +3,7 @@ import { Trash, Pencil } from "phosphor-react";
 import { Booking } from "../../../types/Booking";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
-import UpdateBookingContent from "../Modals/UpdateBookingContent";
+import BookingFormModal from "../Modals/BookingFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 
 type BookingTableRowProps = Booking;
@@ -49,7 +49,7 @@ const BookingTableRow = ({ date, id, name, time }: BookingTableRowProps) => {
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UpdateBookingContent handleUpdateModal={handleUpdateModal} name={name} date={date} time={time} />
+        <BookingFormModal  handleUpdateModal={handleUpdateModal} name={name} date={date} time={time} />
       </Modal>
     </>
   );

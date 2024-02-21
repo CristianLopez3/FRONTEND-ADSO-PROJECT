@@ -3,7 +3,7 @@ import { Trash, Pencil } from "phosphor-react";
 import { Menu } from "../../../types/Menu";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
-import UpdateMenuContent from "../Modals/UpdateMenuContent";
+import MenuFormModal from "../Modals/MenuFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 
 type MenuTableRowProps = Menu;
@@ -59,7 +59,7 @@ const MenuTableRow = ({
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UpdateMenuContent
+        <MenuFormModal
           description={description}
           handleUpdateModal={handleUpdateModal}
           id={id}

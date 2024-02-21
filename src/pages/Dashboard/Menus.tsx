@@ -5,6 +5,11 @@ import MenuTableRow from "../../components/Dashboard/Rows/MenuTableRow";
 import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Link } from "react-router-dom";
 import { RiBookOpenLine } from "react-icons/ri";
+import { Button } from "keep-react";
+import { RiAddFill } from "react-icons/ri";
+import Modal from "../../components/ui/Modal";
+import { useState } from "react";
+import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
 
 const dummyData: Array<Menu> = [
   {
@@ -38,6 +43,8 @@ const dummyData: Array<Menu> = [
 ];
 
 const Menus = () => {
+
+  
   return (
     <>
       <header>
@@ -46,6 +53,9 @@ const Menus = () => {
             <h2 className="flex items-center text-black font-bold  gap-2 text-2xl">
               <RiBookOpenLine />
               Menus
+              <Button size={28} color="success" className="p-2">
+              <RiAddFill />
+            </Button>
             </h2>
           </Link>
         </DashboardNavbar>
@@ -83,6 +93,7 @@ const Menus = () => {
           )}
         />
       </main>
+
     </>
   );
 };

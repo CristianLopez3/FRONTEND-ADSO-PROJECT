@@ -3,7 +3,7 @@ import { Trash, Pencil } from "phosphor-react";
 import { Booking } from "../../../types/Booking";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
-import UpdateBookingContent from "../Modals/UpdateBookingContent";
+import BookingFormModal from "../Modals/BookingFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 
 export type BookingMobileItemProps = Booking;
@@ -55,7 +55,7 @@ const BookingMobileItem: React.FC<BookingMobileItemProps> = ({
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UpdateBookingContent
+        <BookingFormModal
           handleUpdateModal={handleUpdateModal}
           name={name}
           date={date}

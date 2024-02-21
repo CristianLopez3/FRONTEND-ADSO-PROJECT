@@ -2,18 +2,18 @@ import { Pencil } from "phosphor-react";
 import InputField from "../../ui/InputField";
 import { Menu } from "../../../types/Menu";
 
-type UpdateMenuContentProps = {
+type MenuFormModalProps = {
   handleUpdateModal: () => void;
 } & Menu;
 
-const UpdateMenuContent = ({
+const MenuFormModal = ({
   handleUpdateModal,
   id,
   title,
   price,
   quantity,
   description,
-}: UpdateMenuContentProps) => {
+}: MenuFormModalProps) => {
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
@@ -55,4 +55,4 @@ const UpdateMenuContent = ({
   );
 };
 
-export default UpdateMenuContent;
+export default MenuFormModal;

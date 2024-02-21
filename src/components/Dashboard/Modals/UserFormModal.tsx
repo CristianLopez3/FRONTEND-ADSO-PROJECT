@@ -22,13 +22,14 @@ const UserFormModal = ({
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
 
+
   // Maneja la acción dependiendo del modo
   const handleAction = mode === "update" ? handleUpdateModal : handleCreateUser;
 
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
-        <Pencil size={52} color="orange" />
+        <Pencil size={52} color={`${mode == "update" ? "orange" : "green"}`} />
       </div>
       <h3 className="text-lg font-black text-gray-800">{title}</h3>
       <div className="text-left text-sm text-gray-500">
@@ -57,9 +58,9 @@ const UserFormModal = ({
           />
         </form>
       </div>
-      <div className="flex gap-4 mt-8">
+      <div className="grid grid-cols-2 gap-4 mt-8">
         {/* Botón dinámico basado en el modo */}
-        <button className="btn btn-warning w-full" onClick={handleAction}>
+        <button className={`btn ${mode === "update" ? "btn-warning" : "btn-success"} w-full"`} onClick={handleAction}>
           {buttonText}
         </button>
         <button className="btn btn-light w-full" onClick={handleUpdateModal}>

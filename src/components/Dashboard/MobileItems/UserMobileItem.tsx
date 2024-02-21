@@ -4,7 +4,7 @@ import { Trash, Pencil } from "phosphor-react";
 import { User } from "../../../types/User";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
-import UserUpdateContent from "../Modals/UserFormModal";
+import UserFormModal from "../Modals/UserFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 
 export type UserMobileItemProps = User;
@@ -50,7 +50,8 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UserUpdateContent
+        <UserFormModal
+          mode="update"
           handleUpdateModal={handleUpdateModal}
           name={name}
           email={email}

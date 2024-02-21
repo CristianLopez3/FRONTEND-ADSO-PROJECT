@@ -1,13 +1,13 @@
 import { Pencil } from "phosphor-react";
 import InputField from "../../ui/InputField";
 
-type UpdateBookingContentProps = {
+type BookingFormModalProps = {
   handleUpdateModal: () => void;
   name: string;
   date: string;
   time: string;
 }
-const UpdateBookingContent = ({handleUpdateModal, name, date, time}: UpdateBookingContentProps) => {
+const BookingFormModal = ({handleUpdateModal, name, date, time}: BookingFormModalProps) => {
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
     <div className="flex justify-center items-center mb-8">
@@ -52,4 +52,4 @@ const UpdateBookingContent = ({handleUpdateModal, name, date, time}: UpdateBooki
     )
 }
 
-export default UpdateBookingContent
+export default BookingFormModal

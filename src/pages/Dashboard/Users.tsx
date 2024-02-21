@@ -6,6 +6,9 @@ import UserMobileItem from "../../components/Dashboard/MobileItems/UserMobileIte
 import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
+import { useState } from "react";
+import Modal from "../../components/ui/Modal";
+import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
 
 const dummyData: Array<User> = [
   {
@@ -46,6 +49,8 @@ const dummyData: Array<User> = [
 ];
 
 const Users = () => {
+  const [addModal, setAddModal] = useState<boolean>(false);
+
   return (
     <>
       <header>
@@ -53,7 +58,7 @@ const Users = () => {
           <h2 className="flex items-center text-black font-bold  gap-2 text-2xl">
             <PiUsers />
             Users
-            <Button size={28} color="success" className="p-2">
+            <Button size={28} color="success" className="p-2" onClick={() => setAddModal(!addModal)}>
               <RiAddFill />
             </Button>
           </h2>
@@ -64,13 +69,13 @@ const Users = () => {
           data={dummyData}
           columns={[
             { title: "ID", width: "10%" },
-            { title: "Title", width: "20%" },
-            { title: "Description", width: "30%" },
-            { title: "Price", width: "20%" },
-            { title: "Quantity", width: "10%" },
+            { title: "Name", width: "20%" },
+            { title: "Email", width: "30%" },
+            { title: "Cellphone", width: "20%" },
+            { title: "Role", width: "10%" },
             { title: "Actions", width: "10%" },
           ]}
-          renderRowItems={(item: User, index) => (
+          renderRowItems={(item: User) => (
             <UserTableRow
               cellphone={item.cellphone}
               email={item.email}
@@ -80,7 +85,7 @@ const Users = () => {
               key={item.id}
             />
           )}
-          renderMobileItems={(item: User, index) => (
+          renderMobileItems={(item: User) => (
             <UserMobileItem
               cellphone={item.cellphone}
               email={item.email}
@@ -91,6 +96,9 @@ const Users = () => {
           )}
         />
       </main>
+      <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
+        <UserFormModal mode="create" cellphone="" email="" handleCreateUser={() => setAddModal(!addModal)}  />
+      </Modal>
     </>
   );
 };

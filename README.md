@@ -34,3 +34,6 @@ Hi there, let's go and take a look...
 * [phosporicons](https://phosphoricons.com/)
 * [Teddy Tutorials](https://www.youtube.com/watch?v=ZEB3VCbXQHA&ab_channel=TeddySmith)
 * [Tailwind Gradient Generator](https://tailwindcomponents.com/gradient-generator/)
+* [Spring](https://spring.io/guides/tutorials/react-and-spring-data-rest)
+* [Spring Structure](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.structuring-your-code)
+* [React + Spring](https://www.youtube.com/watch?v=mgbEz23qZP0&list=PLZdfbI_OZWAMvhSl32tFcD6M9x_Pqtkwb)

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Modal from "../../ui/Modal";
 import DeleteContent from "../Modals/DeleteContent";
 import { User } from "../../../types/User";
-import UserUpdateContent from "../Modals/UserUpdateContent";
+import UserFormModal from "../Modals/UserFormModal";
 
 type UserTableRowProps = User;
 
@@ -60,7 +60,8 @@ const UserTableRow = ({
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UserUpdateContent
+        <UserFormModal
+          mode="update"
           handleUpdateModal={handleUpdateModal}
           name={name}
           email={email}

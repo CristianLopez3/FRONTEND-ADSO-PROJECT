@@ -18,6 +18,7 @@ const Menu = () => {
         <article className="grid grid-cols-1 md:grid-cols-2  gap-5 mt-12">
           {dataMenus.map((item) => (
             <MenuCard
+              id={item.id}
               key={item.title}
               description={item.description}
               price={30000}

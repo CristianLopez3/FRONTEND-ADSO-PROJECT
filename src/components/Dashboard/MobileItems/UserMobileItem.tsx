@@ -4,7 +4,7 @@ import { Trash, Pencil } from "phosphor-react";
 import { User } from "../../../types/User";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
-import UserUpdateContent from "../Modals/UserUpdateContent";
+import UserUpdateContent from "../Modals/UserFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 
 export type UserMobileItemProps = User;

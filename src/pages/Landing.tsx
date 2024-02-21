@@ -16,11 +16,9 @@ const Landing = () => {
         <Hero />
       </header>
       <main>
-        {/* <Menu /> */}
         <Booking />
         <KnowUs />
       </main>
-      {/* <Footer /> */}
       <MobileNav />
     </div>
   );

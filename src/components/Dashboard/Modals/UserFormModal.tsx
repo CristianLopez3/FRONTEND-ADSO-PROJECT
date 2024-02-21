@@ -5,7 +5,7 @@ import { User } from "../../../types/User";
 type UserFormModalProps = {
   handleUpdateModal?: () => void;
   handleCreateUser?: () => void; 
-  mode: "update" | "create"; // Nuevo prop para indicar el modo del formulario
+  mode: "update" | "create";
 } & Partial<User>; // Usa Partial<User> para hacer que todas las props de User sean opcionales
 
 const UserFormModal = ({
@@ -63,7 +63,7 @@ const UserFormModal = ({
         <button className={`btn ${mode === "update" ? "btn-warning" : "btn-success"} w-full"`} onClick={handleAction}>
           {buttonText}
         </button>
-        <button className="btn btn-light w-full" onClick={handleUpdateModal}>
+        <button className="btn btn-light w-full" onClick={handleAction}>
           Cancel
         </button>
       </div>

@@ -97,7 +97,7 @@ const Users = () => {
         />
       </main>
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
-        <UserFormModal mode="create" cellphone="" email="" handleCreateUser={() => setAddModal(!addModal)}  />
+        <UserFormModal mode="create" cellphone="" email="" handleCreateUser={() => setAddModal(!addModal)}   />
       </Modal>
     </>
   );

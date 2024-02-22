@@ -9,7 +9,7 @@ import DeleteContent from "../Modals/DeleteContent";
 type MenuTableRowProps = Menu;
 
 const MenuTableRow = ({
-  id,
+  id = 0,
   title,
   description,
   price,
@@ -27,6 +27,7 @@ const MenuTableRow = ({
         <td className="row-table">{title}</td>
         <td className="row-table">{description}</td>
         <td className="row-table">{price}</td>
+        <td className="row-table">{quantity}</td>
 
         <td className="row-table">
           <div className="flex gap-2">
@@ -53,13 +54,14 @@ const MenuTableRow = ({
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
         <DeleteContent
           handleDeleteModal={handleDeleteModal}
-          id={id}
+          id={id }
           name={title}
         />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
         <MenuFormModal
+          mode="update"
           description={description}
           handleUpdateModal={handleUpdateModal}
           id={id}

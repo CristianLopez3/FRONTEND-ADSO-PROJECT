@@ -70,7 +70,6 @@ const Users = () => {
           columns={[
             { title: "ID", width: "10%" },
             { title: "Name", width: "20%" },
-            { title: "Email", width: "30%" },
             { title: "Cellphone", width: "20%" },
             { title: "Role", width: "10%" },
             { title: "Actions", width: "10%" },

@@ -3,38 +3,37 @@ import { Menu } from "../../types/Menu";
 import MenuMobileItem from "../../components/Dashboard/MobileItems/MenuMobileItem";
 import MenuTableRow from "../../components/Dashboard/Rows/MenuTableRow";
 import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
-import { Link } from "react-router-dom";
 import { RiBookOpenLine } from "react-icons/ri";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import Modal from "../../components/ui/Modal";
 import { useState } from "react";
-import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
+import MenuFormModal from "../../components/Dashboard/Modals/MenuFormModal";
 
 const dummyData: Array<Menu> = [
   {
-    id: 1,
+    id: 13,
     title: "Hot Potatoes",
     description: "potatoes with sault and sauce to patner",
     price: 2000,
     quantity: 20,
   },
   {
-    id: 2,
+    id: 12,
     title: "Hot Potatoes",
     description: "potatoes with sault and sauce to patner",
     price: 2000,
     quantity: 20,
   },
   {
-    id: 3,
+    id: 33,
     title: "Hot Potatoes",
     description: "potatoes with sault and sauce to patner",
     price: 2000,
     quantity: 20,
   },
   {
-    id: 4,
+    id: 44,
     title: "Hot Potatoes",
     description: "potatoes with sault and sauce to patner",
     price: 2000,
@@ -43,21 +42,22 @@ const dummyData: Array<Menu> = [
 ];
 
 const Menus = () => {
+  const [addModal, setAddModal] = useState<boolean>(false);
+
 
   
   return (
     <>
       <header>
       <DashboardNavbar> 
-        <Link to="/dashboard">
-            <h2 className="flex items-center text-black font-bold  gap-2 text-2xl">
+            <h2 className="flex items-center text-black font-bold  gap-2 text-2xl" onClick={() => setAddModal(!addModal)}>
               <RiBookOpenLine />
               Menus
               <Button size={28} color="success" className="p-2">
               <RiAddFill />
             </Button>
-            </h2>
-          </Link>
+            </h2>  
+         
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
@@ -83,7 +83,7 @@ const Menus = () => {
           )}
           renderMobileItems={(item: Menu, index) => (
             <MenuMobileItem
-              key={index}
+              key={item.id}
               id={item.id}
               title={item.title}
               description={item.description}
@@ -93,7 +93,9 @@ const Menus = () => {
           )}
         />
       </main>
-
+      <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
+        <MenuFormModal  mode="create"   handleCreateModal={() => setAddModal(!addModal)} description="" price={0} quantity={0} title=""   />
+      </Modal>
     </>
   );
 };

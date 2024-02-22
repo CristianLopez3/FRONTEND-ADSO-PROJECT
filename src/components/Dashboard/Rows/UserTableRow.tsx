@@ -24,8 +24,10 @@ const UserTableRow = ({
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
         <td className="row-table">{id}</td>
-        <td className="row-table">{name}</td>
-        <td className="row-table">{email}</td>
+        <td className="row-table flex flex-col text-lg">
+          {name} <span className="text-sm text-gray-600">{email}</span>
+        </td>
+
         <td className="row-table">{cellphone}</td>
         <td className="row-table">{role}</td>
 

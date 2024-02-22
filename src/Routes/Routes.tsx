@@ -8,6 +8,8 @@ import Reservations from "../pages/Dashboard/Reservations";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Menus from "../pages/Dashboard/Menus";
 import Users from "../pages/Dashboard/Users";
+import SSidebar from "../components/layout/Sidebar/Sidebar";
+import Test from "./Test";
 
 export const router = createBrowserRouter([
   {
@@ -32,5 +34,9 @@ export const router = createBrowserRouter([
       {path: "reservations", element: <Reservations />},
       {path: "menus", element: <Menus />}
     ]
+  },
+  {
+    path: "test",
+    element: <Test />
   }
 ]);

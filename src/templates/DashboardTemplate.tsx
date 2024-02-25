@@ -4,7 +4,7 @@ import { LuUserCircle, LuBook } from "react-icons/lu";
 import { PiBowlFood } from "react-icons/pi";
 
 
-const DashboardLayout = () => {
+const DashboardTemplate = () => {
 
 
   return (
@@ -25,4 +25,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default DashboardTemplate;

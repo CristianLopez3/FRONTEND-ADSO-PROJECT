@@ -1,23 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
-import Landing, { LandingLayout } from "../pages/Landing";
-import Login from "../pages/Login";
-import Menu from "../components/Landing/Menu";
-import Booking from "../components/Landing/Booking";
+import Home from "../pages/Home";
+import Login from "../pages/Login/Login";
+import Menu from "../components/Home/Menu";
+import Booking from "../components/Home/Booking";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Reservations from "../pages/Dashboard/Reservations";
-import DashboardLayout from "../templatest/DashboardLayout";
+import DashboardTemplate from "../templates/DashboardTemplate";
 import Menus from "../pages/Dashboard/Menus";
 import Users from "../pages/Dashboard/Users";
-import SSidebar from "../components/layout/Sidebar/Sidebar";
 import Test from "./Test";
 import Profile from "../pages/Dashboard/Profile";
+import HomeLayout from "../templates/HomeTemplate";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingLayout />,
+    element: <HomeLayout />,
     children: [
-      { path: "", element: <Landing /> },
+      { path: "", element: <Home /> },
       { path: "menu", element: <Menu /> },
       { path: "book", element: <Booking /> },
     ],
@@ -28,9 +28,9 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: <DashboardTemplate />,
     children: [
-      {path: "", element: <Dashboard />},
+      {path: "", element: <Dashboard />, },
       {path: "users", element: <Users />},
       {path: "reservations", element: <Reservations />},
       {path: "menus", element: <Menus />},

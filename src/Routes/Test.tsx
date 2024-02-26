@@ -16,6 +16,7 @@ const schema = z.object({
 type formFields = z.infer<typeof schema>;
 
 const Test = () => {
+  
   const {
     register,
     handleSubmit,
@@ -28,15 +29,14 @@ const Test = () => {
     },
     resolver: zodResolver(schema),
   });
+
   const onSubmit: SubmitHandler<formFields> = async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error();
       console.log(data);
+      throw new Error();
     } catch (errr) {
-      setError("email", {
-        message: "This email is already taken",
-      });
+      console.log(data);
     }
   };
 

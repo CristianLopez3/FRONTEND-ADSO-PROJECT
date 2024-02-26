@@ -2,10 +2,6 @@ import { Label, TextInput } from "keep-react";
 import { ComponentPropsWithoutRef, forwardRef } from "react";
 
 type InputFieldProps = {
-  name: string;
-  placeholder: string;
-  value?: string;
-  id: string;
   type?: string;
   styles?: string;
   colorText?: string;
@@ -15,27 +11,24 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   function InputField(
     {
       name,
-      placeholder,
-      value,
-      id,
       type = "text",
       styles,
       colorText = "black",
     },
     ref
   ) {
+    const uniqueId = name + (Math.random() * 100).toString();
     return (
-      <div key={id}>
+      <div key={uniqueId}>
         <Label
-          htmlFor={id}
+          htmlFor={uniqueId}
           value={name}
           className={`capitalize text-${colorText} text-base mb-2 ${styles}`}
         />
         <TextInput
-          id={id}
+          id={uniqueId}
           name={name}
-          placeholder={placeholder}
-          value={value}
+          placeholder={`Enter the ${name}`}
           color="gray"
           type={type}
         />

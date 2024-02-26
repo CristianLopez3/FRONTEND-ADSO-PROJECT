@@ -13,7 +13,7 @@ import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
 const dummyData: Array<User> = [
   {
     id: 1,
-    cellphone: "313 312 32 32",
+    cellphone: "313 312 64 32",
     email: "crisitan@mail.com",
     name: "Cristian",
     role: "ADMIN",
@@ -23,7 +23,7 @@ const dummyData: Array<User> = [
   },
   {
     id: 2,
-    cellphone: "313 312 32 32",
+    cellphone: "313 348 32 32",
     email: "daniel@mail.com",
     name: "Daniel",
     role: "ADMIN",
@@ -33,7 +33,7 @@ const dummyData: Array<User> = [
   },
   {
     id: 3,
-    cellphone: "313 312 32 32",
+    cellphone: "313 322 32 32",
     email: "Camilo@mail.com",
     name: "Camilo",
     role: "ADMIN",
@@ -43,7 +43,7 @@ const dummyData: Array<User> = [
   },
   {
     id: 4,
-    cellphone: "313 312 32 32",
+    cellphone: "313 318 32 32",
     email: "Persona@mail.com",
     name: "Persona",
     role: "WAITRESS",
@@ -143,8 +143,6 @@ const Users = () => {
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
         <UserFormModal
           mode="create"
-          cellphone=""
-          email=""
           handleCreateUser={() => setAddModal(!addModal)}
         />
       </Modal>

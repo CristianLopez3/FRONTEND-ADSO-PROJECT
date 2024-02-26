@@ -31,23 +31,17 @@ const MenuFormModal = ({
         <form>
           <input type="hidden" value={id} />
           <InputField
-            id="title"
             name="title"
-            placeholder="Update the title..."
             value={title}
             type="text"
           />
           <InputField
-            id="quantity"
             name="quantity"
-            placeholder="Update the quantity..."
             type="number"
             value={`${quantity}`}
           />
           <InputField
-            id="description"
             name="description"
-            placeholder="Update the description..."
             value={description}
             type="text"
           />

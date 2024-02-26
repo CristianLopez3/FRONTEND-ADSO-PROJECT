@@ -2,10 +2,10 @@ export  interface User {
   id?: string | number;
   name: string;
   lastName: string;
-  cellphone: string;
-  identification: string;
   email: string;
   password: string;
+  identification: string;
+  cellphone: string;
   role: string;
 }
 

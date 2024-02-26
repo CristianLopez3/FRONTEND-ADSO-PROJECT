@@ -1,93 +1,156 @@
-import { users_service } from "../../../api/users";
-import { useRef } from "react"; // Importa useRef
-import { User } from "../../../types/User";
 import InputField from "../../UI/InputField";
-import Form  from "../../UI/Form" ;
+import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PiSpinnerGapLight } from "react-icons/pi";
+
+const schema = z.object({
+  id: z.union([z.string(), z.number()]),
+  name: z.string().min(1, "name is required"),
+  lastName: z.string().min(1, "lastname is required"),
+  email: z.string().email("Email is required"),
+  password: z.string().min(1, "pasword is required"),
+  identification: z.string().min(1, "identification is required"),
+  cellphone: z.string().min(1, "cellphone is required"),
+  role: z.string().min(1, "role is required"),
+});
+
+type UserFormFields = z.infer<typeof schema>;
 
 type UserFormModalProps = {
   handleUpdateModal?: () => void;
   handleCreateUser?: () => void;
   mode: "update" | "create";
-  id?: string | number; // Hace que id sea opcional
-} & User; // Usa Partial<User> para hacer que todas las props de User sean opcionales
+} & Partial<UserFormFields>; // Usa Partial<User> para hacer que todas las props de User sean opcionales
 
 const UserFormModal = ({
   handleUpdateModal,
   handleCreateUser,
   mode,
-  id,
-  name = "",
+  id = "",
+  name,
   email = "",
   role = "",
-  cellphone = "",
-  identification,
-  lastName, password
+  cellphone,
+  identification = "",
+  lastName = "",
+  password = "",
 }: UserFormModalProps) => {
-  const userDataRef = useRef<User>({ id: id || "", name, email, role, cellphone, identification, lastName, password }); // Crea una referencia con el estado inicial
-
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
 
-  const handleAction = async () => {
-    try {
-      if (mode === "update") {
-        // Lógica para la actualización del usuario
-      } else {
-        // Lógica para la creación de un nuevo usuario
-        await users_service.add({ user: userDataRef.current }); // Accede a los datos a través de la referencia
-        if (handleCreateUser) handleCreateUser(); // Llama al callback si está definido
-      }
-    } catch (error) {
-      console.error("Error adding/updating user:", error);
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+  } = useForm<UserFormFields>({
+    defaultValues: {
+      id: id,
+      name: name,
+      lastName: lastName,
+      email: email,
+      password: password,
+      identification: identification,
+      cellphone: cellphone,
+      role: role,
+    },
+    resolver: zodResolver(schema),
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    userDataRef.current = { ...userDataRef.current, [name]: value }; // Actualiza los datos a través de la referencia
+  const onSubmit: SubmitHandler<UserFormFields> = async (data) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      data.cellphone.valueOf();
+      console.log(data);
+    } catch (error) {
+      console.log(data);
+    }
   };
 
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <h3 className="text-lg font-black text-gray-800">{title}</h3>
       <div className="text-left text-sm text-gray-500">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* Los campos de entrada para el nombre, correo electrónico y teléfono */}
           <InputField
-            id="name"
+            {...register("name")}
             name="name"
-            placeholder="Enter the name..."
-            value={userDataRef.current.name}
             type="text"
-            onChange={handleChange}
+            value={name}
           />
           <InputField
-            id="email"
+            {...register("lastName")}
+            name="lastName"
+            type="text"
+            value={lastName}
+          />
+          <InputField
+            {...register("email")}
             name="email"
-            placeholder="Enter the email..."
-            type="text"
-            value={userDataRef.current.email}
-            onChange={handleChange}
+            type="email"
+            value={email}
           />
           <InputField
-            id="cellphone"
-            name="cellphone"
-            placeholder="Enter the cellphone..."
-            value={userDataRef.current.cellphone}
-            type="text"
-            onChange={handleChange}
+            {...register("password")}
+            name="password"
+            type="password"
+            value={password}
           />
+          <InputField
+            {...register("cellphone")}
+            name="cellphone"
+            type="number"
+            value={cellphone}
+          />
+          <InputField
+            {...register("identification")}
+            name="identification"
+            type="text"
+            value={identification}
+          />
+          <InputField
+            {...register("role")}
+            name="role"
+            type="text"
+            value={role}
+          />
+
+          <div className="grid grid-cols-2 gap-4 mt-8">
+            {/* Botón dinámico basado en el modo */}
+            <button
+              className={`btn ${
+                mode === "update" ? "btn-warning" : "btn-success"
+              } w-full"`}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <div>
+                  <PiSpinnerGapLight className="animate-spin" /> is
+                  processing...
+                </div>
+              ) : (
+                buttonText
+              )}
+            </button>
+            <button
+              className="btn btn-light w-full"
+              onClick={handleUpdateModal || handleCreateUser}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
-      <div className="grid grid-cols-2 gap-4 mt-8">
-        {/* Botón dinámico basado en el modo */}
-        <button className={`btn ${mode === "update" ? "btn-warning" : "btn-success"} w-full"`} onClick={handleAction}>
-          {buttonText}
-        </button>
-        <button className="btn btn-light w-full" onClick={handleUpdateModal || handleCreateUser}>
-          Cancel
-        </button>
-      </div>
+      {errors && (
+        <div className="bg-black text-white p-4">
+          {Object.values(errors).map((error, index) => (
+            <div key={index}>{error.message}</div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -17,23 +17,17 @@ const BookingFormModal = ({handleUpdateModal, name, date, time}: BookingFormModa
     <div className="text-left text-sm text-gray-500">
       <form>
         <InputField
-          id="name"
           name="name"
-          placeholder="Update the name..."
           value={name}
           type="text"
         />
         <InputField
-          id="date"
           name="date"
-          placeholder="Update the date..."
           value={date}
           type="date"
         />
         <InputField
-          id="time"
           name="time"
-          placeholder="Update the time..."
           value={time}
           type="time"
         />

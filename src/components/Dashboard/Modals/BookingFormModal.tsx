@@ -1,5 +1,5 @@
 import { Pencil } from "phosphor-react";
-import InputField from "../../ui/InputField";
+import InputField from "../../UI/InputField";
 
 type BookingFormModalProps = {
   handleUpdateModal: () => void;

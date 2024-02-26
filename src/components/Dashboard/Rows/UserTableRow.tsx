@@ -1,7 +1,7 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { useState } from "react";
-import Modal from "../../ui/Modal";
+import Modal from "../../UI/Modal";
 import DeleteContent from "../Modals/DeleteContent";
 import { User } from "../../../types/User";
 import UserFormModal from "../Modals/UserFormModal";

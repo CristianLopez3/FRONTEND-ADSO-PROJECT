@@ -1,9 +1,12 @@
 export  interface User {
-  id: string | number;
+  id?: string | number;
   name: string;
-  email: string;
-  role: string;
+  lastName: string;
   cellphone: string;
+  identification: string;
+  email: string;
+  password: string;
+  role: string;
 }
 
 enum ROLE {

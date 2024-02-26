@@ -2,7 +2,7 @@ import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { Booking } from "../../../types/Booking";
 import { useState } from "react";
-import Modal from "../../ui/Modal";
+import Modal from "../../UI/Modal";
 import BookingFormModal from "../Modals/BookingFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 

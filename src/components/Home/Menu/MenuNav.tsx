@@ -1,4 +1,4 @@
-import Button from "../../ui/Button";
+import Button from "../../UI/Button";
 import { button } from "../../../theme";
 
 const menuTypes = [

@@ -1,8 +1,9 @@
+import { User } from "../types/User";
 import { instance } from "./base.api";
 
 const endpoint = "users";
 
-export const users = {
+export const users_service = {
   getAll: function ({ page }: { page: number }) {
     return instance.get(endpoint, {
       params: {
@@ -10,4 +11,8 @@ export const users = {
       },
     });
   },
+  
+  add: function({user}: {user: User}){
+    return instance.post(endpoint, user)
+  }
 };

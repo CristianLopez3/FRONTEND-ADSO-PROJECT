@@ -2,7 +2,7 @@ import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { Menu } from "../../../types/Menu";
 import { useState } from "react";
-import Modal from "../../ui/Modal";
+import Modal from "../../UI/Modal";
 import MenuFormModal from "../Modals/MenuFormModal";
 import DeleteContent from "../Modals/DeleteContent";
 

@@ -7,7 +7,7 @@ import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import { useState } from "react";
-import Modal from "../../components/ui/Modal";
+import Modal from "../../components/UI/Modal";
 import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
 
 const dummyData: Array<User> = [
@@ -17,6 +17,9 @@ const dummyData: Array<User> = [
     email: "crisitan@mail.com",
     name: "Cristian",
     role: "ADMIN",
+    identification: "1234567",
+    lastName: "Lopez",
+    password: "***********",
   },
   {
     id: 2,
@@ -24,6 +27,9 @@ const dummyData: Array<User> = [
     email: "daniel@mail.com",
     name: "Daniel",
     role: "ADMIN",
+    identification: "1234567",
+    lastName: "Lopez",
+    password: "***********",
   },
   {
     id: 3,
@@ -31,6 +37,9 @@ const dummyData: Array<User> = [
     email: "Camilo@mail.com",
     name: "Camilo",
     role: "ADMIN",
+    identification: "1234567",
+    lastName: "Lopez",
+    password: "***********",
   },
   {
     id: 4,
@@ -38,6 +47,9 @@ const dummyData: Array<User> = [
     email: "Persona@mail.com",
     name: "Persona",
     role: "WAITRESS",
+    identification: "1234567",
+    lastName: "Lopez",
+    password: "***********",
   },
   {
     id: 5,
@@ -45,6 +57,9 @@ const dummyData: Array<User> = [
     email: "daniel@mail.com",
     name: "Cristian",
     role: "BARTENDER",
+    identification: "1234567",
+    lastName: "Lopez",
+    password: "***********",
   },
 ];
 
@@ -58,7 +73,12 @@ const Users = () => {
           <h2 className="flex items-center text-black font-bold  gap-2 text-2xl">
             <PiUsers />
             Users
-            <Button size={28} color="success" className="p-2" onClick={() => setAddModal(!addModal)}>
+            <Button
+              size={28}
+              color="success"
+              className="p-2"
+              onClick={() => setAddModal(!addModal)}
+            >
               <RiAddFill />
             </Button>
           </h2>
@@ -74,29 +94,59 @@ const Users = () => {
             { title: "Role", width: "10%" },
             { title: "Actions", width: "10%" },
           ]}
-          renderRowItems={(item: User) => (
+          renderRowItems={({
+            id,
+            cellphone,
+            email,
+            identification,
+            lastName,
+            name,
+            password,
+            role,
+          }: User) => (
             <UserTableRow
-              cellphone={item.cellphone}
-              email={item.email}
-              id={item.id}
-              name={item.name}
-              role={item.role}
-              key={item.id}
+              cellphone={cellphone}
+              email={email}
+              id={id}
+              name={name}
+              role={role}
+              key={id}
+              identification={identification}
+              password={password}
+              lastName={lastName}
             />
           )}
-          renderMobileItems={(item: User) => (
+          renderMobileItems={({
+            id,
+            cellphone,
+            email,
+            identification,
+            lastName,
+            name,
+            password,
+            role,
+          }: User) => (
             <UserMobileItem
-              cellphone={item.cellphone}
-              email={item.email}
-              id={item.id}
-              name={item.name}
-              role={item.role}
+              key={id}
+              cellphone={cellphone}
+              email={email}
+              id={id}
+              name={name}
+              role={role}
+              identification={identification}
+              lastName={lastName}
+              password={password}
             />
           )}
         />
       </main>
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
-        <UserFormModal mode="create" cellphone="" email="" handleCreateUser={() => setAddModal(!addModal)}   />
+        <UserFormModal
+          mode="create"
+          cellphone=""
+          email=""
+          handleCreateUser={() => setAddModal(!addModal)}
+        />
       </Modal>
     </>
   );

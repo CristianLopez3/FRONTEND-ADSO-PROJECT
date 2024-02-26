@@ -1,6 +1,6 @@
 import { At, Key, SignIn, ArrowLeft } from "phosphor-react";
-import Img from "../assets/bg-mobile.jpg";
-import InputIcon from "../../components/ui/InputIcon";
+import Img from "../../assets/bg-mobile.jpg";
+import InputIcon from "../../components/UI/InputIcon";
 import { Link } from "react-router-dom";
 
 

@@ -6,7 +6,7 @@ import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { RiBookOpenLine } from "react-icons/ri";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
-import Modal from "../../components/ui/Modal";
+import Modal from "../../components/UI/Modal";
 import { useState } from "react";
 import MenuFormModal from "../../components/Dashboard/Modals/MenuFormModal";
 

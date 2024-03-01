@@ -1,14 +1,14 @@
-import Table from "../../components/dashboard/Table";
+import Table from "../../components/Dashboard/Table";
 import { Menu } from "../../types/Menu";
-import MenuMobileItem from "../../components/dashboard/MobileItems/MenuMobileItem";
-import MenuTableRow from "../../components/dashboard/Rows/MenuTableRow";
-import DashboardNavbar from "../../components/dashboard/DashboardNavbar";
+import MenuMobileItem from "../../components/Dashboard/MobileItems/MenuMobileItem";
+import MenuTableRow from "../../components/Dashboard/Rows/MenuTableRow";
+import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { RiBookOpenLine } from "react-icons/ri";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import Modal from "../../components/UI/Modal";
 import { useState } from "react";
-import MenuFormModal from "../../components/dashboard/Modals/MenuFormModal";
+import MenuFormModal from "../../components/Dashboard/Modals/MenuFormModal";
 
 const dummyData: Array<Menu> = [
   {
@@ -49,14 +49,15 @@ const Menus = () => {
   return (
     <>
       <header>
-      <DashboardNavbar>
+      <DashboardNavbar> 
             <h2 className="flex items-center text-black font-bold  gap-2 text-2xl" onClick={() => setAddModal(!addModal)}>
               <RiBookOpenLine />
               Menus
               <Button size={28} color="success" className="p-2">
               <RiAddFill />
             </Button>
-            </h2>
+            </h2>  
+         
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
@@ -82,7 +83,7 @@ const Menus = () => {
           )}
           renderMobileItems={(item: Menu, index) => (
             <MenuMobileItem
-              key={index}
+              key={item.id}
               id={item.id}
               title={item.title}
               description={item.description}

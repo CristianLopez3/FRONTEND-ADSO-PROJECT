@@ -11,8 +11,11 @@ type UserTableRowProps = User;
 const UserTableRow = ({
   id,
   name,
-  cellphone,
+  lastName,
   email,
+  password,
+  identification,
+  cellphone,
   role,
 }: UserTableRowProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -52,26 +55,31 @@ const UserTableRow = ({
           </div>
         </td>
       </tr>
-
-      <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteContent
-          handleDeleteModal={handleDeleteModal}
-          id={id}
-          name={name}
-        />
-      </Modal>
-
-      <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UserFormModal
-          mode="update"
-          handleUpdateModal={handleUpdateModal}
-          name={name}
-          email={email}
-          cellphone={cellphone}
-          id={id}
-          role={role}
-        />
-      </Modal>
+      {openDeleteModal && (
+        <Modal open={openDeleteModal} onClose={handleDeleteModal}>
+          <DeleteContent
+            handleDeleteModal={handleDeleteModal}
+            id={id!}
+            name={name}
+          />
+        </Modal>
+      )}
+      {openUpdateModal && (
+        <Modal open={openUpdateModal} onClose={handleUpdateModal}>
+          <UserFormModal
+            mode="update"
+            handleUpdateModal={handleUpdateModal}
+            id={id}
+            name={name}
+            lastName={lastName}
+            email={email}
+            password={password}
+            cellphone={cellphone}
+            identification={identification}
+            role={role}
+          />
+        </Modal>
+      )}
     </>
   );
 };

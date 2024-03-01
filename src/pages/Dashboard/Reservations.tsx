@@ -1,8 +1,8 @@
-import MyTable from "../../components/dashboard/Table";
-import BookingMobileItem from "../../components/dashboard/MobileItems/BookingMobileItem";
+import MyTable from "../../components/Dashboard/Table";
+import BookingMobileItem from "../../components/Dashboard/MobileItems/BookingMobileItem";
 import { Booking } from "../../types/Booking";
-import BookingTableRow from "../../components/dashboard/Rows/BookingTableRow";
-import DashboardNavbar from "../../components/dashboard/DashboardNavbar";
+import BookingTableRow from "../../components/Dashboard/Rows/BookingTableRow";
+import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Link } from "react-router-dom";
 import { RiBookOpenLine } from "react-icons/ri";
 

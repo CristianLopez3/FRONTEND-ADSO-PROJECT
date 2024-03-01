@@ -1,16 +1,16 @@
 import { PiTrashFill } from "react-icons/pi";
-type DeleteContentProps = {
+type DeleteModalProps = {
   handleDeleteModal: () => void;
   id: string | number;
   name: string;
 }
 
 
-const DeleteContent = ({
+const DeleteModal = ({
   handleDeleteModal,
   id,
   name
-}: DeleteContentProps) => {
+}: DeleteModalProps) => {
   return (
     <div className="mx-auto my-4 w-48 text-center">
     <div className="flex justify-center items-center">
@@ -34,4 +34,4 @@ const DeleteContent = ({
   )
 }
 
-export default DeleteContent
+export default DeleteModal

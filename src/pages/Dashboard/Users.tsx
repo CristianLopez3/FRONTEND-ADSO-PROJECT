@@ -1,19 +1,17 @@
-import Table from "../../components/dashboard/Table";
 import { User } from "../../types/User";
 import { PiUsers } from "react-icons/pi";
-import UserMobileItem from "../../components/dashboard/MobileItems/UserMobileItem";
-import DashboardNavbar from "../../components/dashboard/DashboardNavbar";
+import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import { useState } from "react";
 import Modal from "../../components/UI/Modal";
-import UserRow from "../../components/user/UserRow";
 import UserForm from "../../components/user/UserForm";
+import UserTable from "../../components/user/UserTable";
 
 const dummyData: Array<User> = [
   {
     id: 1,
-    cellphone: "313 312 32 32",
+    cellphone: "313 312 64 32",
     email: "crisitan@mail.com",
     name: "Cristian",
     role: "ADMIN",
@@ -23,7 +21,7 @@ const dummyData: Array<User> = [
   },
   {
     id: 2,
-    cellphone: "313 312 32 32",
+    cellphone: "313 348 32 32",
     email: "daniel@mail.com",
     name: "Daniel",
     role: "ADMIN",
@@ -33,7 +31,7 @@ const dummyData: Array<User> = [
   },
   {
     id: 3,
-    cellphone: "313 312 32 32",
+    cellphone: "313 322 32 32",
     email: "Camilo@mail.com",
     name: "Camilo",
     role: "ADMIN",
@@ -43,7 +41,7 @@ const dummyData: Array<User> = [
   },
   {
     id: 4,
-    cellphone: "313 312 32 32",
+    cellphone: "313 318 32 32",
     email: "Persona@mail.com",
     name: "Persona",
     role: "WAITRESS",
@@ -85,60 +83,7 @@ const Users = () => {
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
-        <Table
-          data={dummyData}
-          columns={[
-            { title: "ID", width: "10%" },
-            { title: "Name", width: "20%" },
-            { title: "Cellphone", width: "20%" },
-            { title: "Role", width: "10%" },
-            { title: "Actions", width: "10%" },
-          ]}
-          renderRowItems={({
-            id,
-            cellphone,
-            email,
-            identification,
-            lastName,
-            name,
-            password,
-            role,
-          }: User) => (
-            <UserRow
-              cellphone={cellphone}
-              email={email}
-              id={id}
-              name={name}
-              role={role}
-              key={id}
-              identification={identification}
-              password={password}
-              lastName={lastName}
-            />
-          )}
-          renderMobileItems={({
-            id,
-            cellphone,
-            email,
-            identification,
-            lastName,
-            name,
-            password,
-            role,
-          }: User) => (
-            <UserMobileItem
-              key={id}
-              cellphone={cellphone}
-              email={email}
-              id={id}
-              name={name}
-              role={role}
-              identification={identification}
-              lastName={lastName}
-              password={password}
-            />
-          )}
-        />
+        <UserTable data={dummyData} />
       </main>
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
         <UserForm

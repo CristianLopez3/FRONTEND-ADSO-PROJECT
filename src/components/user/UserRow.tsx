@@ -2,7 +2,7 @@ import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { useState } from "react";
 import Modal from "../UI/Modal";
-import DeleteContent from "../UI/DeleteModal";
+import DeleteModal from "../UI/DeleteModal";
 import { User } from "../../types/User";
 import UserForm from "./UserForm";
 
@@ -12,11 +12,11 @@ const UserRow = ({
   id,
   name,
   lastName,
-  cellphone,
   email,
-  role,
-  identification,
   password,
+  identification,
+  cellphone,
+  role,
 }: UserRowProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
@@ -55,29 +55,31 @@ const UserRow = ({
           </div>
         </td>
       </tr>
-
-      <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteContent
-          handleDeleteModal={handleDeleteModal}
-          id={id!}
-          name={name}
-        />
-      </Modal>
-
-      <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UserForm
-          mode="update"
-          handleUpdateModal={handleUpdateModal}
-          name={name}
-          lastName={lastName}
-          email={email}
-          password={password}
-          cellphone={cellphone}
-          identification={identification}
-          id={id}
-          role={role}
-        />
-      </Modal>
+      {openDeleteModal && (
+        <Modal open={openDeleteModal} onClose={handleDeleteModal}>
+          <DeleteModal
+            handleDeleteModal={handleDeleteModal}
+            id={id!}
+            name={name}
+          />
+        </Modal>
+      )}
+      {openUpdateModal && (
+        <Modal open={openUpdateModal} onClose={handleUpdateModal}>
+          <UserForm
+            mode="update"
+            handleUpdateModal={handleUpdateModal}
+            id={id!}
+            name={name}
+            lastName={lastName}
+            email={email}
+            password={password}
+            cellphone={cellphone}
+            identification={identification}
+            role={role}
+          />
+        </Modal>
+      )}
     </>
   );
 };

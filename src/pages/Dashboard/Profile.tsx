@@ -1,5 +1,5 @@
 import React from 'react'
-import Info from '../../components/dashboard/Profile/Info'
+import Info from '../../components/Dashboard/Profile/Info'
 
 type Props = {}
 

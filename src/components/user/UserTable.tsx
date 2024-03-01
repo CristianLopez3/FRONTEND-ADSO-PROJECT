@@ -7,7 +7,7 @@ type UserTableProps = {
   data: User[];
 };
 
-const UserTable = ({ data }: UserTableProps) => {
+const UserTable: React.FC<UserTableProps> = ({ data }) => {
   return (
     <Table
       data={data}

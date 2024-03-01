@@ -6,7 +6,7 @@ import MenuTable from "../../components/menu/MenuTable";
 import Modal from "../../components/UI/Modal";
 import { Menu } from "../../types/Menu";
 import { useState } from "react";
-import MenuFormModal from "../../components/Dashboard/Modals/MenuFormModal";
+import MenuForm from "../../components/menu/MenuForm";
 
 const dummyData: Array<Menu> = [
   {
@@ -63,7 +63,7 @@ const Menus = () => {
       </main>
 
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
-        <MenuFormModal
+        <MenuForm
           mode="create"
           handleCreateModal={() => setAddModal(!addModal)}
           description=""

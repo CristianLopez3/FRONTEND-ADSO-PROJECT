@@ -9,9 +9,12 @@ export  interface User {
   role: string;
 }
 
-// enum ROLE {
-//   ADMIN,
-//   WAITRESS,
-//   BARTENDER,
-//   COOK
-// }
+/**
+  "name": "Dani",
+  "lastName": "Pe",
+  "email": "Fernao@mail.com",
+  "password": "************",
+  "identification": "12342322",
+  "cellphone": 34211,
+    "role": "ADMIN"
+ */

@@ -3,10 +3,11 @@ import { PiUsers } from "react-icons/pi";
 import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../components/UI/Modal";
 import UserForm from "../../components/user/UserForm";
 import UserTable from "../../components/user/UserTable";
+import { users_service } from "../../api/users";
 
 const dummyData: Array<User> = [
   {
@@ -63,7 +64,12 @@ const dummyData: Array<User> = [
 
 const Users = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
-
+  useEffect(() => {
+    const getAllUsers = async () => {
+      await users_service.getAll().then((data) => console.log(data));
+    };
+    getAllUsers();
+  }, []);
   return (
     <>
       <header>

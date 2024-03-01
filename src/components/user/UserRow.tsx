@@ -8,7 +8,7 @@ import { User } from "../../types/User";
 
 type UserRowProps = User;
 
-const UserRow = ({
+const UserRow: React.FC<UserRowProps> = ({
   id,
   name,
   lastName,
@@ -17,7 +17,7 @@ const UserRow = ({
   identification,
   cellphone,
   role,
-}: UserRowProps) => {
+}) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 

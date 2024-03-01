@@ -1,20 +1,14 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Menu } from "../../../types/Menu";
+import { Booking } from "../../types/Booking";
 import { useState } from "react";
-import Modal from "../../UI/Modal";
-import MenuFormModal from "../Modals/MenuFormModal";
-import DeleteContent from "../Modals/DeleteContent";
+import Modal from "../UI/Modal";
+import BookForm from "./BookForm";
+import DeleteModal from "../UI/DeleteModal";
 
-type MenuTableRowProps = Menu;
+type BookRowProps = Booking;
 
-const MenuTableRow = ({
-  id = 0,
-  title,
-  description,
-  price,
-  quantity,
-}: MenuTableRowProps) => {
+const BookRow = ({ date, id, name, time }: BookRowProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -24,10 +18,9 @@ const MenuTableRow = ({
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
         <td className="row-table">{id}</td>
-        <td className="row-table">{title}</td>
-        <td className="row-table">{description}</td>
-        <td className="row-table">{price}</td>
-        <td className="row-table">{quantity}</td>
+        <td className="row-table">{name}</td>
+        <td className="row-table">{date}</td>
+        <td className="row-table">{time}</td>
 
         <td className="row-table">
           <div className="flex gap-2">
@@ -52,26 +45,14 @@ const MenuTableRow = ({
       </tr>
 
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteContent
-          handleDeleteModal={handleDeleteModal}
-          id={id }
-          name={title}
-        />
+        <DeleteModal handleDeleteModal={handleDeleteModal}  id={id!} name={name} />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <MenuFormModal
-          mode="update"
-          description={description}
-          handleUpdateModal={handleUpdateModal}
-          id={id}
-          price={price}
-          quantity={quantity}
-          title={title}
-        />
+        <BookForm  handleUpdateModal={handleUpdateModal} name={name} date={date} time={time} />
       </Modal>
     </>
   );
 };
 
-export default MenuTableRow;
+export default BookRow;

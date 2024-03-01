@@ -1,11 +1,11 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 
-import { Menu } from "../../../types/Menu";
+import { Menu } from "../../types/Menu";
 import { useState } from "react";
-import Modal from "../../UI/Modal";
-import MenuFormModal from "../Modals/MenuFormModal";
-import DeleteContent from "../Modals/DeleteContent";
+import Modal from "../UI/Modal";
+import MenuForm from "./MenuForm";
+import DeleteModal from "../UI/DeleteModal";
 
 export type MenuMobileItemProps = Menu;
 
@@ -50,15 +50,16 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({
         </div>
       </article>
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteContent
+        <DeleteModal
           handleDeleteModal={handleDeleteModal}
-          id={id}
+          id={id!}
           name={title}
         />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <MenuFormModal
+        <MenuForm
+        mode="update"
           description={description}
           handleUpdateModal={handleUpdateModal}
           id={id}

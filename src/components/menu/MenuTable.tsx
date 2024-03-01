@@ -1,12 +1,15 @@
-
-const MenuTableProps = {
+import { Menu } from "../../types/Menu";
+import Table from "../UI/Table";
+import MenuMobileItem from "./MenuMobileItem";
+import MenuRow from "./MenuRow";
+type MenuTableProps = {
   data: Menu[]
 }
 
 const MenuTable = ({data}: MenuTableProps) => {
   return (
     <Table
-          data={dummyData}
+          data={data}
           columns={[
             { title: "ID", width: "10%" },
             { title: "Title", width: "20%" },
@@ -16,7 +19,7 @@ const MenuTable = ({data}: MenuTableProps) => {
             { title: "Actions", width: "10%" },
           ]}
           renderRowItems={(item: Menu, index) => (
-            <MenuTableRow
+            <MenuRow
               id={item.id}
               description={item.description}
               title={item.title}

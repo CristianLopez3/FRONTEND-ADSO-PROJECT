@@ -1,7 +1,7 @@
-import Hero from "../../components/Home/Hero";
-import Booking from "../../components/Home/Booking";
+import Hero from "../../components/home/Hero";
+import Booking from "../../components/home/Booking";
 import MobileNav from "../../components/layout/MobileNav";
-import KnowUs from "../../components/Home/KnowUs";
+import KnowUs from "../../components/home/KnowUs";
 
 
 const Home = () => {

@@ -1,14 +1,14 @@
-import Table from "../../components/Dashboard/Table";
+import Table from "../../components/dashboard/Table";
 import { User } from "../../types/User";
 import { PiUsers } from "react-icons/pi";
-import UserTableRow from "../../components/Dashboard/Rows/UserTableRow";
-import UserMobileItem from "../../components/Dashboard/MobileItems/UserMobileItem";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import UserMobileItem from "../../components/dashboard/MobileItems/UserMobileItem";
+import DashboardNavbar from "../../components/dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import { useState } from "react";
 import Modal from "../../components/UI/Modal";
-import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
+import UserRow from "../../components/user/UserRow";
+import UserForm from "../../components/user/UserForm";
 
 const dummyData: Array<User> = [
   {
@@ -104,7 +104,7 @@ const Users = () => {
             password,
             role,
           }: User) => (
-            <UserTableRow
+            <UserRow
               cellphone={cellphone}
               email={email}
               id={id}
@@ -141,10 +141,8 @@ const Users = () => {
         />
       </main>
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
-        <UserFormModal
+        <UserForm
           mode="create"
-          cellphone=""
-          email=""
           handleCreateUser={() => setAddModal(!addModal)}
         />
       </Modal>

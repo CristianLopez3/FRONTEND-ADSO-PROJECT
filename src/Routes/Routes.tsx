@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
-import Menu from "../components/Home/Menu";
-import Booking from "../components/Home/Booking";
+import Menu from "../components/home/Menu";
+import Booking from "../components/home/Booking";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Reservations from "../pages/Dashboard/Reservations";
 import DashboardTemplate from "../templates/DashboardTemplate";

@@ -1,5 +1,5 @@
 export  interface User {
-  id?: string | number;
+  id?: string | number | null;
   name: string;
   lastName: string;
   cellphone: string;
@@ -9,9 +9,9 @@ export  interface User {
   role: string;
 }
 
-enum ROLE {
-  ADMIN,
-  WAITRESS,
-  BARTENDER,
-  COOK
-}
+// enum ROLE {
+//   ADMIN,
+//   WAITRESS,
+//   BARTENDER,
+//   COOK
+// }

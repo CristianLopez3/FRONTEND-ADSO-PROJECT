@@ -1,11 +1,10 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-
-import { User } from "../../../types/User";
+import { User } from "../../types/User";
 import { useState } from "react";
-import Modal from "../../UI/Modal";
-import UserFormModal from "../Modals/UserFormModal";
-import DeleteContent from "../Modals/DeleteContent";
+import Modal from "../UI/Modal";
+import DeleteModal from "../UI/DeleteModal";
+import UserForm from "./UserForm";
 
 export type UserMobileItemProps = User;
 
@@ -54,7 +53,7 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({
         </div>
       </article>
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteContent
+        <DeleteModal
           handleDeleteModal={handleDeleteModal}
           id={id!}
           name={name}
@@ -62,13 +61,13 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <UserFormModal
+        <UserForm
           mode="update"
           handleUpdateModal={handleUpdateModal}
           name={name}
           email={email}
           cellphone={cellphone}
-          id={id}
+          id={id!}
           role={role}
           identification={identification}
           lastName={lastName}

@@ -3,8 +3,8 @@ import { Trash, Pencil } from "phosphor-react";
 import { useState } from "react";
 import Modal from "../UI/Modal";
 import DeleteModal from "../UI/DeleteModal";
-import { User } from "../../types/User";
 import UserForm from "./UserForm";
+import { User } from "../../types/User";
 
 type UserRowProps = User;
 

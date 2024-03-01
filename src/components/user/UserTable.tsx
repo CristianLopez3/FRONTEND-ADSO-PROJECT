@@ -1,5 +1,5 @@
 import { User } from "../../types/User";
-import UserMobileItem from "../Dashboard/MobileItems/UserMobileItem";
+import UserMobileItem from "./UserMobileItem";
 import Table from "../Dashboard/Table";
 import UserRow from "./UserRow";
 

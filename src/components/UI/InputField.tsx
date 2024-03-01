@@ -37,7 +37,6 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           type={type}
           {...props}
         />
-        {/* <TextInput placeholder="jejejejeje" /> */}
       </div>
     );
   }

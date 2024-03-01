@@ -1,143 +1,59 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { PiSpinnerGapLight } from "react-icons/pi";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-
+import InputField from "../components/UI/InputField";
+import { zodResolver } from "@hookform/resolvers/zod";
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  example: z.string(),
+  exampleRequired: z.string(),
+  name: z.string(),
 });
+type Name = {
+  example: string;
+  exampleRequired: string;
+  name: string;
+};
 
-// type formFileds = {
-//   email: string;
-//   password: string;
-// };
+type Inputs = z.infer<typeof schema>;
+type FormProps = Partial<Inputs> & Partial<Name>;
 
-type formFields = z.infer<typeof schema>;
-
-const Test = () => {
-  
+function Form({ example = "cristian", exampleRequired, name }: FormProps) {
   const {
     register,
     handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<formFields>({
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>({
     defaultValues: {
-      email: "test@email.com",
-      password: "************",
+      example,
+      exampleRequired,
+      name,
     },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema)
   });
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  const onSubmit: SubmitHandler<formFields> = async (data) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
-      throw new Error();
-    } catch (errr) {
-      console.log(data);
-    }
-  };
+  console.log(watch("example")); // watch input value by passing the name of it
 
   return (
-    <main className="App flex justify-center items-center">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("email")}
-          type="text"
-          placeholder="Email"
-          className="block my-2 p-2"
-        />
-        {errors.email && (
-          <div className="text-red-500">{errors.email.message}</div>
-        )}
-        <input
-          {...register("password")}
-          type="password"
-          className=" block my-2 p-2"
-          placeholder="Password"
-        />
-        {errors.password && (
-          <div className="text-red-500">{errors.password.message}</div>
-        )}
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <div>
-              <PiSpinnerGapLight className="animate-spin" /> is processing...
-            </div>
-          ) : (
-            "submit"
-          )}
-        </button>
-      </form>
-    </main>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-10 p-10 bg-blue-200 rounded-sm"
+    >
+      {/* register your input into the hook by invoking the "register" function */}
+      <input defaultValue="test" {...register("example")} name="example" />
+
+      {/* include validation with required or other standard HTML validation rules */}
+      <input {...register("exampleRequired")} />
+
+      <InputField {...register("name")} />
+      {/* errors will return when field validation fails  */}
+      {errors.exampleRequired && <span>This field is required</span>}
+
+      <input type="submit" />
+    </form>
   );
-};
+}
 
-export default Test;
-
-// ! WITHOUT ZOD
-// const Test = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     setError,
-//     formState: { errors, isSubmitting },
-//   } = useForm<formFileds>({defaultValues: {
-//     email: "test@email.com",
-//     password: "************"
-//   }});
-//   const onSubmit: SubmitHandler<formFileds> = async (data) => {
-//     try {
-//       await new Promise((resolve) => setTimeout(resolve, 1000));
-//       throw new Error();
-//       console.log(data);
-//     } catch(errr){
-//       setError("email", {
-//         message: "This email is already taken"
-//       })
-//     }
-
-//   };
-
-//   return (
-//     <main className="App flex justify-center items-center">
-//       <form onSubmit={handleSubmit(onSubmit)}>
-//         <input
-//           {...register("email", { required: "email is required" })}
-//           type="text"
-//           placeholder="Email"
-//           className="block my-2 p-2"
-//         />
-//         {errors.email && (
-//           <div className="text-red-500">{errors.email.message}</div>
-//         )}
-//         <input
-//           {...register("password", {
-//             required: "Password is required",
-//             minLength: {
-//               value: 8,
-//               message: "Password must have at least 8 characters",
-//             },
-//           })}
-//           type="password"
-//           className=" block my-2 p-2"
-//           placeholder="Password"
-//         />
-//         {errors.password && (
-//           <div className="text-red-500">{errors.password.message}</div>
-//         )}
-//         <button type="submit" disabled={isSubmitting}>
-//           {isSubmitting ? (
-//             <div>
-//               <PiSpinnerGapLight className="animate-spin" /> is processing...
-//             </div>
-//           ) : (
-//             "submit"
-//           )}
-//         </button>
-//       </form>
-//     </main>
-//   );
-// };
+export default function Test() {
+  return <Form example="Cristian" exampleRequired="jeje" name="Mi rey" />;
+}

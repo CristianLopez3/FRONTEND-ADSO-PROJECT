@@ -1,14 +1,12 @@
-import Table from "../../components/Dashboard/Table";
 import { User } from "../../types/User";
 import { PiUsers } from "react-icons/pi";
-import UserTableRow from "../../components/Dashboard/Rows/UserTableRow";
-import UserMobileItem from "../../components/Dashboard/MobileItems/UserMobileItem";
 import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import { useState } from "react";
 import Modal from "../../components/UI/Modal";
-import UserFormModal from "../../components/Dashboard/Modals/UserFormModal";
+import UserForm from "../../components/user/UserForm";
+import UserTable from "../../components/user/UserTable";
 
 const dummyData: Array<User> = [
   {
@@ -85,63 +83,10 @@ const Users = () => {
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
-        <Table
-          data={dummyData}
-          columns={[
-            { title: "ID", width: "10%" },
-            { title: "Name", width: "20%" },
-            { title: "Cellphone", width: "20%" },
-            { title: "Role", width: "10%" },
-            { title: "Actions", width: "10%" },
-          ]}
-          renderRowItems={({
-            id,
-            cellphone,
-            email,
-            identification,
-            lastName,
-            name,
-            password,
-            role,
-          }: User) => (
-            <UserTableRow
-              cellphone={cellphone}
-              email={email}
-              id={id}
-              name={name}
-              role={role}
-              key={id}
-              identification={identification}
-              password={password}
-              lastName={lastName}
-            />
-          )}
-          renderMobileItems={({
-            id,
-            cellphone,
-            email,
-            identification,
-            lastName,
-            name,
-            password,
-            role,
-          }: User) => (
-            <UserMobileItem
-              key={id}
-              cellphone={cellphone}
-              email={email}
-              id={id}
-              name={name}
-              role={role}
-              identification={identification}
-              lastName={lastName}
-              password={password}
-            />
-          )}
-        />
+        <UserTable data={dummyData} />
       </main>
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
-        <UserFormModal
+        <UserForm
           mode="create"
           handleCreateUser={() => setAddModal(!addModal)}
         />

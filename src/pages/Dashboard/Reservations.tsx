@@ -1,8 +1,8 @@
 import { Booking } from "../../types/Booking";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
 import { Link } from "react-router-dom";
 import { RiBookOpenLine } from "react-icons/ri";
-import BookTable from "../../components/book/BookTable";
+import BookTable from "./components/book/BookTable";
 
 const dummyData: Array<Booking> = [
   { id: 1, name: "John Doe", date: "2002-01-02", time: "09:30" },

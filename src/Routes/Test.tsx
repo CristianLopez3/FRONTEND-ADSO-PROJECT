@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import InputField from "../components/UI/InputField";
+// import InputField from "../components/UI/InputField";
+import InputField from "@/components/InputField";
 import { zodResolver } from "@hookform/resolvers/zod";
 const schema = z.object({
   example: z.string(),

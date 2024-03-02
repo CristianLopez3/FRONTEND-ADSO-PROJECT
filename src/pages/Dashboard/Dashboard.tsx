@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import BookingsCard from "../../components/Dashboard/BookingsCard";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
-import MenuCard from "../../components/Dashboard/MenuCard";
-import UserCard from "../../components/Dashboard/UserCard";
+import BookingsCard from "./components/Dashboard/BookingsCard";
+import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
+import MenuCard from "./components/Dashboard/MenuCard";
+import UserCard from "./components/Dashboard/UserCard";
 import { RiBookOpenLine } from "react-icons/ri";
 
 const Dashboard = () => {0-0

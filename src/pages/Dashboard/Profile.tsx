@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileInfo from '../../components/user/ProfileInfo'
+import ProfileInfo from './components/user/ProfileInfo'
 
 type Props = {}
 

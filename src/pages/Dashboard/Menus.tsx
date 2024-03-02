@@ -1,12 +1,12 @@
 import { RiBookOpenLine } from "react-icons/ri";
 import { RiAddFill } from "react-icons/ri";
 import { Button } from "keep-react";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
-import MenuTable from "../../components/menu/MenuTable";
-import Modal from "../../components/UI/Modal";
-import { Menu } from "../../types/Menu";
+import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
+import MenuTable from "./components/menu/MenuTable";
+import Modal from "@/components/Modal";
+import { Menu } from "@/types/Menu";
 import { useState } from "react";
-import MenuForm from "../../components/menu/MenuForm";
+import MenuForm from "./components/menu/MenuForm";
 
 const dummyData: Array<Menu> = [
   {

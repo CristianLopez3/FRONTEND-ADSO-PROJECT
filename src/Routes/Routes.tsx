@@ -1,16 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
-import Menu from "../components/Home/Menu";
-import Booking from "../components/Home/Booking";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import Reservations from "../pages/Dashboard/Reservations";
-import DashboardTemplate from "../templates/DashboardTemplate";
-import Menus from "../pages/Dashboard/Menus";
-import Users from "../pages/Dashboard/Users";
+import Menu from "../pages/Home/components/Menu";
+import Booking from "../pages/Home/components/Booking";
+import Dashboard from "../pages/dashboard/Dashboard";
+import Reservations from "../pages/dashboard/Reservations";
+import DashboardTemplate from "../layout/DashboardTemplate";
+import Menus from "../pages/dashboard/Menus";
+import Users from "../pages/dashboard/Users";
 import Test from "./Test";
-import Profile from "../pages/Dashboard/Profile";
-import HomeLayout from "../templates/HomeTemplate";
+import Profile from "../pages/dashboard/Profile";
+import HomeLayout from "../layout/HomeTemplate";
 
 export const router = createBrowserRouter([
   {

@@ -1,12 +1,12 @@
 import { User } from "../../types/User";
 import { PiUsers } from "react-icons/pi";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
-import Modal from "../../components/UI/Modal";
-import UserForm from "../../components/user/UserForm";
-import UserTable from "../../components/user/UserTable";
+import Modal from "../../components/Modal";
+import UserForm from "./components/user/UserForm";
+import UserTable from "./components/user/UserTable";
 import { users_service } from "../../api/users";
 
 const dummyData: Array<User> = [

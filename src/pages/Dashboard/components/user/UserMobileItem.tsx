@@ -6,18 +6,19 @@ import Modal from "@/components/Modal";
 import DeleteModal from "@/components/DeleteModal";
 import UserForm from "./UserForm";
 
-export type UserMobileItemProps = User;
+export type UserMobileItemProps = { user: User };
 
-const UserMobileItem: React.FC<UserMobileItemProps> = ({
-  id,
-  cellphone,
-  email,
-  name,
-  role,
-  identification,
-  lastName,
-  password
-}) => {
+const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
+  const {
+    id,
+    cellphone,
+    email,
+    name,
+    role,
+    identification,
+    lastName,
+    password,
+  } = user;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 

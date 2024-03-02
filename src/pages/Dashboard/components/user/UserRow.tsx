@@ -6,18 +6,19 @@ import DeleteModal from "../../../../components/DeleteModal";
 import UserForm from "./UserForm";
 import { User } from "../../../../types/User";
 
-type UserRowProps = User;
+type UserRowProps = { user: User };
 
-const UserRow: React.FC<UserRowProps> = ({
-  id,
-  name,
-  lastName,
-  email,
-  password,
-  identification,
-  cellphone,
-  role,
-}) => {
+const UserRow: React.FC<UserRowProps> = ({ user }) => {
+  const {
+    id,
+    name,
+    lastName,
+    email,
+    password,
+    identification,
+    cellphone,
+    role,
+  } = user;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 

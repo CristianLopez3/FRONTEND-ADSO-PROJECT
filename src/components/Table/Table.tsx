@@ -1,32 +1,23 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import TableHeader, { Column } from "./TableHeader";
 
-
-type TableProps<T> = {
-  data: T[];
+type TableProps = {
   columns: Column[];
-  renderRowItems: (item: T, index: number | string) => ReactNode;
-  renderMobileItems: (item: T, index: number | string) => ReactNode;
+  rows: ReactNode;
+  mobile: ReactNode;
 };
 
-const Table = <T,>({
-  data,
-  columns,
-  renderRowItems,
-  renderMobileItems,
-}: TableProps<T>) => {
+const Table: React.FC<TableProps> = ({ columns, rows, mobile }) => {
   return (
     <div>
       <div className="overflow-auto rounded-lg shadow hidden lg:block">
         <table className="w-full rounded-lg">
           <TableHeader columns={columns} />
-          <tbody className="divide-y divide-gray-100 ">
-            {data.map((item, index) => renderRowItems(item, index))}
-          </tbody>
+          <tbody className="divide-y divide-gray-100 ">{rows}</tbody>
         </table>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
-        {data.map((item, index) => renderMobileItems(item, index))}
+        {mobile}
       </div>
     </div>
   );

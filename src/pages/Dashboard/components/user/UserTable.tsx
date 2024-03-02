@@ -1,6 +1,6 @@
-import { User } from "@/src/types/User";
+import { User } from "@/types/User";
 import UserMobileItem from "./UserMobileItem";
-import Table from "../Dashboard/Table";
+import Table from "@/components/Table";
 import UserRow from "./UserRow";
 
 type UserTableProps = {
@@ -10,7 +10,6 @@ type UserTableProps = {
 const UserTable: React.FC<UserTableProps> = ({ data }) => {
   return (
     <Table
-      data={data}
       columns={[
         { title: "ID", width: "10%" },
         { title: "Name", width: "20%" },
@@ -18,50 +17,20 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
         { title: "Role", width: "10%" },
         { title: "Actions", width: "10%" },
       ]}
-      renderRowItems={({
-        id,
-        cellphone,
-        email,
-        identification,
-        lastName,
-        name,
-        password,
-        role,
-      }: User) => (
-        <UserRow
-          cellphone={cellphone}
-          email={email}
-          id={id}
-          name={name}
-          role={role}
-          key={id}
-          identification={identification}
-          password={password}
-          lastName={lastName}
-        />
-      )}
-      renderMobileItems={({
-        id,
-        cellphone,
-        email,
-        identification,
-        lastName,
-        name,
-        password,
-        role,
-      }: User) => (
-        <UserMobileItem
-          key={id}
-          cellphone={cellphone}
-          email={email}
-          id={id}
-          name={name}
-          role={role}
-          identification={identification}
-          lastName={lastName}
-          password={password}
-        />
-      )}
+      rows={
+        data.length === 0 ? (
+          <p> No data available </p>
+        ) : (
+          data.map((item, index) => <UserRow user={item} key={index} />)
+        )
+      }
+      mobile={
+        data.length === 0 ? (
+          <p> No data available </p>
+        ) : (
+          data.map((item, index) => <UserMobileItem user={item} key={index} />)
+        )
+      }
     />
   );
 };

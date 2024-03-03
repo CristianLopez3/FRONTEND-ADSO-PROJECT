@@ -9,29 +9,33 @@ type UserTableProps = {
 
 const UserTable: React.FC<UserTableProps> = ({ data }) => {
   return (
-    <Table
-      columns={[
-        { title: "ID", width: "10%" },
-        { title: "Name", width: "20%" },
-        { title: "Cellphone", width: "20%" },
-        { title: "Role", width: "10%" },
-        { title: "Actions", width: "10%" },
-      ]}
-      rows={
-        data.length === 0 ? (
-          <p> No data available </p>
-        ) : (
+    <>
+      <Table
+        columns={[
+          { title: "ID", width: "10%" },
+          { title: "Name", width: "20%" },
+          { title: "Cellphone", width: "20%" },
+          { title: "Role", width: "10%" },
+          { title: "Actions", width: "10%" },
+        ]}
+      >
+        {Array.isArray(data) && data.length > 0 ? (
           data.map((item, index) => <UserRow user={item} key={index} />)
-        )
-      }
-      mobile={
-        data.length === 0 ? (
-          <p> No data available </p>
         ) : (
+          <tr>
+            <td colSpan={4}>No data available yet!.</td>
+          </tr>
+        )}
+      </Table>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
+        {Array.isArray(data) && data.length > 0 ? (
           data.map((item, index) => <UserMobileItem user={item} key={index} />)
-        )
-      }
-    />
+        ) : (
+          <p>No data available</p>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,33 @@
+
+PUT http://localhost:9000/users/3
+Content-Type: application/json
+
+{
+  "name": "Naruto",
+  "lastName": "Garcia",
+  "identification": "12342322",
+  "cellphone": 34211,
+  "email": "Fernao@mail.com",
+  "password": "************",
+  "role": "ADMIN"
+}
+
+
+GET http://localhost:9000/users
+
+
+
+POST http://localhost:9000/users
+Content-Type: application/json
+
+{
+  "name": "Dani",
+  "lastName": "Pe",
+  "identification": "12342322",
+  "cellphone": 34211,
+  "email": "Fernao@mail.com",
+  "password": "************",
+  "role": "ADMIN"
+}
+
+

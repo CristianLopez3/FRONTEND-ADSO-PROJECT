@@ -5,6 +5,9 @@ import Modal from "../../../../components/Modal";
 import DeleteModal from "../../../../components/DeleteModal";
 import UserForm from "./UserForm";
 import { User } from "../../../../types/User";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { deleteUser, getAllUsers } from "@/store/user/UserReducer";
 
 type UserRowProps = { user: User };
 
@@ -21,9 +24,17 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
   } = user;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
-  const handleUpdateModal = () => setOpenUpdateModal(!openUpdateModal);
+  const onDelete = async () => {
+    try {
+      await dispatch(deleteUser(id!));
+      await dispatch(getAllUsers());
+    } catch (error) {
+      console.error("Error deleting user: ", error);
+    }
+  };
+
   return (
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
@@ -41,7 +52,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
               size={28}
               color="warning"
               className="p-2"
-              onClick={handleUpdateModal}
+              onClick={() => setOpenUpdateModal(!openUpdateModal)}
             >
               <Pencil />
             </Button>
@@ -49,7 +60,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
               size={28}
               color="error"
               className="p-2"
-              onClick={handleDeleteModal}
+              onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
               <Trash />
             </Button>
@@ -57,19 +68,25 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
         </td>
       </tr>
       {openDeleteModal && (
-        <Modal open={openDeleteModal} onClose={handleDeleteModal}>
+        <Modal
+          open={openDeleteModal}
+          onClose={() => setOpenDeleteModal(!openDeleteModal)}
+        >
           <DeleteModal
-            handleDeleteModal={handleDeleteModal}
-            id={id!}
+            onDelete={onDelete}
+            handleDeleteModal={() => setOpenDeleteModal(!openDeleteModal)}
             name={name}
           />
         </Modal>
       )}
       {openUpdateModal && (
-        <Modal open={openUpdateModal} onClose={handleUpdateModal}>
+        <Modal
+          open={openUpdateModal}
+          onClose={() => setOpenUpdateModal(!openUpdateModal)}
+        >
           <UserForm
             mode="update"
-            handleUpdateModal={handleUpdateModal}
+            handleUpdateModal={() => setOpenUpdateModal(!openUpdateModal)}
             id={id!}
             name={name}
             lastName={lastName}

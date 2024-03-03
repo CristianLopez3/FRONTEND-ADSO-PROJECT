@@ -1,75 +1,32 @@
-import { User } from "../../types/User";
 import { PiUsers } from "react-icons/pi";
 import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import { RiAddFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
-import Modal from "../../components/Modal";
+import Modal from "@/components/Modal";
 import UserForm from "./components/user/UserForm";
 import UserTable from "./components/user/UserTable";
-import { users_service } from "../../api/users";
-
-const dummyData: Array<User> = [
-  {
-    id: 1,
-    cellphone: "313 312 64 32",
-    email: "crisitan@mail.com",
-    name: "Cristian",
-    role: "ADMIN",
-    identification: "1234567",
-    lastName: "Lopez",
-    password: "***********",
-  },
-  {
-    id: 2,
-    cellphone: "313 348 32 32",
-    email: "daniel@mail.com",
-    name: "Daniel",
-    role: "ADMIN",
-    identification: "1234567",
-    lastName: "Lopez",
-    password: "***********",
-  },
-  {
-    id: 3,
-    cellphone: "313 322 32 32",
-    email: "Camilo@mail.com",
-    name: "Camilo",
-    role: "ADMIN",
-    identification: "1234567",
-    lastName: "Lopez",
-    password: "***********",
-  },
-  {
-    id: 4,
-    cellphone: "313 318 32 32",
-    email: "Persona@mail.com",
-    name: "Persona",
-    role: "WAITRESS",
-    identification: "1234567",
-    lastName: "Lopez",
-    password: "***********",
-  },
-  {
-    id: 5,
-    cellphone: "313 312 32 32",
-    email: "daniel@mail.com",
-    name: "Cristian",
-    role: "BARTENDER",
-    identification: "1234567",
-    lastName: "Lopez",
-    password: "***********",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { getAllUsers } from "@/store/user/UserReducer";
+import Alert from "@/components/Alert";
 
 const Users = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.users);
+
   useEffect(() => {
-    const getAllUsers = async () => {
-      await users_service.getAll().then((data) => console.log(data));
+    const fetchAllUsers = async () => {
+      try {
+        await dispatch(getAllUsers());
+      } catch (error) {
+        console.error("Error fetching all users:", error);
+      }
     };
-    getAllUsers();
-  }, []);
+    fetchAllUsers();
+  }, [dispatch]);
+
   return (
     <>
       <header>
@@ -89,7 +46,17 @@ const Users = () => {
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
-        <UserTable data={dummyData} />
+        {users.isLoading ? (
+          <p>
+            Loading...
+          </p>
+        ) : users.isError ? (
+          <>
+            <Alert title="Error fetching users" description="An error ocurred when the data was being brought in!" mode="warning" />
+          </>
+        ) : (
+          <UserTable data={users.data} />
+        )}
       </main>
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
         <UserForm

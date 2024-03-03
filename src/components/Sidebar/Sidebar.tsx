@@ -10,7 +10,7 @@ type SidebarProps = {
 export const SidebarContext = createContext<boolean>(true);
 
 const Sidebar = ({ children }: SidebarProps) => {
-  const [expanded, setExpanded] = useState<boolean>(true);
+  const [expanded, setExpanded] = useState<boolean>(false);
   return (
     <aside className="h-screen py-4 pl-4">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm rounded-xl">
@@ -20,7 +20,7 @@ const Sidebar = ({ children }: SidebarProps) => {
               expanded ? "w-32" : "w-0"
             }`}
           >
-            MenuEASY{" "}
+            MenuEASY
           </h3>
 
           <button

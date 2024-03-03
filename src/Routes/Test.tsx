@@ -1,60 +1,55 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-// import InputField from "../components/UI/InputField";
-import InputField from "@/components/InputField";
-import { zodResolver } from "@hookform/resolvers/zod";
-const schema = z.object({
-  example: z.string(),
-  exampleRequired: z.string(),
-  name: z.string(),
-});
-type Name = {
-  example: string;
-  exampleRequired: string;
-  name: string;
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+  incrementAsync
+} from "@/store/user/TestReducer";
+
+const Test = () => {
+  return (
+    <div className="bg-white p-10 text-black">
+      <h2>Use of Redux</h2>
+      <Counter />
+    </div>
+  );
 };
 
-type Inputs = z.infer<typeof schema>;
-type FormProps = Partial<Inputs> & Partial<Name>;
+export default Test;
 
-function Form({ example = "cristian", exampleRequired, name }: FormProps) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>({
-    defaultValues: {
-      example,
-      exampleRequired,
-      name,
-    },
-    resolver: zodResolver(schema)
-  });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log(watch("example")); // watch input value by passing the name of it
-
+const Counter = () => {
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-10 p-10 bg-blue-200 rounded-sm"
-    >
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register("example")} name="example" />
-
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("exampleRequired")} />
-
-      <InputField {...register("name")} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
-
-      <input type="submit" />
-    </form>
+    <div>
+      <h2>{count}</h2>
+      <div>
+      <button
+          className="bg-black text-white rounded-md p-2 mr-8"
+          onClick={() => dispatch(incrementAsync(10))}
+        >
+          increment async
+        </button>
+        <button
+          className="bg-black text-white rounded-md p-2 mr-8"
+          onClick={() => dispatch(increment())}
+        >
+          increment
+        </button>
+        <button
+          className="bg-black text-white rounded-md p-2"
+          onClick={() => dispatch(decrement())}
+        >
+          decrement
+        </button>
+        <button
+          className="bg-black text-white rounded-md p-2"
+          onClick={() => dispatch(incrementByAmount(2))}
+        >
+          increment by amount
+        </button>
+      </div>
+    </div>
   );
-}
-
-export default function Test() {
-  return <Form example="Cristian" exampleRequired="jeje" name="Mi rey" />;
-}
+};

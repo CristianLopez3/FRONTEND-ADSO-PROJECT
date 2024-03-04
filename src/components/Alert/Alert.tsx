@@ -10,19 +10,19 @@ const Alert: React.FC<AlertProps> = ({ title, description, mode }) => {
   const styles = {
     success: {
       class:
-        "bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md",
+        "bg-teal-100 border-t-4 border-teal-500 rounded-2xl text-teal-900 px-4 py-3 shadow-md",
       icon: (
         <LuBadgeCheck className=" h-6 w-6 text-teal-500 mr-4" />
       ),
     },
     danger: {
       class:
-        "bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md",
+        "bg-red-100 border-t-4 border-red-500 rounded-2xl text-red-900 px-4 py-3 shadow-md",
       icon: <LuBadgeX  className="h-6 w-6 text-red-500 mr-4" />,
     },
     warning: {
       class:
-        "bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md",
+        "bg-yellow-100 border-t-4 border-yellow-500 rounded-2xl text-yellow-900 px-4 py-3 shadow-md",
       icon: (
         <LuBadgeAlert className="h-6 w-6 text-yellow-500 mr-4" />
       ),

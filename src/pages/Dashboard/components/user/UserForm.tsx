@@ -4,12 +4,11 @@ import InputField from "@/components/InputField";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
-// import { users_service } from "@/api/users";
 import { User } from "@/types/User";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
 import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
-import { domainToASCII } from "url";
+
 
 const schema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
@@ -69,7 +68,7 @@ const UserForm: React.FC<UserFormProps> = ({
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
     data.id = data.id === "" || data.id === null ? null : data.id;
-    let user: User = {
+    const user: User = {
       id: data.id,
       name: data.name,
       lastName: data.lastName,

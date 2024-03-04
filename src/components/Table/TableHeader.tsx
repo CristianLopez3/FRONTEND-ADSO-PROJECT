@@ -1,4 +1,4 @@
-export type Column = {
+export interface Column {
   title: string;
   width: string;
 }
@@ -11,10 +11,10 @@ const TableHeader = ({ columns }: TableHeaderProps) => {
   return (
     <thead className="bg-gray-300">
       <tr className="text-left w-full">
-        {columns.map((column, index) => (
+        {columns.map((column) => (
           <th
-            key={index}
-            className={`p-3 text-gray-900 text-sm font-semibold tracking-wide w-[${column.width}]`}
+            key={column.title}
+            className={`p-3 text-gray-900 text-sm font-semibold tracking-wide ${column.width}`}
           >
             {column.title}
           </th>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "@/components/InputField";
 import { z } from "zod";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
 
-
+// Define the schema for the form
 const schema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
   name: z.string().min(3, "Name is required"),
@@ -65,32 +65,42 @@ const UserForm: React.FC<UserFormProps> = ({
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
-    data.id = data.id === "" || data.id === null ? null : data.id;
-    const user: User = {
-      id: data.id,
-      name: data.name,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-      identification: data.identification,
-      cellphone: data.cellphone.toString(),
-      role: data.role,
-    };
-
-    if (mode === "update") {
-      console.log("user id: " + user.id);
-      await dispatch(updateUser(user));
-    } else {
-      await dispatch(createUser(user));
-    }
-
-    await dispatch(getAllUsers());
-
-    // Close modal
-    handleCreateUser?.() || handleUpdateModal?.();
+  const renderErrorMessage = (error: { message?: string }) => {
+    return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
+
+  const onSubmit: SubmitHandler<Inputs> = useCallback(
+    async (data) => {
+      try {
+        data.id = data.id === "" || data.id === null ? null : data.id;
+        const user: User = {
+          id: data.id,
+          name: data.name,
+          lastName: data.lastName,
+          email: data.email,
+          password: data.password,
+          identification: data.identification,
+          cellphone: data.cellphone.toString(),
+          role: data.role,
+        };
+
+        if (mode === "update") {
+          await dispatch(updateUser(user));
+        } else {
+          await dispatch(createUser(user));
+        }
+
+        await dispatch(getAllUsers());
+
+        // Close modal
+        handleCreateUser?.() || handleUpdateModal?.();
+      } catch (error) {
+        console.error(error);
+        // Handle error appropriately
+      }
+    },
+    [dispatch, handleCreateUser, handleUpdateModal, mode]
+  );
 
   return (
     <div className="mx-auto my-4 w-full sm:w-[300px] md:w-96 text-center">
@@ -99,49 +109,31 @@ const UserForm: React.FC<UserFormProps> = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
           <div className="md:flex md:flex-row gap-x-6">
-            <InputField {...register("name")} />
-            {errors.name && (
-              <p className="p-1  text-red-700">
-                {errors.name.message}
-              </p>
-            )}
-            <InputField {...register("lastName")} />
-            {errors.lastName && (
-              <p className="p-1  text-red-700">
-                {errors.lastName.message}
-              </p>
-            )}
+            <div className="block">
+              <InputField {...register("name")} />
+              {renderErrorMessage(errors.name!)}
+            </div>
+            <div>
+              <InputField {...register("lastName")} />
+              {renderErrorMessage(errors.lastName!)}
+            </div>
           </div>
           <InputField {...register("email")} type="email" />
-          {errors.email && (
-            <p className="p-1  text-red-700">
-              {errors.email.message}
-            </p>
-          )}
+          {renderErrorMessage(errors.email!)}
           <InputField {...register("password")} type="password" />
-          {errors.password && (
-            <p className="p-1  text-red-700">
-              {errors.password.message}
-            </p>
-          )}
+          {renderErrorMessage(errors.password!)}
           <div className="md:flex md:flex-row gap-x-6">
-            <InputField {...register("cellphone")} type="number" />
-            {errors.cellphone && (
-              <p className="p-1  text-red-700">
-                {errors.cellphone.message}
-              </p>
-            )}
-            <InputField {...register("identification")} />
-            {errors.identification && (
-              <p className="p-1  text-red-700">
-                {errors.identification.message}
-              </p>
-            )}
+            <div>
+              <InputField {...register("cellphone")} type="number" />
+              {renderErrorMessage(errors.cellphone!)}
+            </div>
+            <div>
+              <InputField {...register("identification")} />
+              {renderErrorMessage(errors.identification!)}
+            </div>
           </div>
           <InputField {...register("role")} />
-          {errors.role && (
-            <p className="p-1  text-red-700">{errors.role.message}</p>
-          )}
+          {renderErrorMessage(errors.role!)}
 
           <div className="grid grid-cols-2 gap-4 mt-8">
             <button

@@ -4,7 +4,6 @@ import TableHeader, { Column } from "./TableHeader";
 type TableProps = {
   columns: Column[];
   children: ReactNode;
-  // mobile: ReactNode;
 };
 
 const Table: React.FC<TableProps> = ({ columns, children }) => {
@@ -16,11 +15,9 @@ const Table: React.FC<TableProps> = ({ columns, children }) => {
           <tbody className="divide-y divide-gray-100 ">{children}</tbody>
         </table>
       </div>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
-        {mobile}
-      </div> */}
     </div>
   );
 };
 
 export default Table;
+

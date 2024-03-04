@@ -1,5 +1,5 @@
 import { Booking } from "../../types/Booking";
-import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
+import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import { Link } from "react-router-dom";
 import { RiBookOpenLine } from "react-icons/ri";
 import BookTable from "./components/book/BookTable";

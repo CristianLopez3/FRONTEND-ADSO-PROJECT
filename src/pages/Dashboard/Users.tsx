@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "@/store/store";
 import { PiUsers } from "react-icons/pi";
 import { RiAddFill } from "react-icons/ri";
 
-import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
+import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import Modal from "@/components/Modal";
 import UserForm from "./components/user/UserForm";

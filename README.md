@@ -2,6 +2,31 @@
 
 Hi there, let's go and take a look...
 
+
+## Run from scratch the project 
+
+Folllow the next steps to run the project localy:
+
+```sh
+  git clone https://github.com/CristianLopez3/FRONTEND-ADSO-PROJECT.git
+```
+* Enter in the project and run the next commands
+
+```sh
+  npm install 
+```
+
+* At the end in your terminal, making sure that you are in the project run the next command:
+
+```sh
+  npm run dev
+```
+
+*Now you can see the project running in the next url http://localhost:5174*
+
+>[!IMPORTANT]
+> You must be install at least node 18 and npm 10.3
+
 ### Tailwindcss configuration
 ```sh
   npm i -D tailwindcss postcss autoprefixer

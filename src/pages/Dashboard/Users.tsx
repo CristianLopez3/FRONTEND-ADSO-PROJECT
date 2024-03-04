@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { getAllUsers } from "@/store/user/UserReducer";
 import Alert from "@/components/Alert";
+import Skeleton from "@/components/Skeleton";
 
 const Users = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
@@ -47,12 +48,13 @@ const Users = () => {
       </header>
       <main className="px-2 md:px-20 mx-auto">
         {users.isLoading ? (
-          <p>
-            Loading...
-          </p>
+          // <p>
+          //   Loading...
+          // </p>
+          <Skeleton />
         ) : users.isError ? (
           <>
-            <Alert title="Error fetching users" description="An error ocurred when the data was being brought in!" mode="warning" />
+            <Alert title="Error fetching users" description="An error ocurred when the data was being brought in!" mode="danger" />
           </>
         ) : (
           <UserTable data={users.data} />

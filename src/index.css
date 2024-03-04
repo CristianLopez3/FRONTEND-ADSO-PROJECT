@@ -15,9 +15,8 @@
   }
 
   body{
-    @apply bg-black overflow-x-hidden m-0 p-0 ;
+    @apply bg-black overflow-x-hidden overflow-y-scroll m-0 p-0 ;
   }
-
 
   h2{
     @apply text-3xl font-bold text-center;

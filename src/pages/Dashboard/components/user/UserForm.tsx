@@ -13,13 +13,13 @@ import { domainToASCII } from "url";
 
 const schema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
-  name: z.string().min(1, "Name is required"),
-  lastName: z.string().min(1, "Lastname is required"),
+  name: z.string().min(3, "Name is required"),
+  lastName: z.string().min(3, "Lastname is required"),
   email: z.string().email("Invalid email address"),
-  password: z.string().min(1, "Password is required"),
-  identification: z.string().min(1, "Identification is required"),
-  cellphone: z.string().min(1, "Cellphone is required"),
-  role: z.string().min(1, "Role is required"),
+  password: z.string().min(8, "Password is required"),
+  identification: z.string().min(7, "Identification is required"),
+  cellphone: z.string().min(7, "Cellphone is required"),
+  role: z.string().min(4, "Role is required"),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -79,10 +79,9 @@ const UserForm: React.FC<UserFormProps> = ({
       cellphone: data.cellphone.toString(),
       role: data.role,
     };
-    
 
     if (mode === "update") {
-      console.log("user id: " + user.id)
+      console.log("user id: " + user.id);
       await dispatch(updateUser(user));
     } else {
       await dispatch(createUser(user));
@@ -92,7 +91,6 @@ const UserForm: React.FC<UserFormProps> = ({
 
     // Close modal
     handleCreateUser?.() || handleUpdateModal?.();
-
   };
 
   return (
@@ -100,16 +98,51 @@ const UserForm: React.FC<UserFormProps> = ({
       <h3 className="text-lg font-black text-gray-800">{title}</h3>
       <div className="text-left text-sm text-gray-500 mt-8">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <InputField {...register("id")} />
+          <InputField {...register("id")} type="hidden" />
           <div className="md:flex md:flex-row gap-x-6">
             <InputField {...register("name")} />
+            {errors.name && (
+              <p className="p-1  text-red-700">
+                {errors.name.message}
+              </p>
+            )}
             <InputField {...register("lastName")} />
+            {errors.lastName && (
+              <p className="p-1  text-red-700">
+                {errors.lastName.message}
+              </p>
+            )}
           </div>
           <InputField {...register("email")} type="email" />
+          {errors.email && (
+            <p className="p-1  text-red-700">
+              {errors.email.message}
+            </p>
+          )}
           <InputField {...register("password")} type="password" />
-          <InputField {...register("cellphone")} type="number" />
-          <InputField {...register("identification")} />
+          {errors.password && (
+            <p className="p-1  text-red-700">
+              {errors.password.message}
+            </p>
+          )}
+          <div className="md:flex md:flex-row gap-x-6">
+            <InputField {...register("cellphone")} type="number" />
+            {errors.cellphone && (
+              <p className="p-1  text-red-700">
+                {errors.cellphone.message}
+              </p>
+            )}
+            <InputField {...register("identification")} />
+            {errors.identification && (
+              <p className="p-1  text-red-700">
+                {errors.identification.message}
+              </p>
+            )}
+          </div>
           <InputField {...register("role")} />
+          {errors.role && (
+            <p className="p-1  text-red-700">{errors.role.message}</p>
+          )}
 
           <div className="grid grid-cols-2 gap-4 mt-8">
             <button
@@ -136,13 +169,6 @@ const UserForm: React.FC<UserFormProps> = ({
           </div>
         </form>
       </div>
-      {errors && (
-        <div className="mt-10 bg-red-200 text-red-800 border  rounded-md p-4">
-          {Object.values(errors).map((error, index) => (
-            <div key={index}>{error.message}</div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

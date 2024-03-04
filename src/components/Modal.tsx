@@ -9,17 +9,13 @@ type ModalProps = {
 };
 
 const Modal = ({ open, onClose, children }: ModalProps) => {
-  const modalRoot = document.getElementById("modal");
+  const modalRoot = document.getElementById("modal")!;
 
-  if (!modalRoot) {
-    return null; // O puedes devolver un mensaje de error o algo adecuado aquí
-  }
   return ReactDOM.createPortal(
-    //  backdrop
-    <>
+    <div className="relative flex justify-center items-center">
       <div
         onClick={onClose}
-        className={`fixed inset-0 flex justify-center items-center transition-colors ${
+        className={`fixed inset-2 flex justify-center items-center transition-colors  ${
           open ? "visible bg-black/20" : "invisible"
         }`}
       >
@@ -27,8 +23,8 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
         <div
           onClick={(e) => e.stopPropagation()}
           className={`
-      bg-white rounded-xl shadow p-6 transition-all ${
-        open ? "scale-100 opacity-100" : "scale-125 opacity-0"
+      bg-white rounded-xl shadow p-6 transition-all  overflow-y-scroll ${
+        open ? "scale-75 scale-x-100 md:scale-100  opacity-100" : "scale-125 opacity-0"
       }
       `}
         >
@@ -41,7 +37,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
           {children}
         </div>
       </div>
-    </>,
+    </div>,
     modalRoot
   );
 };

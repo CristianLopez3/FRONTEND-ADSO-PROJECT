@@ -7,20 +7,16 @@ import Modal from "../../../../components/Modal";
 import MenuForm from "./MenuForm";
 import DeleteModal from "../../../../components/DeleteModal";
 
-export type MenuMobileItemProps = Menu;
+export type MenuMobileItemProps = { menu: Menu };
 
-const MenuMobileItem: React.FC<MenuMobileItemProps> = ({
-  id,
-  title,
-  description,
-  price,
-  quantity,
-}) => {
+const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
+  const { id, title, description, price, quantity } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
-  const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
-  const handleUpdateModal = () => setOpenUpdateModal(!openUpdateModal);
+  const onDelete = () => {
+    console.log(id);
+  }
   return (
     <>
       <article key={id} className="bg-white p-4 rounded-lg shadow">
@@ -35,7 +31,7 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({
             size={28}
             color="warning"
             className="p-2"
-            onClick={handleUpdateModal}
+            onClick={ () => setOpenUpdateModal(!openUpdateModal)}
           >
             <Pencil />
           </Button>
@@ -43,25 +39,25 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({
             size={28}
             color="error"
             className="p-2"
-            onClick={handleDeleteModal}
+            onClick={() => setOpenDeleteModal(!openDeleteModal)}
           >
             <Trash />
           </Button>
         </div>
       </article>
-      <Modal open={openDeleteModal} onClose={handleDeleteModal}>
+      <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(!openDeleteModal)}>
         <DeleteModal
-          handleDeleteModal={handleDeleteModal}
-          id={id!}
+          handleDeleteModal={() => setOpenDeleteModal(!openDeleteModal)}
+          onDelete={onDelete}
           name={title}
         />
       </Modal>
 
-      <Modal open={openUpdateModal} onClose={handleUpdateModal}>
+      <Modal open={openUpdateModal} onClose={ () => setOpenUpdateModal(!openUpdateModal)}>
         <MenuForm
-        mode="update"
+          mode="update"
           description={description}
-          handleUpdateModal={handleUpdateModal}
+          handleUpdateModal={ () => setOpenUpdateModal(!openUpdateModal)}
           id={id}
           price={price}
           quantity={quantity}

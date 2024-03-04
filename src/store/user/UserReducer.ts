@@ -15,8 +15,6 @@ const initialState: UserReducerState = {
 };
 
 
-
-
 const userSlice = createSlice({
   name: "users",
   initialState,
@@ -25,14 +23,12 @@ const userSlice = createSlice({
     builder
       .addCase(createUser.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
       })
       .addCase(createUser.fulfilled, (state, action: PayloadAction<User[]>) => {
         state.isLoading = false;
         state.data = action.payload;
       })
       .addCase(createUser.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       })
       .addCase(getAllUsers.pending, (state) => {
@@ -75,9 +71,6 @@ const userSlice = createSlice({
   },
 });
 
-export { createUser, getAllUsers, deleteUser, updateUser }; // Export the action creators for usage in components
-export default userSlice.reducer;
-
 const createUser = createAsyncThunk("user/createUser", async (user: User) => {
   try {
     const response = await users_service.add({ user });
@@ -118,3 +111,7 @@ const updateUser = createAsyncThunk("user/updateUser", async (user: User) => {
     throw error;
   }
 });
+
+
+export { createUser, getAllUsers, deleteUser, updateUser }; // Export the action creators for usage in components
+export default userSlice.reducer;

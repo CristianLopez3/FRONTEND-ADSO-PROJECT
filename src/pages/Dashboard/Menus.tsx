@@ -1,47 +1,34 @@
+import { useEffect, useState } from "react";
+import { AppDispatch, RootState } from "@/store/store";
+
 import { RiBookOpenLine } from "react-icons/ri";
 import { RiAddFill } from "react-icons/ri";
+
 import { Button } from "keep-react";
 import DashboardNavbar from "./components/Dashboard/DashboardNavbar";
 import MenuTable from "./components/menu/MenuTable";
 import Modal from "@/components/Modal";
-import { Menu } from "@/types/Menu";
-import { useState } from "react";
 import MenuForm from "./components/menu/MenuForm";
-
-const dummyData: Array<Menu> = [
-  {
-    id: 13,
-    title: "Hot Potatoes",
-    description: "potatoes with sault and sauce to patner",
-    price: 2000,
-    quantity: 20,
-  },
-  {
-    id: 12,
-    title: "Hot Potatoes",
-    description: "potatoes with sault and sauce to patner",
-    price: 2000,
-    quantity: 20,
-  },
-  {
-    id: 33,
-    title: "Hot Potatoes",
-    description: "potatoes with sault and sauce to patner",
-    price: 2000,
-    quantity: 20,
-  },
-  {
-    id: 44,
-    title: "Hot Potatoes",
-    description: "potatoes with sault and sauce to patner",
-    price: 2000,
-    quantity: 20,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMenus } from "@/store/menus/MenuReducer";
+import Skeleton from "@/components/Skeleton";
+import Alert from "@/components/Alert";
 
 const Menus = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const menus = useSelector((state: RootState) => state.menus);
 
+  useEffect(() => {
+    const fetchMenus = async () => {
+      try {
+        await dispatch(getAllMenus());
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMenus();
+  }, [dispatch]);
   return (
     <>
       <header>
@@ -59,7 +46,17 @@ const Menus = () => {
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
-        <MenuTable data={dummyData} />
+        {menus.isLoading ? (
+          <Skeleton />
+        ) : menus.isError ? (
+          <Alert
+            title="Error fetching menus"
+            description="An error ocurred when the data was being brought in!"
+            mode="danger"
+          />
+        ) : (
+          <MenuTable data={menus.data} />
+        )}
       </main>
 
       <Modal open={addModal} onClose={() => setAddModal(!addModal)}>

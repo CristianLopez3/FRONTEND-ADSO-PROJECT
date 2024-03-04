@@ -6,20 +6,17 @@ import Modal from "../../../../components/Modal";
 import MenuForm from "./MenuForm";
 import DeleteContent from "../../../../components/DeleteModal";
 
-type MenuRowProps = Menu;
+type MenuRowProps = { menu: Menu };
 
-const MenuRow = ({
-  id = 0,
-  title,
-  description,
-  price,
-  quantity,
-}: MenuRowProps) => {
+const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
+  const { id = 0, title, description, price, quantity } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
-  const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
-  const handleUpdateModal = () => setOpenUpdateModal(!openUpdateModal);
+  const onDelete = () => {
+    console.log(id);
+  };
+
   return (
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
@@ -35,7 +32,7 @@ const MenuRow = ({
               size={28}
               color="warning"
               className="p-2"
-              onClick={handleUpdateModal}
+              onClick={() => setOpenUpdateModal(!openUpdateModal)}
             >
               <Pencil />
             </Button>
@@ -43,7 +40,7 @@ const MenuRow = ({
               size={28}
               color="error"
               className="p-2"
-              onClick={handleDeleteModal}
+              onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
               <Trash />
             </Button>
@@ -51,19 +48,25 @@ const MenuRow = ({
         </td>
       </tr>
 
-      <Modal open={openDeleteModal} onClose={handleDeleteModal}>
+      <Modal
+        open={openDeleteModal}
+        onClose={() => setOpenDeleteModal(!openDeleteModal)}
+      >
         <DeleteContent
-          handleDeleteModal={handleDeleteModal}
-          id={id }
+          handleDeleteModal={() => setOpenDeleteModal(!openDeleteModal)}
+          onDelete={onDelete}
           name={title}
         />
       </Modal>
 
-      <Modal open={openUpdateModal} onClose={handleUpdateModal}>
+      <Modal
+        open={openUpdateModal}
+        onClose={() => setOpenUpdateModal(!openUpdateModal)}
+      >
         <MenuForm
           mode="update"
           description={description}
-          handleUpdateModal={handleUpdateModal}
+          handleUpdateModal={() => setOpenUpdateModal(!openUpdateModal)}
           id={id}
           price={price}
           quantity={quantity}

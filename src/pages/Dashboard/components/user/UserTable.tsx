@@ -23,8 +23,8 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
           data.map((item, index) => <UserRow user={item} key={index} />)
         ) : (
           <tr>
-            <td colSpan={4}>No data available yet!.</td>
-          </tr>
+          <td colSpan={5} className="tex-left py-4 pl-4 bg-white">No data available yet!.</td>
+        </tr>
         )}
       </Table>
 

@@ -1,15 +1,15 @@
-import { ReactNode, createContext, useContext, useState } from "react";
-import { LuChevronFirst, LuChevronLast, LuMoreVertical } from "react-icons/lu";
+import { createContext, useState } from "react";
+import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { PiArrowSquareIn } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import SidebarItem from "./SidebarItem";
+import { LuUserCircle, LuBook } from "react-icons/lu";
+import { PiBowlFood } from "react-icons/pi";
 
-type SidebarProps = {
-  children: ReactNode;
-};
 
 export const SidebarContext = createContext<boolean>(true);
 
-const Sidebar = ({ children }: SidebarProps) => {
+const Sidebar = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   return (
     <aside className="h-screen py-4 pl-4">
@@ -32,7 +32,29 @@ const Sidebar = ({ children }: SidebarProps) => {
         </div>
 
         <SidebarContext.Provider value={expanded}>
-          <ul className="flex-1 px-3">{children}</ul>
+          <ul className="flex-1 px-3">
+          <SidebarItem
+            path="/dashboard/users"
+            icon={<LuUserCircle size={20} />}
+            text="User"
+            active={false}
+            alert={false}
+          />
+          <SidebarItem
+            path="/dashboard/menus"
+            icon={<PiBowlFood size={20} />}
+            text="Menus"
+            active
+            alert={false}
+          />
+          <SidebarItem
+            path="/dashboard/reservations"
+            icon={<LuBook size={20} />}
+            text="Reservations"
+            active={false}
+            alert={false}
+          />
+          </ul>
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">

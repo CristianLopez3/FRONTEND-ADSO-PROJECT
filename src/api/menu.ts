@@ -4,7 +4,7 @@ import { Menu } from "../types/Menu";
 const endpoint = "menus";
 
 
-export const users_service = {
+export const menus_service = {
   getMenus: function () {
     return instance.get(endpoint);
   },

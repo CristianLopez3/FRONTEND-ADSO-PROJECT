@@ -27,12 +27,8 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const onDelete = async () => {
-    try {
       await dispatch(deleteUser(id!));
       await dispatch(getAllUsers());
-    } catch (error) {
-      console.error("Error deleting user: ", error);
-    }
   };
 
   return (
@@ -74,7 +70,6 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
         >
           <DeleteModal
             onDelete={onDelete}
-            handleDeleteModal={() => setOpenDeleteModal(!openDeleteModal)}
             name={name}
           />
         </Modal>

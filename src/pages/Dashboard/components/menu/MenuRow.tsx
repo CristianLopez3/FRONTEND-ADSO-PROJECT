@@ -5,16 +5,21 @@ import { useState } from "react";
 import Modal from "../../../../components/Modal";
 import MenuForm from "./MenuForm";
 import DeleteContent from "../../../../components/DeleteModal";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { deleteMenu, getAllMenus } from "@/store/menus/MenuReducer";
 
 type MenuRowProps = { menu: Menu };
 
 const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
-  const { id = 0, title, description, price, quantity } = menu;
+  const { id, title, description, price } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onDelete = () => {
-    console.log(id);
+  const onDelete = async () => {
+    await dispatch(deleteMenu(+id!));
+    await dispatch(getAllMenus());
   };
 
   return (
@@ -24,7 +29,6 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         <td className="row-table">{title}</td>
         <td className="row-table">{description}</td>
         <td className="row-table">{price}</td>
-        <td className="row-table">{quantity}</td>
 
         <td className="row-table">
           <div className="flex gap-2">
@@ -52,11 +56,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(!openDeleteModal)}
       >
-        <DeleteContent
-          handleDeleteModal={() => setOpenDeleteModal(!openDeleteModal)}
-          onDelete={onDelete}
-          name={title}
-        />
+        <DeleteContent onDelete={onDelete} name={title} />
       </Modal>
 
       <Modal
@@ -66,10 +66,8 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         <MenuForm
           mode="update"
           description={description}
-          handleUpdateModal={() => setOpenUpdateModal(!openUpdateModal)}
           id={id}
           price={price}
-          quantity={quantity}
           title={title}
         />
       </Modal>

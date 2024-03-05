@@ -6,7 +6,7 @@ import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import { addMenu, getAllMenus } from "@/store/menus/MenuReducer";
+import { addMenu, getAllMenus, updateMenu } from "@/store/menus/MenuReducer";
 import Select from "@/components/Select";
 
 const schema = z.object({
@@ -67,8 +67,8 @@ const MenuForm = ({
           state: data.state === "true" ? true : false,
         };
 
-        if (mode === "update") {
-          // await dispatch(updateUser(user));
+        if (mode === "update" && menu.id !== null) {
+          await dispatch(updateMenu(menu));
         } else {
           await dispatch(addMenu(menu));
         }

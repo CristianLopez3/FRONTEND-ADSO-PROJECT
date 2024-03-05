@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { PiTrashFill } from "react-icons/pi";
 type DeleteModalProps = {
-  handleDeleteModal: () => void;
   onDelete: () => void;
   name: string;
 }
 
 
 const DeleteModal: React.FC<DeleteModalProps> = ({
-  handleDeleteModal,
   onDelete,
   name,
 }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="mx-auto my-4 w-48 text-center">
     <div className="flex justify-center items-center">
@@ -24,7 +24,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
       <button className="btn btn-danger w-full" onClick={onDelete}>Delete</button>
       <button
         className="btn btn-light w-full"
-        onClick={handleDeleteModal}
+        onClick={() => setIsOpen(!isOpen)}
       >
         Cancel
       </button>

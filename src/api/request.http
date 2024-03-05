@@ -1,4 +1,16 @@
 
+POST http://localhost:9000/menus
+Content-Type: application/json
+
+{
+  "title": "Mondongo",
+  "description": "Soup with some vegetables",
+  "price": 1000,
+  "state": true
+}
+
+
+
 PUT http://localhost:9000/users/3
 Content-Type: application/json
 

@@ -17,7 +17,7 @@ export const menus_service = {
     return instance.get(`${endpoint}/${id}`)
   },
 
-  deleteMenu: function({id}: {id: number | string}){
+  deleteMenu: function(id: number | string){
     return instance.delete(`${endpoint}/${id}`)
   },
 

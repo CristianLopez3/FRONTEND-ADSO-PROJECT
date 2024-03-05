@@ -13,6 +13,26 @@ const initialState: MenuReducer = {
   isError: false,
 };
 
+const getAllMenus = createAsyncThunk("menus/getAllMenus", async () => {
+  const response = await menus_service.getMenus();
+  return response.data;
+});
+
+const addMenu = createAsyncThunk("menus/createMenu", async (menu: Menu) => {
+  const response = await menus_service.addMenu({ menu });
+  return response.data;
+});
+
+const updateMenu = createAsyncThunk("menus/update", async (menu: Menu) => {
+  const response = await menus_service.updateMenu({ menu });
+  return response.data;
+});
+
+const deleteMenu = createAsyncThunk("menus/delete", async(id: number) => {
+  const response = await menus_service.deleteMenu(id);
+  return response.data;
+})
+
 const menuSlice = createSlice({
   name: "menus",
   initialState,
@@ -46,17 +66,31 @@ const menuSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
+      .addCase(updateMenu.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(updateMenu.fulfilled, (state, action: PayloadAction<Menu[]>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(updateMenu.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(deleteMenu.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(deleteMenu.fulfilled, (state, action: PayloadAction<Menu[]>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(deleteMenu.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
 });
 
-const getAllMenus = createAsyncThunk("menus/getAllMenus", async () => {
-  const response = await menus_service.getMenus();
-  return response.data;
-});
-
-const addMenu = createAsyncThunk("menus/createMenu", async (menu: Menu) => {
-  const response = await menus_service.addMenu({ menu });
-  return response.data;
-});
-
-export { getAllMenus, addMenu };
+export { getAllMenus, addMenu, updateMenu, deleteMenu };
 export default menuSlice.reducer;

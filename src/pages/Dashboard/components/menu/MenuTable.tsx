@@ -16,7 +16,6 @@ const MenuTable: React.FC<MenuTableProps> = ({ data }) => {
           { title: "Title", width: "20%" },
           { title: "Description", width: "30%" },
           { title: "Price", width: "20%" },
-          { title: "Quantity", width: "10%" },
           { title: "Actions", width: "10%" },
         ]}
       >

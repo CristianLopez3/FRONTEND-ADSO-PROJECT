@@ -17,32 +17,46 @@ const menuSlice = createSlice({
   name: "menus",
   initialState,
   reducers: {},
-  extraReducers: (builder) => 
-  builder.addCase(getAllMenus.pending, (state) => {
-    state.isLoading = true;
-    state.isError = false;
-  })
-  .addCase(getAllMenus.fulfilled, (state, action: PayloadAction<Menu[]>) => {
-    state.isLoading = false;
-    state.data = action.payload;
-  })
-  .addCase(getAllMenus.rejected, (state) => {
-    state.isLoading = false;
-    state.isError = true;
-  })
+  extraReducers: (builder) =>
+    builder
+      .addCase(getAllMenus.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(
+        getAllMenus.fulfilled,
+        (state, action: PayloadAction<Menu[]>) => {
+          state.isLoading = false;
+          state.data = action.payload;
+        }
+      )
+      .addCase(getAllMenus.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(addMenu.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(addMenu.fulfilled, (state, action: PayloadAction<Menu>) => {
+        state.isLoading = false;
+        state.data.push(action.payload);
+      })
+      .addCase(addMenu.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
 });
 
 const getAllMenus = createAsyncThunk("menus/getAllMenus", async () => {
-  try {
-    const response = await menus_service.getMenus();
-    return response.data;
-  } catch (error) {
-    console.log(
-      "goint to menu reducer to change the errorr please..." + error
-    );
-    throw error;
-  }
+  const response = await menus_service.getMenus();
+  return response.data;
 });
 
-export { getAllMenus };
+const addMenu = createAsyncThunk("menus/createMenu", async (menu: Menu) => {
+  const response = await menus_service.addMenu({ menu });
+  return response.data;
+});
+
+export { getAllMenus, addMenu };
 export default menuSlice.reducer;

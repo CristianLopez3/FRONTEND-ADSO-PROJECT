@@ -1,28 +1,38 @@
+import { useCallback, useState } from "react";
 import { Pencil } from "phosphor-react";
 import InputField from "@/components/InputField";
 import { Menu } from "@/types/Menu";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { addMenu, getAllMenus } from "@/store/menus/MenuReducer";
+import Select from "@/components/Select";
 
 const schema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
   title: z.string(),
   price: z.number(),
   description: z.string(),
-  state: z.boolean(),
+  state: z.string(),
 });
 
 type Inputs = z.infer<typeof schema>;
 
 type MenuFormProps = {
   mode: "create" | "update";
-  handleUpdateModal?: () => void;
-  handleCreateModal?: () => void;
+  handleUpdateMenu?: () => void;
+  handleCreateMenu?: () => void;
 } & Partial<Inputs>;
 
+const options = [
+  { id: "1", name: "Choose an state" },
+  { id: "2", name: "Active" },
+  { id: "3", name: "Desactive" },
+];
 const MenuForm = ({
-  handleUpdateModal,
-  handleCreateModal,
+  handleUpdateMenu,
+  handleCreateMenu,
   id,
   title,
   price,
@@ -30,16 +40,48 @@ const MenuForm = ({
   description,
   mode,
 }: MenuFormProps) => {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const { register, handleSubmit } = useForm<Inputs>({
+    defaultValues: {
+      id,
+      title,
+      price,
+      state,
+      description,
+    },
+  });
   const text = mode === "update" ? "Update Menu" : "Create Menu";
   const buttonText = mode === "update" ? "Update" : "Create";
+  const dispatch = useDispatch<AppDispatch>();
+  const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
 
-  const handleAction =
-    mode === "update" ? handleUpdateModal : handleCreateModal;
+  const onSubmit: SubmitHandler<Inputs> = useCallback(
+    async (data) => {
+      try {
+        data.id = data.id === "" || data.id === null ? null : data.id;
+        const menu: Menu = {
+          id: data.id,
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          state: data.state === "true" ? true : false,
+        };
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
-  };
+        if (mode === "update") {
+          // await dispatch(updateUser(user));
+        } else {
+          await dispatch(addMenu(menu));
+        }
+
+        dispatch(getAllMenus());
+
+        handleCreateMenu?.() || handleUpdateMenu?.();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, handleCreateMenu, handleUpdateMenu, mode]
+  );
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
@@ -52,7 +94,14 @@ const MenuForm = ({
           <InputField {...register("title")} type="text" />
           <InputField {...register("description")} type="text" />
           <InputField {...register("price")} type="number" />
-          <InputField {...register("state")} type="number" />
+          <Select
+            options={options}
+            value={selectedOption}
+            onChange={setSelectedOption}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
+          />
+
           <div className="flex gap-4 mt-8">
             <button
               className={`${

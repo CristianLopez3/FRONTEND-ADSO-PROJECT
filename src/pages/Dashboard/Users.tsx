@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 
@@ -9,25 +9,36 @@ import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import { Button } from "keep-react";
 import Modal from "@/components/Modal";
 import UserForm from "./components/user/UserForm";
-import UserTable from "./components/user/UserTable";
+const UserTable = React.lazy(() => import('./components/user/UserTable'));
 import { getAllUsers } from "@/store/user/UserReducer";
 import Alert from "@/components/Alert";
 import Skeleton from "@/components/Skeleton";
+
+// Move fetchAllUsers outside of the component
+const fetchAllUsers = async (dispatch: AppDispatch) => {
+  try {
+    await dispatch(getAllUsers());
+  } catch (error) {
+    console.error("Error fetching all users:", error);
+  }
+};
 
 const Users = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users);
 
+  // Use useCallback to memoize event handlers
+  const toggleAddModal = useCallback(() => {
+    setAddModal(prevState => !prevState);
+  }, []);
+
+  const handleCreateUser = useCallback(() => {
+    setAddModal(false);
+  }, []);
+
   useEffect(() => {
-    const fetchAllUsers = async () => {
-      try {
-        await dispatch(getAllUsers());
-      } catch (error) {
-        console.error("Error fetching all users:", error);
-      }
-    };
-    fetchAllUsers();
+    fetchAllUsers(dispatch);
   }, [dispatch]);
 
   return (
@@ -41,7 +52,7 @@ const Users = () => {
               size={28}
               color="success"
               className="p-2"
-              onClick={() => setAddModal(!addModal)}
+              onClick={toggleAddModal}
             >
               <RiAddFill />
             </Button>
@@ -58,13 +69,15 @@ const Users = () => {
             mode="danger"
           />
         ) : (
-          <UserTable data={users.data} />
+          <Suspense fallback={<Skeleton />}>
+            <UserTable data={users.data} />
+          </Suspense>
         )}
       </main>
-      <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
+      <Modal open={addModal} onClose={toggleAddModal}>
         <UserForm
           mode="create"
-          handleCreateUser={() => setAddModal(!addModal)}
+          handleCreateUser={handleCreateUser}
         />
       </Modal>
     </>

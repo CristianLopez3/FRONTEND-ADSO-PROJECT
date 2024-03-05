@@ -12,27 +12,16 @@ type InputFieldProps = {
   InputHTMLAttributes<HTMLInputElement>;
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  function InputField(
-    { name, type = "text", styles, colorText = "black", ...props },
-    ref
-  ) {
+  function InputField({ name, type = "text", ...props }, ref) {
     const uniqueId = name + (Math.random() * 100).toString();
     return (
-      <div key={uniqueId}>
-        {type !== "hidden" && (
-          <label
-            htmlFor={uniqueId}
-            className={`font-medium text-sm mt-10 mb-2 capitalize text-${colorText} text-base  ${styles}`}
-          >
-            {name}
-          </label>
-        )}
+      <div className="py-2">
         <input
-          className="block w-full py-3 pl-2 pr-4 border border-gray-400 rounded-md outline-none text-sm text-black"
+          className="block w-full py-3 pl-1 pr-4 border-b border-gray-400 outline-none text-sm text-black"
           ref={ref}
           id={uniqueId}
           name={name}
-          placeholder={`Enter the ${name}`}
+          placeholder={`${name}`}
           color="gray"
           type={type}
           {...props}

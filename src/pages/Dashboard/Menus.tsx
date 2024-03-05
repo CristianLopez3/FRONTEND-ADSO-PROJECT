@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { AppDispatch, RootState } from "@/store/store";
 
 import { RiBookOpenLine } from "react-icons/ri";
@@ -6,7 +6,7 @@ import { RiAddFill } from "react-icons/ri";
 
 import { Button } from "keep-react";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
-import MenuTable from "./components/menu/MenuTable";
+const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 import Modal from "@/components/Modal";
 import MenuForm from "./components/menu/MenuForm";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,28 +14,40 @@ import { getAllMenus } from "@/store/menus/MenuReducer";
 import Skeleton from "@/components/Skeleton";
 import Alert from "@/components/Alert";
 
+// Move fetchMenus outside of the component
+const fetchMenus = async (dispatch: AppDispatch) => {
+  try {
+    await dispatch(getAllMenus());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const Menus = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const menus = useSelector((state: RootState) => state.menus);
 
+  // Use useCallback to memoize event handlers
+  const toggleAddModal = useCallback(() => {
+    setAddModal((prevState) => !prevState);
+  }, []);
+
+  const handleCreateMenu = useCallback(() => {
+    setAddModal(false);
+  }, []);
+
   useEffect(() => {
-    const fetchMenus = async () => {
-      try {
-        await dispatch(getAllMenus());
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMenus();
+    fetchMenus(dispatch);
   }, [dispatch]);
+
   return (
     <>
       <header>
         <DashboardNavbar>
           <h2
             className="flex items-center text-black font-bold  gap-2 text-2xl"
-            onClick={() => setAddModal(!addModal)}
+            onClick={toggleAddModal}
           >
             <RiBookOpenLine />
             Menus
@@ -55,19 +67,14 @@ const Menus = () => {
             mode="danger"
           />
         ) : (
-          <MenuTable data={menus.data} />
+          <Suspense fallback={<Skeleton />}>
+            <MenuTable data={menus.data} />
+          </Suspense>
         )}
       </main>
 
-      <Modal open={addModal} onClose={() => setAddModal(!addModal)}>
-        <MenuForm
-          mode="create"
-          handleCreateModal={() => setAddModal(!addModal)}
-          description=""
-          price={0}
-          quantity={0}
-          title=""
-        />
+      <Modal open={addModal} onClose={toggleAddModal}>
+        <MenuForm mode="create" handleCreateMenu={handleCreateMenu} />
       </Modal>
     </>
   );

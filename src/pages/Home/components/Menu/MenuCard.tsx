@@ -10,7 +10,6 @@ const MenuCard = ({
   price,
   // image,
   //category,
-  quantity,
 }: MenuCardProps) => {
   return (
     <>

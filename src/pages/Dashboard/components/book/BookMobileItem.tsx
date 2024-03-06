@@ -47,8 +47,7 @@ const BookMobileItem: React.FC<BookingMobileItemProps> = ({
       </article>
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
         <DeleteModal
-          handleDeleteModal={handleDeleteModal}
-          id={id}
+          onDelete={handleDeleteModal}
           name={name}
         />
       </Modal>

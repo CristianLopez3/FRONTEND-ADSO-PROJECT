@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+// import { useState } from "react";
 import { DatePicker } from "keep-react";
 
 type CalendarProps = {
@@ -7,7 +7,7 @@ type CalendarProps = {
 };
 
 const Calendar = ({ styles }: CalendarProps) => {
-  const [date, setDate] = useState(null);
+  // const [date, setDate] = useState(null);
   return (
     <DatePicker placeholder="Date / Month / Year" className={styles}>
       <DatePicker.SingleDate />

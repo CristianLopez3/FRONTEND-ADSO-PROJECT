@@ -8,8 +8,9 @@ type TimePickerProps = {
 
 const TimePicker = ({styles}: TimePickerProps) => {
   const [time, setTime] = useState<string | Date | null | undefined>(null);
+  
   return (
-    <DatePicker time={setTime} placeholder="Select time" className={styles}>
+    <DatePicker time={setTime} placeholder={time?.toString()} className={styles}>
       <DatePicker.Time />
     </DatePicker>
   );

@@ -54,11 +54,7 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
         </div>
       </article>
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteModal
-          handleDeleteModal={handleDeleteModal}
-          id={id!}
-          name={name}
-        />
+        <DeleteModal onDelete={handleDeleteModal} name={name} />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>

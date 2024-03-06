@@ -10,7 +10,7 @@ import DeleteModal from "../../../../components/DeleteModal";
 export type MenuMobileItemProps = { menu: Menu };
 
 const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
-  const { id, title, description, price, quantity } = menu;
+  const { id, title, description, price, state } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -22,7 +22,7 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
       <article key={id} className="bg-white p-4 rounded-lg shadow">
         <div className="text-xs flex items-center justify-between space-x-2 md:text-sm gap-x-4">
           <div>{title}</div>
-          <div>{quantity}</div>
+          <div>{state}</div>
         </div>
         <div className="text-sm text-gray-600 py-2">{description}</div>
         <div className="text-sm text-gray-600 py-2">{price}</div>
@@ -47,7 +47,6 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
       </article>
       <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(!openDeleteModal)}>
         <DeleteModal
-          handleDeleteModal={() => setOpenDeleteModal(!openDeleteModal)}
           onDelete={onDelete}
           name={title}
         />
@@ -57,10 +56,8 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
         <MenuForm
           mode="update"
           description={description}
-          handleUpdateModal={ () => setOpenUpdateModal(!openUpdateModal)}
           id={id}
           price={price}
-          quantity={quantity}
           title={title}
         />
       </Modal>

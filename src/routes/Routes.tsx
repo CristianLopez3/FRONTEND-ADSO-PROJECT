@@ -10,6 +10,7 @@ import Users from "@/pages/Dashboard/Users";
 import Test from "./Test";
 // import Profile from "@/pages/dashboard/Profile";
 import HomeLayout from "../layout/HomeTemplate";
+import Page404 from "@/pages/Page404";
 
 export const router = createBrowserRouter([
   {
@@ -39,5 +40,9 @@ export const router = createBrowserRouter([
   {
     path: "test",
     element: <Test />
-  }
+  }, 
+ {
+  path: "*",
+  element: <Page404 />
+ }
 ]);

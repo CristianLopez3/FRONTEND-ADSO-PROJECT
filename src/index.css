@@ -56,6 +56,9 @@
   .span-primary {
     @apply bg-primary;
   }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
 }
 
 

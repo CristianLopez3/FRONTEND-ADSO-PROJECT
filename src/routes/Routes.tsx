@@ -3,12 +3,11 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login/Login";
 import Menu from "@/pages/Home/components/Menu";
 import Booking from "@/pages/Home/components/Booking";
-import Dashboard from "@/pages/Dashboard/Dashboard";
+import Dashboard from "@/pages/dashboard/Dashboard";
 import DashboardTemplate from "@/layout/DashboardTemplate";
-import Menus from "@/pages/Dashboard/Menus";
-import Users from "@/pages/Dashboard/Users";
+import Menus from "@/pages/dashboard/Menus";
+import Users from "@/pages/dashboard/Users";
 import Test from "./Test";
-// import Profile from "@/pages/dashboard/Profile";
 import HomeLayout from "../layout/HomeTemplate";
 import Page404 from "@/pages/Page404";
 

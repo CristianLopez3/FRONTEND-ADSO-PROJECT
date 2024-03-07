@@ -11,6 +11,7 @@ import {  Menu } from "@/types/Menu";
 
 import { type MenuForm, menuSchema } from "@/types/Menu";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Alert from "@/components/Alert";
 
 type MenuFormProps = {
   mode: "create" | "update";
@@ -115,7 +116,7 @@ const MenuForm = ({
           {categories.isLoading ? (
             <p>Loading...</p>
           ) : categories.isError ? (
-            <p>Error fetching categories</p>
+            <Alert description='Error fetching categories' mode="danger" title="Failed getting categories"  />
           ) : (
             <select {...register("categoryId")}>
               <option value="">Select a category: </option>

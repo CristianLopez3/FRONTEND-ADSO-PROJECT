@@ -3,7 +3,7 @@ import { Trash, Pencil } from "phosphor-react";
 
 import { Menu } from "../../../../types/Menu";
 import { useState } from "react";
-import Modal from "../../../../components/Modal";
+import Modal from "../../../../components/Modal/Modal";
 import MenuForm from "./MenuForm";
 import DeleteModal from "../../../../components/DeleteModal";
 

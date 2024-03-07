@@ -1,13 +1,16 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { Pencil } from "phosphor-react";
 import InputField from "@/components/InputField";
-import { Menu } from "@/types/Menu";
+// import { Category, Menu } from "@/types/Menu";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
 import { addMenu, getAllMenus, updateMenu } from "@/store/menus/MenuReducer";
-import Select from "@/components/Select";
+// import Select from "@/components/Select";
+import { getAllCategories } from "@/store/menus/CategoryReducer";
+import { Menu } from "@/types/Menu";
+// import { Option } from "@/components/Select/Select";
 
 const schema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
@@ -15,6 +18,8 @@ const schema = z.object({
   price: z.number(),
   description: z.string(),
   state: z.string(),
+  categoryId: z.number(),
+  categoryName: z.string(),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -30,17 +35,30 @@ const options = [
   { id: "2", name: "Active" },
   { id: "3", name: "Desactive" },
 ];
+
+const fetchCategories = async (dispatch: AppDispatch) => {
+  try {
+    dispatch(getAllCategories());
+  } catch (error) {
+    console.log("Error in form menus" + error);
+  }
+};
+
 const MenuForm = ({
   handleUpdateMenu,
   handleCreateMenu,
   id,
   title,
+  description,
   price,
   state,
-  description,
   mode,
 }: MenuFormProps) => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  // const [selectedState, setSelectedState] = useState<Option>(options[0]);
+  const categories = useSelector((state: RootState) => state.categories);
+  // const [selectedCategory, setSelectedCategory] = useState<Category>(
+  //   categories.data[0]
+  // );
   const { register, handleSubmit } = useForm<Inputs>({
     defaultValues: {
       id,
@@ -65,6 +83,10 @@ const MenuForm = ({
           description: data.description,
           price: data.price,
           state: data.state === "true" ? true : false,
+          category: {
+            id: data.categoryId,
+            name: data.categoryName,
+          },
         };
 
         if (mode === "update" && menu.id !== null) {
@@ -82,6 +104,11 @@ const MenuForm = ({
     },
     [dispatch, handleCreateMenu, handleUpdateMenu, mode]
   );
+
+  useEffect(() => {
+    fetchCategories(dispatch);
+  }, [dispatch]);
+
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
@@ -94,13 +121,28 @@ const MenuForm = ({
           <InputField {...register("title")} type="text" />
           <InputField {...register("description")} type="text" />
           <InputField {...register("price")} type="number" />
-          <Select
-            options={options}
-            value={selectedOption}
-            onChange={setSelectedOption}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id}
-          />
+
+          <select {...register("state")}>
+            {options.map((option) => (
+              <option key={option.id.toString()} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+
+          {categories.isLoading ? (
+            <p>Loading...</p>
+          ) : categories.isError ? (
+            <p>Error fetching categories</p>
+          ) : (
+            <select {...register("categoryId")}>
+              {categories.data.map((category) => (
+                <option key={category.id.toString()} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          )}
 
           <div className="flex gap-4 mt-8">
             <button

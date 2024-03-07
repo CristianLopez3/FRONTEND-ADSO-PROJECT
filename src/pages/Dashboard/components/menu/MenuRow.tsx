@@ -2,7 +2,7 @@ import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { Menu } from "../../../../types/Menu";
 import { useState } from "react";
-import Modal from "../../../../components/Modal";
+import Modal from "../../../../components/Modal/Modal";
 import MenuForm from "./MenuForm";
 import DeleteContent from "../../../../components/DeleteModal";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ import { deleteMenu, getAllMenus } from "@/store/menus/MenuReducer";
 type MenuRowProps = { menu: Menu };
 
 const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
-  const { id, title, description, price } = menu;
+  const { id, title, description, price, category } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -29,6 +29,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         <td className="row-table">{title}</td>
         <td className="row-table">{description}</td>
         <td className="row-table">{price}</td>
+        <td className="row-table">{category.name}</td>
 
         <td className="row-table">
           <div className="flex gap-2">

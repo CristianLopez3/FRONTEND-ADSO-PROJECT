@@ -20,8 +20,10 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    // * Add the createUser reducer
       .addCase(createUser.pending, (state) => {
         state.isLoading = true;
+        state.isError = false;
       })
       .addCase(createUser.fulfilled, (state, action: PayloadAction<User[]>) => {
         state.isLoading = false;
@@ -30,6 +32,7 @@ const userSlice = createSlice({
       .addCase(createUser.rejected, (state) => {
         state.isError = true;
       })
+      // * Add the getAllUsers reducer
       .addCase(getAllUsers.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -45,6 +48,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
+      // * Add the deleteUser reducer
       .addCase(deleteUser.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -60,6 +64,7 @@ const userSlice = createSlice({
         state.isError = true;
         state.isLoading = false;
       })
+      // * add the updateUser reducer
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
         state.isError = false;

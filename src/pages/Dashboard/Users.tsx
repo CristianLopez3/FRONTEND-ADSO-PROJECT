@@ -7,7 +7,7 @@ import { RiAddFill } from "react-icons/ri";
 
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import { Button } from "keep-react";
-import Modal from "@/components/Modal";
+import Modal from "@/components/Modal/Modal";
 import UserForm from "./components/user/UserForm";
 const UserTable = React.lazy(() => import('./components/user/UserTable'));
 import { getAllUsers } from "@/store/user/UserReducer";

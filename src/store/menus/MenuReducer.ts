@@ -39,6 +39,7 @@ const menuSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
+    // * Add the getAllMenus reducer
       .addCase(getAllMenus.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -54,6 +55,7 @@ const menuSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
+      // * Add the addMenu reducer
       .addCase(addMenu.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -66,6 +68,7 @@ const menuSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
+      // * Add the updateMenu reducer
       .addCase(updateMenu.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -78,6 +81,7 @@ const menuSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
+      // * Add the deleteMenu reducer
       .addCase(deleteMenu.pending, (state) => {
         state.isLoading = true;
         state.isError = false;

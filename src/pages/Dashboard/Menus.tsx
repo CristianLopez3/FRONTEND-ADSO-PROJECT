@@ -7,7 +7,7 @@ import { RiAddFill } from "react-icons/ri";
 import { Button } from "keep-react";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
-import Modal from "@/components/Modal";
+import Modal from "@/components/Modal/Modal";
 import MenuForm from "./components/menu/MenuForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMenus } from "@/store/menus/MenuReducer";
@@ -40,7 +40,8 @@ const Menus = () => {
   useEffect(() => {
     fetchMenus(dispatch);
   }, [dispatch]);
-
+  
+  console.log(menus.data)
   return (
     <>
       <header>

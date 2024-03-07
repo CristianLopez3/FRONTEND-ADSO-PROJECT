@@ -22,6 +22,11 @@
     @apply text-3xl font-bold text-center;
   }
 
+  select {
+    @apply block w-full py-3 pl-1 pr-4 border-b border-gray-400 outline-none text-sm text-gray-400;
+  }
+
+
 }
 
 @layer components {

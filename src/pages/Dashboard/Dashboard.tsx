@@ -5,7 +5,7 @@ import MenuCard from "./components/dashboard/MenuCard";
 import UserCard from "./components/dashboard/UserCard";
 import { RiBookOpenLine } from "react-icons/ri";
 
-const Dashboard = () => {0-0
+const Dashboard = () => {
   return (
     <>
       <header>

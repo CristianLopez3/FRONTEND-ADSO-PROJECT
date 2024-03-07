@@ -1,4 +1,12 @@
 
+POST http://localhost:9000/category
+Content-Type: application/json
+
+{
+  "name": "Stronger"
+}
+
+
 POST http://localhost:9000/menus
 Content-Type: application/json
 

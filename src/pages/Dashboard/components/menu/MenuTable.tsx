@@ -16,6 +16,7 @@ const MenuTable: React.FC<MenuTableProps> = ({ data }) => {
           { title: "Title", width: "20%" },
           { title: "Description", width: "30%" },
           { title: "Price", width: "20%" },
+          { title: "Category", width: "20%" },
           { title: "Actions", width: "10%" },
         ]}
       >
@@ -23,7 +24,9 @@ const MenuTable: React.FC<MenuTableProps> = ({ data }) => {
           data.map((item, index) => <MenuRow menu={item} key={index} />)
         ) : (
           <tr>
-            <td colSpan={6} className="tex-left py-4 pl-4 bg-white">No data available yet!.</td>
+            <td colSpan={6} className="tex-left py-4 pl-4 bg-white">
+              No data available yet!.
+            </td>
           </tr>
         )}
       </Table>

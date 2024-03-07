@@ -1,34 +1,22 @@
 import { useCallback, useEffect } from "react";
 import { Pencil } from "phosphor-react";
 import InputField from "@/components/InputField";
-// import { Category, Menu } from "@/types/Menu";
-import { z } from "zod";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { addMenu, getAllMenus, updateMenu } from "@/store/menus/MenuReducer";
-// import Select from "@/components/Select";
 import { getAllCategories } from "@/store/menus/CategoryReducer";
-import { Menu } from "@/types/Menu";
-// import { Option } from "@/components/Select/Select";
+import {  Menu } from "@/types/Menu";
 
-const schema = z.object({
-  id: z.union([z.string(), z.number(), z.null()]),
-  title: z.string(),
-  price: z.number(),
-  description: z.string(),
-  state: z.string(),
-  categoryId: z.number(),
-  categoryName: z.string(),
-});
-
-type Inputs = z.infer<typeof schema>;
+import { type MenuForm, menuSchema } from "@/types/Menu";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type MenuFormProps = {
   mode: "create" | "update";
   handleUpdateMenu?: () => void;
   handleCreateMenu?: () => void;
-} & Partial<Inputs>;
+} & Partial<MenuForm>;
 
 const options = [
   { id: "1", name: "Choose an state" },
@@ -54,12 +42,8 @@ const MenuForm = ({
   state,
   mode,
 }: MenuFormProps) => {
-  // const [selectedState, setSelectedState] = useState<Option>(options[0]);
   const categories = useSelector((state: RootState) => state.categories);
-  // const [selectedCategory, setSelectedCategory] = useState<Category>(
-  //   categories.data[0]
-  // );
-  const { register, handleSubmit } = useForm<Inputs>({
+  const { register, handleSubmit } = useForm<MenuForm>({
     defaultValues: {
       id,
       title,
@@ -67,13 +51,14 @@ const MenuForm = ({
       state,
       description,
     },
+    resolver: zodResolver(menuSchema)
   });
   const text = mode === "update" ? "Update Menu" : "Create Menu";
   const buttonText = mode === "update" ? "Update" : "Create";
   const dispatch = useDispatch<AppDispatch>();
   const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
 
-  const onSubmit: SubmitHandler<Inputs> = useCallback(
+  const onSubmit: SubmitHandler<MenuForm> = useCallback(
     async (data) => {
       try {
         data.id = data.id === "" || data.id === null ? null : data.id;
@@ -83,10 +68,7 @@ const MenuForm = ({
           description: data.description,
           price: data.price,
           state: data.state === "true" ? true : false,
-          category: {
-            id: data.categoryId,
-            name: data.categoryName,
-          },
+          idCategory: data.categoryId
         };
 
         if (mode === "update" && menu.id !== null) {
@@ -94,7 +76,7 @@ const MenuForm = ({
         } else {
           await dispatch(addMenu(menu));
         }
-
+        console.log("Menu created" + menu);
         dispatch(getAllMenus());
 
         handleCreateMenu?.() || handleUpdateMenu?.();
@@ -136,6 +118,7 @@ const MenuForm = ({
             <p>Error fetching categories</p>
           ) : (
             <select {...register("categoryId")}>
+              <option value="">Select a category: </option>
               {categories.data.map((category) => (
                 <option key={category.id.toString()} value={category.id}>
                   {category.name}

@@ -40,8 +40,7 @@ const Menus = () => {
   useEffect(() => {
     fetchMenus(dispatch);
   }, [dispatch]);
-  
-  console.log(menus.data)
+ 
   return (
     <>
       <header>

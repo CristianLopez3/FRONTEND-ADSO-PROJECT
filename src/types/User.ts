@@ -1,4 +1,6 @@
-export  interface User {
+import { z } from "zod";
+
+export interface User {
   id?: string | number | null;
   name: string;
   lastName: string;
@@ -9,12 +11,16 @@ export  interface User {
   role: string;
 }
 
-/**
-  "name": "Dani",
-  "lastName": "Pe",
-  "email": "Fernao@mail.com",
-  "password": "************",
-  "identification": "12342322",
-  "cellphone": 34211,
-    "role": "ADMIN"
- */
+export const userSchema = z.object({
+  id: z.union([z.string(), z.number(), z.null()]),
+  name: z.string().min(3, "Name is required"),
+  lastName: z.string().min(3, "Lastname is required"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password is required"),
+  identification: z.string().min(7, "Identification is required"),
+  cellphone: z.string().min(7, "Cellphone is required"),
+  role: z.string().min(4, "Role is required"),
+});
+
+export type UserFormTypes = z.infer<typeof userSchema>;
+

@@ -1,33 +1,19 @@
 import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "@/components/InputField";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
 import { User } from "@/types/User";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
-
-// Define the schema for the form
-const schema = z.object({
-  id: z.union([z.string(), z.number(), z.null()]),
-  name: z.string().min(3, "Name is required"),
-  lastName: z.string().min(3, "Lastname is required"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password is required"),
-  identification: z.string().min(7, "Identification is required"),
-  cellphone: z.string().min(7, "Cellphone is required"),
-  role: z.string().min(4, "Role is required"),
-});
-
-type Inputs = z.infer<typeof schema>;
+import { type UserFormTypes, userSchema } from "@/types/User";
 
 type UserFormProps = {
   handleUpdateModal?: () => void;
   handleCreateUser?: () => void;
   mode: "update" | "create";
-} & Partial<Inputs>;
+} & Partial<UserFormTypes>;
 
 const UserForm: React.FC<UserFormProps> = ({
   handleUpdateModal,
@@ -49,7 +35,7 @@ const UserForm: React.FC<UserFormProps> = ({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<Inputs>({
+  } = useForm<UserFormTypes>({
     defaultValues: {
       id,
       name,
@@ -60,7 +46,7 @@ const UserForm: React.FC<UserFormProps> = ({
       cellphone,
       role,
     },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(userSchema),
   });
 
   const dispatch = useDispatch<AppDispatch>();
@@ -69,7 +55,8 @@ const UserForm: React.FC<UserFormProps> = ({
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
 
-  const onSubmit: SubmitHandler<Inputs> = useCallback(
+  // TODO - Add the logic to create an user with his respective Role.
+  const onSubmit: SubmitHandler<UserFormTypes> = useCallback(
     async (data) => {
       try {
         data.id = data.id === "" || data.id === null ? null : data.id;
@@ -83,7 +70,7 @@ const UserForm: React.FC<UserFormProps> = ({
           cellphone: data.cellphone.toString(),
           role: data.role,
         };
-
+        
         if (mode === "update") {
           await dispatch(updateUser(user));
         } else {
@@ -92,11 +79,9 @@ const UserForm: React.FC<UserFormProps> = ({
 
         await dispatch(getAllUsers());
 
-        // Close modal
         handleCreateUser?.() || handleUpdateModal?.();
       } catch (error) {
         console.error(error);
-        // Handle error appropriately
       }
     },
     [dispatch, handleCreateUser, handleUpdateModal, mode]

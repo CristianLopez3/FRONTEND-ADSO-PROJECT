@@ -12,7 +12,7 @@ export const getMenusByCategory = async (id: number) => {
 };
 
 export const addMenu = async (menu: MenuPost) => {
-  const response = await menus_service.addMenu(menu);
+  const response = await menus_service.addMenu({menu});
   return response.data;
 };
 

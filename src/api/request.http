@@ -1,21 +1,22 @@
 
-POST http://localhost:9000/category
-Content-Type: application/json
-
-{
-  "name": "Stronger"
-}
-
-
 POST http://localhost:9000/menus
 Content-Type: application/json
 
 {
-  "title": "Mondongo",
+  "title": "Arepa",
   "description": "Soup with some vegetables",
   "price": 1000,
-  "state": true
+  "state": true,
+  "idCategory": 1
 }
+
+POST http://localhost:9000/category
+Content-Type: application/json
+
+{
+  "name": "Starter"
+}
+
 
 
 

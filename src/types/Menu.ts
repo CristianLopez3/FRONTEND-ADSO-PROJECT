@@ -27,7 +27,7 @@ export const menuSchema = z.object({
   price: z.number(),
   description: z.string(),
   state: z.string(),
-  categoryId: z.union([z.string(), z.number()]),
+  idCategory: z.union([z.string(), z.number()]),
 });
 
 // * This is the type of the data that we are going to send to the server

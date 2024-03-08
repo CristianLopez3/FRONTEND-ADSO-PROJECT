@@ -16,7 +16,7 @@ export const menus_service = {
     return instance.get(`${endpoint}/category/${id}`);
   },
 
-  addMenu: function (menu: MenuPost) {
+  addMenu: function ({menu}:{menu: MenuPost}) {
     return instance.post(endpoint, menu);
   },
 

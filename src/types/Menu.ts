@@ -24,7 +24,7 @@ export interface MenuPost {
 export const menuSchema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
   title: z.string(),
-  price: z.number(),
+  price: z.union([z.string(), z.number()]),
   description: z.string(),
   state: z.string(),
   idCategory: z.union([z.string(), z.number()]),

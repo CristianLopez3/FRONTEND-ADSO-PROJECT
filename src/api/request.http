@@ -1,5 +1,9 @@
+GET http://localhost:9000/menus
 
-POST http://localhost:9000/menus
+GET http://localhost:9000/category
+
+
+GET http://localhost:9000/menus
 Content-Type: application/json
 
 {

@@ -48,7 +48,7 @@ const MenuForm = ({
   mode,
 }: MenuFormProps) => {
   const categories = useSelector((state: RootState) => state.categories);
-  const { register, handleSubmit } = useForm<MenuForm>({
+  const { register, handleSubmit, formState: {errors} } = useForm<MenuForm>({
     defaultValues: {
       id,
       title,
@@ -72,8 +72,8 @@ const MenuForm = ({
           id: data.id,
           title: data.title,
           description: data.description,
-          price: data.price,
-          state: data.state === "true" ? true : false,
+          price: typeof data.price === "string" ? parseFloat(data.price) : data.price,
+          state: data.state === "Active" ? true : false,
           idCategory: data.idCategory,
         };
 
@@ -97,6 +97,12 @@ const MenuForm = ({
     fetchCategories(dispatch);
   }, [dispatch]);
 
+
+  const renderErrorMessage = (error: { message?: string }) => {
+    return error && <p className="p-1 text-red-700">{error.message}</p>;
+  };
+
+
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
@@ -106,10 +112,13 @@ const MenuForm = ({
       <div className="text-left text-sm text-gray-500">
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
+          {renderErrorMessage(errors.id!)}
           <InputField {...register("title")} type="text" />
+          {renderErrorMessage(errors.title!)}
           <InputField {...register("description")} type="text" />
+          {renderErrorMessage(errors.description!)}
           <InputField {...register("price")} type="number" />
-
+          {renderErrorMessage(errors.price!)}
           <select {...register("state")}>
             {options.map((option) => (
               <option key={option.id.toString()} value={option.id}>
@@ -117,7 +126,7 @@ const MenuForm = ({
               </option>
             ))}
           </select>
-
+          {renderErrorMessage(errors.state!)}
           {categories.isLoading ? (
             <p>Loading...</p>
           ) : categories.isError ? (
@@ -132,6 +141,7 @@ const MenuForm = ({
               ))}
             </select>
           )}
+          {renderErrorMessage(errors.idCategory!)}
 
           <div className="flex gap-4 mt-8">
             <button

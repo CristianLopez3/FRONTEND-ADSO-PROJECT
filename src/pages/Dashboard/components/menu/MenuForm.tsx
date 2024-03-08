@@ -1,15 +1,19 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { Pencil } from "phosphor-react";
 import InputField from "@/components/InputField";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
-import { addMenu, getAllMenus, updateMenu } from "@/store/menus/MenuReducer";
+import {
+  addMenuAction,
+  getAllMenusAction,
+  updateMenuAction,
+} from "@/store/menus/menuActions";
 import { getAllCategories } from "@/store/menus/CategoryReducer";
-import {  Menu } from "@/types/Menu";
+import { MenuPost } from "@/types/Menu";
 
-import { type MenuForm, menuSchema } from "@/types/Menu";
+import { MenuForm as MenuFormType, menuSchema } from "@/types/Menu";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Alert from "@/components/Alert";
 
@@ -17,7 +21,7 @@ type MenuFormProps = {
   mode: "create" | "update";
   handleUpdateMenu?: () => void;
   handleCreateMenu?: () => void;
-} & Partial<MenuForm>;
+} & Partial<MenuFormType>;
 
 const options = [
   { id: "1", name: "Choose an state" },
@@ -40,53 +44,56 @@ const MenuForm = ({
   title,
   description,
   price,
-  state,
+  state: formState,
   mode,
+  categoryId
 }: MenuFormProps) => {
   const categories = useSelector((state: RootState) => state.categories);
-  const { register, handleSubmit } = useForm<MenuForm>({
+  const { register, handleSubmit } = useForm<MenuFormType>({
     defaultValues: {
       id,
       title,
       price,
-      state,
+      state: formState,
       description,
+      categoryId
     },
-    resolver: zodResolver(menuSchema)
+    resolver: zodResolver(menuSchema),
   });
   const text = mode === "update" ? "Update Menu" : "Create Menu";
   const buttonText = mode === "update" ? "Update" : "Create";
   const dispatch = useDispatch<AppDispatch>();
   const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
 
-  const onSubmit: SubmitHandler<MenuForm> = useCallback(
-    async (data) => {
-      try {
-        data.id = data.id === "" || data.id === null ? null : data.id;
-        const menu: Menu = {
-          id: data.id,
-          title: data.title,
-          description: data.description,
-          price: data.price,
-          state: data.state === "true" ? true : false,
-          idCategory: data.categoryId
-        };
+  const onSubmit: SubmitHandler<MenuFormType> = async (data) => {
+    try {
+      data.id = data.id === "" ? null : Number(data.id);
+      const menu: MenuPost = {
+        id: data.id,
+        title: data.title,
+        description: data.description,
+        price: data.price,
+        state: data.state === "2" ? true : false,
+        idCategory: data.categoryId,
+      };
 
-        if (mode === "update" && menu.id !== null) {
-          await dispatch(updateMenu(menu));
-        } else {
-          await dispatch(addMenu(menu));
-        }
-        console.log("Menu created" + menu);
-        dispatch(getAllMenus());
-
-        handleCreateMenu?.() || handleUpdateMenu?.();
-      } catch (error) {
-        console.log(error);
+      if (mode === "update" && menu.id !== null) {
+        await dispatch(updateMenuAction(menu));
+      } else {
+        await dispatch(addMenuAction(menu));
       }
-    },
-    [dispatch, handleCreateMenu, handleUpdateMenu, mode]
-  );
+      console.log("Menu created" + menu);
+      dispatch(getAllMenusAction());
+
+      if (handleCreateMenu) {
+        handleCreateMenu();
+      } else if (handleUpdateMenu) {
+        handleUpdateMenu();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchCategories(dispatch);
@@ -116,9 +123,16 @@ const MenuForm = ({
           {categories.isLoading ? (
             <p>Loading...</p>
           ) : categories.isError ? (
-            <Alert description='Error fetching categories' mode="danger" title="Failed getting categories"  />
+            <Alert
+              description="Error fetching categories"
+              mode="danger"
+              title="Failed getting categories"
+            />
           ) : (
-            <select {...register("categoryId")}>
+            <select
+              {...register("categoryId")}
+              defaultValue={categoryId}
+            >
               <option value="">Select a category: </option>
               {categories.data.map((category) => (
                 <option key={category.id.toString()} value={category.id}>
@@ -133,6 +147,7 @@ const MenuForm = ({
               className={`${
                 mode === "update" ? "btn btn-warning" : "btn btn-success"
               } w-full`}
+              type="submit"
             >
               {buttonText}
             </button>

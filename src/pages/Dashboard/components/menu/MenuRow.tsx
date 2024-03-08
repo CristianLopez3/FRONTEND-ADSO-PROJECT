@@ -1,26 +1,30 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Menu } from "../../../../types/Menu";
+import { Menu } from"@/types/Menu";
 import { useState } from "react";
-import Modal from "../../../../components/Modal/Modal";
+import Modal from "@/components/Modal";
 import MenuForm from "./MenuForm";
-import DeleteContent from "../../../../components/DeleteModal";
+import DeleteContent from "@/components/DeleteModal";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import { deleteMenu, getAllMenus } from "@/store/menus/MenuReducer";
+import { deleteMenuAction, getAllMenusAction } from "@/store/menus/menuActions";
+
 
 type MenuRowProps = { menu: Menu };
 
+
 const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
-  const { id, title, description, price, category } = menu;
+// * This is the type of the data that we are going to send to the server
+  const { id, title, description, price, category } = menu
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
 
   const onDelete = async () => {
-    await dispatch(deleteMenu(+id!));
-    await dispatch(getAllMenus());
+    await dispatch(deleteMenuAction(+id!));
+    await dispatch(getAllMenusAction());
   };
+
 
   return (
     <>

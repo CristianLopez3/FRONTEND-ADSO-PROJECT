@@ -10,14 +10,14 @@ const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 import Modal from "@/components/Modal/Modal";
 import MenuForm from "./components/menu/MenuForm";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMenus } from "@/store/menus/MenuReducer";
+import { getAllMenusAction } from "@/store/menus/menuActions";
 import Skeleton from "@/components/Skeleton";
 import Alert from "@/components/Alert";
 
 // Move fetchMenus outside of the component
 const fetchMenus = async (dispatch: AppDispatch) => {
   try {
-    await dispatch(getAllMenus());
+    await dispatch(getAllMenusAction());
   } catch (error) {
     console.log(error);
   }

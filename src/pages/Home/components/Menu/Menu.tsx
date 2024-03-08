@@ -24,6 +24,7 @@ const Menu = () => {
               description={item.description}
               price={30000}
               title={item.title}
+              idCategory={item.idCategory}
             />
           ))}
         </article>

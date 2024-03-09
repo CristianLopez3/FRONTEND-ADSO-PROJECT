@@ -1,31 +1,34 @@
+// * Sidebar component
+import { useLocation } from "react-router-dom";
 import { createContext, useState } from "react";
-import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
-import { PiArrowSquareIn } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
+// * Icons imports
+import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { LuUserCircle, LuBook } from "react-icons/lu";
+import { PiArrowSquareIn } from "react-icons/pi";
 import { PiBowlFood } from "react-icons/pi";
-
+// * Styles imports
+import { styles } from "./contants";
+// * Routes imports
+import { ROUTES } from "@/routes/constants";
 
 export const SidebarContext = createContext<boolean>(true);
 
 const Sidebar = () => {
+  const location = useLocation();
   const [expanded, setExpanded] = useState<boolean>(false);
   return (
-    <aside className="h-screen py-4 pl-4">
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm rounded-xl">
-        <div className="p-4 pb-2 flex justify-between items-center">
-          <h3
-            className={`overflow-hidden transition-all text-gray-700 font-extrabold ${
-              expanded ? "w-32" : "w-0"
-            }`}
-          >
+    <aside className={styles.aside}>
+      <nav className={styles.nav}>
+        <div className={styles.navDiv}>
+          <h3 className={`${styles.h3Default} ${expanded ? "w-32" : "w-0"}`}>
             MenuEASY
           </h3>
 
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className={styles.button}
           >
             {expanded ? <LuChevronFirst /> : <LuChevronLast />}
           </button>
@@ -33,27 +36,27 @@ const Sidebar = () => {
 
         <SidebarContext.Provider value={expanded}>
           <ul className="flex-1 px-3">
-          <SidebarItem
-            path="/dashboard/users"
-            icon={<LuUserCircle size={20} />}
-            text="User"
-            active={false}
-            alert={false}
-          />
-          <SidebarItem
-            path="/dashboard/menus"
-            icon={<PiBowlFood size={20} />}
-            text="Menus"
-            active
-            alert={false}
-          />
-          <SidebarItem
-            path="/dashboard/reservations"
-            icon={<LuBook size={20} />}
-            text="Reservations"
-            active={false}
-            alert={false}
-          />
+            <SidebarItem
+              path={ROUTES.DASHBOARD.USERS}
+              icon={<LuUserCircle size={20} />}
+              text="User"
+              active={location.pathname === ROUTES.DASHBOARD.USERS}
+              alert={false}
+            />
+            <SidebarItem
+              path={ROUTES.DASHBOARD.MENUS}
+              icon={<PiBowlFood size={20} />}
+              text="Menus"
+              active={location.pathname === ROUTES.DASHBOARD.MENUS}
+              alert={false}
+            />
+            <SidebarItem
+              path={ROUTES.DASHBOARD.RESERVATIONS}
+              icon={<LuBook size={20} />}
+              text="Reservations"
+              active={location.pathname === ROUTES.DASHBOARD.RESERVATIONS}
+              alert={false}
+            />
           </ul>
         </SidebarContext.Provider>
 

@@ -1,16 +1,16 @@
-import Img from '../../../../assets/patrick.jpg'
+import Img from "@/assets/patrick.jpg";
+import { styles } from "./KnowUs.styles";
 
 const KnowUs = () => {
   return (
     <section>
-      <div className="container-section mt-20">
-        <div className="w-[100%] max-h-[700px] flex flex-col justify-between lg:flex-row">
-
+      <div className={styles.container}>
+        <div className={styles.article}>
           <article className="w-full lg:w-1/2 flex items-center">
             <img src={Img} alt="men in a cafetery" className="w-full" />
           </article>
 
-          <article className="w-full   flex justify-center items-center pt-16 lg:ml-16 lg:w-1/2">
+          <article className={styles.articleText}>
             <div className="w-[90%] block mx-auto text-center">
               <h2 className="text-white">
                 Come and enjoy a place made for your pace.
@@ -22,7 +22,6 @@ const KnowUs = () => {
               </p>
             </div>
           </article>
-
         </div>
       </div>
     </section>

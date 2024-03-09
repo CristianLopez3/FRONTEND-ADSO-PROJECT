@@ -5,8 +5,6 @@
   background-position: center;
   opacity: 0.9;
   backdrop-filter: grayscale( 0%);
-  /* filter: blur(10px); */
-  /* backdrop-filter: brightness(10%); */
 }
 
 #super-hero{

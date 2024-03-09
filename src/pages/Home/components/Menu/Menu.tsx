@@ -1,33 +1,46 @@
-import { useState, useEffect } from "react";
-import MenuNav from "./MenuNav";
-import MenuCard from "./MenuCard";
+import React, { Suspense, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { getAllMenusAction } from "@/store/menus";
+import { CardSkeleton } from "@/components/Skeleton";
+
+const MenuNav = React.lazy(() => import("./MenuNav"));
+const MenuCard = React.lazy(() => import("./MenuCard"));
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState<string>("All");
   const menus = useSelector((state: RootState) => state.menus);
   const dispatch = useDispatch<AppDispatch>();
 
-  function handleMenuActive(menu: string): void {
+  const handleMenuActive = useCallback((menu: string): void => {
     setMenuActive(menu);
-  }
+  }, []);
 
   useEffect(() => {
     const fetchMenus = async () => {
       await dispatch(getAllMenusAction());
-    }
+    };
     fetchMenus();
   }, [dispatch]);
 
+  const filteredMenus =
+    menuActive === "All"
+      ? menus.data
+      : menus.data.filter((item) => item.category.name === menuActive);
+
   return (
-    <section id="menu" className="mt-[100px] pt-2 dark:bg-secondary text-white mb-20">
-      <div className="container mx-auto">
-        <MenuNav menuActive={menuActive} handleMenuActive={handleMenuActive} />
-        <article className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
-          {menuActive === "All" ? (
-            menus.data.map((item) => (
+    <Suspense fallback={<CardSkeleton />}>
+      <section
+        id="menu"
+        className="mt-[100px] pt-2 dark:bg-secondary text-white mb-20"
+      >
+        <div className="container mx-auto">
+          <MenuNav
+            menuActive={menuActive}
+            handleMenuActive={handleMenuActive}
+          />
+          <article className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
+            {filteredMenus.map((item) => (
               <MenuCard
                 state={item.state}
                 id={item.id}
@@ -37,25 +50,11 @@ const Menu = () => {
                 title={item.title}
                 category={item.category}
               />
-            ))
-          ) : (
-            menus.data
-              .filter((item) => item.category.name === menuActive)
-              .map((item) => (
-                <MenuCard
-                  state={true}
-                  id={item.id}
-                  key={item.title}
-                  description={item.description}
-                  price={item.price}
-                  title={item.title}
-                  category={item.category}
-                />
-              ))
-          )}
-        </article>
-      </div>
-    </section>
+            ))}
+          </article>
+        </div>
+      </section>
+    </Suspense>
   );
 };
 

@@ -1,25 +1,19 @@
 import { Link } from "react-router-dom";
 import { Users } from "phosphor-react";
-
+import {ROUTES} from '@/routes/constants';
 
 type MenuLinksProps = {
   handleHamburgerMenu?: () => void;
   variant: "desktop" | "mobile";
 };
 
-const paths = {
-  home: "/",
-  login: "/login",
-  menu: "/menu",
-  book: "/book"
-};  
 
 const MenuLinks = ({ variant, handleHamburgerMenu }: MenuLinksProps) => {
   const links = [
-    { path: paths.home, text: "Home" },
-    { path: paths.menu, text: "Menu" },
-    { path: paths.book, text: "Book" },
-    { path: paths.login, text: "Login" }
+    { path: ROUTES.HOME.ROOT, text: "Home" },
+    { path: ROUTES.HOME.MENU, text: "Menu" },
+    { path: ROUTES.HOME.BOOK, text: "Book" },
+    { path: ROUTES.LOGIN, text: "Login" }
   ];
 
   if (variant === "mobile") {

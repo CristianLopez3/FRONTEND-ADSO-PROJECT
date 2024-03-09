@@ -4,18 +4,14 @@ import { type Menu } from "@/types/Menu";
 type MenuCardProps = Menu;
 
 const MenuCard = ({
-  // id,
   title,
   description,
-  price,
-  // image,
-  //category,
+  price
 }: MenuCardProps) => {
   return (
     <>
       <div
         key={title}
-        // className="max-w-sm md:max-w-66 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800"
         className="relative max-w-11/12 md:max-w-11/12 flex  overflow-hidden  rounded-md shadow-xl dark:bg-gray-800"
       >
         <figure className="w-1/3 h-full">

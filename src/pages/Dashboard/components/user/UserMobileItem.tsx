@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { User } from "@/types/User";
-import { useState } from "react";
-import Modal from "@/components/Modal/Modal";
-import DeleteModal from "@/components/DeleteModal";
+import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
 
 export type UserMobileItemProps = { user: User };

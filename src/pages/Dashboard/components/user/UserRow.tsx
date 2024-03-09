@@ -1,10 +1,9 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
 import { useState } from "react";
-import Modal from "../../../../components/Modal/Modal";
-import DeleteModal from "../../../../components/DeleteModal";
+import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
-import { User } from "../../../../types/User";
+import { User } from "@/types/User";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { deleteUser, getAllUsers } from "@/store/user/UserReducer";
@@ -27,8 +26,8 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const onDelete = async () => {
-      await dispatch(deleteUser(id!));
-      await dispatch(getAllUsers());
+    await dispatch(deleteUser(id!));
+    await dispatch(getAllUsers());
   };
 
   return (
@@ -68,10 +67,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
           open={openDeleteModal}
           onClose={() => setOpenDeleteModal(!openDeleteModal)}
         >
-          <DeleteModal
-            onDelete={onDelete}
-            name={name}
-          />
+          <DeleteModal onDelete={onDelete} name={name} />
         </Modal>
       )}
       {openUpdateModal && (

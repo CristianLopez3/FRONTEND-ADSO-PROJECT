@@ -1,5 +1,9 @@
 export const ROUTES = {
-  HOME: "/",
+  HOME: {
+    ROOT: "/",
+    MENU: "/menu",
+    BOOK: "/book"
+  },
   LOGIN: "/login",
   DASHBOARD: {
     ROOT: "/dashboard",

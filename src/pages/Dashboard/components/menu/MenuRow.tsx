@@ -1,21 +1,18 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Menu } from"@/types/Menu";
+import { Menu } from "@/types/Menu";
 import { useState } from "react";
-import Modal from "@/components/Modal";
+import { Modal, DeleteModal } from "@/components/Modal";
 import MenuForm from "./MenuForm";
-import DeleteContent from "@/components/DeleteModal";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { deleteMenuAction, getAllMenusAction } from "@/store/menus/menuActions";
 
-
 type MenuRowProps = { menu: Menu };
 
-
 const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
-// * This is the type of the data that we are going to send to the server
-  const { id, title, description, price, category } = menu
+  // * This is the type of the data that we are going to send to the server
+  const { id, title, description, price, state, category } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -24,7 +21,6 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
     await dispatch(deleteMenuAction(+id!));
     await dispatch(getAllMenusAction());
   };
-
 
   return (
     <>
@@ -61,7 +57,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(!openDeleteModal)}
       >
-        <DeleteContent onDelete={onDelete} name={title} />
+        <DeleteModal onDelete={onDelete} name={title} />
       </Modal>
 
       <Modal
@@ -74,6 +70,8 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
           id={id}
           price={price}
           title={title}
+          state={state ? "Active" : "Inactive"}
+          idCategory={category.id}
         />
       </Modal>
     </>

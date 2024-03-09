@@ -11,7 +11,7 @@ import Modal from "@/components/Modal/Modal";
 import MenuForm from "./components/menu/MenuForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMenusAction } from "@/store/menus/menuActions";
-import Skeleton from "@/components/Skeleton";
+import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
 
 // Move fetchMenus outside of the component
@@ -40,7 +40,7 @@ const Menus = () => {
   useEffect(() => {
     fetchMenus(dispatch);
   }, [dispatch]);
- 
+
   return (
     <>
       <header>
@@ -59,7 +59,7 @@ const Menus = () => {
       </header>
       <main className="px-2 md:px-20 mx-auto">
         {menus.isLoading ? (
-          <Skeleton />
+          <TableSkeleton />
         ) : menus.isError ? (
           <Alert
             title="Error fetching menus"
@@ -67,7 +67,7 @@ const Menus = () => {
             mode="danger"
           />
         ) : (
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<TableSkeleton />}>
             <MenuTable data={menus.data} />
           </Suspense>
         )}

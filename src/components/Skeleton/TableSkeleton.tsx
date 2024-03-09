@@ -1,5 +1,5 @@
 
-const Skeleton = () => {
+const TableSkeleton = () => {
   return (
     <div
       role="status"
@@ -45,4 +45,4 @@ const Skeleton = () => {
   );
 };
 
-export default Skeleton;
+export default TableSkeleton;

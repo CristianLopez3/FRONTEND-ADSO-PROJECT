@@ -1,13 +1,7 @@
 // import { useState } from "react";
-import InputField from "@/components/InputField";
+import { InputField } from "@/components/Input";
 
 const FormBooking = () => {
-  // const [people, setPeople] = useState<number>(0);
-
-  // const handleValue = () => {
-  //   setPeople((prevValue) => (prevValue >= 0 ? prevValue++ : prevValue));
-  // };
-
   return (
     <div className="width-full mx-auto">
       <form className="space-y-2">

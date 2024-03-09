@@ -1,11 +1,12 @@
-import { Button } from "keep-react";
-import { Trash, Pencil } from "phosphor-react";
-
-import { Menu } from "../../../../types/Menu";
 import { useState } from "react";
-import Modal from "../../../../components/Modal/Modal";
+
+import { Modal, DeleteModal } from "@/components/Modal";
+import { Menu } from "@/types/Menu";
+import { Trash, Pencil } from "phosphor-react";
+import { Button } from "keep-react";
 import MenuForm from "./MenuForm";
-import DeleteModal from "../../../../components/DeleteModal";
+import { mobileItemStyles as styles } from "./constants";
+
 
 export type MenuMobileItemProps = { menu: Menu };
 
@@ -16,22 +17,22 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
 
   const onDelete = () => {
     console.log(id);
-  }
+  };
   return (
     <>
-      <article key={id} className="bg-white p-4 rounded-lg shadow">
-        <div className="text-xs flex items-center justify-between space-x-2 md:text-sm gap-x-4">
+      <article key={id} className={styles.container}>
+        <div className={styles.text}>
           <div>{title}</div>
           <div>{state}</div>
         </div>
-        <div className="text-sm text-gray-600 py-2">{description}</div>
-        <div className="text-sm text-gray-600 py-2">{price}</div>
-        <div className="flex gap-2">
+        <div className={styles.description}>{description}</div>
+        <div className={styles.description}>{price}</div>
+        <div className={styles.buttons}>
           <Button
             size={28}
             color="warning"
             className="p-2"
-            onClick={ () => setOpenUpdateModal(!openUpdateModal)}
+            onClick={() => setOpenUpdateModal(!openUpdateModal)}
           >
             <Pencil />
           </Button>
@@ -45,14 +46,17 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
           </Button>
         </div>
       </article>
-      <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(!openDeleteModal)}>
-        <DeleteModal
-          onDelete={onDelete}
-          name={title}
-        />
+      <Modal
+        open={openDeleteModal}
+        onClose={() => setOpenDeleteModal(!openDeleteModal)}
+      >
+        <DeleteModal onDelete={onDelete} name={title} />
       </Modal>
 
-      <Modal open={openUpdateModal} onClose={ () => setOpenUpdateModal(!openUpdateModal)}>
+      <Modal
+        open={openUpdateModal}
+        onClose={() => setOpenUpdateModal(!openUpdateModal)}
+      >
         <MenuForm
           mode="update"
           description={description}

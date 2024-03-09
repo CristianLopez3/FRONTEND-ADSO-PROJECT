@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import InputField from "@/components/InputField";
+import { InputField } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
 import { User } from "@/types/User";
@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
 import { type UserFormTypes, userSchema } from "@/types/User";
+import { formStyles as styles } from "./contants";
 
 type UserFormProps = {
   handleUpdateModal?: () => void;
@@ -70,7 +71,7 @@ const UserForm: React.FC<UserFormProps> = ({
           cellphone: data.cellphone.toString(),
           role: data.role,
         };
-        
+
         if (mode === "update") {
           await dispatch(updateUser(user));
         } else {
@@ -88,12 +89,12 @@ const UserForm: React.FC<UserFormProps> = ({
   );
 
   return (
-    <div className="mx-auto my-4 w-full sm:w-[300px] md:w-96 text-center">
-      <h3 className="text-lg font-black text-gray-800">{title}</h3>
-      <div className="text-left text-sm text-gray-500 mt-8">
+    <div className={styles.container}>
+      <h3 className={styles.h3}>{title}</h3>
+      <div className={styles.form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
-          <div className="md:flex md:flex-row gap-x-6">
+          <div className={styles.inputFlex}>
             <div className="block">
               <InputField {...register("name")} />
               {renderErrorMessage(errors.name!)}
@@ -120,7 +121,7 @@ const UserForm: React.FC<UserFormProps> = ({
           <InputField {...register("role")} />
           {renderErrorMessage(errors.role!)}
 
-          <div className="grid grid-cols-2 gap-4 mt-8">
+          <div className={styles.buttons}>
             <button
               className={`btn ${
                 mode === "update" ? "btn-warning" : "btn-success"

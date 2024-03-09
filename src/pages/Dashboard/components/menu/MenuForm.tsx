@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from "react";
-import { Pencil } from "phosphor-react";
-import InputField from "@/components/InputField";
-
-import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { AppDispatch, RootState } from "@/store/store";
+import { formStyles } from "./constants";
+
 import {
   addMenuAction,
   getAllMenusAction,
@@ -14,7 +14,9 @@ import { getAllCategories } from "@/store/menus/CategoryReducer";
 import { MenuPost } from "@/types/Menu";
 
 import { type MenuForm, menuSchema } from "@/types/Menu";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Pencil } from "phosphor-react";
+import { InputField } from "@/components/Input";
 
 type MenuFormProps = {
   mode: "create" | "update";
@@ -22,17 +24,13 @@ type MenuFormProps = {
   handleCreateMenu?: () => void;
 } & Partial<MenuForm>;
 
-const options = [
-  { id: "1", name: "Choose an state" },
-  { id: "2", name: "Active" },
-  { id: "3", name: "Desactive" },
-];
+const options = ["Choose an state", "Active", "Desactive"];
 
 const fetchCategories = async (dispatch: AppDispatch) => {
   try {
     dispatch(getAllCategories());
   } catch (error) {
-    console.log("Error in form menus" + error);
+    throw new Error("Error fetching categories");
   }
 };
 
@@ -48,21 +46,37 @@ const MenuForm = ({
   mode,
 }: MenuFormProps) => {
   const categories = useSelector((state: RootState) => state.categories);
-  const { register, handleSubmit, formState: {errors} } = useForm<MenuForm>({
+  const dispatch = useDispatch<AppDispatch>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<MenuForm>({
     defaultValues: {
       id,
       title,
       price,
       state,
       description,
-      idCategory
+      idCategory,
     },
     resolver: zodResolver(menuSchema),
   });
   const text = mode === "update" ? "Update Menu" : "Create Menu";
   const buttonText = mode === "update" ? "Update" : "Create";
-  const dispatch = useDispatch<AppDispatch>();
   const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
+
+  useEffect(() => {
+    reset({
+      id,
+      title,
+      price,
+      state,
+      description,
+      idCategory,
+    });
+  }, [id, title, price, state, description, idCategory, reset]);
 
   const onSubmit: SubmitHandler<MenuForm> = useCallback(
     async (data) => {
@@ -72,22 +86,28 @@ const MenuForm = ({
           id: data.id,
           title: data.title,
           description: data.description,
-          price: typeof data.price === "string" ? parseFloat(data.price) : data.price,
+          price:
+            typeof data.price === "string"
+              ? parseFloat(data.price)
+              : data.price,
           state: data.state === "Active" ? true : false,
-          idCategory: data.idCategory,
+          idCategory:
+            typeof data.idCategory === "string"
+              ? parseInt(data.idCategory)
+              : data.idCategory,
         };
 
         if (mode === "update" && menu.id !== null) {
           await dispatch(updateMenuAction(menu));
+          // console.log(menu);
         } else {
           await dispatch(addMenuAction(menu));
-          console.log("Menu created" + menu);
         }
         dispatch(getAllMenusAction());
 
         handleCreateMenu?.() || handleUpdateMenu?.();
       } catch (error) {
-        console.log(error);
+        throw new Error("Error creating or updating menu");
       }
     },
     [dispatch, handleCreateMenu, handleUpdateMenu, mode]
@@ -97,19 +117,17 @@ const MenuForm = ({
     fetchCategories(dispatch);
   }, [dispatch]);
 
-
   const renderErrorMessage = (error: { message?: string }) => {
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
 
-
   return (
-    <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
-      <div className="flex justify-center items-center mb-8">
+    <div className={formStyles.container}>
+      <div className={formStyles.pencil}>
         <Pencil size={52} color={mode === "update" ? "orange" : "green"} />
       </div>
-      <h3 className="text-lg font-black text-gray-800">{text}</h3>
-      <div className="text-left text-sm text-gray-500">
+      <h3 className={formStyles.title}>{text}</h3>
+      <div className={formStyles.form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
           {renderErrorMessage(errors.id!)}
@@ -121,8 +139,8 @@ const MenuForm = ({
           {renderErrorMessage(errors.price!)}
           <select {...register("state")}>
             {options.map((option) => (
-              <option key={option.id.toString()} value={option.id}>
-                {option.name}
+              <option key={option.toString()} value={option}>
+                {option}
               </option>
             ))}
           </select>
@@ -143,7 +161,7 @@ const MenuForm = ({
           )}
           {renderErrorMessage(errors.idCategory!)}
 
-          <div className="flex gap-4 mt-8">
+          <div className={formStyles.buttons}>
             <button
               className={`${
                 mode === "update" ? "btn btn-warning" : "btn btn-success"

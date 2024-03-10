@@ -1,6 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from "react";
+import axios from "axios";
 
-const Test: React.FC = () => {
+const ImageUpload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -23,24 +24,46 @@ const Test: React.FC = () => {
       return;
     }
 
-    // Save the file to the 'assets/menus' folder
-    // This will depend on your environment and setup
-    // Here is a placeholder for the logic
-    console.log(`Saving file ${selectedFile.name} to assets/menus`);
+    // Prepare FormData
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    // Send the request
+    axios
+      .post("http://localhost:9000/file/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <>
       <div className="min-h-screen bg-white text-black flex items-center flex-col justify-center">
-        <h1>Managment files with firebase</h1>
+        <h1>Upload Image</h1>
         <form onSubmit={handleSubmit}>
           <input type="file" onChange={handleFileChange} />
           {previewUrl && <img src={previewUrl} alt="Preview" />}
-          <button type="submit">Submit</button>
+          <button className="btn bg-gray-300" type="submit">
+            Submit
+          </button>
+          <div className="p-8 border bg-red-800 ">
+
+          <img
+            src="http://localhost:9000/file/72bc3143-b3d7-409c-b0fb-15b6fe3f4d64.png"
+            alt="image"
+          />
+          </div>
         </form>
       </div>
     </>
   );
 };
 
-export default Test;
+export default ImageUpload;

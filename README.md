@@ -62,3 +62,14 @@ Folllow the next steps to run the project localy:
 * [Spring](https://spring.io/guides/tutorials/react-and-spring-data-rest)
 * [Spring Structure](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.structuring-your-code)
 * [React + Spring](https://www.youtube.com/watch?v=mgbEz23qZP0&list=PLZdfbI_OZWAMvhSl32tFcD6M9x_Pqtkwb)
+
+
+## Firebase
+
+In this project I'm using firebase to make transactions with files in firebase storage...
+
+```sh
+  npm i firebase
+```
+
+[firebase console](https://console.firebase.google.com/project/menueasy-f7860/storage/menueasy-f7860.appspot.com/files?fb_utm_campaign=latam-CO-all-es-dr-SKWS-all-all-trial-b-dr-1707800-LUAC0020206&fb_utm_content=text-ad-none-any-DEV_c-CRE_654650680938-ADGP_Hybrid%20%7C%20SKWS%20-%20BRO%20%7C%20Txt_Compute-Firebase-KWID_43700076085059655-kwd-308670941208&fb_utm_medium=cpc&fb_utm_source=google&fb_utm_term=KW_firebase-ST_Firebase)

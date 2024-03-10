@@ -1,45 +1,43 @@
-import { getAllCategories } from "@/store/menus/CategoryReducer";
-import { AppDispatch, RootState } from "@/store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { ChangeEvent, useState } from 'react';
 
+const Test: React.FC = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setSelectedFile(file);
 
-const fetchCategories = async (dispatch: AppDispatch) => {
-  try {
-    dispatch(getAllCategories());
-  } catch (error) {
-    console.log("Error in form menus" + error);
-  }
-};
+      // Create a preview URL
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
+  };
 
-const Test = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const categories = useSelector((state: RootState) => state.categories);
-  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-  
-  useEffect(() => {
-    fetchCategories(dispatch);
-  }, [dispatch]);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
+    if (!selectedFile) {
+      console.log("No file selected");
+      return;
+    }
 
+    // Save the file to the 'assets/menus' folder
+    // This will depend on your environment and setup
+    // Here is a placeholder for the logic
+    console.log(`Saving file ${selectedFile.name} to assets/menus`);
+  };
 
   return (
     <>
-      <div className="bg-gray-400">
-        {categories.isLoading ? (
-          <p>Loading...</p>
-        ) : categories.isError ? (
-          <p>Error fetching categories</p>
-        ) : (
-          <select>
-            {categories.data.map((category) => (
-              <option key={category.id.toString()} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        )}
+      <div className="min-h-screen bg-white text-black flex items-center flex-col justify-center">
+        <h1>Managment files with firebase</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="file" onChange={handleFileChange} />
+          {previewUrl && <img src={previewUrl} alt="Preview" />}
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </>
   );

@@ -1,13 +1,16 @@
-import ImgMenu from "@/assets/bg-mobile.jpg";
 import { type Menu } from "@/types/Menu";
 
-type MenuCardProps = Menu;
+type MenuCardProps = Partial<Menu>;
 
-const MenuCard = ({
+const MenuCard: React.FC<MenuCardProps> = ({
   title,
   description,
-  price
-}: MenuCardProps) => {
+  price,
+  imageName
+}) => {
+
+  const url = "http://localhost:9000/file/";
+  console.log(imageName)
   return (
     <>
       <div
@@ -17,7 +20,7 @@ const MenuCard = ({
         <figure className="w-1/3 h-full">
           <img
             className="object-cover h-36 w-full"
-            src={ImgMenu}
+            src={url + imageName}
             alt="Hamburger"
           />
         </figure>

@@ -7,6 +7,7 @@ export interface Menu {
   description: string;
   price: number;
   state: boolean;
+  imageName: string;
   category: Category;
 }
 

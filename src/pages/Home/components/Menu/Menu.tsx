@@ -42,13 +42,12 @@ const Menu = () => {
           <article className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
             {filteredMenus.map((item) => (
               <MenuCard
-                state={item.state}
-                id={item.id}
+                // state={item.state}
                 key={item.title}
                 description={item.description}
                 price={item.price}
                 title={item.title}
-                category={item.category}
+                imageName={item.imageName}
               />
             ))}
           </article>

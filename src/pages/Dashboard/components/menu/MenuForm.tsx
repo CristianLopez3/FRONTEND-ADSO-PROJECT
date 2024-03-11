@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -45,8 +45,10 @@ const MenuForm = ({
   idCategory,
   mode,
 }: MenuFormProps) => {
+  const [image, setImage] = useState<File | null>(null);
   const categories = useSelector((state: RootState) => state.categories);
   const dispatch = useDispatch<AppDispatch>();
+
   const {
     register,
     handleSubmit,
@@ -63,6 +65,7 @@ const MenuForm = ({
     },
     resolver: zodResolver(menuSchema),
   });
+
   const text = mode === "update" ? "Update Menu" : "Create Menu";
   const buttonText = mode === "update" ? "Update" : "Create";
   const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
@@ -97,11 +100,14 @@ const MenuForm = ({
               : data.idCategory,
         };
 
+        const formData = new FormData();
+        formData.append("image", image!);
+        formData.append("menu", JSON.stringify(menu));
         if (mode === "update" && menu.id !== null) {
           await dispatch(updateMenuAction(menu));
           // console.log(menu);
         } else {
-          await dispatch(addMenuAction(menu));
+          await dispatch(addMenuAction(formData));
         }
         dispatch(getAllMenusAction());
 
@@ -110,7 +116,7 @@ const MenuForm = ({
         throw new Error("Error creating or updating menu");
       }
     },
-    [dispatch, handleCreateMenu, handleUpdateMenu, mode]
+    [dispatch, handleCreateMenu, handleUpdateMenu, mode, image]
   );
 
   useEffect(() => {
@@ -128,7 +134,24 @@ const MenuForm = ({
       </div>
       <h3 className={formStyles.title}>{text}</h3>
       <div className={formStyles.form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          // className={`${image && "flex justify-center items-center"}`}
+        >
+          {image && (
+            <img
+              src={URL.createObjectURL(image)}
+              alt="preview"
+              className="mx-auto w-32 h-32 border mt-6"
+            />
+          )}
+          <InputField
+            type="file"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setImage(e.target.files![0] ? e.target.files![0] : null)
+            }
+          />
+
           <InputField {...register("id")} type="hidden" />
           {renderErrorMessage(errors.id!)}
           <InputField {...register("title")} type="text" />

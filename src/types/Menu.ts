@@ -27,6 +27,7 @@ export const menuSchema = z.object({
   price: z.union([z.string(), z.number()]),
   description: z.string(),
   state: z.string(),
+
   idCategory: z.union([z.string(), z.number()]),
 });
 
@@ -41,6 +42,7 @@ export type Category = {
 
 
 // * This is the type of the data that we are going to use in the reducer
+
 export interface MenuReducer {
   isLoading: boolean;
   data: Menu[];

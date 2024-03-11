@@ -11,8 +11,8 @@ export const getMenusByCategory = async (id: number) => {
   return response.data;
 };
 
-export const addMenu = async (menu: MenuPost) => {
-  const response = await menus_service.addMenu({menu});
+export const addMenu = async (menu: FormData) => {
+  const response = await menus_service.addMenu(menu);
   return response.data;
 };
 

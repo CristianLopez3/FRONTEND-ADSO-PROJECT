@@ -83,74 +83,203 @@ const Test: React.FC = () => {
 
 export default Test;
 
+/**
+ * import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useDispatch, useSelector } from "react-redux";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AppDispatch, RootState } from "@/store/store";
+import { formStyles } from "./constants";
 
+import {
+  addMenuAction,
+  getAllMenusAction,
+  updateMenuAction,
+} from "@/store/menus";
+import { getAllCategories } from "@/store/menus/CategoryReducer";
+import { MenuPost } from "@/types/Menu";
 
-// import React, { ChangeEvent, useState } from "react";
-// import axios from "axios";
+import { type MenuForm, menuSchema } from "@/types/Menu";
 
-// const ImageUpload: React.FC = () => {
-//   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-//   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+import { Pencil } from "phosphor-react";
+import { InputField } from "@/components/Input";
 
-//   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-//     if (e.target.files && e.target.files.length > 0) {
-//       const file = e.target.files[0];
-//       setSelectedFile(file);
+type MenuFormProps = {
+  mode: "create" | "update";
+  handleUpdateMenu?: () => void;
+  handleCreateMenu?: () => void;
+} & Partial<MenuForm>;
 
-//       // Create a preview URL
-//       const url = URL.createObjectURL(file);
-//       setPreviewUrl(url);
-//     }
-//   };
+const options = ["Choose an state", "Active", "Desactive"];
 
-//   const handleSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault();
+const fetchCategories = async (dispatch: AppDispatch) => {
+  try {
+    dispatch(getAllCategories());
+  } catch (error) {
+    throw new Error("Error fetching categories");
+  }
+};
 
-//     if (!selectedFile) {
-//       console.log("No file selected");
-//       return;
-//     }
+const MenuForm = ({
+  handleUpdateMenu,
+  handleCreateMenu,
+  id,
+  title,
+  description,
+  price,
+  state,
+  idCategory,
+  mode,
+}: MenuFormProps) => {
+  const [image, setImage] = useState<File | null>(null);
+  const categories = useSelector((state: RootState) => state.categories);
+  const dispatch = useDispatch<AppDispatch>();
 
-//     // Prepare FormData
-//     const formData = new FormData();
-//     formData.append("image", selectedFile);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<MenuForm>({
+    defaultValues: {
+      id,
+      title,
+      price,
+      state,
+      description,
+      idCategory,
+    },
+    resolver: zodResolver(menuSchema),
+  });
 
-//     // Send the request
-//     axios
-//       .post("http://localhost:9000/file/upload", formData, {
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//         },
-//       })
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
+  const text = mode === "update" ? "Update Menu" : "Create Menu";
+  const buttonText = mode === "update" ? "Update" : "Create";
+  const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
 
-//   return (
-//     <>
-//       <div className="min-h-screen bg-white text-black flex items-center flex-col justify-center">
-//         <h1>Upload Image</h1>
-//         <form onSubmit={handleSubmit}>
-//           <input type="file" onChange={handleFileChange} />
-//           {previewUrl && <img src={previewUrl} alt="Preview" />}
-//           <button className="btn bg-gray-300" type="submit">
-//             Submit
-//           </button>
-//           <div className="p-8 border bg-red-800 ">
+  useEffect(() => {
+    reset({
+      id,
+      title,
+      price,
+      state,
+      description,
+      idCategory,
+    });
+  }, [id, title, price, state, description, idCategory, reset]);
 
-//           <img
-//             src="http://localhost:9000/file/72bc3143-b3d7-409c-b0fb-15b6fe3f4d64.png"
-//             alt="image"
-//           />
-//           </div>
-//         </form>
-//       </div>
-//     </>
-//   );
-// };
+  const onSubmit: SubmitHandler<MenuForm> = useCallback(
+    async (data) => {
+      try {
+        data.id = data.id === "" || data.id === null ? null : data.id;
+        const menu: MenuPost = {
+          id: data.id,
+          title: data.title,
+          description: data.description,
+          price:
+            typeof data.price === "string"
+              ? parseFloat(data.price)
+              : data.price,
+          state: data.state === "Active" ? true : false,
+          idCategory:
+            typeof data.idCategory === "string"
+              ? parseInt(data.idCategory)
+              : data.idCategory,
+        };
 
-// export default ImageUpload;
+        const formData = new FormData();
+        formData.append("menu", JSON.stringify(menu));
+        formData.append("image", image!);
+
+        if (mode === "update" && menu.id !== null) {
+          await dispatch(updateMenuAction(menu));
+          // console.log(menu);
+        } else {
+          await dispatch(addMenuAction(formData));
+        }
+        dispatch(getAllMenusAction());
+
+        handleCreateMenu?.() || handleUpdateMenu?.();
+      } catch (error) {
+        throw new Error("Error creating or updating menu");
+      }
+    },
+    [dispatch, handleCreateMenu, handleUpdateMenu, mode, image]
+  );
+
+  useEffect(() => {
+    fetchCategories(dispatch);
+  }, [dispatch]);
+
+  const renderErrorMessage = (error: { message?: string }) => {
+    return error && <p className="p-1 text-red-700">{error.message}</p>;
+  };
+
+  return (
+    <div className={formStyles.container}>
+      <div className={formStyles.pencil}>
+        <Pencil size={52} color={mode === "update" ? "orange" : "green"} />
+      </div>
+      <h3 className={formStyles.title}>{text}</h3>
+      <div className={formStyles.form}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputField {...register("id")} type="hidden" />
+          {renderErrorMessage(errors.id!)}
+          <InputField {...register("title")} type="text" />
+          {renderErrorMessage(errors.title!)}
+          <InputField {...register("description")} type="text" />
+          {renderErrorMessage(errors.description!)}
+          <InputField {...register("price")} type="number" />
+          <input
+            type="file"
+            name="image"
+            id="image"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setImage(e.target.files !== null ? e.target.files[0] : null)
+            }
+          />
+          {renderErrorMessage(errors.price!)}
+          <select {...register("state")}>
+            {options.map((option) => (
+              <option key={option.toString()} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          {renderErrorMessage(errors.state!)}
+          {categories.isLoading ? (
+            <p>Loading...</p>
+          ) : categories.isError ? (
+            <p>Error fetching categories</p>
+          ) : (
+            <select {...register("idCategory")}>
+              <option value="">Select a category: </option>
+              {categories.data.map((category) => (
+                <option key={category.id.toString()} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          )}
+          {renderErrorMessage(errors.idCategory!)}
+
+          <div className={formStyles.buttons}>
+            <button
+              className={`${
+                mode === "update" ? "btn btn-warning" : "btn btn-success"
+              } w-full`}
+            >
+              {buttonText}
+            </button>
+            <button className="btn btn-light w-full" onClick={handleAction}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default MenuForm;
+
+ */

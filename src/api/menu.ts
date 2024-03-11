@@ -8,7 +8,7 @@ export const menus_service = {
     return instance.get(endpoint);
   },
 
-  getMenuById: function (id:  number | string ) {
+  getMenuById: function (id: number | string) {
     return instance.get(`${endpoint}/${id}`);
   },
 
@@ -16,8 +16,12 @@ export const menus_service = {
     return instance.get(`${endpoint}/category/${id}`);
   },
 
-  addMenu: function ({menu}:{menu: MenuPost}) {
-    return instance.post(endpoint, menu);
+  addMenu: function (formData: FormData) {
+    return instance.post(endpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 
   deleteMenu: function (id: number | string) {

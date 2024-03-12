@@ -2,14 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import UserReducer from "./user/UserReducer";
 import {menuReducer} from "@/store/menus";
 import CategoryReducer from "./menus/CategoryReducer";
-import filesReducer from "./files/filesReducer";
 
 export const store = configureStore({
   reducer: {
     users: UserReducer,
     menus: menuReducer,
-    categories: CategoryReducer,
-    images: filesReducer,
+    categories: CategoryReducer
   },
 });
 

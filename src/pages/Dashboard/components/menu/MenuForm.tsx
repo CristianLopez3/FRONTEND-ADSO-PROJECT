@@ -103,6 +103,7 @@ const MenuForm = ({
         const formData = new FormData();
         formData.append("image", image!);
         formData.append("menu", JSON.stringify(menu));
+        console.log(formData);
         if (mode === "update" && menu.id !== null) {
           await dispatch(updateMenuAction(menu));
           // console.log(menu);
@@ -136,7 +137,6 @@ const MenuForm = ({
       <div className={formStyles.form}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          // className={`${image && "flex justify-center items-center"}`}
         >
           {image && (
             <img

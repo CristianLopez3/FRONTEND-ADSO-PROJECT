@@ -4,15 +4,11 @@ import { Booking } from "@/types/Booking";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";
-import DeleteModal from "@/components/DeleteModal";
-export type BookingMobileItemProps = Booking;
+import DeleteModal from "@/components/Modal/DeleteModal";
+export type BookingMobileItemProps = { book: Booking };
 
-const BookMobileItem: React.FC<BookingMobileItemProps> = ({
-  id,
-  name,
-  date,
-  time,
-}) => {
+const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
+  const { id, name, date, time } = book;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -46,10 +42,7 @@ const BookMobileItem: React.FC<BookingMobileItemProps> = ({
         </div>
       </article>
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteModal
-          onDelete={handleDeleteModal}
-          name={name}
-        />
+        <DeleteModal onDelete={handleDeleteModal} name={name} />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>

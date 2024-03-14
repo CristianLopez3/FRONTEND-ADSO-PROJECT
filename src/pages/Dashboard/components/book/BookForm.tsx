@@ -1,5 +1,5 @@
 import { Pencil } from "phosphor-react";
-import InputField from "@/components/Input";
+import InputField from "@/components/Input/InputField";
 
 type BookFormProps = {
   handleUpdateModal: () => void;

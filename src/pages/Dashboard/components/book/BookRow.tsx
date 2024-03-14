@@ -4,11 +4,12 @@ import { Booking } from "@/types/Booking";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";
-import DeleteModal from "@/components/DeleteModal";
+import DeleteModal from "@/components/Modal/DeleteModal";
 
-type BookRowProps = Booking;
+type BookRowProps = {book: Booking};
 
-const BookRow = ({ date, id, name, time }: BookRowProps) => {
+const BookRow = ({ book }: BookRowProps) => {
+  const { id, name, date, time } = book;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 

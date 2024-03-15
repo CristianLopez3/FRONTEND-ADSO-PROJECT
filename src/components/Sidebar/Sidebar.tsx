@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 import { Link } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 // * Icons imports
-import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
+import { LuChevronFirst, LuChevronLast, LuHome } from "react-icons/lu";
 import { LuUserCircle, LuBook } from "react-icons/lu";
 import { PiArrowSquareIn } from "react-icons/pi";
 import { PiBowlFood } from "react-icons/pi";
@@ -36,6 +36,13 @@ const Sidebar = () => {
 
         <SidebarContext.Provider value={expanded}>
           <ul className="flex-1 px-3">
+            <SidebarItem
+              path={ROUTES.DASHBOARD.ROOT}
+              icon={<LuHome size={20} />}
+              text="Home"
+              active={location.pathname === ROUTES.DASHBOARD.ROOT}
+              alert={true}
+            />
             <SidebarItem
               path={ROUTES.DASHBOARD.USERS}
               icon={<LuUserCircle size={20} />}

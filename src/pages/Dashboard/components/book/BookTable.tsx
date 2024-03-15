@@ -1,7 +1,6 @@
 import React from "react";
 import { Booking } from "@/types/Booking";
 const BookMobileItem = React.lazy(() => import("./BookMobileItem"));
-// import BookRow from "./BookRow";
 import Table from "@/components/Table";
 import BookRow from "./BookRow";
 
@@ -14,10 +13,9 @@ const BookTable = ({ data }: BookTableProps) => {
     <>
       <Table
         columns={[
-          { title: "ID", width: "10%" },
-          { title: "Name", width: "30%" },
-          { title: "Date", width: "30%" },
-          { title: "Time", width: "20%" },
+          { title: "Name", width: "20%" },
+          { title: "Date", width: "20%" },
+          { title: "Description", width: "20%"},
           { title: "Actions", width: "10%" },
         ]}
       >
@@ -35,15 +33,17 @@ const BookTable = ({ data }: BookTableProps) => {
           </tr>
         )}
       </Table>
-      {Array.isArray(data) && data.length > 0 ? (
-        <React.Suspense fallback={<div>Loading...</div>}>
-          {data.map((item, index) => (
-            <BookMobileItem book={item} key={index} />
-          ))}
-        </React.Suspense>
-      ) : (
-        <p>No data available</p>
-      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
+        {Array.isArray(data) && data.length > 0 ? (
+          <React.Suspense fallback={<div>Loading...</div>}>
+            {data.map((item, index) => (
+              <BookMobileItem book={item} key={index} />
+            ))}
+          </React.Suspense>
+        ) : (
+          <p>No data available</p>
+        )}
+      </div>
     </>
   );
 };

@@ -14,7 +14,7 @@ export const  SidebarItem: React.FC<SidebarItemProps> =({
   icon,
   text,
   active = false,
-  alert = false,
+  alert,
   path,
 }: SidebarItemProps) => {
   const expanded = useContext(SidebarContext);

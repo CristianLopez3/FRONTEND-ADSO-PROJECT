@@ -6,10 +6,10 @@ import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
 
-type BookRowProps = {book: Booking};
+type BookRowProps = { book: Booking };
 
 const BookRow = ({ book }: BookRowProps) => {
-  const { id, name, date, time } = book;
+  const { id, name, description, date, time } = book;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -18,10 +18,12 @@ const BookRow = ({ book }: BookRowProps) => {
   return (
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
-        <td className="row-table">{id}</td>
         <td className="row-table">{name}</td>
-        <td className="row-table">{date}</td>
-        <td className="row-table">{time}</td>
+        <td className="row-table flex flex-col text-sm">
+          {time}
+          <span className="text-sm text-gray-600">{date}</span>
+        </td>
+        <td className="row-table text-wrap">{description}</td>
 
         <td className="row-table">
           <div className="flex gap-2">
@@ -50,7 +52,14 @@ const BookRow = ({ book }: BookRowProps) => {
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>
-        <BookForm  handleUpdateModal={handleUpdateModal} name={name} date={date} time={time} />
+        <BookForm
+          id={id}
+          name={name}
+          description={description}
+          date={date}
+          time={time}
+          mode="update"
+        />
       </Modal>
     </>
   );

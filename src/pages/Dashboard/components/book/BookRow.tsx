@@ -1,12 +1,12 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Booking } from "@/types/Booking";
+import { Reservation } from "@/types/Booking";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
 
-type BookRowProps = { book: Booking };
+type BookRowProps = { book: Reservation };
 
 const BookRow = ({ book }: BookRowProps) => {
   const { id, name, description, date, time } = book;

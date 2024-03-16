@@ -1,31 +1,67 @@
-import { Booking } from "../../types/Booking";
+import { useCallback, useEffect, useState } from "react";
+import { Reservation } from "@/types/Reservation";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
-import { Link } from "react-router-dom";
-import { RiBookOpenLine } from "react-icons/ri";
+import { RiAddFill, RiBookOpenLine } from "react-icons/ri";
 import BookTable from "./components/book/BookTable";
+import { Modal } from "@/components/Modal";
+import BookForm from "./components/book/BookForm";
+import { AppDispatch } from "@/store/store";
+import { getReservationsAction } from "@/store/reservations";
+import { useDispatch } from "react-redux";
+import { Button } from "keep-react";
 
-const dummyData: Array<Booking> = [
-  { id: 1, name: "John Doe", description: "I need help with my daughter because she likes meat but fresh", date: "2002-01-02", time: "09:30" },
-  { id: 2, name: "Jane Smith",  description: "I need help with my daughter because she likes meat but fresh", date: "2002-04-02", time: "10:15" },
-  { id: 3, name: "Michael Johnson",  description: "I need help with my daughter because she likes meat but fresh", date: "2002-08-02", time: "20:00" },
-];
+const dummyData: Array<Reservation> = [];
+
+// Move fetchMenus outside of the component
+const fetchReservations = async (dispatch: AppDispatch) => {
+  try {
+    await dispatch(getReservationsAction());
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const Reservations = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  // Use useCallback to memoize event handlers
+  const toggleAddModal = useCallback(() => {
+    setIsOpen((prevState) => !prevState);
+  }, []);
+
+  const handleCreateReservation = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  useEffect(() => {
+    fetchReservations(dispatch);
+  }, [dispatch]);
+
   return (
     <>
       <header>
         <DashboardNavbar>
-          <Link to="/dashboard">
-            <h2 className="flex items-center text-black font-bold  gap-2 text-2xl">
-              <RiBookOpenLine />
-              Reservations
-            </h2>
-          </Link>
+          <h2
+            className="flex items-center text-black font-bold  gap-2 text-2xl"
+            onClick={toggleAddModal}
+          >
+            <RiBookOpenLine />
+            Reservations
+            <Button size={28} color="success" className="p-2">
+              <RiAddFill />
+            </Button>
+          </h2>
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
         <BookTable data={dummyData} />
       </main>
+      <Modal open={isOpen} onClose={toggleAddModal}>
+        <BookForm
+          mode="create"
+          handleCreateReservation={handleCreateReservation}
+        />
+      </Modal>
     </>
   );
 };

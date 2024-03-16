@@ -1,38 +1,88 @@
 import { Pencil } from "phosphor-react";
 import InputField from "@/components/Input/InputField";
-import { useForm } from "react-hook-form";
-import { BookingForm, bookSchema } from "@/types/Booking";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import {
+  Reservation,
+  ReservationForm,
+  reservationSchema,
+} from "@/types/Reservation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { useCallback } from "react";
+
+import {
+  createReservationAction,
+  getReservationsAction,
+} from "@/store/reservations";
 
 type BookFormProps = {
-  handleUpdateBooking?: () => void;
-  handleCreateBooking?: () => void;
+  handleUpdateReservation?: () => void;
+  handleCreateReservation?: () => void;
   mode: string;
-} & Partial<BookingForm>;
+} & Partial<ReservationForm>;
 
 const BookForm = ({
-  handleCreateBooking,
-  handleUpdateBooking,
+  handleCreateReservation,
+  handleUpdateReservation,
   mode,
   id,
   name,
-  date,
-  time,
+  email,
+  phoneNumber,
+  reservationDate,
   description,
+  numberOfPeople,
 }: BookFormProps) => {
-  const { register } = useForm<BookingForm>({
+  const { register, handleSubmit } = useForm<ReservationForm>({
     defaultValues: {
       id,
       name,
+      phoneNumber, // Agregado
+      email, // Agregado
+      reservationDate, // Agregado
       description,
-      date,
-      time,
+      numberOfPeople,
     },
-    resolver: zodResolver(bookSchema),
-    // * Select function to handle the form by the mode
+    resolver: zodResolver(reservationSchema),
   });
+
   const handleAction =
-    mode === "create" ? handleCreateBooking : handleUpdateBooking;
+    mode === "create" ? handleCreateReservation : handleUpdateReservation;
+  const text = mode === "update" ? "Update Menu" : "Create Menu";
+
+  // const reservations = useSelector((state: RootState) => state.reservations);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onSubmit: SubmitHandler<ReservationForm> = useCallback(
+    async (data) => {
+      try {
+        data.id = data.id === "" || data.id === null ? null : data.id;
+        const reservation: Reservation = {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          description: data.description,
+          reservationDate: data.reservationDate,
+          numberOfPeople: data.numberOfPeople,
+        };
+
+        if (mode === "update" && reservation.id !== null) {
+          // todo
+        } else {
+          await dispatch(createReservationAction(reservation));
+        }
+        dispatch(getReservationsAction());
+
+        handleCreateReservation?.() || handleUpdateReservation?.();
+      } catch (error) {
+        throw new Error("Error creating or updating menu");
+      }
+    },
+    [dispatch, handleCreateReservation, handleUpdateReservation, mode]
+  );
 
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
@@ -41,20 +91,31 @@ const BookForm = ({
       </div>
       <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
       <div className="text-left text-sm text-gray-500">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
           <InputField {...register("name")} />
-
+          <InputField {...register("phoneNumber")} /> 
+          <InputField {...register("email")} /> 
+          <InputField
+            {...register("reservationDate")}
+            type="datetime-local"
+          />
           <InputField {...register("description")} />
-          <InputField {...register("date")} />
-          <InputField {...register("time")} />
+          <InputField {...register("numberOfPeople")} />
+          <div className="flex gap-4 mt-8">
+            <button
+              className={`${
+                mode === "update" ? "btn btn-warning" : "btn btn-success"
+              } w-full`}
+              type="submit"
+            >
+              {text}
+            </button>
+            <button className="btn btn-light w-full" onClick={handleAction}>
+              Cancel
+            </button>
+          </div>
         </form>
-      </div>
-      <div className="flex gap-4 mt-8">
-        <button className="btn btn-warning w-full">Update</button>
-        <button className="btn btn-light w-full" onClick={handleAction}>
-          Cancel
-        </button>
       </div>
     </div>
   );

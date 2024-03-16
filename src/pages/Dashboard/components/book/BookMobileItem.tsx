@@ -1,11 +1,11 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Booking } from "@/types/Booking";
+import { Reservation } from "@/types/Booking";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
-export type BookingMobileItemProps = { book: Booking };
+export type BookingMobileItemProps = { book: Reservation };
 
 const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
   const { id, name, date, time } = book;

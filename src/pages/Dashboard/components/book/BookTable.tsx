@@ -1,11 +1,11 @@
 import React from "react";
-import { Booking } from "@/types/Booking";
+import { Reservation } from "@/types/Booking";
 const BookMobileItem = React.lazy(() => import("./BookMobileItem"));
 import Table from "@/components/Table";
 import BookRow from "./BookRow";
 
 type BookTableProps = {
-  data: Booking[];
+  data: Reservation[];
 };
 
 const BookTable = ({ data }: BookTableProps) => {

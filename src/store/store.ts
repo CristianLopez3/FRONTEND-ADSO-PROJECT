@@ -1,13 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import UserReducer from "./user/UserReducer";
-import {menuReducer} from "@/store/menus";
+import { menuReducer } from "@/store/menus";
 import CategoryReducer from "./menus/CategoryReducer";
+import { reservationReducer } from "./reservations";
+
 
 export const store = configureStore({
   reducer: {
     users: UserReducer,
     menus: menuReducer,
-    categories: CategoryReducer
+    categories: CategoryReducer,
+    reservations: reservationReducer,
   },
 });
 

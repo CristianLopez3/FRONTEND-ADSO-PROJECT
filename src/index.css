@@ -39,6 +39,9 @@
   .btn.btn-light{
     @apply bg-white text-gray-500;
   }
+  .btn.btn-dark{
+    @apply bg-black  text-gray-200;
+  }
   .btn.btn-danger {
     @apply text-white bg-red-600 shadow-red-400/40;
   }

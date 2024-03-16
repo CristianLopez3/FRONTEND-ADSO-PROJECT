@@ -11,14 +11,7 @@ const MenuTable: React.FC<MenuTableProps> = ({ data }) => {
   return (
     <>
       <Table
-        columns={[
-          { title: "ID", width: "10%" },
-          { title: "Title", width: "20%" },
-          { title: "Description", width: "30%" },
-          { title: "Price", width: "20%" },
-          { title: "Category", width: "20%" },
-          { title: "Actions", width: "10%" },
-        ]}
+        titles={["ID", "Title", "Description", "Price", "Category", "Actions"]}
       >
         {Array.isArray(data) && data.length > 0 ? (
           data.map((item, index) => <MenuRow menu={item} key={index} />)

@@ -11,15 +11,7 @@ type UserTableProps = {
 const UserTable: React.FC<UserTableProps> = ({ data }) => {
   return (
     <>
-      <Table
-        columns={[
-          { title: "ID", width: "10%" },
-          { title: "Name", width: "20%" },
-          { title: "Cellphone", width: "20%" },
-          { title: "Role", width: "10%" },
-          { title: "Actions", width: "10%" },
-        ]}
-      >
+      <Table titles={["ID", "Name", "Cellphone", "Role", "Actions"]}>
         {Array.isArray(data) && data.length > 0 ? (
           <React.Suspense fallback={<div>Loading...</div>}>
             {data.map((item, index) => (

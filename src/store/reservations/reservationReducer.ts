@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MenuReducer } from "@/types/Menu";
 import {
   getReservationsAction,
   createReservationAction,
 } from "./reservationActions";
-import { Menu } from "@/types/Menu";
+import { Reservation, ReservationReducer } from "@/types/Reservation";
 
-const initialState: MenuReducer = {
+const initialState: ReservationReducer = {
   isLoading: false,
   data: [],
   isError: false,
@@ -25,7 +24,7 @@ const reservationSlice = createSlice({
       })
       .addCase(
         getReservationsAction.fulfilled,
-        (state, action: PayloadAction<Menu[]>) => {
+        (state, action: PayloadAction<Reservation[]>) => {
           state.isLoading = false;
           state.data = action.payload;
         }
@@ -41,7 +40,7 @@ const reservationSlice = createSlice({
       })
       .addCase(
         createReservationAction.fulfilled,
-        (state, action: PayloadAction<Menu>) => {
+        (state, action: PayloadAction<Reservation>) => {
           state.isLoading = false;
           state.data.push(action.payload);
         }

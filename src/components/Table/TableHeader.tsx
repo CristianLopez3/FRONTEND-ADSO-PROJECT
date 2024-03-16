@@ -1,22 +1,19 @@
-export interface Column {
-  title: string;
-  width: string;
-}
+
 
 type TableHeaderProps = {
-  columns: Column[];
-};
+  titles: string[];
+}
 
-const TableHeader = ({ columns }: TableHeaderProps) => {
+const TableHeader: React.FC<TableHeaderProps> = ({titles}) => {
   return (
     <thead className="bg-gray-300">
       <tr className="text-left w-[100%]">
-        {columns.map((column) => (
+        {titles.map((title) => (
           <th
-            key={column.title}
-            className={`w-[${column.width}] p-3 text-gray-900 text-sm font-semibold tracking-wide `}
+            key={title}
+            className={` p-3 text-gray-900 text-sm font-semibold tracking-wide `}
           >
-            {column.title}
+            {title}
           </th>
         ))}
       </tr>

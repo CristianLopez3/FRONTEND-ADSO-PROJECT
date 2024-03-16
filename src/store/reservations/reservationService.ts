@@ -1,4 +1,4 @@
-import { reservationsService } from "@/api/reservations"; 
+import { reservationsService } from "@/api/reservations";
 import { Reservation } from "@/types/Reservation";
 
 export const getReservations = async () => {

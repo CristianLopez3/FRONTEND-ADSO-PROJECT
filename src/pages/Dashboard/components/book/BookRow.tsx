@@ -1,15 +1,24 @@
 import { Button } from "keep-react";
 import { Trash, Pencil } from "phosphor-react";
-import { Reservation } from "@/types/Booking";
+import { Reservation } from "@/types/Reservation";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
+import { formatedDate, formatedHour } from "@/utils/dateFormater";
 
 type BookRowProps = { book: Reservation };
 
 const BookRow = ({ book }: BookRowProps) => {
-  const { id, name, description, date, time } = book;
+  const {
+    id,
+    name,
+    description,
+    email,
+    numberOfPeople,
+    phoneNumber,
+    reservationDate,
+  } = book;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -19,11 +28,17 @@ const BookRow = ({ book }: BookRowProps) => {
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
         <td className="row-table">{name}</td>
-        <td className="row-table flex flex-col text-sm">
-          {time}
-          <span className="text-sm text-gray-600">{date}</span>
+        <td className="row-table flex flex-col">
+          {email}
+          <span className="text-sm text-gray-600 font-semibold italic">{phoneNumber}</span>
         </td>
         <td className="row-table text-wrap">{description}</td>
+        <td className="row-table flex flex-col">
+          {formatedDate(reservationDate)}
+          <span className="text-sm text-gray-600 font-semibold italic">
+            {formatedHour(reservationDate)}
+          </span>
+        </td>
 
         <td className="row-table">
           <div className="flex gap-2">
@@ -55,9 +70,11 @@ const BookRow = ({ book }: BookRowProps) => {
         <BookForm
           id={id}
           name={name}
+          email={email}
           description={description}
-          date={date}
-          time={time}
+          reservationDate={reservationDate}
+          numberOfPeople={numberOfPeople}
+          phoneNumber={phoneNumber}
           mode="update"
         />
       </Modal>

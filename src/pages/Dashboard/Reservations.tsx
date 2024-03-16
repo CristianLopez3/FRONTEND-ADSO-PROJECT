@@ -1,16 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
-import { Reservation } from "@/types/Reservation";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import { RiAddFill, RiBookOpenLine } from "react-icons/ri";
-import BookTable from "./components/book/BookTable";
+const BookTable = React.lazy(() => import("./components/book/BookTable"));
 import { Modal } from "@/components/Modal";
 import BookForm from "./components/book/BookForm";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch, RootState } from "@/store/store";
 import { getReservationsAction } from "@/store/reservations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "keep-react";
-
-const dummyData: Array<Reservation> = [];
+import { TableSkeleton } from "@/components/Skeleton";
+import Alert from "@/components/Alert";
 
 // Move fetchMenus outside of the component
 const fetchReservations = async (dispatch: AppDispatch) => {
@@ -24,7 +23,7 @@ const fetchReservations = async (dispatch: AppDispatch) => {
 const Reservations = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-  // Use useCallback to memoize event handlers
+  const reservations = useSelector((state: RootState) => state.reservations);
   const toggleAddModal = useCallback(() => {
     setIsOpen((prevState) => !prevState);
   }, []);
@@ -36,6 +35,8 @@ const Reservations = () => {
   useEffect(() => {
     fetchReservations(dispatch);
   }, [dispatch]);
+
+
 
   return (
     <>
@@ -54,7 +55,19 @@ const Reservations = () => {
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-20 mx-auto">
-        <BookTable data={dummyData} />
+      {reservations.isLoading ? (
+          <TableSkeleton />
+        ) : reservations.isError ? (
+          <Alert
+            title="Error fetching reservations"
+            description="An error ocurred when the data was being brought in!"
+            mode="danger"
+          />
+        ) : (
+          <Suspense fallback={<TableSkeleton />}>
+            <BookTable data={reservations.data} />
+          </Suspense>
+        )}
       </main>
       <Modal open={isOpen} onClose={toggleAddModal}>
         <BookForm

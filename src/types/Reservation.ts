@@ -23,3 +23,9 @@ export const reservationSchema = z.object({
 });
 
 export type ReservationForm = z.infer<typeof reservationSchema>;
+
+export interface ReservationReducer {
+  isLoading: boolean;
+  data: Reservation[];
+  isError: boolean;
+}

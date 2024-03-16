@@ -1,23 +1,29 @@
+import { cn } from "@/utils/cn";
 import { type ReactNode, type ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = {
-  variant: string;
+  variant: "light" | "danger" | "warning" | "success" | "dark";
   content: string | number;
   children?: ReactNode;
 } & ComponentPropsWithoutRef<"button">;
 
-const  Button = ({
+
+const Button = ({
   variant,
   content,
   children,
+  className,
   ...props
 }: ButtonProps) => {
+  const variantClass = variant ? `btn-${variant}` : '';
+  const classes = `btn ${variantClass}`;
+  const styles = cn(classes, className);
+
   return (
-    <button className={variant} {...props}>
+    <button className={styles} {...props}>
       {content}
       {children}
     </button>
   );
 }
-
 export default Button;

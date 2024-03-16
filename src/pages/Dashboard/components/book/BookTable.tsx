@@ -1,5 +1,5 @@
 import React from "react";
-import { Reservation } from "@/types/Booking";
+import { Reservation } from "@/types/Reservation";
 const BookMobileItem = React.lazy(() => import("./BookMobileItem"));
 import Table from "@/components/Table";
 import BookRow from "./BookRow";
@@ -11,14 +11,7 @@ type BookTableProps = {
 const BookTable = ({ data }: BookTableProps) => {
   return (
     <>
-      <Table
-        columns={[
-          { title: "Name", width: "20%" },
-          { title: "Date", width: "20%" },
-          { title: "Description", width: "20%"},
-          { title: "Actions", width: "10%" },
-        ]}
-      >
+      <Table titles={["Name", "Contact", "Description", "Date", "Actions"]}>
         {Array.isArray(data) && data.length > 0 ? (
           <React.Suspense fallback={<div>Loading...</div>}>
             {data.map((item, index) => (

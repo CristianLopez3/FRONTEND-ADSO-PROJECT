@@ -8,7 +8,6 @@ type TableHeaderProps = {
 };
 
 const TableHeader = ({ columns }: TableHeaderProps) => {
-  console.log(columns);
   return (
     <thead className="bg-gray-300">
       <tr className="text-left w-[100%]">

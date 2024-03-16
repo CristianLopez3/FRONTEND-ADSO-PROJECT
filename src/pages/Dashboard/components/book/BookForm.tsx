@@ -35,7 +35,11 @@ const BookForm = ({
   description,
   numberOfPeople,
 }: BookFormProps) => {
-  const { register, handleSubmit } = useForm<ReservationForm>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ReservationForm>({
     defaultValues: {
       id,
       name,
@@ -50,7 +54,7 @@ const BookForm = ({
 
   const handleAction =
     mode === "create" ? handleCreateReservation : handleUpdateReservation;
-  const text = mode === "update" ? "Update Menu" : "Create Menu";
+  const text = mode === "update" ? "Update" : "Create";
 
   // const reservations = useSelector((state: RootState) => state.reservations);
   const dispatch = useDispatch<AppDispatch>();
@@ -58,6 +62,8 @@ const BookForm = ({
   const onSubmit: SubmitHandler<ReservationForm> = useCallback(
     async (data) => {
       try {
+        console.log("Data received by onSubmit:", data); // Agregado
+
         data.id = data.id === "" || data.id === null ? null : data.id;
         const reservation: Reservation = {
           id: data.id,
@@ -69,39 +75,54 @@ const BookForm = ({
           numberOfPeople: data.numberOfPeople,
         };
 
+        console.log("Reservation object to be dispatched:", reservation); // Agregado
+
         if (mode === "update" && reservation.id !== null) {
           // todo
         } else {
-          await dispatch(createReservationAction(reservation));
+          const result = await dispatch(createReservationAction(reservation));
+          console.log(
+            "Result from dispatching createReservationAction:",
+            result
+          ); // Agregado
         }
         dispatch(getReservationsAction());
 
         handleCreateReservation?.() || handleUpdateReservation?.();
       } catch (error) {
+        console.error("Error in onSubmit:", error); // Agregado
         throw new Error("Error creating or updating menu");
       }
     },
     [dispatch, handleCreateReservation, handleUpdateReservation, mode]
   );
 
+  const renderErrorMessage = (error: { message?: string }) => {
+    return error && <p className="p-1 text-red-700">{error.message}</p>;
+  };
+
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
         <Pencil size={52} color="orange" />
       </div>
-      <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
+      <h3 className="text-lg font-black text-gray-800">{text}</h3>
       <div className="text-left text-sm text-gray-500">
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
+          {renderErrorMessage(errors.id!)}
           <InputField {...register("name")} />
-          <InputField {...register("phoneNumber")} /> 
-          <InputField {...register("email")} /> 
-          <InputField
-            {...register("reservationDate")}
-            type="datetime-local"
-          />
+          {renderErrorMessage(errors.name!)}
+          <InputField {...register("phoneNumber")} />
+          {renderErrorMessage(errors.phoneNumber!)}
+          <InputField {...register("email")} />
+          {renderErrorMessage(errors.email!)}
+          <InputField {...register("reservationDate")} type="datetime-local" />
+          {renderErrorMessage(errors.reservationDate!)}
           <InputField {...register("description")} />
-          <InputField {...register("numberOfPeople")} />
+          {renderErrorMessage(errors.description!)}
+          <InputField {...register("numberOfPeople")} type="number" />
+          {renderErrorMessage(errors.numberOfPeople!)}
           <div className="flex gap-4 mt-8">
             <button
               className={`${

@@ -1,11 +1,11 @@
-import {z} from 'zod'
+import { z } from "zod";
 
-export interface Reservation  {
+export interface Reservation {
   id?: number | string | null;
   name: string;
-  phoneNumber: string; // Agregado
-  email: string; // Agregado
-  reservationDate: string; // Agregado
+  phoneNumber: string;
+  email: string;
+  reservationDate: string;
   description: string;
   numberOfPeople: number;
 }
@@ -13,14 +13,13 @@ export interface Reservation  {
 export const reservationSchema = z.object({
   id: z.union([z.number(), z.string(), z.null()]),
   name: z.string(),
-  phoneNumber: z.string(), // Agregado
-  email: z.string().email(), // Agregado
-  reservationDate: z.string().refine(value => !isNaN(Date.parse(value)), { // Agregado
-	message: "Invalid date format",
+  phoneNumber: z.string(),
+  email: z.string().email(),
+  reservationDate: z.string().refine((value) => !isNaN(Date.parse(value)), {
+    message: "Invalid date format",
   }),
   description: z.string(),
-  numberOfPeople: z.number()
+  numberOfPeople: z.string().transform(Number),
 });
 
 export type ReservationForm = z.infer<typeof reservationSchema>;
-

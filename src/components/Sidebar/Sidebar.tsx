@@ -1,23 +1,45 @@
-// * Sidebar component
-import { useLocation } from "react-router-dom";
-import { createContext, useState } from "react";
+import {
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import SidebarItem from "./SidebarItem";
-// * Icons imports
-import { LuChevronFirst, LuChevronLast, LuHome } from "react-icons/lu";
-import { LuUserCircle, LuBook } from "react-icons/lu";
+import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { PiArrowSquareIn } from "react-icons/pi";
-import { PiBowlFood } from "react-icons/pi";
-// * Styles imports
-import { styles } from "./contants";
-// * Routes imports
-import { ROUTES } from "@/routes/constants";
+import { getMenuItems, styles } from "./contants";
+import { getUncheckedReservationsAction } from "@/store/reservations";
 
 export const SidebarContext = createContext<boolean>(true);
 
 const Sidebar = () => {
   const location = useLocation();
   const [expanded, setExpanded] = useState<boolean>(false);
+  const reservations = useSelector((state: RootState) => state.reservations);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getUncheckedReservationsAction());
+  }, [dispatch]);
+
+  const toggleExpanded = useCallback(() => {
+    setExpanded((curr) => !curr);
+  }, []);
+
+  const reservationAlert = reservations.data.length > 0 ? true : false;
+
+  const menuItems = useMemo(
+    () => getMenuItems(reservationAlert),
+    [reservationAlert]
+  );
+
   return (
     <aside className={styles.aside}>
       <nav className={styles.nav}>
@@ -26,44 +48,23 @@ const Sidebar = () => {
             MenuEASY
           </h3>
 
-          <button
-            onClick={() => setExpanded((curr) => !curr)}
-            className={styles.button}
-          >
+          <button onClick={toggleExpanded} className={styles.button}>
             {expanded ? <LuChevronFirst /> : <LuChevronLast />}
           </button>
         </div>
 
         <SidebarContext.Provider value={expanded}>
           <ul className="flex-1 px-3">
-            <SidebarItem
-              path={ROUTES.DASHBOARD.ROOT}
-              icon={<LuHome size={20} />}
-              text="Home"
-              active={location.pathname === ROUTES.DASHBOARD.ROOT}
-              alert={true}
-            />
-            <SidebarItem
-              path={ROUTES.DASHBOARD.USERS}
-              icon={<LuUserCircle size={20} />}
-              text="User"
-              active={location.pathname === ROUTES.DASHBOARD.USERS}
-              alert={false}
-            />
-            <SidebarItem
-              path={ROUTES.DASHBOARD.MENUS}
-              icon={<PiBowlFood size={20} />}
-              text="Menus"
-              active={location.pathname === ROUTES.DASHBOARD.MENUS}
-              alert={false}
-            />
-            <SidebarItem
-              path={ROUTES.DASHBOARD.RESERVATIONS}
-              icon={<LuBook size={20} />}
-              text="Reservations"
-              active={location.pathname === ROUTES.DASHBOARD.RESERVATIONS}
-              alert={false}
-            />
+            {menuItems.map((item) => (
+              <SidebarItem
+                key={item.path}
+                path={item.path}
+                icon={item.icon}
+                text={item.text}
+                active={location.pathname === item.path}
+                alert={item.alert}
+              />
+            ))}
           </ul>
         </SidebarContext.Provider>
 

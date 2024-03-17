@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import Button from "@/components/Button";
 import { InputField } from "@/components/Input";
 import { Modal } from "@/components/Modal";
@@ -16,13 +15,13 @@ import { useDispatch } from "react-redux";
 
 const FormBooking = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // to manipulate modal when form is submitted
-  const [isLoading ,setIsLoading ] = useState<boolean>(false); 
+  const [isLoading ,setIsLoading ] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted, isLoading },
+    formState: { errors, isSubmitted },
     reset,
   } = useForm<ReservationForm>({
     defaultValues: {

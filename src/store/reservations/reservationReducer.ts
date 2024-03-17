@@ -2,8 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getReservationsAction,
   createReservationAction,
+  checkedInReservationAction,
 } from "./reservationActions";
 import { Reservation, ReservationReducer } from "@/types/Reservation";
+import { getUncheckedReservationsAction } from './reservationActions';
 
 const initialState: ReservationReducer = {
   isLoading: false,
@@ -48,7 +50,34 @@ const reservationSlice = createSlice({
       .addCase(createReservationAction.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
+      })
+      .addCase(getUncheckedReservationsAction.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(getUncheckedReservationsAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(getUncheckedReservationsAction.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(checkedInReservationAction.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(checkedInReservationAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = state.data.map((reservation) =>
+          reservation.id === action.payload.id ? action.payload : reservation
+        );
+      })
+      .addCase(checkedInReservationAction.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
       });
+
   },
 });
 

@@ -8,6 +8,12 @@ export interface Reservation {
   reservationDate: string;
   description: string;
   numberOfPeople: number;
+  checkedIn?: boolean;
+}
+
+export interface CheckReservation {
+  id: number | string;
+  checkedIn: boolean;
 }
 
 export const reservationSchema = z.object({

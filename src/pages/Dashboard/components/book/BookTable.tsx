@@ -11,7 +11,7 @@ type BookTableProps = {
 const BookTable = ({ data }: BookTableProps) => {
   return (
     <>
-      <Table titles={["Name", "Contact", "Description", "Date", "Actions"]}>
+      <Table titles={["Check", "Name", "Contact", "Description", "Date", "Actions"]}>
         {Array.isArray(data) && data.length > 0 ? (
           <React.Suspense fallback={<div>Loading...</div>}>
             {data.map((item, index) => (

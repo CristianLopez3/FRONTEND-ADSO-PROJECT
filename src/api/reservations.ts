@@ -1,15 +1,22 @@
 import { instance } from "./base.api";
-import { type Reservation } from "@/types/Reservation";
+import { CheckReservation, type Reservation } from "@/types/Reservation";
 
 const endpoint = "reservations";
 
 export const reservationsService = {
+  addReservation: function (reservation: Reservation) {
+    return instance.post(endpoint, reservation);
+  },
+
   getResevations: function () {
     return instance.get(endpoint);
   },
 
-  addReservation: function ( reservation: Reservation) {
-    return instance.post(endpoint, reservation);
+  getUnCheckedReservations: function () {
+    return instance.get(endpoint + "/unchecked-in");
   },
 
+  checkinReservation: function ({ id, checkedIn }: CheckReservation) {
+    return instance.patch(endpoint + `/check/` + id, { checkedIn });
+  },
 };

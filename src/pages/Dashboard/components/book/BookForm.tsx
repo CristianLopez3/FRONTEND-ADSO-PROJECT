@@ -16,6 +16,7 @@ import {
   createReservationAction,
   getReservationsAction,
 } from "@/store/reservations";
+import Button from "@/components/Button";
 
 type BookFormProps = {
   handleModal: () => void;
@@ -76,18 +77,14 @@ const BookForm = ({
         if (mode === "update" && reservation.id !== null) {
           // todo
         } else {
-          const result = await dispatch(createReservationAction(reservation));
-          console.log(
-            "Result from dispatching createReservationAction:",
-            result
-          ); // Agregado
+          await dispatch(createReservationAction(reservation));
         }
         dispatch(getReservationsAction());
 
         handleModal();
       } catch (error) {
         console.error("Error in onSubmit:", error); // Agregado
-        throw new Error("Error creating or updating menu");
+        throw new Error("Error creating or updating reservation");
       }
     },
     [dispatch, handleModal, mode]
@@ -107,30 +104,37 @@ const BookForm = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
           {renderErrorMessage(errors.id!)}
+
           <InputField {...register("name")} />
           {renderErrorMessage(errors.name!)}
+
           <InputField {...register("phoneNumber")} />
           {renderErrorMessage(errors.phoneNumber!)}
+
           <InputField {...register("email")} />
           {renderErrorMessage(errors.email!)}
+
           <InputField {...register("reservationDate")} type="datetime-local" />
           {renderErrorMessage(errors.reservationDate!)}
+
           <InputField {...register("description")} />
           {renderErrorMessage(errors.description!)}
+
           <InputField {...register("numberOfPeople")} type="number" />
           {renderErrorMessage(errors.numberOfPeople!)}
+
           <div className="flex gap-4 mt-8">
-            <button
-              className={`${
-                mode === "update" ? "btn btn-warning" : "btn btn-success"
-              } w-full`}
-              type="submit"
-            >
-              {text}
-            </button>
-            <button className="btn btn-light w-full" onClick={handleModal}>
-              Cancel
-            </button>
+            <Button
+              variant={`${mode === "update" ? "warning" : "success"}`}
+              className="w-full"
+              content={text}
+            />
+            <Button
+              variant="light"
+              className="w  -full"
+              onClick={handleModal}
+              content="cancel"
+            />
           </div>
         </form>
       </div>

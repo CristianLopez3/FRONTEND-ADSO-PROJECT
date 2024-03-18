@@ -33,11 +33,11 @@ const Sidebar = () => {
     setExpanded((curr) => !curr);
   }, []);
 
-  const reservationAlert = reservations.data.length > 0 ? true : false;
+  const hasUncheckedInReservation = reservations.data.some(reservation => reservation.checkedIn === false);
 
   const menuItems = useMemo(
-    () => getMenuItems(reservationAlert),
-    [reservationAlert]
+    () => getMenuItems(hasUncheckedInReservation),
+    [hasUncheckedInReservation]
   );
 
   return (

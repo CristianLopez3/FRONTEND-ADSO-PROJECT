@@ -52,9 +52,12 @@ const reservationSlice = createSlice({
       .addCase(getUncheckedReservationsAction.pending, startLoading)
       .addCase(getUncheckedReservationsAction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload;
+        state.data = state.data.map((reservation) =>
+          reservation.id === action.payload.id ? action.payload : reservation
+        );
       })
       .addCase(getUncheckedReservationsAction.rejected, loadingFailed)
+
       .addCase(checkedInReservationAction.pending, startLoading)
       .addCase(checkedInReservationAction.fulfilled, (state, action) => {
         state.isLoading = false;

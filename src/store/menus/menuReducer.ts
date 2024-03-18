@@ -50,6 +50,7 @@ const menuSlice = createSlice({
         }
       )
       .addCase(addMenuAction.rejected, loadingFailed)
+
       .addCase(updateMenuAction.pending, startLoading)
       .addCase(
         updateMenuAction.fulfilled,
@@ -59,15 +60,17 @@ const menuSlice = createSlice({
         }
       )
       .addCase(updateMenuAction.rejected, loadingFailed)
+      // * DELETE MENU * //
       .addCase(deleteMenuAction.pending, startLoading)
-      .addCase(
-        deleteMenuAction.fulfilled,
-        (state, action: PayloadAction<Menu[]>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-        }
-      )
+      
+      .addCase(deleteMenuAction.fulfilled, (state, action) => {
+        // Obtener el ID del menú eliminado del payload de la acción
+        state.isLoading = false;
+        const deletedMenuId = action.meta.arg; // Obtiene el ID del menú eliminado de action.meta.arg
+        state.data = state.data.filter(menu => menu.id !== deletedMenuId);
+      })
       .addCase(deleteMenuAction.rejected, loadingFailed)
+
       .addCase(getMenusByCategoryAction.pending, startLoading)
       .addCase(
         getMenusByCategoryAction.fulfilled,

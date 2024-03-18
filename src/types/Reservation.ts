@@ -16,17 +16,27 @@ export interface CheckReservation {
   checkedIn: boolean;
 }
 
+
+
 export const reservationSchema = z.object({
   id: z.union([z.number(), z.string(), z.null()]),
-  name: z.string(),
-  phoneNumber: z.string(),
-  email: z.string().email(),
+  name: z.string().min(1, "Please enter a name"),
+  phoneNumber: z.string().min(7, "Please enter a valid phone number"),
+  email: z.string().email("Please enter a valid email address"),
   reservationDate: z.string().refine((value) => !isNaN(Date.parse(value)), {
-    message: "Invalid date format",
+    message: "Please enter a valid date for the reservation",
   }),
   description: z.string(),
-  numberOfPeople: z.string().transform(Number),
+  numberOfPeople: z
+    .union([
+      z.string().transform(Number),
+      z.number().min(1, "Please enter a valid number of people (at least 1)"),
+    ])
+    .refine((value) => value >= 1, {
+      message: "Please enter a valid number of people (at least 1)",
+    }),
 });
+
 
 export type ReservationForm = z.infer<typeof reservationSchema>;
 

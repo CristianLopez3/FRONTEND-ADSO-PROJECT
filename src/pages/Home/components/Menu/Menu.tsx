@@ -24,9 +24,9 @@ const Menu = () => {
   }, [dispatch]);
 
   const filteredMenus =
-    menuActive === "All"
-      ? menus.data
-      : menus.data.filter((item) => item.category.name === menuActive);
+    menuActive === "All" 
+      ? menus.data.filter((item) => item.state)
+      : menus.data.filter((item) => item.category.name === menuActive && item.state);
 
   return (
     <Suspense fallback={<CardSkeleton />}>

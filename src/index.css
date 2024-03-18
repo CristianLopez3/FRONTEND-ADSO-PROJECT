@@ -67,6 +67,13 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
+
+  .input-validation {
+    @apply flex flex-col justify-center;
+  }
+
 }
+
+
 
 

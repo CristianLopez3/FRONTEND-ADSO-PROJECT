@@ -14,8 +14,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 const FormBooking = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false); // to manipulate modal when form is submitted
-  const [isLoading ,setIsLoading ] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isReservationSuccess, setIsReservationSuccess] =
+    useState<boolean>(false); // Nuevo estado
 
   const dispatch = useDispatch<AppDispatch>();
   const {
@@ -31,25 +33,21 @@ const FormBooking = () => {
       phoneNumber: "",
       reservationDate: "",
       description: "",
-      numberOfPeople: 0,
+      numberOfPeople: undefined,
     },
     resolver: zodResolver(reservationSchema),
   });
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    if (isSubmitted) {
+    if (isReservationSuccess) {
       setIsOpen(true);
-      timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setIsOpen(false);
-      }, 2000); // close modal after 5 seconds
+        setIsReservationSuccess(false); // Restablecer el estado de éxito de la reserva
+      }, 2000);
+      return () => clearTimeout(timeoutId);
     }
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [isSubmitted]);
+  }, [isReservationSuccess]);
 
   const onSubmit: SubmitHandler<ReservationForm> = useCallback(
     async (data) => {
@@ -71,6 +69,7 @@ const FormBooking = () => {
         // console.log("Reservation object to be dispatched:", reservation); // Agregado
         await dispatch(createReservationAction(reservation));
         reset();
+        setIsReservationSuccess(true);
       } catch (error) {
         console.error("Error in onSubmit:", error); // Agregado
         throw new Error("Error creating or updating menu");
@@ -82,16 +81,26 @@ const FormBooking = () => {
   );
 
   const renderErrorMessage = (error: { message?: string }) => {
-    return error && <p className="p-1 text-red-700">{error.message}</p>;
+    return (
+      error && <p className="text-red-600 text-sm pl-1">{error.message}</p>
+    );
   };
 
   return (
     <div className="width-full mx-auto">
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="lg:grid lg:grid-cols-2 gap-x-2">
-          <InputField {...register("name")} placeholder="Write your name..." />
-          {renderErrorMessage(errors.name!)}
-          <InputField {...register("phoneNumber")} type="number" />
+          <div className="input-validation">
+            <InputField
+              {...register("name")}
+              placeholder="Write your name..."
+            />
+            {renderErrorMessage(errors.name!)}
+          </div>
+          <div className="input-validation">
+            <InputField {...register("phoneNumber")} type="number" />
+            {renderErrorMessage(errors.phoneNumber!)}
+          </div>
         </div>
         <InputField
           {...register("email")}
@@ -101,15 +110,21 @@ const FormBooking = () => {
         {renderErrorMessage(errors.email!)}
 
         <div className="w-full grid grid-cols-1 items-center gap-4  md:grid-cols-2">
-          <InputField {...register("reservationDate")} type="datetime-local" />
-          {renderErrorMessage(errors.reservationDate!)}
-
-          <InputField
-            {...register("numberOfPeople")}
-            placeholder="How many people?..."
-            type="number"
-          />
-          {renderErrorMessage(errors.numberOfPeople!)}
+          <div className="input-validation">
+            <InputField
+              {...register("reservationDate")}
+              type="datetime-local"
+            />
+            {renderErrorMessage(errors.reservationDate!)}
+          </div>
+          <div className="input-validation">
+            <InputField
+              {...register("numberOfPeople")}
+              placeholder="How many people?..."
+              type="number"
+            />
+            {renderErrorMessage(errors.numberOfPeople!)}
+          </div>
         </div>
         <InputField
           {...register("description")}

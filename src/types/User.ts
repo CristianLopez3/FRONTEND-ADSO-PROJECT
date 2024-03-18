@@ -16,8 +16,8 @@ export const userSchema = z.object({
   name: z.string().min(3, "Name is required"),
   lastName: z.string().min(3, "Lastname is required"),
   email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password is required"),
-  identification: z.string().min(7, "Identification is required"),
+  password: z.string().min(8, "Password needs at least 8 characteres"),
+  identification: z.string().min(7, "Identification have at least 7 characters"),
   cellphone: z.string().min(7, "Cellphone is required"),
   role: z.string().min(4, "Role is required"),
 });

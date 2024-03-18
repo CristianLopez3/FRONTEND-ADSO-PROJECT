@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "keep-react";
 import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
+import { currentFormatedDate, formatedDate } from "@/utils/dateFormater";
 
 // Move fetchMenus outside of the component
 const fetchReservations = async (dispatch: AppDispatch) => {
@@ -42,12 +43,14 @@ const Reservations = () => {
     <>
       <header>
         <DashboardNavbar>
+          
           <h2
             className="flex items-center text-black font-bold  gap-2 text-2xl"
             onClick={toggleAddModal}
           >
             <RiBookOpenLine />
             Reservations
+        
             <Button size={28} color="success" className="p-2">
               <RiAddFill />
             </Button>

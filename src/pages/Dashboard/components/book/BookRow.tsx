@@ -50,7 +50,7 @@ const BookRow = ({ book }: BookRowProps) => {
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
         <td>
-          <form className="flex items-center justify-center">
+          <form className="flex items-center justify-left pl-4">
             <InputCheck
               checked={checked}
               onChange={handleCheckboxChange}

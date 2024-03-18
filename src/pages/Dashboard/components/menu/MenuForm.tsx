@@ -104,6 +104,7 @@ const MenuForm = ({
         if (mode === "update" && menu.id !== null) {
           await dispatch(updateMenuAction(menu));
         } else {
+          console.log(formData);
           await dispatch(addMenuAction(formData));
         }
         dispatch(getAllMenusAction());
@@ -130,9 +131,7 @@ const MenuForm = ({
       </div>
       <h3 className={formStyles.title}>{text}</h3>
       <div className={formStyles.form}>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           {image && (
             <img
               src={URL.createObjectURL(image)}
@@ -149,12 +148,16 @@ const MenuForm = ({
 
           <InputField {...register("id")} type="hidden" />
           {renderErrorMessage(errors.id!)}
+
           <InputField {...register("title")} type="text" />
           {renderErrorMessage(errors.title!)}
+
           <InputField {...register("description")} type="text" />
           {renderErrorMessage(errors.description!)}
+
           <InputField {...register("price")} type="number" />
           {renderErrorMessage(errors.price!)}
+
           <select {...register("state")}>
             {options.map((option) => (
               <option key={option.toString()} value={option}>
@@ -181,14 +184,16 @@ const MenuForm = ({
 
           <div className={formStyles.buttons}>
             <Button
-            variant={mode === "update" ? "warning" : "success"}
+              variant={mode === "update" ? "warning" : "success"}
               className="w-full"
               content={buttonText}
             />
-            <Button variant="light" content="cancel" onClick={handleModal} className="w-full" />
-            {/* <button className="btn btn-light w-full" onClick={handleAction}>
-              Cancel
-            </button> */}
+            <Button
+              variant="light"
+              content="cancel"
+              onClick={handleModal}
+              className="w-full"
+            />
           </div>
         </form>
       </div>

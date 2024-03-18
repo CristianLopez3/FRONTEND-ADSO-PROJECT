@@ -1,5 +1,6 @@
 import { menus_service } from "@/api/menu";
 import { MenuPost } from "@/types/Menu";
+import { MenuStatePatch } from '../../types/Menu';
 
 export const getMenus = async () => {
   const response = await menus_service.getMenus();
@@ -25,3 +26,8 @@ export const deleteMenu = async (id: number) => {
   const response = await menus_service.deleteMenu(id);
   return response.data;
 };
+
+export const changeState = async (menu: MenuStatePatch) => {
+  const response = await menus_service.changeState(menu);
+  return response.data;
+}

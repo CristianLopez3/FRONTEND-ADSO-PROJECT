@@ -5,12 +5,22 @@ import {
   checkedInReservationAction,
 } from "./reservationActions";
 import { Reservation, ReservationReducer } from "@/types/Reservation";
-import { getUncheckedReservationsAction } from './reservationActions';
+import { getUncheckedReservationsAction } from "./reservationActions";
 
 const initialState: ReservationReducer = {
   isLoading: false,
   data: [],
   isError: false,
+};
+
+const startLoading = (state: ReservationReducer) => {
+  state.isLoading = true;
+  state.isError = false;
+};
+
+const loadingFailed = (state: ReservationReducer) => {
+  state.isLoading = false;
+  state.isError = true;
 };
 
 const reservationSlice = createSlice({
@@ -20,10 +30,7 @@ const reservationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // * Add the getAllMenusAction reducer
-      .addCase(getReservationsAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(getReservationsAction.pending, startLoading)
       .addCase(
         getReservationsAction.fulfilled,
         (state, action: PayloadAction<Reservation[]>) => {
@@ -31,15 +38,9 @@ const reservationSlice = createSlice({
           state.data = action.payload;
         }
       )
-      .addCase(getReservationsAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
+      .addCase(getReservationsAction.rejected, loadingFailed)
       // * Add the addMenu reducer
-      .addCase(createReservationAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(createReservationAction.pending, startLoading)
       .addCase(
         createReservationAction.fulfilled,
         (state, action: PayloadAction<Reservation>) => {
@@ -47,37 +48,21 @@ const reservationSlice = createSlice({
           state.data.push(action.payload);
         }
       )
-      .addCase(createReservationAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      .addCase(getUncheckedReservationsAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(createReservationAction.rejected, loadingFailed)
+      .addCase(getUncheckedReservationsAction.pending, startLoading)
       .addCase(getUncheckedReservationsAction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
       })
-      .addCase(getUncheckedReservationsAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      .addCase(checkedInReservationAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(getUncheckedReservationsAction.rejected, loadingFailed)
+      .addCase(checkedInReservationAction.pending, startLoading)
       .addCase(checkedInReservationAction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = state.data.map((reservation) =>
           reservation.id === action.payload.id ? action.payload : reservation
         );
       })
-      .addCase(checkedInReservationAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      });
-
+      .addCase(checkedInReservationAction.rejected, loadingFailed);
   },
 });
 

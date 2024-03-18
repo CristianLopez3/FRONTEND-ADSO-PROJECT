@@ -1,5 +1,5 @@
 import { instance } from "./base.api";
-import { MenuPost } from "@/types/Menu";
+import { MenuPost, MenuStatePatch } from "@/types/Menu";
 
 const endpoint = "menus";
 
@@ -31,4 +31,10 @@ export const menus_service = {
   updateMenu: function (menu: MenuPost) {
     return instance.put(`${endpoint}/${menu.id!}`, menu);
   },
+
+  changeState: function ({ id, state }: MenuStatePatch ) {
+    return instance.patch(endpoint + `/state/` + id, { state });
+  },
+
+
 };

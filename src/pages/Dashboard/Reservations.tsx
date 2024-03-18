@@ -28,7 +28,7 @@ const Reservations = () => {
     setIsOpen((prevState) => !prevState);
   }, []);
 
-  const handleCreateReservation = useCallback(() => {
+  const handleModal = useCallback(() => {
     setIsOpen(false);
   }, []);
 
@@ -72,7 +72,7 @@ const Reservations = () => {
       <Modal open={isOpen} onClose={toggleAddModal}>
         <BookForm
           mode="create"
-          handleCreateReservation={handleCreateReservation}
+          handleModal={handleModal}
         />
       </Modal>
     </>

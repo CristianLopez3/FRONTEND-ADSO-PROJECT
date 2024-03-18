@@ -33,7 +33,7 @@ const Menus = () => {
     setAddModal((prevState) => !prevState);
   }, []);
 
-  const handleCreateMenu = useCallback(() => {
+  const handleModal = useCallback(() => {
     setAddModal(false);
   }, []);
 
@@ -74,7 +74,7 @@ const Menus = () => {
       </main>
 
       <Modal open={addModal} onClose={toggleAddModal}>
-        <MenuForm mode="create" handleCreateMenu={handleCreateMenu} />
+        <MenuForm mode="create" handleModal={handleModal} />
       </Modal>
     </>
   );

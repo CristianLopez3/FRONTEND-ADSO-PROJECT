@@ -18,14 +18,12 @@ import {
 } from "@/store/reservations";
 
 type BookFormProps = {
-  handleUpdateReservation?: () => void;
-  handleCreateReservation?: () => void;
+  handleModal: () => void;
   mode: string;
 } & Partial<ReservationForm>;
 
 const BookForm = ({
-  handleCreateReservation,
-  handleUpdateReservation,
+  handleModal,
   mode,
   id,
   name,
@@ -52,8 +50,6 @@ const BookForm = ({
     resolver: zodResolver(reservationSchema),
   });
 
-  const handleAction =
-    mode === "create" ? handleCreateReservation : handleUpdateReservation;
   const text = mode === "update" ? "Update" : "Create";
 
   // const reservations = useSelector((state: RootState) => state.reservations);
@@ -88,13 +84,13 @@ const BookForm = ({
         }
         dispatch(getReservationsAction());
 
-        handleCreateReservation?.() || handleUpdateReservation?.();
+        handleModal();
       } catch (error) {
         console.error("Error in onSubmit:", error); // Agregado
         throw new Error("Error creating or updating menu");
       }
     },
-    [dispatch, handleCreateReservation, handleUpdateReservation, mode]
+    [dispatch, handleModal, mode]
   );
 
   const renderErrorMessage = (error: { message?: string }) => {
@@ -132,7 +128,7 @@ const BookForm = ({
             >
               {text}
             </button>
-            <button className="btn btn-light w-full" onClick={handleAction}>
+            <button className="btn btn-light w-full" onClick={handleModal}>
               Cancel
             </button>
           </div>

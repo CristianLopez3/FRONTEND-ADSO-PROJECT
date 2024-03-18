@@ -6,6 +6,7 @@ import {
   updateMenuAction,
   deleteMenuAction,
   getMenusByCategoryAction,
+  changeStateAction,
 } from "./menuActions";
 import { Menu } from "@/types/Menu";
 
@@ -15,17 +16,23 @@ const initialState: MenuReducer = {
   isError: false,
 };
 
+const startLoading = (state: MenuReducer) => {
+  state.isLoading = true;
+  state.isError = false;
+};
+
+const loadingFailed = (state: MenuReducer) => {
+  state.isLoading = false;
+  state.isError = true;
+};
+
 const menuSlice = createSlice({
   name: "menus",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // * Add the getAllMenusAction reducer
-      .addCase(getAllMenusAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(getAllMenusAction.pending, startLoading)
       .addCase(
         getAllMenusAction.fulfilled,
         (state, action: PayloadAction<Menu[]>) => {
@@ -33,15 +40,8 @@ const menuSlice = createSlice({
           state.data = action.payload;
         }
       )
-      .addCase(getAllMenusAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      // * Add the addMenu reducer
-      .addCase(addMenuAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(getAllMenusAction.rejected, loadingFailed)
+      .addCase(addMenuAction.pending, startLoading)
       .addCase(
         addMenuAction.fulfilled,
         (state, action: PayloadAction<Menu>) => {
@@ -49,15 +49,8 @@ const menuSlice = createSlice({
           state.data.push(action.payload);
         }
       )
-      .addCase(addMenuAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      // * Add the updateMenu reducer
-      .addCase(updateMenuAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(addMenuAction.rejected, loadingFailed)
+      .addCase(updateMenuAction.pending, startLoading)
       .addCase(
         updateMenuAction.fulfilled,
         (state, action: PayloadAction<Menu[]>) => {
@@ -65,15 +58,8 @@ const menuSlice = createSlice({
           state.data = action.payload;
         }
       )
-      .addCase(updateMenuAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      // * Add the deleteMenu reducer
-      .addCase(deleteMenuAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(updateMenuAction.rejected, loadingFailed)
+      .addCase(deleteMenuAction.pending, startLoading)
       .addCase(
         deleteMenuAction.fulfilled,
         (state, action: PayloadAction<Menu[]>) => {
@@ -81,15 +67,8 @@ const menuSlice = createSlice({
           state.data = action.payload;
         }
       )
-      .addCase(deleteMenuAction.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      // * Add the getMenusByCategory reducer
-      .addCase(getMenusByCategoryAction.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+      .addCase(deleteMenuAction.rejected, loadingFailed)
+      .addCase(getMenusByCategoryAction.pending, startLoading)
       .addCase(
         getMenusByCategoryAction.fulfilled,
         (state, action: PayloadAction<Menu[]>) => {
@@ -97,10 +76,19 @@ const menuSlice = createSlice({
           state.data = action.payload;
         }
       )
-      .addCase(getMenusByCategoryAction.rejected, (state) => {
+      .addCase(getMenusByCategoryAction.rejected, loadingFailed)
+      .addCase(changeStateAction.pending, startLoading)
+      .addCase(changeStateAction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
-      });
+        state.data = state.data.map((menu) =>
+          /**
+           * If the id of the menu is the same as the id of the payload, then return the payload
+           * the payload in this case is the menu with the updated state
+           */
+          menu.id === action.payload.id ? action.payload : menu
+        );
+      })
+      .addCase(changeStateAction.rejected, loadingFailed);
   },
 });
 

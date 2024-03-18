@@ -17,11 +17,11 @@ import { type MenuForm, menuSchema } from "@/types/Menu";
 
 import { Pencil } from "phosphor-react";
 import { InputField } from "@/components/Input";
+import Button from "@/components/Button";
 
 type MenuFormProps = {
   mode: "create" | "update";
-  handleUpdateMenu?: () => void;
-  handleCreateMenu?: () => void;
+  handleModal: () => void;
 } & Partial<MenuForm>;
 
 const options = ["Choose an state", "Active", "Desactive"];
@@ -35,8 +35,7 @@ const fetchCategories = async (dispatch: AppDispatch) => {
 };
 
 const MenuForm = ({
-  handleUpdateMenu,
-  handleCreateMenu,
+  handleModal,
   id,
   title,
   description,
@@ -68,7 +67,6 @@ const MenuForm = ({
 
   const text = mode === "update" ? "Update Menu" : "Create Menu";
   const buttonText = mode === "update" ? "Update" : "Create";
-  const handleAction = mode === "update" ? handleUpdateMenu : handleCreateMenu;
 
   useEffect(() => {
     reset({
@@ -83,41 +81,38 @@ const MenuForm = ({
 
   const onSubmit: SubmitHandler<MenuForm> = useCallback(
     async (data) => {
+      const formData = new FormData();
       try {
         data.id = data.id === "" || data.id === null ? null : data.id;
         const menu: MenuPost = {
-          // id: data.id,
           title: data.title,
           description: data.description,
           price:
             typeof data.price === "string"
               ? parseFloat(data.price)
               : data.price,
-          state: data.state === "Active" ? true : false,
+          state: data.state === "Desactive" ? false : true,
           idCategory:
             typeof data.idCategory === "string"
               ? parseInt(data.idCategory)
               : data.idCategory,
         };
 
-        const formData = new FormData();
         formData.append("image", image!);
         formData.append("menu", JSON.stringify(menu));
-        console.log(formData);
+
         if (mode === "update" && menu.id !== null) {
           await dispatch(updateMenuAction(menu));
-          // console.log(menu);
         } else {
           await dispatch(addMenuAction(formData));
         }
         dispatch(getAllMenusAction());
-
-        handleCreateMenu?.() || handleUpdateMenu?.();
+        handleModal();
       } catch (error) {
         throw new Error("Error creating or updating menu");
       }
     },
-    [dispatch, handleCreateMenu, handleUpdateMenu, mode, image]
+    [dispatch, handleModal, mode, image]
   );
 
   useEffect(() => {
@@ -185,16 +180,15 @@ const MenuForm = ({
           {renderErrorMessage(errors.idCategory!)}
 
           <div className={formStyles.buttons}>
-            <button
-              className={`${
-                mode === "update" ? "btn btn-warning" : "btn btn-success"
-              } w-full`}
-            >
-              {buttonText}
-            </button>
-            <button className="btn btn-light w-full" onClick={handleAction}>
+            <Button
+            variant={mode === "update" ? "warning" : "success"}
+              className="w-full"
+              content={buttonText}
+            />
+            <Button variant="light" content="cancel" onClick={handleModal} className="w-full" />
+            {/* <button className="btn btn-light w-full" onClick={handleAction}>
               Cancel
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

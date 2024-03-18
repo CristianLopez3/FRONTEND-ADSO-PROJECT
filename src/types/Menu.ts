@@ -21,6 +21,12 @@ export interface MenuPost {
   idCategory: number | string;
 }
 
+// * This is the type of the data that we are going to use in the reducer in order to change the state of the menu
+export interface MenuStatePatch {
+  id: number | string;
+  state: boolean;
+}
+
 // * This is the schema that we are going to use to validate the data
 export const menuSchema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),

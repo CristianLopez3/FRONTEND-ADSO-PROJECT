@@ -1,31 +1,61 @@
-import { Button } from "keep-react";
-import { Trash, Pencil } from "phosphor-react";
-import { Menu } from "@/types/Menu";
 import { useState } from "react";
-import { Modal, DeleteModal } from "@/components/Modal";
-import MenuForm from "./MenuForm";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import { deleteMenuAction, getAllMenusAction } from "@/store/menus/menuActions";
+import {
+  changeStateAction,
+  deleteMenuAction,
+} from "@/store/menus/menuActions";
+import { Trash, Pencil } from "phosphor-react";
+import { Menu } from "@/types/Menu";
+import { Modal, DeleteModal } from "@/components/Modal";
+import MenuForm from "./MenuForm";
+import { Button } from "keep-react";
+import Toggle from "@/components/Toggle";
 
 type MenuRowProps = { menu: Menu };
 
 const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
-  // * This is the type of the data that we are going to send to the server
   const { id, title, description, price, state, category } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+  const [menuState, setMenuState] = useState(state);
   const dispatch = useDispatch<AppDispatch>();
 
   const onDelete = async () => {
-    await dispatch(deleteMenuAction(+id!));
-    await dispatch(getAllMenusAction());
+    try {
+      await dispatch(deleteMenuAction(+id!));
+      // Update only the deleted menu in the state
+    } catch (error) {
+      console.error('Failed to delete menu:', error);
+    }
+  };
+
+  const onStateChange = async () => {
+    const newState = !menuState;
+    try {
+      const resultAction = await dispatch(
+        changeStateAction({ id: +id!, state: newState })
+      );
+
+      if (changeStateAction.fulfilled.match(resultAction)) {
+        setMenuState(newState);
+      }
+      // Update only the changed menu in the state
+    } catch (error) {
+      console.error('Failed to change menu state:', error);
+    }
   };
 
   return (
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
-        <td className="row-table">{id}</td>
+        <td className="row-table">
+          <Toggle
+            variant="success"
+            enabled={menuState}
+            setEnabled={onStateChange}
+          />
+        </td>
         <td className="row-table">{title}</td>
         <td className="row-table">{description}</td>
         <td className="row-table">{price}</td>

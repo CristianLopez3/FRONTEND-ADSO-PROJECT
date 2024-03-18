@@ -33,7 +33,7 @@ const BookRow = ({ book }: BookRowProps) => {
     () => setOpenDeleteModal((prev) => !prev),
     []
   );
-  const handleUpdateModal = useCallback(
+  const handleModal = useCallback(
     () => setOpenUpdateModal((prev) => !prev),
     []
   );
@@ -45,7 +45,6 @@ const BookRow = ({ book }: BookRowProps) => {
       dispatch(checkedInReservationAction({ id: id!, checkedIn: isChecked }));
     }
   };
-
 
   return (
     <>
@@ -60,7 +59,7 @@ const BookRow = ({ book }: BookRowProps) => {
             />
           </form>
         </td>
-        <td className="row-table">{name}</td>
+        <td className="row-table max-w-[100px] text-balance">{name}</td>
 
         <td className="row-table flex flex-col">
           {email}
@@ -68,7 +67,7 @@ const BookRow = ({ book }: BookRowProps) => {
             {phoneNumber}
           </span>
         </td>
-        <td className="row-table text-wrap">{description}</td>
+        <td className="row-table max-w-[300px] text-balance">{description}</td>
         <td className="row-table flex flex-col">
           {formatedDate(reservationDate)}
           <span className="text-sm text-gray-600 font-semibold italic">
@@ -81,7 +80,7 @@ const BookRow = ({ book }: BookRowProps) => {
               size={28}
               color="warning"
               className="p-2"
-              onClick={handleUpdateModal}
+              onClick={handleModal}
             >
               <Pencil />
             </Button>
@@ -102,7 +101,7 @@ const BookRow = ({ book }: BookRowProps) => {
         <DeleteModal onDelete={handleDeleteModal} name={name} />
       </Modal>
 
-      <Modal open={openUpdateModal} onClose={handleUpdateModal}>
+      <Modal open={openUpdateModal} onClose={handleModal}>
         <BookForm
           id={id}
           name={name}
@@ -112,6 +111,7 @@ const BookRow = ({ book }: BookRowProps) => {
           numberOfPeople={numberOfPeople}
           phoneNumber={phoneNumber}
           mode="update"
+          handleModal={handleModal}
         />
       </Modal>
     </>

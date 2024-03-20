@@ -1,6 +1,6 @@
 
 import { SelectHTMLAttributes, ComponentPropsWithoutRef, forwardRef } from 'react';
-import { button } from '../../theme';
+
 
 type OptionType = {
   id: string | number | null;
@@ -21,7 +21,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps<OptionType>>((props, re
       value={value.id!}
       onChange={(e) => {
         const selectedOption = options.find(
-          (option) => option.id.toString() === e.target.value
+          (option) => option.id!.toString() === e.target.value
         );
         if (selectedOption) {
           onChange(selectedOption);
@@ -31,7 +31,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps<OptionType>>((props, re
       ref={ref}
     >
       {options.map((option) => (
-        <option key={option.id.toString()} value={option.id}>
+        <option key={option.id!.toString()} value={option.id!}>
           {option.name}
         </option>
       ))}

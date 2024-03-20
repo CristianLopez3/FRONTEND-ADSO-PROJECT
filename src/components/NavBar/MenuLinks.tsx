@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Users } from "phosphor-react";
+import { PiUsers } from "react-icons/pi";
 import {ROUTES} from '@/routes/constants';
 
 type MenuLinksProps = {
@@ -33,7 +33,7 @@ const MenuLinks = ({ variant, handleHamburgerMenu }: MenuLinksProps) => {
       {links.map((link, index) => (
         <div key={index} className="group">
           <Link to={link.path} className="hover:text-primary">
-            {link.text === "Login" ? <Users size={24} /> : link.text}
+            {link.text === "Login" ? <PiUsers size={24} /> : link.text}
             <div className="mx-2 group-hover:border-b group-hover:border-b-primary"></div>
           </Link>
         </div>

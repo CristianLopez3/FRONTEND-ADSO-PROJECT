@@ -1,6 +1,6 @@
-import { Pencil } from "phosphor-react";
 import InputField from "@/components/Input/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { PiPencil } from "react-icons/pi";
 
 import {
   Reservation,
@@ -97,7 +97,7 @@ const BookForm = ({
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
-        <Pencil size={52} color="orange" />
+        <PiPencil size={52} color="orange" />
       </div>
       <h3 className="text-lg font-black text-gray-800">{text}</h3>
       <div className="text-left text-sm text-gray-500">

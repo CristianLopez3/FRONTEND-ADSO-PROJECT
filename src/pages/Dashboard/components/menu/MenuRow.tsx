@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import {
-  changeStateAction,
-  deleteMenuAction,
-} from "@/store/menus/menuActions";
-import { Trash, Pencil } from "phosphor-react";
+import { changeStateAction, deleteMenuAction } from "@/store/menus/menuActions";
+
 import { Menu } from "@/types/Menu";
 import { Modal, DeleteModal } from "@/components/Modal";
 import MenuForm from "./MenuForm";
-import { Button } from "keep-react";
+
 import Toggle from "@/components/Toggle";
+import { PiTrash, PiPencil } from "react-icons/pi";
+import Button from "@/components/Button";
 
 type MenuRowProps = { menu: Menu };
 
@@ -26,7 +25,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
       await dispatch(deleteMenuAction(+id!));
       // Update only the deleted menu in the state
     } catch (error) {
-      console.error('Failed to delete menu:', error);
+      console.error("Failed to delete menu:", error);
     }
   };
 
@@ -42,7 +41,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
       }
       // Update only the changed menu in the state
     } catch (error) {
-      console.error('Failed to change menu state:', error);
+      console.error("Failed to change menu state:", error);
     }
   };
 
@@ -64,20 +63,18 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         <td className="row-table">
           <div className="flex gap-2">
             <Button
-              size={28}
-              color="warning"
-              className="p-2"
+              variant="warning"
+              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenUpdateModal(!openUpdateModal)}
             >
-              <Pencil />
+              <PiPencil />
             </Button>
             <Button
-              size={28}
-              color="error"
-              className="p-2"
+              variant="danger"
+              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
-              <Trash />
+              <PiTrash />
             </Button>
           </div>
         </td>
@@ -96,6 +93,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
       >
         <MenuForm
           mode="update"
+          handleModal={() => setOpenUpdateModal(!openUpdateModal)}
           description={description}
           id={id}
           price={price}

@@ -7,10 +7,9 @@ import BookForm from "./components/book/BookForm";
 import { AppDispatch, RootState } from "@/store/store";
 import { getReservationsAction } from "@/store/reservations";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "keep-react";
 import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
-import { currentFormatedDate, formatedDate } from "@/utils/dateFormater";
+import Button from "@/components/Button";
 
 // Move fetchMenus outside of the component
 const fetchReservations = async (dispatch: AppDispatch) => {
@@ -51,7 +50,7 @@ const Reservations = () => {
             <RiBookOpenLine />
             Reservations
         
-            <Button size={28} color="success" className="p-2">
+            <Button variant="success" className="p-2">
               <RiAddFill />
             </Button>
           </h2>

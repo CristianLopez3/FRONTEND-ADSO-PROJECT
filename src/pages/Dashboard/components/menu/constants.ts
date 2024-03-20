@@ -1,5 +1,5 @@
 export const formStyles = {
-  container: "mx-auto my-4 w-[400px] sm:w-[100%] md:w-full text-center",
+  container: "mx-auto my-4 w-[300px] sm:w-[100%] md:w-full text-center",
   pencil: "flex justify-center items-center mb-8",
   title: "text-lg font-black text-gray-800",
   form: "text-left text-sm text-gray-500",

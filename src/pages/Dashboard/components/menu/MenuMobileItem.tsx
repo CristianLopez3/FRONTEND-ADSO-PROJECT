@@ -2,11 +2,10 @@ import { useState } from "react";
 
 import { Modal, DeleteModal } from "@/components/Modal";
 import { Menu } from "@/types/Menu";
-import { Trash, Pencil } from "phosphor-react";
-import { Button } from "keep-react";
+import { PiTrash, PiPencil } from "react-icons/pi";
+import Button from "@/components/Button";
 import MenuForm from "./MenuForm";
 import { mobileItemStyles as styles } from "./constants";
-
 
 export type MenuMobileItemProps = { menu: Menu };
 
@@ -29,20 +28,18 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
         <div className={styles.description}>{price}</div>
         <div className={styles.buttons}>
           <Button
-            size={28}
-            color="warning"
+            variant="warning"
             className="p-2"
             onClick={() => setOpenUpdateModal(!openUpdateModal)}
           >
-            <Pencil />
+            <PiPencil />
           </Button>
           <Button
-            size={28}
-            color="error"
+            variant="danger"
             className="p-2"
             onClick={() => setOpenDeleteModal(!openDeleteModal)}
           >
-            <Trash />
+            <PiTrash />
           </Button>
         </div>
       </article>
@@ -59,6 +56,7 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
       >
         <MenuForm
           mode="update"
+          handleModal={() => setOpenUpdateModal(!openUpdateModal)}
           description={description}
           id={id}
           price={price}

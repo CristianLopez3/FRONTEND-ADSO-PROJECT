@@ -15,7 +15,7 @@ import { MenuPost } from "@/types/Menu";
 
 import { type MenuForm, menuSchema } from "@/types/Menu";
 
-import { Pencil } from "phosphor-react";
+import { PiPencil } from "react-icons/pi";
 import { InputField } from "@/components/Input";
 import Button from "@/components/Button";
 
@@ -85,6 +85,7 @@ const MenuForm = ({
       try {
         data.id = data.id === "" || data.id === null ? null : data.id;
         const menu: MenuPost = {
+          id: data.id,
           title: data.title,
           description: data.description,
           price:
@@ -127,7 +128,7 @@ const MenuForm = ({
   return (
     <div className={formStyles.container}>
       <div className={formStyles.pencil}>
-        <Pencil size={52} color={mode === "update" ? "orange" : "green"} />
+        <PiPencil size={52} color={mode === "update" ? "orange" : "green"} />
       </div>
       <h3 className={formStyles.title}>{text}</h3>
       <div className={formStyles.form}>

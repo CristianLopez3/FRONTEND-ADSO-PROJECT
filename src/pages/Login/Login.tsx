@@ -1,7 +1,8 @@
-import { At, Key, SignIn, ArrowLeft } from "phosphor-react";
+import { PiAt , PiKey , PiSignInLight , PiArrowLeft  } from "react-icons/pi";
 import Img from "../../assets/bg-mobile.jpg";
 import { InputIcon } from "@/components/Input";
 import { Link } from "react-router-dom";
+import Button from "@/components/Button";
 
 const styles = {
   main: "flex items-center justify-center min-h-screen bg-black overflow-x-hidden",
@@ -21,7 +22,7 @@ const Login = () => {
             Log in to your account if you are an employee
           </p>
           <InputIcon
-            icon={<At />}
+            icon={<PiAt  />}
             placeholder="email"
             id="email"
             name="email"
@@ -29,7 +30,7 @@ const Login = () => {
             styles="mb-6"
           />
           <InputIcon
-            icon={<Key />}
+            icon={<PiKey  />}
             placeholder="password"
             id="password"
             name="password"
@@ -39,10 +40,10 @@ const Login = () => {
           <div className="flex flex-col items-center justify-between mt-6 space-y-6 lg:flex-row lg:space-y-0">
             <div className="font-thing text-black">Forgot Password</div>
             <Link to="/dashboard">
-              <button className={styles.button}>
+              <Button className={styles.button} variant="dark" content="">
                 <span>Next</span>
-                <SignIn />
-              </button>
+                <PiSignInLight  />
+              </Button>
             </Link>
           </div>
 
@@ -52,7 +53,7 @@ const Login = () => {
         <img src={Img} alt="image" className="w-[430px] hidden md:block" />
 
         <Link to="/">
-          <ArrowLeft
+          <PiArrowLeft 
             className="absolute top-[27px] left-[20px] md:top-[20px] md:left-[20px]"
             size={28}
           />

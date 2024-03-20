@@ -1,5 +1,3 @@
-import { Button } from "keep-react";
-import { Trash, Pencil } from "phosphor-react";
 import { useState } from "react";
 import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
@@ -7,6 +5,8 @@ import { User } from "@/types/User";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { deleteUser, getAllUsers } from "@/store/user/UserReducer";
+import { PiTrash, PiPencil } from "react-icons/pi";
+import Button from "@/components/Button";
 
 type UserRowProps = { user: User };
 
@@ -44,20 +44,18 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
         <td className="row-table">
           <div className="flex gap-2">
             <Button
-              size={28}
-              color="warning"
-              className="p-2"
+              variant="warning"
+              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenUpdateModal(!openUpdateModal)}
             >
-              <Pencil />
+              <PiPencil />
             </Button>
             <Button
-              size={28}
-              color="error"
-              className="p-2"
+              variant="danger"
+              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
-              <Trash />
+              <PiTrash />
             </Button>
           </div>
         </td>

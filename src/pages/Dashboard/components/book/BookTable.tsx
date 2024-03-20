@@ -20,7 +20,7 @@ const BookTable = ({ data }: BookTableProps) => {
           </React.Suspense>
         ) : (
           <tr>
-            <td colSpan={5} className="tex-left py-4 pl-4 bg-white">
+            <td colSpan={6} className="tex-left py-4 pl-4 bg-white">
               No data available yet!.
             </td>
           </tr>

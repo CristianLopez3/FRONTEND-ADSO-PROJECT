@@ -13,7 +13,13 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
     <>
       <Table titles={["ID", "Name", "Cellphone", "Role", "Actions"]}>
         {Array.isArray(data) && data.length > 0 ? (
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense
+            fallback={
+              <tr>
+                <td colSpan={5}>Loading...</td>
+              </tr>
+            }
+          >
             {data.map((item, index) => (
               <UserRow user={item} key={index} />
             ))}

@@ -9,7 +9,6 @@ const Home = () => {
   return (
     <div className="relative pb-0">
       <header>
-        {/* <Navbar /> */}
         <Hero />
       </header>
       <main>

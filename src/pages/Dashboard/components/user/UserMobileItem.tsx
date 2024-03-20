@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "keep-react";
-import { Trash, Pencil } from "phosphor-react";
+import Button from "@/components/Button";
+import { PiTrash, PiPencil } from "react-icons/pi";
 import { User } from "@/types/User";
 import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
@@ -35,20 +35,18 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
         <div className="text-sm text-gray-600 py-2">{email}</div>
         <div className="flex gap-2">
           <Button
-            size={28}
-            color="warning"
+            variant="warning"
             className="p-2"
-            onClick={handleUpdateModal}
+            onClick={() => setOpenUpdateModal(!openUpdateModal)}
           >
-            <Pencil />
+            <PiPencil />
           </Button>
           <Button
-            size={28}
-            color="error"
+            variant="danger"
             className="p-2"
-            onClick={handleDeleteModal}
+            onClick={() => setOpenDeleteModal(!openDeleteModal)}
           >
-            <Trash />
+            <PiTrash />
           </Button>
         </div>
       </article>

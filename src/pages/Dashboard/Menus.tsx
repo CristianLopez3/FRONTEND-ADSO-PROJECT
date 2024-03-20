@@ -4,7 +4,6 @@ import { AppDispatch, RootState } from "@/store/store";
 import { RiBookOpenLine } from "react-icons/ri";
 import { RiAddFill } from "react-icons/ri";
 
-import { Button } from "keep-react";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 import Modal from "@/components/Modal/Modal";
@@ -13,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllMenusAction } from "@/store/menus/menuActions";
 import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
+import Button from "@/components/Button";
 
 // Move fetchMenus outside of the component
 const fetchMenus = async (dispatch: AppDispatch) => {
@@ -51,7 +51,7 @@ const Menus = () => {
           >
             <RiBookOpenLine />
             Menus
-            <Button size={28} color="success" className="p-2">
+            <Button variant="success" className="p-2">
               <RiAddFill />
             </Button>
           </h2>

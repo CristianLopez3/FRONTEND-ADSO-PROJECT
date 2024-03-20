@@ -1,5 +1,5 @@
-import { Button } from "keep-react";
-import { Trash, Pencil } from "phosphor-react";
+import { AppDispatch } from "@/store/store";
+import { useDispatch } from "react-redux";
 import { Reservation } from "@/types/Reservation";
 import { useCallback, useState } from "react";
 import Modal from "@/components/Modal/Modal";
@@ -7,9 +7,9 @@ import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import { formatedDate, formatedHour } from "@/utils/dateFormater";
 import { InputCheck } from "@/components/Input";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
-import { checkedInReservationAction } from "../../../../store/reservations/reservationActions";
+import { checkedInReservationAction } from "@/store/reservations/reservationActions";
+import { PiTrash, PiPencil } from "react-icons/pi";
+import Button from "@/components/Button";
 
 type BookRowProps = { book: Reservation };
 
@@ -77,21 +77,18 @@ const BookRow = ({ book }: BookRowProps) => {
         <td className="row-table">
           <div className="flex gap-2">
             <Button
-              size={28}
-              color="warning"
-              className="p-2"
-              onClick={handleModal}
+              variant="warning"
+              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
+              onClick={() => setOpenUpdateModal(!openUpdateModal)}
             >
-              <Pencil />
+              <PiPencil />
             </Button>
-
             <Button
-              size={28}
-              color="error"
-              className="p-2"
-              onClick={handleDeleteModal}
+              variant="danger"
+              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
+              onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
-              <Trash />
+              <PiTrash />
             </Button>
           </div>
         </td>

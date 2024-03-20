@@ -6,12 +6,12 @@ import { getAllUsers } from "@/store/user/UserReducer";
 import { PiUsers } from "react-icons/pi";
 import { RiAddFill } from "react-icons/ri";
 
-import { Button } from "keep-react";
 import { TableSkeleton } from "@/components/Skeleton";
 import { Modal } from "@/components/Modal";
 import Alert from "@/components/Alert";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import UserForm from "./components/user/UserForm";
+import Button from "@/components/Button";
 const UserTable = React.lazy(() => import("./components/user/UserTable"));
 
 // Move fetchAllUsers outside of the component
@@ -49,8 +49,7 @@ const Users = () => {
             <PiUsers />
             Users
             <Button
-              size={28}
-              color="success"
+              variant="success"
               className="p-2"
               onClick={toggleAddModal}
             >

@@ -3,7 +3,7 @@ import { type ReactNode, type ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = {
   variant: "light" | "danger" | "warning" | "success" | "dark";
-  content: string | number;
+  content?: string | number;
   children?: ReactNode;
 } & ComponentPropsWithoutRef<"button">;
 

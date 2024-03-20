@@ -1,5 +1,4 @@
 import Button from "@/components/Button";
-import { button } from "@/theme";
 import { AppDispatch, RootState } from "@/store/store";
 import { useEffect } from "react";
 import { Category } from "@/types/Menu";
@@ -24,7 +23,7 @@ const MenuNav = ({ menuActive, handleMenuActive }: MenuNavProps) => {
     <>
       <div className="flex flex-row w-full gap-2 overflow-x-scroll ">
         <Button
-          variant={menuActive === "All" ? button.active : button.inactive}
+          variant={menuActive === "All" ? "light" : "dark"}
           content="All"
           onClick={() => handleMenuActive("All")}
         />
@@ -33,7 +32,7 @@ const MenuNav = ({ menuActive, handleMenuActive }: MenuNavProps) => {
             <Button
               key={item.id}
               variant={
-                menuActive === item.name ? button.active : button.inactive
+                menuActive === item.name ?"light": "dark"
               }
               content={item.name}
               onClick={() => handleMenuActive(item.name)}

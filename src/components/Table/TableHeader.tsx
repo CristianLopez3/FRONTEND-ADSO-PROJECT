@@ -1,5 +1,3 @@
-
-
 type TableHeaderProps = {
   titles: string[];
 }

@@ -1,4 +1,4 @@
-import { X } from "phosphor-react";
+import { PiX } from "react-icons/pi";
 import { type ReactNode } from "react";
 import ReactDOM from "react-dom";
 
@@ -35,7 +35,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
               onClick={onClose}
               className="absolute top-2 right-2 p-1 rounded-full text-black bg-white hover:text-gray-100 hover:bg-gray-600 transition-all"
             >
-              <X />
+              <PiX />
             </button>
             {children}
           </div>

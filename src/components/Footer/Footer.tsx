@@ -14,7 +14,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bottom-0 left-0 bg-grayDark pt-12 pb-28 md:py-12 mt-20 mb-0  text-white">
+    <footer className="bg-grayDark pt-12 pb-28 md:py-12 mt-20 mb-0  text-white">
       <section className="container-section text-base md:text-xl space-y-3">
         <h2 className="mb-12">Menu EASY Location and Hours</h2> 
         <p className="pb-3">(+57) 300 389 2X 1X </p>

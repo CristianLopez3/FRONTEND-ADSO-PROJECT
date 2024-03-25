@@ -13,7 +13,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({titles}) => {
           >
             {title}
           </th>
-        ))}
+        ))} 
       </tr>
     </thead>
   );

@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({ title, count, icon, variant = "r-right" }) 
       </div>
       <div className="flex items-end gap-8">
         <h4 className="text-black text-3xl font-bold">32</h4>
-        <p className="text-gray-600">active {count}</p>
+        <p className="text-zinc-950">active {count}</p>
       </div>
     </article>
   );

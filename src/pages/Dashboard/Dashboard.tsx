@@ -3,6 +3,7 @@ import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import { RiBookOpenLine } from "react-icons/ri";
 import { cardElements } from "./components/dashboard/cardElements";
 import Card from "./components/dashboard/Card";
+import Chart from "./components/dashboard/Chart";
 
 const Dashboard = () => {
   return (
@@ -17,7 +18,7 @@ const Dashboard = () => {
           </Link>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-20 mx-auto">
+      <main className="px-2 md:px-8 mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {cardElements.map((card) => {
             return (
@@ -27,6 +28,9 @@ const Dashboard = () => {
               />
             );
           })}
+        </div>
+        <div className="hidden py-4 w-full overflow-x-scroll lg:block lg:w-1/2">
+          <Chart />
         </div>
       </main>
     </>

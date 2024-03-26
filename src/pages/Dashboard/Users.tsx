@@ -58,7 +58,7 @@ const Users = () => {
           </h2>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-20 mx-auto">
+      <main className="px-2 md:px-8 mx-auto">
         {users.isLoading ? (
           <TableSkeleton />
         ) : users.isError ? (

@@ -10,9 +10,7 @@ type MenuTableProps = {
 const MenuTable: React.FC<MenuTableProps> = ({ data }) => {
   return (
     <>
-      <Table
-        titles={["Active", "Title", "Description", "Price", "Category", "Actions"]}
-      >
+      <Table>
         {Array.isArray(data) && data.length > 0 ? (
           data.map((item, index) => <MenuRow menu={item} key={index} />)
         ) : (

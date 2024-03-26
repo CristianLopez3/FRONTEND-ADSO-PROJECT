@@ -11,7 +11,7 @@ type BookTableProps = {
 const BookTable = ({ data }: BookTableProps) => {
   return (
     <>
-      <Table titles={["Check", "Name", "Contact", "Description", "Date", "Actions"]}>
+      <Table>
         {Array.isArray(data) && data.length > 0 ? (
           <React.Suspense fallback={<div>Loading...</div>}>
             {data.map((item, index) => (
@@ -20,7 +20,7 @@ const BookTable = ({ data }: BookTableProps) => {
           </React.Suspense>
         ) : (
           <tr>
-            <td colSpan={6} className="tex-left py-4 pl-4 bg-white">
+            <td colSpan={6} className="text-left py-4 pl-4 bg-zinc-800">
               No data available yet!.
             </td>
           </tr>

@@ -1,17 +1,14 @@
 import { type ReactNode } from "react";
-import TableHeader from "./TableHeader";
 
 type TableProps = {
-  titles: string[];
   children: ReactNode;
 };
 
-const Table: React.FC<TableProps> = ({ titles, children }) => {
+const Table: React.FC<TableProps> = ({ children }) => {
   return (
-    <div className="w-full overflow-auto rounded-lg shadow hidden lg:block">
+    <div className="w-full overflow-auto rounded-2xl shadow-2xl hidden lg:block">
       <table className="w-full">
-        <TableHeader titles={titles} />
-        <tbody className="divide-y divide-gray-100 ">{children}</tbody>
+        <tbody className="py-4">{children}</tbody>
       </table>
     </div>
   );

@@ -11,7 +11,7 @@ type UserTableProps = {
 const UserTable: React.FC<UserTableProps> = ({ data }) => {
   return (
     <>
-      <Table titles={["ID", "Name", "Cellphone", "Role", "Actions"]}>
+      <Table>
         {Array.isArray(data) && data.length > 0 ? (
           <React.Suspense
             fallback={
@@ -26,7 +26,7 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
           </React.Suspense>
         ) : (
           <tr>
-            <td colSpan={5} className="tex-left py-4 pl-4 bg-white">
+            <td colSpan={5} className="text-left py-4 pl-4 bg-zinc-800 text-zinc-300">
               No data available yet!.
             </td>
           </tr>

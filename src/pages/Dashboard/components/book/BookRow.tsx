@@ -48,8 +48,8 @@ const BookRow = ({ book }: BookRowProps) => {
 
   return (
     <>
-      <tr className="bg-white hover:bg-grayLight transition-all">
-        <td>
+      <tr className="transition-all">
+        <td className="row-table">
           <form className="flex items-center justify-left pl-4">
             <InputCheck
               checked={checked}
@@ -59,18 +59,20 @@ const BookRow = ({ book }: BookRowProps) => {
             />
           </form>
         </td>
-        <td className="row-table max-w-[100px] text-balance">{name}</td>
+        <td className="row-table max-w-[100px] text-balance">
+          {name}
+        </td>
 
-        <td className="row-table flex flex-col">
+        <td className="row-table w-fit">
           {email}
-          <span className="text-sm text-gray-600 font-semibold italic">
+          <span className="block text-sm bg-zinc-800 font-semibold italic">
             {phoneNumber}
           </span>
         </td>
         <td className="row-table max-w-[300px] text-balance">{description}</td>
-        <td className="row-table flex flex-col">
+        <td className="row-table bg-zinc-800 w-fit">
           {formatedDate(reservationDate)}
-          <span className="text-sm text-gray-600 font-semibold italic">
+          <span className="block text-sm  text-zinc-400 font-semibold italic">
             {formatedHour(reservationDate)}
           </span>
         </td>

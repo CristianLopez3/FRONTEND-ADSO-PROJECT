@@ -46,7 +46,7 @@ const Menus = () => {
       <header>
         <DashboardNavbar>
           <h2
-            className="flex items-center text-black font-bold  gap-2 text-2xl"
+            className="flex items-center text-zinc-300 font-bold  gap-2 text-2xl"
             onClick={toggleAddModal}
           >
             <RiBookOpenLine />

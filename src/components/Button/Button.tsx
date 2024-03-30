@@ -20,7 +20,7 @@ const Button = ({
   const styles = cn(classes, className);
 
   return (
-    <button className={styles} {...props}>
+    <button className={styles} id={content} {...props}>
       {content}
       {children}
     </button>

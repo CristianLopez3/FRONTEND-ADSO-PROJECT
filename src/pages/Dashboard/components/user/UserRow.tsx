@@ -33,8 +33,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
   return (
     <>
       <tr className="bg-white hover:bg-grayLight transition-all">
-        <td className="row-table">{id}</td>
-        <td className="row-table flex flex-col text-lg">
+        <td className="row-table flex flex-col text-lg w-full">
           {name} <span className="text-sm text-gray-600">{email}</span>
         </td>
 

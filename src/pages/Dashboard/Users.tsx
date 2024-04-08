@@ -45,7 +45,7 @@ const Users = () => {
     <>
       <header>
         <DashboardNavbar>
-          <h2 className="flex items-center text-black font-bold  gap-2 text-2xl">
+          <h2 className="flex items-center text-black font-bold  gap-2 text-2xl text-zinc-300">
             <PiUsers />
             Users
             <Button
@@ -58,7 +58,7 @@ const Users = () => {
           </h2>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-20 mx-auto">
+      <main className="px-2 md:px-8 mx-auto">
         {users.isLoading ? (
           <TableSkeleton />
         ) : users.isError ? (

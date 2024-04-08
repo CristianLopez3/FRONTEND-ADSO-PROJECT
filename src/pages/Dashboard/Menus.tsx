@@ -46,7 +46,7 @@ const Menus = () => {
       <header>
         <DashboardNavbar>
           <h2
-            className="flex items-center text-black font-bold  gap-2 text-2xl"
+            className="flex items-center text-zinc-300 font-bold  gap-2 text-2xl"
             onClick={toggleAddModal}
           >
             <RiBookOpenLine />
@@ -57,7 +57,7 @@ const Menus = () => {
           </h2>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-20 mx-auto">
+      <main className="px-2 md:px-8 mx-auto">
         {menus.isLoading ? (
           <TableSkeleton />
         ) : menus.isError ? (

@@ -36,28 +36,24 @@ const Reservations = () => {
     fetchReservations(dispatch);
   }, [dispatch]);
 
-
-
   return (
     <>
       <header>
         <DashboardNavbar>
-          
           <h2
-            className="flex items-center text-black font-bold  gap-2 text-2xl"
+            className="flex items-center text-black font-bold gap-2 text-2xl text-zinc-300"
             onClick={toggleAddModal}
           >
             <RiBookOpenLine />
             Reservations
-        
             <Button variant="success" className="p-2">
               <RiAddFill />
             </Button>
           </h2>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-20 mx-auto">
-      {reservations.isLoading ? (
+      <main className="px-2 md:px-8 mx-auto">
+        {reservations.isLoading ? (
           <TableSkeleton />
         ) : reservations.isError ? (
           <Alert
@@ -72,10 +68,7 @@ const Reservations = () => {
         )}
       </main>
       <Modal open={isOpen} onClose={toggleAddModal}>
-        <BookForm
-          mode="create"
-          handleModal={handleModal}
-        />
+        <BookForm mode="create" handleModal={handleModal} />
       </Modal>
     </>
   );

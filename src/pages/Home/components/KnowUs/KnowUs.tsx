@@ -15,7 +15,7 @@ const KnowUs = () => {
               <h2 className="text-white">
                 Come and enjoy a place made for your pace.
               </h2>
-              <p className="text-grayLight  py-16 text-base md:text-xl">
+              <p className="text-grayLight py-16 text-base lg:text-xl md:pb-20">
                 Indulge in a culinary experience tailored to your rhythm at our
                 restaurant. Come and savor dishes crafted for every pace of
                 life, where every bite tells a story of dedication and flavor.

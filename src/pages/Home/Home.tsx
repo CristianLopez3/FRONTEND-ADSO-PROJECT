@@ -1,6 +1,5 @@
 import Hero from "./components/Hero";
 import Booking from "./components/Booking";
-import MobileNav from "@/components/MobileNav";
 import KnowUs from "./components/KnowUs";
 
 
@@ -15,7 +14,6 @@ const Home = () => {
         <Booking />
         <KnowUs />
       </main>
-      <MobileNav />
     </div>
   );
 };

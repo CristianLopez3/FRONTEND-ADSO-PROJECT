@@ -2,7 +2,7 @@ POST http://localhost:9000/category
 Content-Type: application/json
 
 {
-  "name": "Stronger"
+  "name": "Starter"
 }
 
 

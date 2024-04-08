@@ -23,7 +23,6 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
   const onDelete = async () => {
     try {
       await dispatch(deleteMenuAction(+id!));
-      // Update only the deleted menu in the state
     } catch (error) {
       console.error("Failed to delete menu:", error);
     }
@@ -47,7 +46,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
 
   return (
     <>
-      <tr className="bg-white hover:bg-grayLight transition-all">
+      <tr className="hover:bg-zinc-700 transition-all">
         <td className="row-table">
           <Toggle
             variant="success"
@@ -55,10 +54,10 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
             setEnabled={onStateChange}
           />
         </td>
-        <td className="row-table">{title}</td>
+        <td className="row-table">{title}
+        <span className="block text-[11px]">{category.name}</span></td>
         <td className="row-table">{description}</td>
-        <td className="row-table">{price}</td>
-        <td className="row-table">{category.name}</td>
+        <td className="row-table">${price}</td>
 
         <td className="row-table">
           <div className="flex gap-2">

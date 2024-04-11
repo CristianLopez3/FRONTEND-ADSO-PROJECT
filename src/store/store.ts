@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import UserReducer from "./user/UserReducer";
 import { menuReducer } from "@/store/menus";
 import CategoryReducer from "./menus/CategoryReducer";
+import {authReducer} from "./auth";
 import { reservationReducer } from "./reservations";
 
 
@@ -11,6 +12,7 @@ export const store = configureStore({
     menus: menuReducer,
     categories: CategoryReducer,
     reservations: reservationReducer,
+    auth: authReducer
   },
 });
 

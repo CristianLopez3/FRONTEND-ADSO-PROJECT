@@ -13,6 +13,7 @@ import Menus from "@/pages/Dashboard/Menus";
 import Users from "@/pages/Dashboard/Users";
 import Page404 from "@/pages/Page404";
 import Reservations from "@/pages/Dashboard/Reservations";
+import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -30,13 +31,16 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardTemplate />,
+    element: (
+      <ProtectedRoute>
+        <DashboardTemplate />
+      </ProtectedRoute>
+    ),
     children: [
       { path: "", element: <Dashboard /> },
       { path: "users", element: <Users /> },
       { path: "reservations", element: <Reservations /> },
       { path: "menus", element: <Menus /> },
-      // {path: "profile", element: <Profile />}
     ],
   },
   {

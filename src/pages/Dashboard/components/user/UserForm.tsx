@@ -1,11 +1,13 @@
 import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { InputField } from "@/components/Input";
+import { useDispatch } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
+
+import { InputField } from "@/components/Input";
 import { User } from "@/types/User";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
+
 import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
 import { type UserFormTypes, userSchema } from "@/types/User";
 import { formStyles as styles } from "./contants";
@@ -22,7 +24,7 @@ const UserForm: React.FC<UserFormProps> = ({
   mode,
   id,
   name,
-  email,
+  username: email,
   role,
   cellphone,
   identification,
@@ -41,7 +43,7 @@ const UserForm: React.FC<UserFormProps> = ({
       id,
       name,
       lastName,
-      email,
+      username: email,
       password,
       identification,
       cellphone,
@@ -65,7 +67,7 @@ const UserForm: React.FC<UserFormProps> = ({
           id: data.id,
           name: data.name,
           lastName: data.lastName,
-          email: data.email,
+          username: data.username,
           password: data.password,
           identification: data.identification,
           cellphone: data.cellphone.toString(),
@@ -104,8 +106,8 @@ const UserForm: React.FC<UserFormProps> = ({
               {renderErrorMessage(errors.lastName!)}
             </div>
           </div>
-          <InputField {...register("email")} type="email" />
-          {renderErrorMessage(errors.email!)}
+          <InputField {...register("username")} type="email" />
+          {renderErrorMessage(errors.username!)}
           <InputField {...register("password")} type="password" />
           {renderErrorMessage(errors.password!)}
           <div className="md:flex md:flex-row gap-x-6">

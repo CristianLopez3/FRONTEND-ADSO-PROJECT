@@ -11,6 +11,16 @@ export interface User {
   role: string;
 }
 
+export interface UserAuthResponse {
+  id: string | number;
+  name: string;
+  lastName: string;
+  email: string;
+  identification: string;
+  cellphone: string;
+  role: string;
+}
+
 export const userSchema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
   name: z.string().min(3, "Name is required"),

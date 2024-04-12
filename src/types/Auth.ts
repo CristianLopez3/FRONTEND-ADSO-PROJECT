@@ -1,4 +1,5 @@
 import { z } from "zod";
+import {  UserAuthResponse } from "./User";
 
 export interface Auth {
     username: string;
@@ -22,5 +23,6 @@ export interface AuthState {
 
 export interface AuthPayload {
     accessToken: string;
-    tokenType: string;
+    user: UserAuthResponse;
+    expiresIn: Date;
 }

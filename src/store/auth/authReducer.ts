@@ -22,7 +22,8 @@ initialState,
             state.isLoading = false;
             state.user = {
                 accessToken: action.payload.accessToken,
-                tokenType: action.payload.tokenType,
+                user: action.payload.user,
+                expiresIn: action.payload.expiresIn,
             };
         })
         .addCase(loginAction.rejected, (state) => {

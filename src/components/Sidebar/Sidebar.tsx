@@ -8,7 +8,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import SidebarItem from "./SidebarItem";
@@ -16,6 +16,9 @@ import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { PiArrowSquareIn } from "react-icons/pi";
 import { getMenuItems, styles } from "./contants";
 import { getUncheckedReservationsAction } from "@/store/reservations";
+import { ROUTES } from "@/routes/constants";
+import { removeCookies } from "@/utils/cookies";
+import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
 export const SidebarContext = createContext<boolean>(true);
 
@@ -24,6 +27,7 @@ const Sidebar = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const reservations = useSelector((state: RootState) => state.reservations);
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUncheckedReservationsAction());
@@ -33,12 +37,20 @@ const Sidebar = () => {
     setExpanded((curr) => !curr);
   }, []);
 
-  const hasUncheckedInReservation = reservations.data.some(reservation => reservation.checkedIn === false);
+  const hasUncheckedInReservation = reservations.data.some(
+    (reservation) => reservation.checkedIn === false
+  );
 
   const menuItems = useMemo(
     () => getMenuItems(hasUncheckedInReservation),
     [hasUncheckedInReservation]
   );
+
+  const handleLogout = () => {
+    removeCookies(TOKEN_COOKIE);
+    removeCookies(USER_COOKIE);
+    navigate(ROUTES.LOGIN);
+  };
 
   return (
     <aside className={styles.aside}>
@@ -70,7 +82,7 @@ const Sidebar = () => {
 
         <div className="border-t flex p-3">
           <img
-            src="https://ui-avatars.com/api/?background=808080&color=000000&bold=true"
+            src="https://ui-avatars.com/api/?name=Cristian+lopez&background=808080&color=000000&bold=true"
             alt=""
             className="w-10 h-10 rounded-md"
           />
@@ -89,9 +101,9 @@ const Sidebar = () => {
                 <span className="text-xs text-gray-600">johndoe@gmail.com</span>
               </div>
             </Link>
-            <Link to="/">
+            <button onClick={handleLogout}>
               <PiArrowSquareIn size={20} />
-            </Link>
+            </button>
           </div>
         </div>
       </nav>

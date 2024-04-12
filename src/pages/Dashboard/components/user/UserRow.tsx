@@ -15,7 +15,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
     id,
     name,
     lastName,
-    email,
+    username: email,
     password,
     identification,
     cellphone,
@@ -78,7 +78,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
             id={id!}
             name={name}
             lastName={lastName}
-            email={email}
+            username={email}
             password={password}
             cellphone={cellphone}
             identification={identification}

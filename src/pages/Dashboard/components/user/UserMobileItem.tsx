@@ -11,7 +11,7 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
   const {
     id,
     cellphone,
-    email,
+    username: email,
     name,
     role,
     identification,
@@ -59,7 +59,7 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
           mode="update"
           handleUpdateModal={handleUpdateModal}
           name={name}
-          email={email}
+          username={email}
           cellphone={cellphone}
           id={id!}
           role={role}

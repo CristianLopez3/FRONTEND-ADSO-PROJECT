@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { PiAt, PiKey, PiSignInLight, PiArrowLeft } from "react-icons/pi";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Img from "../../assets/bg-mobile.jpg";
 import Button from "@/components/Button";
 import { InputIcon } from "@/components/Input";
@@ -11,21 +11,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { loginAction } from "@/store/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Alert from "@/components/Alert";
 import { ROUTES } from "@/routes/constants";
+import { useQueryParam } from "@/utils/hooks/useQueryParam";
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const authState = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState<string | null>(null);
-
+  const error = useQueryParam("error");
+  console.log(error);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<AuthTypes>({ resolver: zodResolver(schema) });
+
+  useEffect(() => {
+    error && setLoginError(error), [error];
+  }, [error]);
 
   const onSubmit: SubmitHandler<AuthTypes> = useCallback(
     async ({ username, password }) => {
@@ -55,12 +60,14 @@ const Login = () => {
       <section className={styles.section}>
         <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-20">
           <h2 className="font-mono mb-5 text-4xl font-bold"> Login </h2>
-          {loginError ? (
-            <Alert
-            mode="danger"
-            title="Login failed!"
-            description={loginError}
-            />
+          {loginError !== null ? (
+            <div className="block w-full rounded-lg bg-red-100 text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white mb-8">
+              <div className="p-6">
+                <p className="text-base text-red-600">
+                  {loginError}
+                </p>
+              </div>
+            </div>
           ) : (
             <p className="max-w-sm mb-12 font-sans font-light text-gray-600">
               {"Log in to your account if you are an employee"}
@@ -98,7 +105,6 @@ const Login = () => {
 
           <div className="mt-12 border-b border-b-grayDark"></div>
         </form>
-    
 
         <img src={Img} alt="image" className="w-[430px] hidden md:block" />
 

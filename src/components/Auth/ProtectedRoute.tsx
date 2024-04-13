@@ -1,10 +1,10 @@
-import React, { createContext, useEffect, useState } from "react";
-import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
+import React, { createContext, useEffect } from "react";
 import { getCookies } from "@/utils/cookies";
 import { useNavigate } from "react-router";
-import { UserAuthResponse } from "@/types/User";
 import { useSelector } from "react-redux";
+
 import { RootState } from "@/store/store";
+import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
@@ -18,18 +18,17 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const navigate = useNavigate();
   const token = getCookies(TOKEN_COOKIE);
   const userCookie = getCookies(USER_COOKIE);
-  const [user, setUser] = useState<UserAuthResponse | null>(null);
 
   useEffect(() => {
     if (!token && !userCookie) {
-      setUser(null);
       navigate("/login?error=There was an error, try sign in again!.");
     }
-    setUser(auth!.user)
-  }, [token, user, userCookie, auth, navigate]);
+  }, [token, userCookie, auth, navigate]);
+
+  // setUser(userCookie);
 
   return (
-    <UserContext.Provider value={user ? user : userCookie}>
+    <UserContext.Provider value={userCookie}>
       {children}
     </UserContext.Provider>
   );

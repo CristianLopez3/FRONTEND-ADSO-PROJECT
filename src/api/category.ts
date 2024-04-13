@@ -1,9 +1,16 @@
-import { instance } from "./base.api";
+import { getCookies } from "@/utils/cookies";
+import { ENDPOINTS, instance } from "./base.api";
+import { TOKEN_COOKIE } from "@/store/auth";
 
-const endpoint = "category";
+const ENDPOINT = ENDPOINTS.CATEGORY;
 
-export const category_service = {
+export const categoryService = {
   getCategories: function () {
-    return instance.get(endpoint);
+    return instance.get(ENDPOINT, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${getCookies(TOKEN_COOKIE)}`,
+      },
+    });
   },
 };

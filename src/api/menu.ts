@@ -1,23 +1,32 @@
-import { instance } from "./base.api";
+import { getCookies } from "@/utils/cookies";
+import { ENDPOINTS, instance } from "./base.api";
 import { MenuPost, MenuStatePatch } from "@/types/Menu";
+import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
-const endpoint = "menus";
 
-export const menus_service = {
+const ENDPOINT = ENDPOINTS.MENU;
+
+export const menusService = {
   getMenus:  () => {
-    return instance.get(endpoint);
+    console.log(getCookies(USER_COOKIE));
+    return instance.get(ENDPOINT, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${getCookies(TOKEN_COOKIE)}`,
+      }
+    });
   },
 
   getMenuById:  (id: number | string) => {
-    return instance.get(`${endpoint}/${id}`);
+    return instance.get(`${ENDPOINT}/${id}`);
   },
 
   getMenusByCategory:  (id: number | string) =>  {
-    return instance.get(`${endpoint}/category/${id}`);
+    return instance.get(`${ENDPOINT}/category/${id}`);
   },
 
   addMenu:  (formData: FormData) =>  {
-    return instance.post(endpoint, formData, {
+    return instance.post(ENDPOINT, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -25,16 +34,15 @@ export const menus_service = {
   },
 
   deleteMenu: (id: number | string) => {
-    return instance.delete(`${endpoint}/${id}`);
+    return instance.delete(`${ENDPOINT}/${id}`);
   },
 
   updateMenu:  (menu: MenuPost) =>  {
-    return instance.put(`${endpoint}/${menu.id!}`, menu);
+    return instance.put(`${ENDPOINT}/${menu.id!}`, menu);
   },
 
   changeState:  ({ id, state }: MenuStatePatch ) => {
-    return instance.patch(endpoint + `/state/` + id, { state });
+    return instance.patch(ENDPOINT + `/state/` + id, { state });
   },
-
 
 };

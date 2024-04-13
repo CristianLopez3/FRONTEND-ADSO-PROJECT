@@ -17,7 +17,7 @@ import { PiArrowSquareIn } from "react-icons/pi";
 import { getMenuItems, styles } from "./contants";
 import { getUncheckedReservationsAction } from "@/store/reservations";
 import { ROUTES } from "@/routes/constants";
-import { removeCookies } from "@/utils/cookies";
+import { getCookies, removeCookies } from "@/utils/cookies";
 import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
 export const SidebarContext = createContext<boolean>(true);
@@ -28,6 +28,8 @@ const Sidebar = () => {
   const reservations = useSelector((state: RootState) => state.reservations);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const user = getCookies(USER_COOKIE);
+  console.log(user);
 
   useEffect(() => {
     dispatch(getUncheckedReservationsAction());
@@ -82,7 +84,7 @@ const Sidebar = () => {
 
         <div className="border-t flex p-3">
           <img
-            src="https://ui-avatars.com/api/?name=Cristian+lopez&background=808080&color=000000&bold=true"
+            src={`https://ui-avatars.com/api/?name=${user.name}+${user.lastName}&background=808080&color=000000&bold=true`}
             alt=""
             className="w-10 h-10 rounded-md"
           />

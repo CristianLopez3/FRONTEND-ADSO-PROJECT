@@ -8,8 +8,8 @@ const MenuCard: React.FC<MenuCardProps> = ({
   price,
   imageName
 }) => {
-  const url = "http://localhost:9000/file/";
-  console.log(imageName)
+  const url = "http://localhost:8080/api/v1/file/";
+  // console.log(imageName)
   return (
     <>
       <div

@@ -24,7 +24,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       navigate("/login?error=There was an error, try sign in again!.");
     }
   }, [token, userCookie, auth, navigate]);
-
   // setUser(userCookie);
 
   return (

@@ -1,17 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import { PiAt, PiKey, PiSignInLight, PiArrowLeft } from "react-icons/pi";
 import { useCallback, useEffect, useState } from "react";
-import Img from "../../assets/bg-mobile.jpg";
-import Button from "@/components/Button";
-import { InputIcon } from "@/components/Input";
-import { styles } from "./constants";
+
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Auth, AuthTypes, schema } from "@/types/Auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { loginAction } from "@/store/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import { InputIcon } from "@/components/Input";
+import Button from "@/components/Button";
 import { ROUTES } from "@/routes/constants";
+
+import Img from "@/assets/bg-mobile.jpg";
+import { styles } from "./constants";
+import { Auth, AuthTypes, schema } from "@/types/Auth";
 import { useQueryParam } from "@/utils/hooks/useQueryParam";
 
 const Login = () => {
@@ -20,7 +24,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState<string | null>(null);
   const error = useQueryParam("error");
-  console.log(error);
+  // console.log(error);
   const {
     register,
     handleSubmit,

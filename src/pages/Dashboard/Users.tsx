@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
-import { getAllUsers } from "@/store/user/UserReducer";
+import { getAllUsersAction } from "@/store/user";
 
 import { PiUsers } from "react-icons/pi";
 import { RiAddFill } from "react-icons/ri";
@@ -17,7 +17,7 @@ const UserTable = React.lazy(() => import("./components/user/UserTable"));
 // Move fetchAllUsers outside of the component
 const fetchAllUsers = async (dispatch: AppDispatch) => {
   try {
-    await dispatch(getAllUsers());
+    await dispatch(getAllUsersAction());
   } catch (error) {
     console.error("Error fetching all users:", error);
   }

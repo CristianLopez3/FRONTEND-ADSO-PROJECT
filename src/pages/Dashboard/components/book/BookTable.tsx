@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Reservation } from "@/types/Reservation";
-const BookMobileItem = React.lazy(() => import("./BookMobileItem"));
 import Table from "@/components/Table";
 import BookRow from "./BookRow";
+const BookMobileItem = React.lazy(() => import("./BookMobileItem"));
 
 type BookTableProps = {
   data: Reservation[];
@@ -20,7 +21,7 @@ const BookTable = ({ data }: BookTableProps) => {
           </React.Suspense>
         ) : (
           <tr>
-            <td colSpan={6} className="text-left py-4 pl-4 bg-zinc-800">
+            <td colSpan={6} className="tex-left py-4 pl-4 bg-white">
               No data available yet!.
             </td>
           </tr>

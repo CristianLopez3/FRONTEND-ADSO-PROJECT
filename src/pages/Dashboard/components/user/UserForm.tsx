@@ -8,7 +8,7 @@ import { InputField } from "@/components/Input";
 import { User } from "@/types/User";
 import { AppDispatch } from "@/store/store";
 
-import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
+import { createUserAction, getAllUsersAction, updateUserAction } from "@/store/user";
 import { type UserFormTypes, userSchema } from "@/types/User";
 import { formStyles as styles } from "./contants";
 
@@ -28,8 +28,7 @@ const UserForm: React.FC<UserFormProps> = ({
   role,
   cellphone,
   identification,
-  lastName,
-  password,
+  lastName
 }) => {
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
@@ -44,7 +43,6 @@ const UserForm: React.FC<UserFormProps> = ({
       name,
       lastName,
       username: email,
-      password,
       identification,
       cellphone,
       role,
@@ -67,7 +65,7 @@ const UserForm: React.FC<UserFormProps> = ({
           id: data.id,
           name: data.name,
           lastName: data.lastName,
-          username: data.username,
+          email: data.username,
           password: data.password,
           identification: data.identification,
           cellphone: data.cellphone.toString(),
@@ -75,12 +73,12 @@ const UserForm: React.FC<UserFormProps> = ({
         };
 
         if (mode === "update") {
-          await dispatch(updateUser(user));
+          await dispatch(updateUserAction(user));
         } else {
-          await dispatch(createUser(user));
+          await dispatch(createUserAction(user));
         }
 
-        await dispatch(getAllUsers());
+        await dispatch(getAllUsersAction());
 
         handleCreateUser?.() || handleUpdateModal?.();
       } catch (error) {
@@ -108,8 +106,7 @@ const UserForm: React.FC<UserFormProps> = ({
           </div>
           <InputField {...register("username")} type="email" />
           {renderErrorMessage(errors.username!)}
-          <InputField {...register("password")} type="password" />
-          {renderErrorMessage(errors.password!)}
+          
           <div className="md:flex md:flex-row gap-x-6">
             <div>
               <InputField {...register("cellphone")} type="number" />

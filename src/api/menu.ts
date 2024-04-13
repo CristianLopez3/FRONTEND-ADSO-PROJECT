@@ -1,20 +1,12 @@
-import { getCookies } from "@/utils/cookies";
 import { ENDPOINTS, instance } from "./base.api";
 import { MenuPost, MenuStatePatch } from "@/types/Menu";
-import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
 
 const ENDPOINT = ENDPOINTS.MENU;
 
 export const menusService = {
   getMenus:  () => {
-    console.log(getCookies(USER_COOKIE));
-    return instance.get(ENDPOINT, {
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${getCookies(TOKEN_COOKIE)}`,
-      }
-    });
+    return instance.get(ENDPOINT);
   },
 
   getMenuById:  (id: number | string) => {

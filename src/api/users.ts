@@ -5,7 +5,7 @@ const ENDPOINT = ENDPOINTS.USERS;
 
 
 
-export const users_service = {
+export const usersService = {
   getAll: function () {
     return instance.get(ENDPOINT);
   },

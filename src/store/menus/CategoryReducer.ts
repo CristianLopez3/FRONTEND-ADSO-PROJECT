@@ -1,4 +1,4 @@
-import { category_service } from "@/api/category";
+import { categoryService } from "@/api/category";
 import { Category } from "@/types/Menu";
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
@@ -38,7 +38,7 @@ const menuSlicer = createSlice({
 
 
 const getAllCategories = createAsyncThunk("categories/getAllCategories", async () => {
-  const response = await category_service.getCategories();
+  const response = await categoryService.getCategories();
   return response.data;
 })
 

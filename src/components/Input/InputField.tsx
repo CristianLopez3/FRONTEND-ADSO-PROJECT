@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { generateUniqueId } from "@/utils/uniqueId";
 import {
   ComponentPropsWithoutRef,
   InputHTMLAttributes,
@@ -14,16 +15,17 @@ type InputFieldProps = {
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   function InputField({ name, type = "text", styles, ...props }, ref) {
-    const uniqueId = name + (Math.random() * 100).toString();
+
     const defaultStyle =
       "block w-full py-3 pl-1 pr-4 border-b border-gray-400 outline-none text-sm text-black";
     const combinedStyles = cn(defaultStyle, styles);
+    
     return (
       <div className="py-2">
         <input
           className={combinedStyles}
           ref={ref}
-          id={uniqueId}
+          id={generateUniqueId(name!)}
           name={name}
           placeholder={`${name}`}
           color="gray"

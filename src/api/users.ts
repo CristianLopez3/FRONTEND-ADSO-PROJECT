@@ -1,28 +1,27 @@
-import { instance } from "./base.api";
+import { ENDPOINTS, instance } from "./base.api";
 import { User } from "../types/User";
 
-const endpoint = "users";
+const ENDPOINT = ENDPOINTS.USERS;
 
 
 
-export const users_service = {
+export const usersService = {
   getAll: function () {
-    return instance.get(endpoint);
+    return instance.get(ENDPOINT);
   },
 
   add: function ({ user }: {user: User}) {
-    return instance.post(endpoint, user);
+    return instance.post(ENDPOINT, user);
   },
 
   getUserById: function({id}: {id: number | string}){
-    return instance.get(`${endpoint}/${id}`)
+    return instance.get(`${ENDPOINT}/${id}`)
   },
 
   deleteUser: function({id}: {id: number | string}){
-    return instance.delete(`${endpoint}/${id}`)
+    return instance.delete(`${ENDPOINT}/${id}`)
   },
-
   update: function ({ user }: {user: User}) {
-    return instance.put(`${endpoint}/${user.id!}`, user);
+    return instance.put(`${ENDPOINT}/${user.id!}`, user);
   },
 };

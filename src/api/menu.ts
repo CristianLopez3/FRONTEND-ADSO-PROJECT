@@ -1,40 +1,40 @@
-import { instance } from "./base.api";
+import { ENDPOINTS, instance } from "./base.api";
 import { MenuPost, MenuStatePatch } from "@/types/Menu";
 
-const endpoint = "menus";
 
-export const menus_service = {
-  getMenus: function () {
-    return instance.get(endpoint);
+const ENDPOINT = ENDPOINTS.MENU;
+
+export const menusService = {
+  getMenus:  () => {
+    return instance.get(ENDPOINT);
   },
 
-  getMenuById: function (id: number | string) {
-    return instance.get(`${endpoint}/${id}`);
+  getMenuById:  (id: number | string) => {
+    return instance.get(`${ENDPOINT}/${id}`);
   },
 
-  getMenusByCategory: function (id: number | string) {
-    return instance.get(`${endpoint}/category/${id}`);
+  getMenusByCategory:  (id: number | string) =>  {
+    return instance.get(`${ENDPOINT}/category/${id}`);
   },
 
-  addMenu: function (formData: FormData) {
-    return instance.post(endpoint, formData, {
+  addMenu:  (formData: FormData) =>  {
+    return instance.post(ENDPOINT, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
   },
 
-  deleteMenu: function (id: number | string) {
-    return instance.delete(`${endpoint}/${id}`);
+  deleteMenu: (id: number | string) => {
+    return instance.delete(`${ENDPOINT}/${id}`);
   },
 
-  updateMenu: function (menu: MenuPost) {
-    return instance.put(`${endpoint}/${menu.id!}`, menu);
+  updateMenu:  (menu: MenuPost) =>  {
+    return instance.put(`${ENDPOINT}/${menu.id!}`, menu);
   },
 
-  changeState: function ({ id, state }: MenuStatePatch ) {
-    return instance.patch(endpoint + `/state/` + id, { state });
+  changeState:  ({ id, state }: MenuStatePatch ) => {
+    return instance.patch(ENDPOINT + `/state/` + id, { state });
   },
-
 
 };

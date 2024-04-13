@@ -1,8 +1,10 @@
 import React from "react";
+
 import { User } from "@/types/User";
-const UserMobileItem = React.lazy(() => import("./UserMobileItem"));
 import Table from "@/components/Table";
+
 const UserRow = React.lazy(() => import("./UserRow"));
+const UserMobileItem = React.lazy(() => import("./UserMobileItem"));
 
 type UserTableProps = {
   data: User[];

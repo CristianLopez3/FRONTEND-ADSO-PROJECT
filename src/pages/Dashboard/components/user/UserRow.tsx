@@ -4,7 +4,7 @@ import UserForm from "./UserForm";
 import { User } from "@/types/User";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import { deleteUser, getAllUsers } from "@/store/user/UserReducer";
+import { deleteUserAction, getAllUsersAction } from "@/store/user";
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 
@@ -16,7 +16,6 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
     name,
     lastName,
     email,
-    password,
     identification,
     cellphone,
     role,
@@ -26,15 +25,15 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const onDelete = async () => {
-    await dispatch(deleteUser(id!));
-    await dispatch(getAllUsers());
+    await dispatch(deleteUserAction(id!));
+    await dispatch(getAllUsersAction());
   };
 
   return (
     <>
-      <tr className="bg-white hover:bg-grayLight transition-all">
+      <tr className="border-none">
         <td className="row-table flex flex-col text-lg w-full">
-          {name} <span className="text-sm text-gray-600">{email}</span>
+          {name} <span className="text-sm text-zinc-100">{email}</span>
         </td>
 
         <td className="row-table">{cellphone}</td>
@@ -51,7 +50,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
             </Button>
             <Button
               variant="danger"
-              className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
+              className="p-2  hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
               <PiTrash />
@@ -78,8 +77,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
             id={id!}
             name={name}
             lastName={lastName}
-            email={email}
-            password={password}
+            username={email}
             cellphone={cellphone}
             identification={identification}
             role={role}

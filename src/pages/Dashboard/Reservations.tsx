@@ -41,7 +41,7 @@ const Reservations = () => {
       <header>
         <DashboardNavbar>
           <h2
-            className="flex items-center text-black font-bold gap-2 text-2xl text-zinc-300"
+            className="flex items-center  font-bold gap-2 text-2xl text-zinc-300"
             onClick={toggleAddModal}
           >
             <RiBookOpenLine />

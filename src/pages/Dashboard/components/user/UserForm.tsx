@@ -1,12 +1,14 @@
 import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { InputField } from "@/components/Input";
+import { useDispatch } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
+
+import { InputField } from "@/components/Input";
 import { User } from "@/types/User";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import { createUser, getAllUsers, updateUser } from "@/store/user/UserReducer";
+
+import { createUserAction, getAllUsersAction, updateUserAction } from "@/store/user";
 import { type UserFormTypes, userSchema } from "@/types/User";
 import { formStyles as styles } from "./contants";
 
@@ -22,12 +24,11 @@ const UserForm: React.FC<UserFormProps> = ({
   mode,
   id,
   name,
-  email,
+  username: email,
   role,
   cellphone,
   identification,
-  lastName,
-  password,
+  lastName
 }) => {
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
@@ -41,8 +42,7 @@ const UserForm: React.FC<UserFormProps> = ({
       id,
       name,
       lastName,
-      email,
-      password,
+      username: email,
       identification,
       cellphone,
       role,
@@ -65,7 +65,7 @@ const UserForm: React.FC<UserFormProps> = ({
           id: data.id,
           name: data.name,
           lastName: data.lastName,
-          email: data.email,
+          email: data.username,
           password: data.password,
           identification: data.identification,
           cellphone: data.cellphone.toString(),
@@ -73,12 +73,12 @@ const UserForm: React.FC<UserFormProps> = ({
         };
 
         if (mode === "update") {
-          await dispatch(updateUser(user));
+          await dispatch(updateUserAction(user));
         } else {
-          await dispatch(createUser(user));
+          await dispatch(createUserAction(user));
         }
 
-        await dispatch(getAllUsers());
+        await dispatch(getAllUsersAction());
 
         handleCreateUser?.() || handleUpdateModal?.();
       } catch (error) {
@@ -104,10 +104,9 @@ const UserForm: React.FC<UserFormProps> = ({
               {renderErrorMessage(errors.lastName!)}
             </div>
           </div>
-          <InputField {...register("email")} type="email" />
-          {renderErrorMessage(errors.email!)}
-          <InputField {...register("password")} type="password" />
-          {renderErrorMessage(errors.password!)}
+          <InputField {...register("username")} type="email" />
+          {renderErrorMessage(errors.username!)}
+          
           <div className="md:flex md:flex-row gap-x-6">
             <div>
               <InputField {...register("cellphone")} type="number" />

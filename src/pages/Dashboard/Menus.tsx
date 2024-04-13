@@ -5,7 +5,6 @@ import { RiBookOpenLine } from "react-icons/ri";
 import { RiAddFill } from "react-icons/ri";
 
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
-const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 import Modal from "@/components/Modal/Modal";
 import MenuForm from "./components/menu/MenuForm";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,8 @@ import { getAllMenusAction } from "@/store/menus/menuActions";
 import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
+
+const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 
 // Move fetchMenus outside of the component
 const fetchMenus = async (dispatch: AppDispatch) => {
@@ -40,6 +41,7 @@ const Menus = () => {
   useEffect(() => {
     fetchMenus(dispatch);
   }, [dispatch]);
+
 
   return (
     <>

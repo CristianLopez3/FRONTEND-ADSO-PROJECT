@@ -106,6 +106,10 @@ const UserForm: React.FC<UserFormProps> = ({
           </div>
           <InputField {...register("username")} type="email" />
           {renderErrorMessage(errors.username!)}
+
+
+          <InputField {...register("password")} type="password" />
+          {renderErrorMessage(errors.password!)}
           
           <div className="md:flex md:flex-row gap-x-6">
             <div>

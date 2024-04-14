@@ -39,7 +39,7 @@ const Sidebar = () => {
     setExpanded((curr) => !curr);
   }, []);
 
-  const hasUncheckedInReservation = reservations.data.some(
+  const hasUncheckedInReservation = reservations.data.some( 
     (reservation) => reservation.checkedIn === false
   );
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  countUsers,
   createUserService,
   deleteUserService,
   getAllUsersService,
@@ -24,4 +25,9 @@ export const deleteUserAction = createAsyncThunk(
 export const updateUserAction = createAsyncThunk(
   "users/updateUser",
   updateUserService
+);
+
+export const countUsersAction = createAsyncThunk(
+  "users/countUsers",
+  countUsers
 );

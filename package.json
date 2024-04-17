@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
+    "@react-pdf/renderer": "^3.4.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@types/node": "^20.11.24",
     "@types/react-router": "^5.1.20",

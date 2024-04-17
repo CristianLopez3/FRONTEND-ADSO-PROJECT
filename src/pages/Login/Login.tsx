@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
-import { loginAction } from "@/store/auth";
+import { loginAction, TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
 import { InputIcon } from "@/components/Input";
 import Button from "@/components/Button";
@@ -17,6 +17,7 @@ import Img from "@/assets/bg-mobile.jpg";
 import { styles } from "./constants";
 import { Auth, AuthTypes, schema } from "@/types/Auth";
 import { useQueryParam } from "@/utils/hooks/useQueryParam";
+import { removeCookies } from "@/utils/cookies";
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,6 +35,8 @@ const Login = () => {
 
   useEffect(() => {
     error && setLoginError(error), [error];
+    removeCookies(USER_COOKIE);
+    removeCookies(TOKEN_COOKIE);
   }, [error]);
 
   const onSubmit: SubmitHandler<AuthTypes> = useCallback(

@@ -37,10 +37,38 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: "", element: <Dashboard /> },
-      { path: "users", element: <Users /> },
-      { path: "reservations", element: <Reservations /> },
-      { path: "menus", element: <Menus /> },
+      { 
+        path: "", 
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ) 
+      },
+      { 
+        path: "users", 
+        element: (
+          <ProtectedRoute>
+            <Users />
+          </ProtectedRoute>
+        ) 
+      },
+      { 
+        path: "reservations", 
+        element: (
+          <ProtectedRoute>
+            <Reservations />
+          </ProtectedRoute>
+        ) 
+      },
+      { 
+        path: "menus", 
+        element: (
+          <ProtectedRoute>
+            <Menus />
+          </ProtectedRoute>
+        ) 
+      },
     ],
   },
   {

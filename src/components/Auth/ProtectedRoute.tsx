@@ -16,15 +16,17 @@ export const UserContext = createContext(null);
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const auth = useSelector((state: RootState) => state.auth.user);
   const navigate = useNavigate();
-  const token = getCookies(TOKEN_COOKIE);
-  const userCookie = getCookies(USER_COOKIE);
 
   useEffect(() => {
+    const token = getCookies(TOKEN_COOKIE);
+    const userCookie = getCookies(USER_COOKIE);
+
     if (!token && !userCookie) {
       navigate("/login?error=There was an error, try sign in again!.");
     }
-  }, [token, userCookie, auth, navigate]);
-  // setUser(userCookie);
+  }, [auth, navigate]);
+
+  const userCookie = getCookies(USER_COOKIE);
 
   return (
     <UserContext.Provider value={userCookie}>

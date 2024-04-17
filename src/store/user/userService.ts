@@ -20,3 +20,8 @@ export const updateUserService = async (user: User) => {
   const response = await usersService.update({ user });
   return response.data;
 };
+
+export const countUsers = async () => {
+  const response = await usersService.countUsers();
+  return response.data;
+}

@@ -27,3 +27,9 @@ export const checkedInReservation = async ({
   });
   return response.data;
 };
+
+
+export const countReservations = async () => {
+  const response = await reservationsService.countReservations();
+  return response.data;
+}

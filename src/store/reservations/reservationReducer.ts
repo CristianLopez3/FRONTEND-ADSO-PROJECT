@@ -3,6 +3,7 @@ import {
   getReservationsAction,
   createReservationAction,
   checkedInReservationAction,
+  countReservationsAction,
 } from "./reservationActions";
 import { Reservation, ReservationReducer } from "@/types/Reservation";
 import { getUncheckedReservationsAction } from "./reservationActions";
@@ -10,6 +11,7 @@ import { getUncheckedReservationsAction } from "./reservationActions";
 const initialState: ReservationReducer = {
   isLoading: false,
   data: [],
+  count: null,
   isError: false,
 };
 
@@ -65,7 +67,16 @@ const reservationSlice = createSlice({
           reservation.id === action.payload.id ? action.payload : reservation
         );
       })
-      .addCase(checkedInReservationAction.rejected, loadingFailed);
+      .addCase(checkedInReservationAction.rejected, loadingFailed)
+      /**
+       * ADD COUNT RESERVATIONS
+       */
+      .addCase(countReservationsAction.pending, startLoading)
+      .addCase(countReservationsAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.count = action.payload;
+      })
+      .addCase(countReservationsAction.rejected, loadingFailed);
   },
 });
 

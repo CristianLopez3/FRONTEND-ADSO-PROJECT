@@ -55,15 +55,13 @@ Folllow the next steps to run the project localy:
 * [Components Examples](https://merakiui.com/components)
 * [Restaurant designs](https://dribbble.com/shots/18979770-Restaurant-Website)
 * [Restaurant Reference](https://the1894lodge.com/)
-* [Keep Components](https://react.keepdesign.io/docs/getting-started/Introduction)
-* [phosporicons](https://phosphoricons.com/)
 * [Teddy Tutorials](https://www.youtube.com/watch?v=ZEB3VCbXQHA&ab_channel=TeddySmith)
 * [Tailwind Gradient Generator](https://tailwindcomponents.com/gradient-generator/)
 * [Spring](https://spring.io/guides/tutorials/react-and-spring-data-rest)
 * [Spring Structure](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.structuring-your-code)
 * [React + Spring](https://www.youtube.com/watch?v=mgbEz23qZP0&list=PLZdfbI_OZWAMvhSl32tFcD6M9x_Pqtkwb)
 * [React + tailwind components](https://tw-elements.com/docs/standard/components/cards/)
-
+* [Tailwind ocomponents example](https://tailwindcomponents.com/component/tailwind-css-404-page-not-found)
 
 ## Firebase
 

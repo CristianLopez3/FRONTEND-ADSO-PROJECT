@@ -14,6 +14,7 @@ import Page404 from "@/pages/Page404";
 import Reservations from "@/pages/Dashboard/Reservations";
 import DashboardTemplate from "@/layout/DashboardTemplate";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
+import Profile from "@/pages/Dashboard/components/profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,13 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ) 
       },
+      {
+        path: "profile",
+        element:
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+      }
     ],
   },
   {

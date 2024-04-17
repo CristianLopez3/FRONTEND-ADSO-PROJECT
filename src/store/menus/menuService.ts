@@ -31,3 +31,8 @@ export const changeState = async (menu: MenuStatePatch) => {
   const response = await menusService.changeState(menu);
   return response.data;
 }
+
+export const countMenu = async () => {
+  const response = await menusService.countMenu();
+  return response.data;
+}

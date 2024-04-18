@@ -7,23 +7,25 @@ import { AppDispatch, RootState } from "@/store/store";
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import Card from "./components/dashboard/Card";
 import Chart from "./components/dashboard/Chart";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { countMenuAction } from "@/store/menus";
 import { countUsersAction } from "@/store/user";
 import { countReservationsAction } from "@/store/reservations";
 import Profile from "./components/profile/Profile";
-import { getCookies } from "@/utils/cookies";
-import { USER_COOKIE } from "@/store/auth";
+import { UserContext } from "@/components/Auth/ProtectedRoute";
+
 
 const Dashboard = () => {
+  const user = useContext(UserContext);  
   const menus = useSelector((state: RootState) => state.menus.count);
   const reservations = useSelector(
     (state: RootState) => state.reservations.count
   );
   const users = useSelector((state: RootState) => state.users.count);
   const dispatch = useDispatch<AppDispatch>();
-  const {name} = getCookies(USER_COOKIE);
 
+  
+  
   useEffect(() => {
     const fetchCounts = async () => {
       try {
@@ -37,7 +39,11 @@ const Dashboard = () => {
     fetchCounts();
   }, [dispatch]);
 
-
+  
+  if(!user) {
+    return <div>Loading...</div>
+  }
+  
   return (
     <>
       <header>
@@ -45,7 +51,7 @@ const Dashboard = () => {
           <Link to="/dashboard">
             <h2 className="flex items-center text-zinc-50 font-bold  gap-2 text-2xl">
               <RiBookOpenLine />
-              Hi {name}
+              Hi {user.name}
             </h2>
           </Link>
         </DashboardNavbar>

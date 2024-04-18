@@ -6,7 +6,7 @@ type TableProps = {
 
 const Table: React.FC<TableProps> = ({ children }) => {
   return (
-    <div className="w-full overflow-auto rounded-2xl shadow-2xl hidden lg:block">
+    <div className="w-full overflow-auto rounded-xl shadow-2xl hidden lg:block">
       <table className="w-full">
         <tbody className="py-4">{children}</tbody>
       </table>

@@ -34,19 +34,19 @@
   }
 
   .btn {
-    @apply flex gap-2 items-center  justify-center  py-2 px-4 font-semibold shadow-md rounded-lg;
+    @apply flex gap-2 items-center  justify-center  py-2 px-4 font-semibold shadow-md rounded-md;
   }
 
   .btn.btn-light{
-    @apply bg-white text-gray-500;
+    @apply bg-zinc-100 text-zinc-500;
   }
 
   .btn.btn-dark{
-    @apply bg-black text-gray-200;
+    @apply bg-zinc-950 text-zinc-200;
   }
 
   .btn.btn-danger {
-    @apply text-white bg-red-600 shadow-red-400/40;
+    @apply text-zinc-100 bg-red-600 shadow-red-400/40;
   }
   
   .btn.btn-warning {

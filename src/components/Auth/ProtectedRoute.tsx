@@ -11,7 +11,7 @@ type ProtectedRouteProps = {
 };
 
 // Create a UserContext
-export const UserContext = createContext(null);
+export const UserContext = createContext(getCookies(USER_COOKIE) || null);
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const auth = useSelector((state: RootState) => state.auth.user);
@@ -33,6 +33,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
+}
 
 export default ProtectedRoute;

@@ -49,7 +49,7 @@ export function getMenuItems(reservationAlert: boolean): MenuItem[] {
       alert: false,
     },
     {
-      path: ROUTES.DASHBOARD.RESERVATIONS,
+      path: ROUTES.DASHBOARD.RESERVATIONS.ROOT,
       icon: <LuBook size={20} />,
       text: "Reservations",
       alert: reservationAlert,

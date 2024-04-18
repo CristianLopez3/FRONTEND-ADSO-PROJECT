@@ -10,14 +10,15 @@ type InputFieldProps = {
   type?: string;
   styles?: string;
   colorText?: string;
+  placeholder?: string;
 } & ComponentPropsWithoutRef<"input"> &
   InputHTMLAttributes<HTMLInputElement>;
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  function InputField({ name, type = "text", styles, ...props }, ref) {
+  function InputField({ name, type = "text", styles,  ...props }, ref) {
 
-    const defaultStyle =
-      "block w-full py-3 pl-1 pr-4 border-b border-gray-400 outline-none text-sm text-black";
+    const defaultStyle =  
+      "block w-full py-3 pl-1 pr-4 border-b border-zinc-400 outline-none text-sm text-black";
     const combinedStyles = cn(defaultStyle, styles);
     
     return (

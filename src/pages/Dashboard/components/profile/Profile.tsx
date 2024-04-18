@@ -2,10 +2,28 @@
 import BaseIcon from "@/assets/icon.jpeg";
 import styles from "./styles.module.css";
 import { getCookies } from "@/utils/cookies";
-import { USER_COOKIE } from "@/store/auth";
+import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
+import { useNavigate } from "react-router";
+import { useContext, useEffect } from "react";
+import { UserContext } from "@/components/Auth/ProtectedRoute";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const {name, email, lastName} = getCookies(USER_COOKIE);
+  const user = useContext(UserContext);
+  const auth = useSelector((state: RootState) => state.auth.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = getCookies(TOKEN_COOKIE);
+    const userCookie = getCookies(USER_COOKIE);
+
+    if ((!token && !userCookie) || user === null) {
+      navigate("/login?error=There was an error, try sign in again!.");
+    }
+  }, [auth, navigate]);
+
+  const {name, email, lastName} = user;
 
   return (
 

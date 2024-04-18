@@ -15,6 +15,7 @@ import Reservations from "@/pages/Dashboard/Reservations";
 import DashboardTemplate from "@/layout/DashboardTemplate";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import Profile from "@/pages/Dashboard/components/profile/Profile";
+import Report from "@/pages/Dashboard/components/book/Report";
 
 export const router = createBrowserRouter([
   {
@@ -38,45 +39,59 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { 
-        path: "", 
+      {
+        path: "",
         element: (
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        ) 
+        ),
       },
-      { 
-        path: "users", 
+      {
+        path: "users",
         element: (
           <ProtectedRoute>
             <Users />
           </ProtectedRoute>
-        ) 
+        ),
       },
-      { 
-        path: "reservations", 
-        element: (
-          <ProtectedRoute>
-            <Reservations />
-          </ProtectedRoute>
-        ) 
+      {
+        path: "reservations",
+        children: [
+          {
+            path: "",
+            element: (
+              <ProtectedRoute>
+                <Reservations />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "report",
+            element: (
+              <ProtectedRoute>
+                <Report />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
-      { 
-        path: "menus", 
+      {
+        path: "menus",
         element: (
           <ProtectedRoute>
             <Menus />
           </ProtectedRoute>
-        ) 
+        ),
       },
       {
         path: "profile",
-        element:
+        element: (
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>
-      }
+        ),
+      },
     ],
   },
   {

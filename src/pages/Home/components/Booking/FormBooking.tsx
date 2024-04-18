@@ -65,8 +65,6 @@ const FormBooking = () => {
           reservationDate: data.reservationDate,
           numberOfPeople: data.numberOfPeople,
         };
-
-        // console.log("Reservation object to be dispatched:", reservation); // Agregado
         await dispatch(createReservationAction(reservation));
         reset();
         setIsReservationSuccess(true);
@@ -98,7 +96,7 @@ const FormBooking = () => {
             {renderErrorMessage(errors.name!)}
           </div>
           <div className="input-validation">
-            <InputField {...register("phoneNumber")} type="number" />
+            <InputField placeholder="Phone number" {...register("phoneNumber")}  />
             {renderErrorMessage(errors.phoneNumber!)}
           </div>
         </div>

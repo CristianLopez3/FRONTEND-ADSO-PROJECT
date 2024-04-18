@@ -15,7 +15,7 @@ import Reservations from "@/pages/Dashboard/Reservations";
 import DashboardTemplate from "@/layout/DashboardTemplate";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import Profile from "@/pages/Dashboard/components/profile/Profile";
-import Report from "@/pages/Dashboard/components/book/Report";
+import Report from "@/pages/Dashboard/components/book/Reports/Report";
 
 export const router = createBrowserRouter([
   {

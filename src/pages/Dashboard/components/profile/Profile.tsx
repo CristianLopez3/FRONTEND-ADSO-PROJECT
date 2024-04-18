@@ -21,9 +21,9 @@ const Profile = () => {
     if ((!token && !userCookie) || user === null) {
       navigate("/login?error=There was an error, try sign in again!.");
     }
-  }, [auth, navigate]);
+  }, [auth, navigate, user]);
 
-  const {name, email, lastName} = user;
+  const {name, email, lastname} = user;
 
   return (
 
@@ -36,7 +36,7 @@ const Profile = () => {
                 </div> 
                 <div className={styles.name_container}>
                     <h4 className={styles.name}>
-                    {`${name} ${lastName} `}
+                    {`${name} ${lastname} `}
                     </h4>
                     <p className={styles.role}>
                       {email}

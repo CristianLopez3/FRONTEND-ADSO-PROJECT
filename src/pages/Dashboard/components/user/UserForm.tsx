@@ -8,9 +8,13 @@ import { InputField } from "@/components/Input";
 import { User } from "@/types/User";
 import { AppDispatch } from "@/store/store";
 
-import { createUserAction, getAllUsersAction, updateUserAction } from "@/store/user";
+import {
+  createUserAction,
+  getAllUsersAction,
+  updateUserAction,
+} from "@/store/user";
 import { type UserFormTypes, userSchema } from "@/types/User";
-import { formStyles as styles } from "./contants";
+import styles from "./styles.module.css";
 
 type UserFormProps = {
   handleUpdateModal?: () => void;
@@ -28,7 +32,7 @@ const UserForm: React.FC<UserFormProps> = ({
   role,
   cellphone,
   identification,
-  lastName
+  lastName,
 }) => {
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
@@ -89,24 +93,30 @@ const UserForm: React.FC<UserFormProps> = ({
   );
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.h3}>{title}</h3>
-      <div className={styles.form}>
+    <div className={styles.form_container}>
+      <h3 className={styles.form_h3}>{title}</h3>
+
+      <div className={styles.form_form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
-          <div className={styles.inputFlex}>
-            <div className="block">
+
+          <div className={styles.form_input_flex}>
+            <div className={`block ${styles.input_flex}`}>
               <InputField {...register("name")} />
               {renderErrorMessage(errors.name!)}
             </div>
-            <div>
+            <div className={styles.input_flex}>
               <InputField {...register("lastName")} />
               {renderErrorMessage(errors.lastName!)}
             </div>
           </div>
+
           <InputField {...register("username")} type="email" />
           {renderErrorMessage(errors.username!)}
-          
+
+          <InputField {...register("password")} type="password" />
+          {renderErrorMessage(errors.password!)}
+
           <div className="md:flex md:flex-row gap-x-6">
             <div>
               <InputField {...register("cellphone")} type="number" />
@@ -117,10 +127,11 @@ const UserForm: React.FC<UserFormProps> = ({
               {renderErrorMessage(errors.identification!)}
             </div>
           </div>
+
           <InputField {...register("role")} />
           {renderErrorMessage(errors.role!)}
 
-          <div className={styles.buttons}>
+          <div className={styles.form_buttons}>
             <button
               className={`btn ${
                 mode === "update" ? "btn-warning" : "btn-success"

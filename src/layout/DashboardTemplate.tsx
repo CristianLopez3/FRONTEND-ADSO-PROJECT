@@ -1,9 +1,21 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Sidebar from "../components/Sidebar";
 import { LuBell } from "react-icons/lu";
 import { currentFormatedDate } from "@/utils/dateFormater";
+import { getCookies } from "@/utils/cookies";
+import { USER_COOKIE } from "@/store/auth";
+import { useEffect } from "react";
 
 const DashboardTemplate = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userCookie = getCookies(USER_COOKIE);
+    if (!userCookie) {
+      navigate("/login");
+    }
+  
+  })
+  
   return (
     <>
       <div className="relative md:static flex bg-zinc-900">

@@ -9,7 +9,10 @@ export const ROUTES = {
     ROOT: "/dashboard",
     USERS: "/dashboard/users",
     MENUS: "/dashboard/menus",
-    RESERVATIONS: "/dashboard/reservations",
+    RESERVATIONS: {
+      ROOT: "/dashboard/reservations",
+      REPORT: "/dashboard/reservations/report",
+    },
     PROFILE: "/dashboard/profile",
   },
   TEST: "/test",

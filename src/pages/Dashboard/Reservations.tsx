@@ -1,15 +1,19 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
+import { RiAddFill, RiPencilLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
-import { RiAddFill, RiBookOpenLine } from "react-icons/ri";
 const BookTable = React.lazy(() => import("./components/book/BookTable"));
 import { Modal } from "@/components/Modal";
 import BookForm from "./components/book/BookForm";
 import { AppDispatch, RootState } from "@/store/store";
 import { getReservationsAction } from "@/store/reservations";
-import { useDispatch, useSelector } from "react-redux";
 import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
+import styles from "./styles.module.css";
+import { Link } from "react-router-dom";
+import { ROUTES } from "@/routes/constants";
 
 // Move fetchMenus outside of the component
 const fetchReservations = async (dispatch: AppDispatch) => {
@@ -40,19 +44,28 @@ const Reservations = () => {
     <>
       <header>
         <DashboardNavbar>
-          <h2
-            className="flex items-center  font-bold gap-2 text-2xl text-zinc-300"
-            onClick={toggleAddModal}
-          >
-            <RiBookOpenLine />
+          <h2 className={styles.title}>
+            <div className={styles.title_line} />
             Reservations
-            <Button variant="success" className="p-2">
-              <RiAddFill />
-            </Button>
           </h2>
+          <div className="flex justify-around gap-2">
+            <Button
+              variant="success"
+              className={styles.add_button}
+              onClick={toggleAddModal}
+            >
+              <span>Add</span> <RiAddFill />
+            </Button>
+            <Link
+              to={ROUTES.DASHBOARD.RESERVATIONS.REPORT}
+              className="px-2 flex items-center gap-x-2 bg-zinc-300 text-zinc-900 rounded-md"
+            >
+              Generate Report <RiPencilLine />
+            </Link>
+          </div>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-8 mx-auto">
+      <main className={styles.main}>
         {reservations.isLoading ? (
           <TableSkeleton />
         ) : reservations.isError ? (

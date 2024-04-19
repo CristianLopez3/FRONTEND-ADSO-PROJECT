@@ -1,23 +1,22 @@
 import { ENDPOINTS, instance } from "./base.api";
 import { MenuPost, MenuStatePatch } from "@/types/Menu";
 
-
 const ENDPOINT = ENDPOINTS.MENU;
 
 export const menusService = {
-  getMenus:  () => {
+  getMenus: () => {
     return instance.get(ENDPOINT);
   },
 
-  getMenuById:  (id: number | string) => {
+  getMenuById: (id: number | string) => {
     return instance.get(`${ENDPOINT}/${id}`);
   },
 
-  getMenusByCategory:  (id: number | string) =>  {
+  getMenusByCategory: (id: number | string) => {
     return instance.get(`${ENDPOINT}/category/${id}`);
   },
 
-  addMenu:  (formData: FormData) =>  {
+  addMenu: (formData: FormData) => {
     return instance.post(ENDPOINT, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -29,12 +28,15 @@ export const menusService = {
     return instance.delete(`${ENDPOINT}/${id}`);
   },
 
-  updateMenu:  (menu: MenuPost) =>  {
+  updateMenu: (menu: MenuPost) => {
     return instance.put(`${ENDPOINT}/${menu.id!}`, menu);
   },
 
-  changeState:  ({ id, state }: MenuStatePatch ) => {
+  changeState: ({ id, state }: MenuStatePatch) => {
     return instance.patch(ENDPOINT + `/state/` + id, { state });
   },
 
+  countMenu: () => {
+    return instance.get(ENDPOINT + "/count");
+  },
 };

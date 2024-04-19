@@ -1,22 +1,35 @@
 import { instance } from "./base.api";
 import { CheckReservation, type Reservation } from "@/types/Reservation";
 
-const endpoint = "reservations";
+const ENDPOINT = "reservations";
 
 export const reservationsService = {
   addReservation: function (reservation: Reservation) {
-    return instance.post(endpoint, reservation);
+    return instance.post(ENDPOINT, reservation);
   },
 
   getResevations: function () {
-    return instance.get(endpoint);
+    return instance.get(ENDPOINT);
   },
 
   getUnCheckedReservations: function () {
-    return instance.get(endpoint + "/unchecked-in");
+    return instance.get(ENDPOINT + "/unchecked-in");
   },
 
   checkinReservation: function ({ id, checkedIn }: CheckReservation) {
-    return instance.patch(endpoint + `/check/` + id, { checkedIn });
+    return instance.patch(ENDPOINT + `/check/` + id, { checkedIn });
   },
+
+  countReservations: () => {
+    return instance.get(ENDPOINT + "/count");
+  },
+
+  getMonthlyReservations: () => {
+    return instance.get(ENDPOINT + "/mes");
+  },
+
+  getReservationsBetweenDates: (start: string, end: string) => {
+    return instance.get(ENDPOINT + `/between-dates?start=${start}&end=${end}`);
+  }
+
 };

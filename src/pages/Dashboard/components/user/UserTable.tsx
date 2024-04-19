@@ -2,6 +2,7 @@ import React from "react";
 
 import { User } from "@/types/User";
 import Table from "@/components/Table";
+import styles from "./styles.module.css";
 
 const UserRow = React.lazy(() => import("./UserRow"));
 const UserMobileItem = React.lazy(() => import("./UserMobileItem"));
@@ -28,14 +29,14 @@ const UserTable: React.FC<UserTableProps> = ({ data }) => {
           </React.Suspense>
         ) : (
           <tr>
-            <td colSpan={5} className="text-left py-4 pl-4 bg-zinc-800 text-zinc-300">
+            <td colSpan={5} className={styles.no_data}>
               No data available yet!.
             </td>
           </tr>
         )}
       </Table>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden">
+      <div className={styles.data_table}>
         {Array.isArray(data) && data.length > 0 ? (
           <React.Suspense fallback={<div>Loading...</div>}>
             {data.map((item, index) => (

@@ -1,0 +1,29 @@
+.title {
+  @apply flex items-center  font-bold gap-2 text-2xl text-zinc-300;
+}
+
+.button_back {
+  @apply py-2 px-4 flex items-center gap-x-2 bg-zinc-300 text-zinc-900 rounded-md;
+}
+
+.title_line {
+  @apply w-1 border-l-4 h-8;
+}
+
+.main {
+  @apply px-2 md:px-8 mx-auto;
+}
+
+.section {
+  @apply grid grid-cols-3 gap-3;
+}
+
+.card_container {
+    @apply w-full p-6 bg-zinc-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
+
+    & h5 {
+        @apply mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-zinc-100;
+    }
+}
+
+    

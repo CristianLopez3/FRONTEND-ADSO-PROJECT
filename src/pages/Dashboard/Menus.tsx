@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { AppDispatch, RootState } from "@/store/store";
 
-import { RiBookOpenLine } from "react-icons/ri";
+
 import { RiAddFill } from "react-icons/ri";
 
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
@@ -14,6 +14,8 @@ import Alert from "@/components/Alert";
 import Button from "@/components/Button";
 
 const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
+
+import styles from "./styles.module.css";
 
 // Move fetchMenus outside of the component
 const fetchMenus = async (dispatch: AppDispatch) => {
@@ -42,21 +44,21 @@ const Menus = () => {
     fetchMenus(dispatch);
   }, [dispatch]);
 
-
   return (
     <>
       <header>
         <DashboardNavbar>
-          <h2
-            className="flex items-center text-zinc-300 font-bold  gap-2 text-2xl"
+          <h2 className={styles.title}>
+            <div className={styles.title_line} />
+            Menus
+          </h2>
+          <Button
+            variant="success"
+            className={styles.add_button}
             onClick={toggleAddModal}
           >
-            <RiBookOpenLine />
-            Menus
-            <Button variant="success" className="p-2">
-              <RiAddFill />
-            </Button>
-          </h2>
+            <span>Add</span> <RiAddFill />
+          </Button>
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-8 mx-auto">

@@ -7,6 +7,7 @@ import {
   updateMenu,
   deleteMenu,
   changeState,
+  countMenu,
 } from "./menuService";
 
 export const getAllMenusAction = createAsyncThunk(
@@ -28,4 +29,9 @@ export const deleteMenuAction = createAsyncThunk("menus/delete", deleteMenu);
 export const changeStateAction = createAsyncThunk(
   "menus/changeState",
   changeState
+);
+
+export const countMenuAction = createAsyncThunk(
+  "menus/countMenu",
+  countMenu
 );

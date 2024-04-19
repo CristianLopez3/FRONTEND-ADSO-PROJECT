@@ -16,8 +16,6 @@ export interface CheckReservation {
   checkedIn: boolean;
 }
 
-
-
 export const reservationSchema = z.object({
   id: z.union([z.number(), z.string(), z.null()]),
   name: z.string().min(1, "Please enter a name"),
@@ -43,5 +41,6 @@ export type ReservationForm = z.infer<typeof reservationSchema>;
 export interface ReservationReducer {
   isLoading: boolean;
   data: Reservation[];
+  count?: number | null;
   isError: boolean;
 }

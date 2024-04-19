@@ -7,12 +7,14 @@ import {
   deleteMenuAction,
   getMenusByCategoryAction,
   changeStateAction,
+  countMenuAction,
 } from "./menuActions";
 import { Menu } from "@/types/Menu";
 
 const initialState: MenuReducer = {
   isLoading: false,
   data: [],
+  count: null,
   isError: false,
 };
 
@@ -62,12 +64,12 @@ const menuSlice = createSlice({
       .addCase(updateMenuAction.rejected, loadingFailed)
       // * DELETE MENU * //
       .addCase(deleteMenuAction.pending, startLoading)
-      
+
       .addCase(deleteMenuAction.fulfilled, (state, action) => {
         // Obtener el ID del menú eliminado del payload de la acción
         state.isLoading = false;
         const deletedMenuId = action.meta.arg; // Obtiene el ID del menú eliminado de action.meta.arg
-        state.data = state.data.filter(menu => menu.id !== deletedMenuId);
+        state.data = state.data.filter((menu) => menu.id !== deletedMenuId);
       })
       .addCase(deleteMenuAction.rejected, loadingFailed)
 
@@ -91,7 +93,16 @@ const menuSlice = createSlice({
           menu.id === action.payload.id ? action.payload : menu
         );
       })
-      .addCase(changeStateAction.rejected, loadingFailed);
+      .addCase(changeStateAction.rejected, loadingFailed)
+      /**
+       * Add menu count in order to display the total number of menus
+       */
+      .addCase(countMenuAction.pending, startLoading)
+      .addCase(countMenuAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.count = action.payload;
+      })
+      .addCase(countMenuAction.rejected, loadingFailed);
   },
 });
 

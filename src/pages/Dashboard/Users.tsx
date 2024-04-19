@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { getAllUsersAction } from "@/store/user";
 
-import { PiUsers } from "react-icons/pi";
 import { RiAddFill } from "react-icons/ri";
 
 import { TableSkeleton } from "@/components/Skeleton";
@@ -13,6 +12,8 @@ import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import UserForm from "./components/user/UserForm";
 import Button from "@/components/Button";
 const UserTable = React.lazy(() => import("./components/user/UserTable"));
+
+import styles from "./styles.module.css";
 
 // Move fetchAllUsers outside of the component
 const fetchAllUsers = async (dispatch: AppDispatch) => {
@@ -45,20 +46,20 @@ const Users = () => {
     <>
       <header>
         <DashboardNavbar>
-          <h2 className="flex items-center text-black font-bold  gap-2 text-2xl text-zinc-300">
-            <PiUsers />
+          <h2 className={styles.title}>
+            <div className={styles.title_line} />
             Users
-            <Button
-              variant="success"
-              className="p-2"
-              onClick={toggleAddModal}
-            >
-              <RiAddFill />
-            </Button>
           </h2>
+          <Button
+            variant="success"
+            className={styles.add_button}
+            onClick={toggleAddModal}
+          >
+            <span>Add</span> <RiAddFill />
+          </Button>
         </DashboardNavbar>
       </header>
-      <main className="px-2 md:px-8 mx-auto">
+      <main className={styles.main}>
         {users.isLoading ? (
           <TableSkeleton />
         ) : users.isError ? (

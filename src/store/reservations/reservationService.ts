@@ -27,3 +27,21 @@ export const checkedInReservation = async ({
   });
   return response.data;
 };
+
+
+export const countReservations = async () => {
+  const response = await reservationsService.countReservations();
+  return response.data;
+}
+
+
+export const getMonthlyReservations = async () => {
+  const response = await reservationsService.getMonthlyReservations();
+  return response.data;
+};
+
+
+export const getReservationsBetweenDates = async (start: string, end: string) => {
+  const response = await reservationsService.getReservationsBetweenDates(start, end);
+  return response.data;
+}

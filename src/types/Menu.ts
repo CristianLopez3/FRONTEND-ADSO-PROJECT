@@ -53,5 +53,6 @@ export type Category = {
 export interface MenuReducer {
   isLoading: boolean;
   data: Menu[];
+  count?: number | null;
   isError: boolean;
 }

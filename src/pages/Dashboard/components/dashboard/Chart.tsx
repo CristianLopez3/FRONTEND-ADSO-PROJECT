@@ -1,3 +1,4 @@
+import { getMonthlyReservations } from "@/store/reservations/reservationService";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -34,33 +36,55 @@ const options = {
   scales: {
     x: {
       ticks: {
-        color: "#d4d4d8", 
+        color: "#d4d4d8",
       },
     },
     y: {
       ticks: {
-        color: "#d4d4d8", 
+        color: "#d4d4d8",
       },
     },
   },
 };
 
-const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Reservations",
-      data: [10, 15, 10, 59, 159, 100, 59],
-      borderColor: "#e4e4e7",
-      backgroundColor: "#fff",
-    },
-  ],
+
+type ReservationsByMonth = {
+  [key: string]: number;
 };
 
 const Chart = () => {
+  const [reservations, setReservations] = useState<ReservationsByMonth>({});
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMonthlyReservations = async () => {
+      try {
+        const response = await getMonthlyReservations();
+        setReservations(response);
+      } catch (error) {
+        setError("Failed to fetch data");
+      }
+    };
+    fetchMonthlyReservations();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  // Transform reservations into the format needed for the chart
+  const data = {
+    labels: Object.keys(reservations),
+    datasets: [
+      {
+        label: "Reservations",
+        data: Object.values(reservations),
+        borderColor: "#e4e4e7",
+        backgroundColor: "#fff",
+      },
+    ],
+  };
+
   return <Line className="block w-full h-full" options={options} data={data} />;
 };
-
 export default Chart;

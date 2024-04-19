@@ -31,7 +31,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
 
   return (
     <>
-      <tr className="border-none">
+      <tr className="border-none" style={{marginTrim: "initial"}}>
         <td className="row-table flex flex-col text-lg w-full">
           {name} <span className="text-sm text-zinc-100">{email}</span>
         </td>
@@ -39,7 +39,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
         <td className="row-table">{cellphone}</td>
         <td className="row-table">{role}</td>
 
-        <td className="row-table">
+        <td className="row-table w-24">
           <div className="flex gap-2">
             <Button
               variant="warning"
@@ -60,6 +60,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
       </tr>
       {openDeleteModal && (
         <Modal
+          width="1/4"
           open={openDeleteModal}
           onClose={() => setOpenDeleteModal(!openDeleteModal)}
         >

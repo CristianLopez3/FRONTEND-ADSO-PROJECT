@@ -6,13 +6,32 @@ import DashboardNavbar from "../../dashboard/DashboardNavbar";
 import Button from "@/components/Button";
 
 import styles from "./styles.module.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  getMonthlyReservations,
+  getReservationsBetweenDates,
+} from "@/store/reservations/reservationService";
+import ReportCard from "./ReportCard";
 
 const Report = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(
+    new Date(new Date().setDate(new Date().getDate() + 1))
+  );
+
+  const generateReport = async () => {
+    const monthlyReservations = await getMonthlyReservations();
+    console.log("Monthly Reservations:", monthlyReservations);
+
+    const reservationsBetweenDates = await getReservationsBetweenDates(
+      startDate.toISOString().substring(0, 19),
+      endDate.toISOString().substring(0, 19)
+    );
+    console.log("Reservations Between Dates:", reservationsBetweenDates);
+  };
+
   return (
     <>
       <header>
@@ -32,39 +51,23 @@ const Report = () => {
         </DashboardNavbar>
         <main className={styles.main}>
           <section className={styles.section}>
-            <article className={styles.card_container}>
-              <a href="#">
-                <h5>Report the quantity of bookings the last month</h5>
-              </a>
+            <ReportCard title="Report the quantity of Bookings the last month">
               <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                 this month you need the quantity of bookings of the last month
               </p>
-              <Button variant="dark">Generate Report</Button>
-            </article>
+              <Button variant="dark" content="Generate Report" />
+            </ReportCard>
 
-            <article className={styles.card_dates}>
-              <a href="#">
-                <h5>Report the quantity of bookings between two dates</h5>
-              </a>
+            <ReportCard
+              title="Report the quantity of bookings between two dates"
+              className="col-span-2"
+            >
               <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                 this month you need the quantity of bookings of the last month
               </p>
-          
 
               <div className="flex items-center my-4">
                 <div className="relative">
-                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg
-                      className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                    </svg>
-                  </div>
-
                   <DatePicker
                     selected={startDate}
                     className="p-2 bg-zinc-200 rounded-md border border-zinc-800"
@@ -80,9 +83,12 @@ const Report = () => {
                   />
                 </div>
               </div>
-
-              <Button variant="dark">Generate Report</Button>
-            </article>
+              <Button
+                variant="dark"
+                content="Generate Report"
+                onClick={generateReport}
+              />
+            </ReportCard>
           </section>
         </main>
       </header>

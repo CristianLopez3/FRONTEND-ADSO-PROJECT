@@ -5,7 +5,8 @@ import {
   createReservation,
   getUncheckedReservations,
   checkedInReservation,
-  countReservations,
+  countReservations
+//  getMonthlyReservations,
 } from "./reservationService";
 
 export const createReservationAction = createAsyncThunk(
@@ -33,3 +34,10 @@ export const countReservationsAction = createAsyncThunk(
   "reservations/countReservations",
   countReservations
 );
+
+/**
+export const getMonthlyReservationsAction = createAsyncThunk(
+  "reservations/getMonthlyReservations",
+  getMonthlyReservations
+);
+ */

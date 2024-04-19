@@ -46,11 +46,11 @@
   }
 
   .btn.btn-danger {
-    @apply text-zinc-100 bg-red-600 shadow-red-400/40;
+    @apply text-zinc-900 bg-red-200 shadow-red-400/40;
   }
   
   .btn.btn-warning {
-    @apply  bg-yellow-300 shadow-yellow-400/40 text-yellow-800;
+    @apply  bg-yellow-100 shadow-yellow-400/40 text-yellow-800;
   }
   
   .btn.btn-success {

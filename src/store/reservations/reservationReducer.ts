@@ -3,7 +3,7 @@ import {
   getReservationsAction,
   createReservationAction,
   checkedInReservationAction,
-  countReservationsAction,
+  countReservationsAction
 } from "./reservationActions";
 import { Reservation, ReservationReducer } from "@/types/Reservation";
 import { getUncheckedReservationsAction } from "./reservationActions";
@@ -76,7 +76,8 @@ const reservationSlice = createSlice({
         state.isLoading = false;
         state.count = action.payload;
       })
-      .addCase(countReservationsAction.rejected, loadingFailed);
+      .addCase(countReservationsAction.rejected, loadingFailed)
+      
   },
 });
 

@@ -21,3 +21,19 @@
 .input_flex {
     @apply w-full md:w-1/2;
 }
+
+
+/*=============================================
+=            Table User            =
+=============================================*/
+
+.no_data {
+    @apply text-left py-4 pl-4 bg-zinc-800 text-zinc-300;
+}
+
+.data_table {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden;
+}
+
+/*=====  End of Table User  ======*/
+

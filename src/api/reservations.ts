@@ -23,4 +23,13 @@ export const reservationsService = {
   countReservations: () => {
     return instance.get(ENDPOINT + "/count");
   },
+
+  getMonthlyReservations: () => {
+    return instance.get(ENDPOINT + "/mes");
+  },
+
+  getReservationsBetweenDates: (start: string, end: string) => {
+    return instance.get(ENDPOINT + `/between-dates?start=${start}&end=${end}`);
+  }
+
 };

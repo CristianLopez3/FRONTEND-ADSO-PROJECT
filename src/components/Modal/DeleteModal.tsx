@@ -1,4 +1,7 @@
 import { PiTrashFill } from "react-icons/pi";
+import styles from "./styles.module.css";
+import Button from "../Button";
+
 type DeleteModalProps = {
   onDelete: () => void;
   name: string;
@@ -6,18 +9,16 @@ type DeleteModalProps = {
 
 const DeleteModal: React.FC<DeleteModalProps> = ({ onDelete, name }) => {
   return (
-    <div className="mx-auto my-4 w-48 text-center">
-      <div className="flex justify-center items-center">
+    <div className={styles.delete_modal}>
+      <div className={styles.delete_icon}>
         <PiTrashFill size={52} color="red" />
       </div>
-      <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
-      <p className="text-sm text-gray-500">
+      <h3 className={styles.delete_title}>Confirm Delete</h3>
+      <p className={styles.delete_message}>
         Are you sure want to delete {name}?
       </p>
-      <div className="flex gap-4 mt-8">
-        <button className="btn btn-danger w-full" onClick={onDelete}>
-          Delete
-        </button>
+      <div className={styles.delete_button}>
+        <Button content="Delete" variant="danger" onClick={onDelete} />
       </div>
     </div>
   );

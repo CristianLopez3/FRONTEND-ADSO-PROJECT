@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import styles from "./styles.module.css";
 
 type TableProps = {
   children: ReactNode;
@@ -6,7 +7,7 @@ type TableProps = {
 
 const Table: React.FC<TableProps> = ({ children }) => {
   return (
-    <div className="w-full overflow-auto rounded-xl shadow-2xl hidden lg:block">
+    <div className={styles.table_container}>
       <table className="w-full">
         <tbody className="py-4">{children}</tbody>
       </table>

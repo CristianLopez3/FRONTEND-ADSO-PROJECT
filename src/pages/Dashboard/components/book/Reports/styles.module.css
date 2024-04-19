@@ -15,22 +15,15 @@
 }
 
 .section {
-  @apply flex justify-between;
+  @apply grid grid-cols-3 gap-3;
 }
 
 .card_container {
-    @apply max-w-sm p-6 bg-zinc-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
+    @apply w-full p-6 bg-zinc-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
 
     & h5 {
         @apply mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-zinc-100;
     }
 }
 
-
-.card_dates {
-  @apply max-w-full p-6 bg-zinc-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ;
-
-  & h5 {
-      @apply mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-zinc-100;
-  }
-}
+    

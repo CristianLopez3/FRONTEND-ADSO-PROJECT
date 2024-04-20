@@ -59,9 +59,7 @@ const BookRow = ({ book }: BookRowProps) => {
             />
           </form>
         </td>
-        <td className="row-table max-w-[100px] text-balance">
-          {name}
-        </td>
+        <td className="row-table max-w-[100px] text-balance">{name}</td>
 
         <td className="row-table w-fit">
           {email}
@@ -96,7 +94,7 @@ const BookRow = ({ book }: BookRowProps) => {
         </td>
       </tr>
 
-      <Modal open={openDeleteModal} onClose={handleDeleteModal}>
+      <Modal width="1/4" open={openDeleteModal} onClose={handleDeleteModal}>
         <DeleteModal onDelete={handleDeleteModal} name={name} />
       </Modal>
 

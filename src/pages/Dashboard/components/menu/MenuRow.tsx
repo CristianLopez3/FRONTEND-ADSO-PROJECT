@@ -54,8 +54,10 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
             setEnabled={onStateChange}
           />
         </td>
-        <td className="row-table">{title}
-        <span className="block text-[11px]">{category.name}</span></td>
+        <td className="row-table">
+          {title}
+          <span className="block text-[11px]">{category.name}</span>
+        </td>
         <td className="row-table">{description}</td>
         <td className="row-table">${price}</td>
 
@@ -80,6 +82,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
       </tr>
 
       <Modal
+        width="1/4"
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(!openDeleteModal)}
       >

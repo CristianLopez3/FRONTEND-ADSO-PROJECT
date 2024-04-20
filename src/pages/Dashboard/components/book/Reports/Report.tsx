@@ -16,6 +16,7 @@ import {
 import ReportCard from "./ReportCard";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ReportBetweenDates from "./ReportBetweenDates";
+import DocumentReport from "./Example";
 
 const Report = () => {
   const [reservations, setReservations] = useState<number | null>(null);
@@ -87,11 +88,18 @@ const Report = () => {
                 onClick={generateReport}
               />
               <PDFDownloadLink
+                // document={
+                // //   <ReportBetweenDates
+                // //     startDate={startDate}
+                // //     endDate={endDate}
+                // //     quantity={reservations ? reservations : 0}
+                // //   />
+                // // }
                 document={
-                  <ReportBetweenDates
+                  <DocumentReport
                     startDate={startDate}
                     endDate={endDate}
-                    quantity={reservations ? reservations : 0}
+                    reservations={reservations!}
                   />
                 }
                 fileName="RESERVATIONS_REPORT.pdf"

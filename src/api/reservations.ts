@@ -30,6 +30,18 @@ export const reservationsService = {
 
   getReservationsBetweenDates: (start: string, end: string) => {
     return instance.get(ENDPOINT + `/between-dates?start=${start}&end=${end}`);
-  }
+  },
+
+  getReservationsForGivenMonths: (start: string, end: string) => {
+    return instance.get(ENDPOINT + `/compare-months?start=${start}&end=${end}`);
+  },
+
+  getReservationsForCurrentMonth: () => {
+    return instance.get(ENDPOINT + "/current-month");
+  },
+
+  getReservationsForPreviousMonth: () => {
+    return instance.get(ENDPOINT + "/previous-month");
+  },
 
 };

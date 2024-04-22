@@ -20,7 +20,6 @@
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "clsx": "^2.1.0",
-    "faker": "^5.5.3",
     "framer-motion": "^11.0.20",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
@@ -42,6 +41,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/faker": "^6.6.9",
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.55",
     "@types/react-datepicker": "^6.2.0",

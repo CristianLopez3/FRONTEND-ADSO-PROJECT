@@ -47,13 +47,15 @@ const options = {
   },
 };
 
-
-
 type ReservationsByMonth = {
   [key: string]: number;
 };
 
-const Chart = () => {
+type ChartProps = {
+  className?: string;
+};
+
+const Chart: React.FC<ChartProps> = ({ className }) => {
   const [reservations, setReservations] = useState<ReservationsByMonth>({});
   const [error, setError] = useState<string | null>(null);
 
@@ -85,6 +87,10 @@ const Chart = () => {
     ],
   };
 
-  return <Line className="block w-full h-full" options={options} data={data} />;
+  return (
+    <div className={className}>
+      <Line className="block w-full h-full" options={options} data={data} />
+    </div>
+  );
 };
 export default Chart;

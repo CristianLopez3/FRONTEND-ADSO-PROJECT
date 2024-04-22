@@ -1,59 +1,67 @@
-import { Document, Page, Text, StyleSheet } from "@react-pdf/renderer";
+import { useEffect, useState } from "react";
+import ReportCard from "./ReportCard";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-type Props = {
-  quantity: number;
-  startDate: Date;
-  endDate: Date;
+import styles from "./styles.module.css";
+import { getReservationsBetweenDates } from "@/store/reservations/reservationService";
+
+const getReservations = async (start: Date, end: Date) => {
+  const data = await getReservationsBetweenDates(start, end);
+  return data.data;
 };
 
-const ReportBetweenDates: React.FC<Props> = ({
-  quantity,
-  startDate,
-  endDate,
-}) => {
+const ReportBetweenDates = () => {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(
+    new Date(new Date().setDate(new Date().getDate() + 7))
+  );
+
+  const [reservations, setReservations] = useState(0);
+  useEffect(() => {
+    if (startDate && endDate) {
+      getReservations(startDate, endDate).then((data) => {
+        setReservations(data);
+      });
+    }
+  }, [startDate, endDate]);
+
   return (
-    
-      <Document pageLayout="singlePage">
-        <Page size={"A4"} style={styles.body}>
-          <Text style={styles.title}>Reservations Between June and July</Text>
+    <ReportCard
+      title="Report the quantity of bookings between two dates"
+      className="cols-span-2 w-1/3"
+    >
+      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        Choose the date you need know the reservations
+      </p>
 
-          <Text style={styles.text} wrap>
-            Between {`${startDate.getUTCDate()} ${startDate.toISOString().substring(9)}`} and{" "}
-            {`${endDate.getUTCMonth()} ${endDate.getUTCDay()}`} there were{" "}
-            {`${quantity}`} reservations
-          </Text>
-        </Page>
-      </Document>
-
+      <article className="grid grid-cols-2 gap-x-10">
+        <section>
+          <div className="flex gap-2 flex-col my-4">
+            <div className={styles.datepicker_container}>
+              <span className="text-zinc-500">from</span>
+              <DatePicker
+                selected={startDate}
+                className="p-2 bg-zinc-200 rounded-md border border-zinc-800"
+                onChange={(date: Date) => setStartDate(date)}
+              />
+            </div>
+            <div className={styles.datepicker_container}>
+              <span className="text-zinc-500">until</span>
+              <DatePicker
+                selected={endDate}
+                className="p-2 bg-zinc-200 rounded-md border border-zinc-800"
+                onChange={(date: Date) => setEndDate(date)}
+              />
+            </div>
+          </div>
+        </section>
+        <section className="flex justify-center items-center">
+          <span className="text-7xl">{reservations}</span>
+        </section>
+      </article>
+    </ReportCard>
   );
 };
 
 export default ReportBetweenDates;
-
-const styles = StyleSheet.create({
-  body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35,
-  },
-  page: {
-    padding: 10,
-    fontSize: 12,
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  title: {
-    fontWeight: 800,
-    fontSize: 34,
-    color: "#000",
-    textAlign: "center",
-  },
-  text: {
-    margin: 12,
-    fontSize: 14,
-    textAlign: "justify",
-  },
-});

@@ -70,9 +70,7 @@ const Login = () => {
           {loginError !== null ? (
             <div className="block w-full rounded-lg bg-red-100 text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white mb-8">
               <div className="p-6">
-                <p className="text-base text-red-600">
-                  {loginError}
-                </p>
+                <p className="text-base text-red-600">{loginError}</p>
               </div>
             </div>
           ) : (
@@ -105,7 +103,7 @@ const Login = () => {
               variant="dark"
               content=""
             >
-              <span>Next</span>
+              <span>{isSubmitting ? "Login..." : "Next"}</span>
               <PiSignInLight />
             </Button>
           </div>

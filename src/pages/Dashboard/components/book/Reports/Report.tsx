@@ -3,35 +3,57 @@ import "react-datepicker/dist/react-datepicker.css";
 import ChartTwoMonths from "./ChartTwoMonths";
 import Chart from "../../dashboard/Chart";
 
-import ReportBetweenDates from "./ReportBetweenDates";
+import CardBetweenDates from "./CardBetweenDates";
 import Message from "@/components/Messages/Message";
 import { LuBadgeCheck } from "react-icons/lu";
+import { useEffect, useState } from "react";
+import {
+  getReservationsForCurrentMonth,
+  getUncheckedInReserations,
+} from "@/store/reservations/reservationService";
 
 const Report = () => {
-  // console.log(new Date().toISOString().substring(0, 19));
+  const [uncheckedIn, setUncheckedIn] = useState<number>(0);
+  const [currentMonth, setCurrentMonth] = useState<number>(0);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const data = await getUncheckedInReserations();
+        const currentResponse = await getReservationsForCurrentMonth();
+        setCurrentMonth(currentResponse);
+        setUncheckedIn(data);
+      } catch (error) {
+        throw new Error("Can't find unchecked reservations");
+      }
+    };
+
+    fetch();
+  }, []);
+
   return (
     <>
-      <header>
-        <main className={styles.main}>
-          <section className={styles.section}>
-            <article className={styles.article_charts}>
-              <div className="md:col-span-2 lg:col-span-1">
-                <ReportBetweenDates />
-              </div>
-              <ChartTwoMonths className="max-w-[600px] lg:ml-12 flex justify-center items-center lg:col-span-2" />
-              <Chart className="col-span-1 md:col-span-2 w-full h-[300px] xl:h-[800px]" />
-            </article>
-            <article className="w-full 2xl:w-[50%]">
-              <Message
-                icon={<LuBadgeCheck color="#e4e4e7" />}
-                title="Unchecked Reservations"
-                description="You have unchecked reservations"
-                data={<div className="text-zinc-50 text-2xl">23</div>}
-              />
-            </article>
-          </section>
-        </main>
-      </header>
+      <main className={styles.main}>
+        <section className={styles.section}>
+          <ChartTwoMonths className="max-w-[600px] flex justify-center items-center  lg:ml-12" />
+          <CardBetweenDates />
+          <Chart className="w-full h-[300px] xl:max-h-[800px]" />
+          <article className="space-y-3 lg:mt-3 order-first lg:-order-none">
+            <Message
+              icon={<LuBadgeCheck color="#e4e4e7" />}
+              title="Unchecked Reservations"
+              description="You have unchecked reservations"
+              data={<div className="text-zinc-50 text-2xl">{uncheckedIn}</div>}
+            />
+            <Message
+              icon={<LuBadgeCheck color="#e4e4e7" />}
+              title="Month Reservations"
+              description={`This month has had ${currentMonth} reservations`}
+              data={<div className="text-zinc-50 text-2xl">{currentMonth}</div>}
+            />
+          </article>
+        </section>
+      </main>
     </>
   );
 };

@@ -1,6 +1,6 @@
 /* Message.module.css */
 .messageContainer {
-  @apply flex items-center gap-3 w-full lg:w-[90%];
+  @apply flex items-center justify-center gap-3 w-full lg:w-[90%];
 }
 
 .iconContainer {

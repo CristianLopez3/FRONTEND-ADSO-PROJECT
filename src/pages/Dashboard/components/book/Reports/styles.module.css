@@ -3,7 +3,14 @@
 =            Base Report            =
 =============================================*/
 
+.main {
+  @apply px-2 mx-auto grid grid-cols-1 ;
+}
 
+
+.section {
+  @apply max-w-[1440px] gap-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 ;
+}
 
 .title {
   @apply flex items-center  font-bold gap-2 text-2xl text-zinc-300;
@@ -17,16 +24,14 @@
   @apply w-1 border-l-4 h-8;
 }
 
-.main {
-  @apply px-2 md:px-8 mx-auto;
-}
-
-.section {
-  @apply grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4;
-}
 
 .article_charts {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 col-span-1 md:col-span-2 lg:col-span-3; 
+  @apply grid grid-cols-1  gap-4 col-span-1  
+  md:col-span-3 
+  md:grid-cols-1 
+  lg:col-span-3  
+  lg:grid-cols-2
+  ; 
 }
 
 
@@ -38,10 +43,6 @@
 /*=============================================
 =            Report Between Dates Styles            =
 =============================================*/
-
-.body_card {
-  @apply grid grid-cols-1 xl:grid-cols-2 gap-x-10;
-}
 
 
 .card_container {
@@ -78,4 +79,9 @@
     @apply text-sm lg:hidden text-zinc-300;
   }
 
+}
+
+
+.body_card {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-x-10;
 }

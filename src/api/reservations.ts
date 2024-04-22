@@ -44,4 +44,8 @@ export const reservationsService = {
     return instance.get(ENDPOINT + "/previous-month");
   },
 
+  getUncheckedInReserations: () => {
+    return instance.get(ENDPOINT + "/unchecked-in-count");
+  }
+
 };

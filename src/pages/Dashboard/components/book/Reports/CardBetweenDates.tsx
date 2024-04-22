@@ -11,7 +11,7 @@ const getReservations = async (start: Date, end: Date) => {
   return data.data;
 };
 
-const ReportBetweenDates = () => {
+const CardBetweenDates = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(
     new Date(new Date().setDate(new Date().getDate() + 7))
@@ -29,7 +29,7 @@ const ReportBetweenDates = () => {
   return (
     <ReportCard
       title="Report the quantity of bookings between two dates"
-      className="cols-span-2 w-1/3"
+      className="cols-span-2"
     >
       <p className={styles.description}>
         Choose the date you need know the reservations
@@ -66,4 +66,4 @@ const ReportBetweenDates = () => {
   );
 };
 
-export default ReportBetweenDates;
+export default CardBetweenDates;

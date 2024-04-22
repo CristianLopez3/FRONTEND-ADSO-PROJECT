@@ -29,7 +29,7 @@ const DashboardTemplate = () => {
             </h2>
           </div>
 
-          <div className="w-full h-full overflow-y-scroll">
+          <div className="max-w-[1720px] mx-auto h-full overflow-y-scroll">
             <Outlet />
           </div>
         </div>

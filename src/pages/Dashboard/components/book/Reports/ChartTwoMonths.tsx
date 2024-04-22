@@ -81,7 +81,7 @@ const ChartTwoMonths: React.FC<Props> = ({ className }) => {
     datasets: [
       {
         label: "Reservations",
-        data: [currentMonth, previousMonth],
+        data: [previousMonth, currentMonth],
         backgroundColor: "orange",
       },
     ],

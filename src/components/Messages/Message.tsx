@@ -16,13 +16,13 @@ const Message: React.FC<MessageProps> = ({
   return (
     <article className={styles.messageContainer}>
       <div className={styles.iconContainer}>{icon}</div>
-      <div className={styles.contentContainer}>
+      <section className={styles.contentContainer}>
         <div>
           <h3 className={styles.title}>{title}</h3>
           <p className={styles.description}>{description}</p>
         </div>
         {data && data}
-      </div>
+      </section>
     </article>
   );
 };

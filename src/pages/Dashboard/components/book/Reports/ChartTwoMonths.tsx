@@ -1,4 +1,8 @@
 import {
+  getReservationsForCurrentMonth,
+  getReservationsForPreviousMonth,
+} from "@/store/reservations/reservationService";
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -7,7 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -46,27 +50,52 @@ export const options = {
   },
 };
 
-const labels = ["Actual Month", "Last Month"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Differences Between Months",
-      data: [3, 5],
-      backgroundColor: "green",
-    },
-  ],
-};
+const labels = ["Last Month", "Current Month"];
 
 type Props = {
   className: string;
 };
 
 const ChartTwoMonths: React.FC<Props> = ({ className }) => {
+  const [currentMonth, setCurrentMonth] = useState<number>(0);
+  const [previousMonth, setPreviousMonth] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const previousResponse = await getReservationsForPreviousMonth();
+        const currentResponse = await getReservationsForCurrentMonth();
+        setCurrentMonth(currentResponse);
+        setPreviousMonth(previousResponse);
+      } catch (error) {
+        setError("Failed to fetch data");
+        console.error(error);
+      }
+    };
+    fetch();
+  }, []);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Reservations",
+        data: [currentMonth, previousMonth],
+        backgroundColor: "orange",
+      },
+    ],
+  };
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className={className}>
-      <Bar options={options} data={data} />;
+      <div className="w-full h-full">
+        <Bar options={options} data={data} />;
+      </div>
     </div>
   );
 };

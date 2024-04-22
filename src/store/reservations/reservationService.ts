@@ -45,3 +45,13 @@ export const getReservationsBetweenDates = async (start: Date, end: Date) => {
   );
   return response;
 };
+
+export const getReservationsForCurrentMonth = async () => {
+  const response = await reservationsService.getReservationsForPreviousMonth();
+  return response.data;
+};
+
+export const getReservationsForPreviousMonth = async () => {
+  const response = await reservationsService.getReservationsForCurrentMonth();
+  return response.data;
+};

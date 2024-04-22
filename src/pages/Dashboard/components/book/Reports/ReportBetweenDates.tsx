@@ -31,33 +31,35 @@ const ReportBetweenDates = () => {
       title="Report the quantity of bookings between two dates"
       className="cols-span-2 w-1/3"
     >
-      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+      <p className={styles.description}>
         Choose the date you need know the reservations
       </p>
 
-      <article className="grid grid-cols-2 gap-x-10">
+      <article className={styles.body_card}>
         <section>
-          <div className="flex gap-2 flex-col my-4">
+          <div className="flex gap-2 flex-col my-4 items-center md:items-center lg:items-start">
             <div className={styles.datepicker_container}>
-              <span className="text-zinc-500">from</span>
+              <span className={styles.datapicker_label}>From</span>
               <DatePicker
                 selected={startDate}
-                className="p-2 bg-zinc-200 rounded-md border border-zinc-800"
+                className={styles.data_picker}
                 onChange={(date: Date) => setStartDate(date)}
               />
             </div>
             <div className={styles.datepicker_container}>
-              <span className="text-zinc-500">until</span>
+              <span className={styles.datapicker_label}>To</span>
               <DatePicker
                 selected={endDate}
-                className="p-2 bg-zinc-200 rounded-md border border-zinc-800"
+                className={styles.data_picker}
                 onChange={(date: Date) => setEndDate(date)}
               />
             </div>
           </div>
         </section>
-        <section className="flex justify-center items-center">
-          <span className="text-7xl">{reservations}</span>
+        <section className={styles.section_center}>
+          <p className={styles.reservations_number}>
+            <span>Quantiti of Reservations: </span> {reservations}
+          </p>
         </section>
       </article>
     </ReportCard>

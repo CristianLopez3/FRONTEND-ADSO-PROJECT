@@ -4,18 +4,16 @@ import { CheckReservation } from "@/types/Reservation"; // Import the CheckReser
 
 
 
+export const getReservations = async () => {
+  const response = await reservationsService.getResevations();
+  return response.data.content;
+};
+
+
 export const createReservation = async (reservation: Reservation) => {
   const response = await reservationsService.addReservation(reservation);
   return response.data;
 };
-
-
-
-export const getReservations = async () => {
-  const response = await reservationsService.getResevations();
-  return response.data;
-};
-
 
 
 export const getUncheckedReservations = async () => {

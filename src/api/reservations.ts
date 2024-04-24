@@ -9,7 +9,7 @@ export const reservationsService = {
   },
 
   getResevations: function () {
-    return instance.get(ENDPOINT);
+    return instance.get(ENDPOINT + "?page=1");
   },
 
   getUnCheckedReservations: function () {

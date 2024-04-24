@@ -3,7 +3,7 @@ import {
   countUsers,
   createUserService,
   deleteUserService,
-  getAllUsersService,
+  getUsers,
   updateUserService,
 } from "./userService";
 
@@ -14,7 +14,7 @@ export const createUserAction = createAsyncThunk(
 
 export const getAllUsersAction = createAsyncThunk(
   "users/getAllUsers",
-  getAllUsersService
+  getUsers
 );
 
 export const deleteUserAction = createAsyncThunk(

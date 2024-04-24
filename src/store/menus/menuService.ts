@@ -4,7 +4,7 @@ import { MenuStatePatch } from '../../types/Menu';
 
 export const getMenus = async () => {
   const response = await menusService.getMenus();
-  return response.data;
+  return response.data.content;
 };
 
 export const getMenusByCategory = async (id: number) => {

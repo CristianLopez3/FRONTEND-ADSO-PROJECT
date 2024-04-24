@@ -21,20 +21,20 @@ const MenuNav = ({ menuActive, handleMenuActive }: MenuNavProps) => {
   }, [dispatch]);
   return (
     <>
-      <div className="flex flex-row w-full gap-2 overflow-x-scroll ">
+      <div className="flex-center w-full gap-2 overflow-x-scroll mt-8">
         <Button
           variant={menuActive === "All" ? "light" : "dark"}
           content="All"
+          className="rounded-sm transition-colors duration-50"
           onClick={() => handleMenuActive("All")}
         />
         {categories.data.map((item: Category) => {
           return (
             <Button
               key={item.id}
-              variant={
-                menuActive === item.name ?"light": "dark"
-              }
+              variant={menuActive === item.name ? "light" : "dark"}
               content={item.name}
+              className={`rounded-sm  font-normal transition-colors duration-50`}
               onClick={() => handleMenuActive(item.name)}
             />
           );

@@ -13,10 +13,12 @@ import { useLocation } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { PiArrowSquareIn } from "react-icons/pi";
-import { getMenuItems, styles } from "./contants";
+import { getMenuItems } from "./contants";
 import { ROUTES } from "@/routes/constants";
 import { getCookies, removeCookies } from "@/utils/cookies";
 import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
+
+import styles from "./styles.module.css";
 
 export const SidebarContext = createContext<boolean>(true);
 
@@ -50,8 +52,8 @@ const Sidebar = () => {
   return (
     <aside className={styles.aside}>
       <nav className={styles.nav}>
-        <div className={styles.navDiv}>
-          <h3 className={`${styles.h3Default} ${expanded ? "w-32" : "w-0"}`}>
+        <div className={styles.nav_div}>
+          <h3 className={`${styles.h3_default} ${expanded ? "w-32" : "w-0"}`}>
             MenuEASY
           </h3>
 

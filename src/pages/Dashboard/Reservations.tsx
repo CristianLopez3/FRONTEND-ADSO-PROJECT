@@ -46,10 +46,7 @@ const Reservations = () => {
     fetchReservations(dispatch);
   }, [currentPage, dispatch, reservations.meta?.totalPages]);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    console.log(`changin page... ${current}`);
-  };
+  const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
     <>
@@ -71,7 +68,8 @@ const Reservations = () => {
               to={ROUTES.DASHBOARD.RESERVATIONS.REPORT}
               className="px-2 flex items-center gap-x-2 bg-zinc-300 text-zinc-900 rounded-md"
             >
-              Generate Report <RiPencilLine />
+              <span className="hidden md:block">Generate Report</span>{" "}
+              <RiPencilLine />
             </Link>
           </div>
         </DashboardNavbar>
@@ -88,12 +86,16 @@ const Reservations = () => {
         ) : (
           <Suspense fallback={<TableSkeleton />}>
             <BookTable data={reservations.data} />
-            <Pagination
-              itemsPerPage={10}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-              pageRange={reservations.meta?.totalPages ?? 1}
-            />
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden"
+            >
+              <Pagination
+                itemsPerPage={10}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+                pageRange={reservations.meta?.totalPages ?? 1}
+              />
+            </div>
           </Suspense>
         )}
       </main>

@@ -55,4 +55,7 @@ export interface MenuReducer {
   data: Menu[];
   count?: number | null;
   isError: boolean;
+  meta?: {
+    totalPages?: number | null;
+  }
 }

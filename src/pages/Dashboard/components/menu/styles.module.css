@@ -1,0 +1,42 @@
+/*=============================================
+=            Form menu styles            =
+=============================================*/
+
+.form {
+  @apply text-left text-sm text-gray-500 p-2 lg:p-10;
+}
+
+.form_container {
+  @apply mx-auto my-4 w-[300px] sm:w-[100%] md:w-full text-center;
+}
+
+.form_pencil {
+  @apply flex justify-center items-center mb-8;
+}
+.form_title {
+  @apply text-lg font-black text-gray-800;
+}
+
+.form_buttons {
+  @apply flex gap-4 mt-8;
+}
+
+/*=============================================
+=            mobile item section            =
+=============================================*/
+
+.mobile_container {
+  @apply bg-white p-4 rounded-lg shadow;
+}
+
+.mobile_text {
+  @apply text-xs flex items-center justify-between space-x-2 md:text-sm gap-x-4;
+}
+
+.mobile_description {
+  @apply text-sm text-gray-600 py-2;
+}
+
+.mobile_buttons {
+  @apply flex gap-2;
+}

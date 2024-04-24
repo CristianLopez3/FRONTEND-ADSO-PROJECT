@@ -5,7 +5,7 @@ import { Menu } from "@/types/Menu";
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 import MenuForm from "./MenuForm";
-import { mobileItemStyles as styles } from "./constants";
+import styles from "./styles.module.css";
 
 export type MenuMobileItemProps = { menu: Menu };
 
@@ -19,14 +19,14 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
   };
   return (
     <>
-      <article key={id} className={styles.container}>
+      <article key={id} className={styles.form_container}>
         <div className={styles.text}>
           <div>{title}</div>
           <div>{state}</div>
         </div>
-        <div className={styles.description}>{description}</div>
-        <div className={styles.description}>{price}</div>
-        <div className={styles.buttons}>
+        <div className={styles.mobile_description}>{description}</div>
+        <div className={styles.mobile_description}>{price}</div>
+        <div className={styles.mobile_buttons}>
           <Button
             variant="warning"
             className="p-2"

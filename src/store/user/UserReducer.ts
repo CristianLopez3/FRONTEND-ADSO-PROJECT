@@ -1,4 +1,4 @@
-import { User } from "@/types/User";
+import { User, UserReducerState } from "@/types/User";
 import {
   countUsersAction,
   createUserAction,
@@ -8,18 +8,15 @@ import {
 } from "./userActions";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UserReducerState {
-  isLoading: boolean;
-  data: User[];
-  count?: number | null;
-  isError: boolean;
-}
 
 const initialState: UserReducerState = {
   isLoading: false,
   data: [],
   count: null,
   isError: false,
+  meta: {
+    totalPages: null
+  }
 };
 
 // Functios to manage the state of the reducer
@@ -39,6 +36,16 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(getAllUsersAction.pending, startLoading)
+    .addCase(
+      getAllUsersAction.fulfilled,
+      (state, action: PayloadAction<{content: User[], totalPages: number}>) => {
+        state.isLoading = false;
+        state.data = action.payload.content;
+        state.meta!.totalPages = action.payload.totalPages;
+      }
+    )
+    .addCase(getAllUsersAction.rejected, loadingFailed)
       .addCase(createUserAction.pending, startLoading)
       .addCase(
         createUserAction.fulfilled,
@@ -48,15 +55,6 @@ const userSlice = createSlice({
         }
       )
       .addCase(createUserAction.rejected, loadingFailed)
-      .addCase(getAllUsersAction.pending, startLoading)
-      .addCase(
-        getAllUsersAction.fulfilled,
-        (state, action: PayloadAction<User[]>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-        }
-      )
-      .addCase(getAllUsersAction.rejected, loadingFailed)
       .addCase(deleteUserAction.pending, startLoading)
       .addCase(
         deleteUserAction.fulfilled,

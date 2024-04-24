@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { AppDispatch, RootState } from "@/store/store";
 
-
 import { RiAddFill } from "react-icons/ri";
 
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
@@ -16,9 +15,10 @@ import Button from "@/components/Button";
 const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 
 import styles from "./styles.module.css";
+import Pagination from "@/components/Pagination";
 
 // Move fetchMenus outside of the component
-const fetchMenus = async (dispatch: AppDispatch) => {
+const fetchMenus = async (dispatch: AppDispatch, page: number) => {
   try {
     await dispatch(getAllMenusAction());
   } catch (error) {
@@ -30,6 +30,7 @@ const Menus = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const menus = useSelector((state: RootState) => state.menus);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   // Use useCallback to memoize event handlers
   const toggleAddModal = useCallback(() => {
@@ -41,8 +42,10 @@ const Menus = () => {
   }, []);
 
   useEffect(() => {
-    fetchMenus(dispatch);
+    fetchMenus(dispatch, currentPage);
   }, [dispatch]);
+
+  const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
     <>
@@ -73,6 +76,12 @@ const Menus = () => {
         ) : (
           <Suspense fallback={<TableSkeleton />}>
             <MenuTable data={menus.data} />
+            <Pagination
+              itemsPerPage={10}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              pageRange={menus.meta?.totalPages ?? 1}
+            />
           </Suspense>
         )}
       </main>

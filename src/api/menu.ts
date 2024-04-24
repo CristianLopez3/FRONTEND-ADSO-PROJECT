@@ -4,8 +4,8 @@ import { MenuPost, MenuStatePatch } from "@/types/Menu";
 const ENDPOINT = ENDPOINTS.MENU;
 
 export const menusService = {
-  getMenus: () => {
-    return instance.get(ENDPOINT);
+  getMenus: (page = 0) => {
+    return instance.get(`${ENDPOINT}?page=${page}`);
   },
 
   getMenuById: (id: number | string) => {

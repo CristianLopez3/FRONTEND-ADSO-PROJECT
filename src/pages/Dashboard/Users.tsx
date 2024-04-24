@@ -14,9 +14,10 @@ import Button from "@/components/Button";
 const UserTable = React.lazy(() => import("./components/user/UserTable"));
 
 import styles from "./styles.module.css";
+import Pagination from "@/components/Pagination";
 
-// Move fetchAllUsers outside of the component
-const fetchAllUsers = async (dispatch: AppDispatch) => {
+
+const fetchAllUsers = async (dispatch: AppDispatch, page: number) => {
   try {
     await dispatch(getAllUsersAction());
   } catch (error) {
@@ -28,6 +29,7 @@ const Users = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users);
+  const [currentPage, setCurrentPage] = useState(0);
 
   // Use useCallback to memoize event handlers
   const toggleAddModal = useCallback(() => {
@@ -39,8 +41,11 @@ const Users = () => {
   }, []);
 
   useEffect(() => {
-    fetchAllUsers(dispatch);
+    fetchAllUsers(dispatch, currentPage);
   }, [dispatch]);
+
+  const handlePageChange = (page: number) => setCurrentPage(page);
+
 
   return (
     <>
@@ -71,6 +76,12 @@ const Users = () => {
         ) : (
           <Suspense fallback={<TableSkeleton />}>
             <UserTable data={users.data} />
+            <Pagination
+              itemsPerPage={10}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              pageRange={users.meta?.totalPages ?? 1}
+            />
           </Suspense>
         )}
       </main>

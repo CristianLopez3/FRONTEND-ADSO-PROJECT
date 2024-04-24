@@ -19,6 +19,8 @@ import { PiPencil } from "react-icons/pi";
 import { InputField } from "@/components/Input";
 import Button from "@/components/Button";
 
+import styles from "./styles.module.css";
+
 type MenuFormProps = {
   mode: "create" | "update";
   handleModal: () => void;
@@ -126,12 +128,12 @@ const MenuForm = ({
   };
 
   return (
-    <div className={formStyles.container}>
-      <div className={formStyles.pencil}>
+    <div className={styles.form_container}>
+      <div className={styles.form_pencil}>
         <PiPencil size={52} color={mode === "update" ? "orange" : "green"} />
       </div>
-      <h3 className={formStyles.title}>{text}</h3>
-      <div className={formStyles.form}>
+      <h3 className={styles.form_title}>{text}</h3>
+      <div className={styles.form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {image && (
             <img
@@ -140,6 +142,7 @@ const MenuForm = ({
               className="mx-auto w-32 h-32 border mt-6"
             />
           )}
+
           <InputField
             type="file"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -159,28 +162,30 @@ const MenuForm = ({
           <InputField {...register("price")} type="number" />
           {renderErrorMessage(errors.price!)}
 
-          <select {...register("state")}>
-            {options.map((option) => (
-              <option key={option.toString()} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {renderErrorMessage(errors.state!)}
-          {categories.isLoading ? (
-            <p>Loading...</p>
-          ) : categories.isError ? (
-            <p>Error fetching categories</p>
-          ) : (
-            <select {...register("idCategory")}>
-              <option value="">Select a category: </option>
-              {categories.data.map((category) => (
-                <option key={category.id.toString()} value={category.id}>
-                  {category.name}
+          <div className="md:flex md:flex-row gap-x-6">
+            <select {...register("state")}>
+              {options.map((option) => (
+                <option key={option.toString()} value={option} defaultValue={"active"}>
+                  {option}
                 </option>
               ))}
             </select>
-          )}
+            {renderErrorMessage(errors.state!)}
+            {categories.isLoading ? (
+              <p>Loading...</p>
+            ) : categories.isError ? (
+              <p>Error fetching categories</p>
+            ) : (
+              <select {...register("idCategory")}>
+                <option value="">Select a category: </option>
+                {categories.data.map((category) => (
+                  <option key={category.id.toString()} value={category.id} defaultValue={1}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
           {renderErrorMessage(errors.idCategory!)}
 
           <div className={formStyles.buttons}>

@@ -11,6 +11,8 @@ import { checkedInReservationAction } from "@/store/reservations/reservationActi
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 
+import styles from "./styles.module.css";
+
 type BookRowProps = { book: Reservation };
 
 const BookRow = ({ book }: BookRowProps) => {
@@ -48,7 +50,7 @@ const BookRow = ({ book }: BookRowProps) => {
 
   return (
     <>
-      <tr className="transition-all">
+      <tr className={styles.tr}>
         <td className="row-table">
           <form className="flex items-center justify-left pl-4">
             <InputCheck
@@ -63,18 +65,18 @@ const BookRow = ({ book }: BookRowProps) => {
 
         <td className="row-table w-fit">
           {email}
-          <span className="block text-sm bg-zinc-800 font-semibold italic">
+          <span className={styles.tr_span}>
             {phoneNumber}
           </span>
         </td>
         <td className="row-table max-w-[300px] text-balance">{description}</td>
         <td className="row-table bg-zinc-800 w-fit">
           {formatedDate(reservationDate)}
-          <span className="block text-sm  text-zinc-400 font-semibold italic">
+          <span className={styles.tr_span}>
             {formatedHour(reservationDate)}
           </span>
         </td>
-        <td className="row-table">
+        <td className="row-table w-24">
           <div className="flex gap-2">
             <Button
               variant="warning"

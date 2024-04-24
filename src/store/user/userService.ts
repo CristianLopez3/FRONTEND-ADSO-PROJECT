@@ -2,9 +2,9 @@ import { usersService } from "@/api/users";
 import { User } from "@/types/User";
 
 
-export const getUsers = async () => {
-  const response = await usersService.getAll();
-  return response.data.content;
+export const getUsers = async (page = 0) => {
+  const response = await usersService.getAll(page);
+  return response.data;
 };
 
 

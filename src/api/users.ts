@@ -5,8 +5,8 @@ const ENDPOINT = ENDPOINTS.USERS;
 
 export const usersService = {
   
-  getAll: function () {
-    return instance.get(ENDPOINT);
+  getAll: function (page = 0) {
+    return instance.get(`${ENDPOINT}?page=${page}`);
   },
 
   add: function ({ user }: { user: User }) {

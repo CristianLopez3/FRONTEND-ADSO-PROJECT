@@ -21,6 +21,17 @@ export interface UserAuthResponse {
   role: string;
 }
 
+export interface UserReducerState {
+  isLoading: boolean;
+  data: User[];
+  count?: number | null;
+  isError: boolean;
+  meta?:{
+    totalPages?: number | null;
+  }
+}
+
+
 export const userSchema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
   name: z.string().min(3, "Name is required"),

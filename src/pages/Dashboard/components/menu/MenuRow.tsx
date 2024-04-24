@@ -61,7 +61,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
         <td className="row-table">{description}</td>
         <td className="row-table">${price}</td>
 
-        <td className="row-table">
+        <td className="row-table w-24">
           <div className="flex gap-2">
             <Button
               variant="warning"

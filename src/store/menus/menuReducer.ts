@@ -16,6 +16,9 @@ const initialState: MenuReducer = {
   data: [],
   count: null,
   isError: false,
+  meta: {
+    totalPages: null,
+  }
 };
 
 const startLoading = (state: MenuReducer) => {
@@ -37,9 +40,10 @@ const menuSlice = createSlice({
       .addCase(getAllMenusAction.pending, startLoading)
       .addCase(
         getAllMenusAction.fulfilled,
-        (state, action: PayloadAction<Menu[]>) => {
+        (state, action: PayloadAction<{content: Menu[], totalPages: number}>) => {
           state.isLoading = false;
-          state.data = action.payload;
+          state.data = action.payload.content;
+          state.meta!.totalPages = action.payload.totalPages;
         }
       )
       .addCase(getAllMenusAction.rejected, loadingFailed)

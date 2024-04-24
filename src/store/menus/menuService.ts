@@ -2,9 +2,9 @@ import { menusService } from "@/api/menu";
 import { MenuPost } from "@/types/Menu";
 import { MenuStatePatch } from '../../types/Menu';
 
-export const getMenus = async () => {
-  const response = await menusService.getMenus();
-  return response.data.content;
+export const getMenus = async (page = 0) => {
+  const response = await menusService.getMenus(page);
+  return response.data;
 };
 
 export const getMenusByCategory = async (id: number) => {

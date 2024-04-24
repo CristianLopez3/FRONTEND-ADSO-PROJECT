@@ -58,7 +58,7 @@
   }
 
   .row-table {
-    @apply py-4 w-fit px-3 text-sm bg-zinc-800  border-0 text-zinc-200 whitespace-nowrap;
+    @apply py-3 w-fit px-3 text-sm bg-zinc-800  border-0 text-zinc-200 whitespace-nowrap;
   }
 
   .container-section {

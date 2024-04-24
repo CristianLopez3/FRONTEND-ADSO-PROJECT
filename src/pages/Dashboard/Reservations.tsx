@@ -16,7 +16,6 @@ import { TableSkeleton } from "@/components/Skeleton";
 import Button from "@/components/Button";
 import { ROUTES } from "@/routes/constants";
 import Pagination from "@/components/Pagination";
-import { current } from "@reduxjs/toolkit";
 
 // Move fetchMenus outside of the component
 
@@ -86,16 +85,13 @@ const Reservations = () => {
         ) : (
           <Suspense fallback={<TableSkeleton />}>
             <BookTable data={reservations.data} />
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden"
-            >
-              <Pagination
-                itemsPerPage={10}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-                pageRange={reservations.meta?.totalPages ?? 1}
-              />
-            </div>
+
+            <Pagination
+              itemsPerPage={10}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              pageRange={reservations.meta?.totalPages ?? 1}
+            />
           </Suspense>
         )}
       </main>

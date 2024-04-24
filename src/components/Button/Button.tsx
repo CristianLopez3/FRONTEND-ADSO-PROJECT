@@ -9,7 +9,7 @@ type ButtonProps = {
 
 
 const Button = ({
-  variant,
+  variant = "light",
   content,
   children,
   className,

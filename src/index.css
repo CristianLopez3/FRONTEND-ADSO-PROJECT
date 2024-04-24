@@ -34,15 +34,15 @@
   }
 
   .btn {
-    @apply flex gap-2 items-center  justify-center  py-2 px-4 font-semibold shadow-md rounded-md;
+    @apply flex gap-2 items-center  justify-center  py-2 px-4 font-normal shadow-md rounded-md;
   }
 
   .btn.btn-light{
-    @apply bg-zinc-100 text-zinc-500;
+    @apply bg-zinc-100 text-zinc-900;
   }
 
   .btn.btn-dark{
-    @apply bg-zinc-950 text-zinc-200;
+    @apply bg-zinc-950 text-zinc-300;
   }
 
   .btn.btn-danger {

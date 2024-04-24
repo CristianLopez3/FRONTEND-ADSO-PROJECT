@@ -1,28 +1,24 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { RiAddFill, RiPencilLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 const BookTable = React.lazy(() => import("./components/book/BookTable"));
-import { Modal } from "@/components/Modal";
-import BookForm from "./components/book/BookForm";
 import { AppDispatch, RootState } from "@/store/store";
 import { getReservationsAction } from "@/store/reservations";
-import { TableSkeleton } from "@/components/Skeleton";
-import Alert from "@/components/Alert";
-import Button from "@/components/Button";
+
+import { Modal } from "@/components/Modal";
+import BookForm from "./components/book/BookForm";
+import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import styles from "./styles.module.css";
-import { Link } from "react-router-dom";
+import Alert from "@/components/Alert";
+import { TableSkeleton } from "@/components/Skeleton";
+import Button from "@/components/Button";
 import { ROUTES } from "@/routes/constants";
+import Pagination from "@/components/Pagination";
+import { current } from "@reduxjs/toolkit";
 
 // Move fetchMenus outside of the component
-const fetchReservations = async (dispatch: AppDispatch) => {
-  try {
-    await dispatch(getReservationsAction());
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 const Reservations = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -32,13 +28,28 @@ const Reservations = () => {
     setIsOpen((prevState) => !prevState);
   }, []);
 
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
   const handleModal = useCallback(() => {
     setIsOpen(false);
   }, []);
 
   useEffect(() => {
+    const fetchReservations = async (dispatch: AppDispatch) => {
+      try {
+        // const page = Math.min(currentPage, reservations.meta?.totalPages ?? 0);
+        await dispatch(getReservationsAction(currentPage));
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchReservations(dispatch);
-  }, [dispatch]);
+  }, [currentPage, dispatch, reservations.meta?.totalPages]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    console.log(`changin page... ${current}`);
+  };
 
   return (
     <>
@@ -77,6 +88,12 @@ const Reservations = () => {
         ) : (
           <Suspense fallback={<TableSkeleton />}>
             <BookTable data={reservations.data} />
+            <Pagination
+              itemsPerPage={10}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              pageRange={reservations.meta?.totalPages ?? 1}
+            />
           </Suspense>
         )}
       </main>

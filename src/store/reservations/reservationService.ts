@@ -4,9 +4,9 @@ import { CheckReservation } from "@/types/Reservation"; // Import the CheckReser
 
 
 
-export const getReservations = async () => {
-  const response = await reservationsService.getResevations();
-  return response.data.content;
+export const getReservations = async (page = 0) => {
+  const response = await reservationsService.getResevations(page);
+  return response.data;
 };
 
 

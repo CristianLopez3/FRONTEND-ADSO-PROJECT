@@ -8,16 +8,16 @@ export const reservationsService = {
     return instance.post(ENDPOINT, reservation);
   },
 
-  getResevations: function () {
-    return instance.get(ENDPOINT + "?page=1");
+  getResevations: function (page = 1 ) {
+    return instance.get(`${ENDPOINT}?page=${page}`);
   },
 
   getUnCheckedReservations: function () {
-    return instance.get(ENDPOINT + "/unchecked-in");
+    return instance.get(`${ENDPOINT}/unchecked-in`);
   },
 
   checkinReservation: function ({ id, checkedIn }: CheckReservation) {
-    return instance.patch(ENDPOINT + `/check/` + id, { checkedIn });
+    return instance.patch(`${ENDPOINT}/check/` + id, { checkedIn });
   },
 
   countReservations: () => {
@@ -46,6 +46,5 @@ export const reservationsService = {
 
   getUncheckedInReserations: () => {
     return instance.get(ENDPOINT + "/unchecked-in-count");
-  }
-
+  },
 };

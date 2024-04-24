@@ -2,7 +2,6 @@ import { usersService } from "@/api/users";
 import { User } from "@/types/User";
 
 
-
 export const getUsers = async () => {
   const response = await usersService.getAll();
   return response.data.content;
@@ -20,10 +19,12 @@ export const deleteUserService = async (id: number | string) => {
   return response.data;
 };
 
+
 export const updateUserService = async (user: User) => {
   const response = await usersService.update({ user });
   return response.data;
 };
+
 
 export const countUsers = async () => {
   const response = await usersService.countUsers();

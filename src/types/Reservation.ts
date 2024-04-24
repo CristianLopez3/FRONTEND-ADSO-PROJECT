@@ -42,5 +42,10 @@ export interface ReservationReducer {
   isLoading: boolean;
   data: Reservation[];
   count?: number | null;
+
   isError: boolean;
+  meta?: {
+    totalPages?: number | null;
+    // Add here other properties that 'meta' may have
+  };
 }

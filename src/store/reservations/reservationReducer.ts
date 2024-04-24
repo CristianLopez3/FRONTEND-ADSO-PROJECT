@@ -11,6 +11,9 @@ import { getUncheckedReservationsAction } from "./reservationActions";
 const initialState: ReservationReducer = {
   isLoading: false,
   data: [],
+  meta: { 
+    totalPages: null,
+  },
   count: null,
   isError: false,
 };
@@ -35,9 +38,10 @@ const reservationSlice = createSlice({
       .addCase(getReservationsAction.pending, startLoading)
       .addCase(
         getReservationsAction.fulfilled,
-        (state, action: PayloadAction<Reservation[]>) => {
+        (state, action: PayloadAction<{content: Reservation[], totalPages: number}>) => {
           state.isLoading = false;
-          state.data = action.payload;
+          state.data = action.payload.content;
+          state.meta!.totalPages = action.payload.totalPages ?? null;
         }
       )
       .addCase(getReservationsAction.rejected, loadingFailed)

@@ -42,9 +42,10 @@ const BookForm = ({
     defaultValues: {
       id,
       name,
-      phoneNumber, // Agregado
-      email, // Agregado
-      reservationDate, // Agregado
+      phoneNumber,
+      email,
+      reservationDate: reservationDate ? reservationDate.split('T')[0] : '', // Divide la fecha
+      reservationTime: reservationDate ? reservationDate.split('T')[1].substring(0, 5) : '', // Divide la hora
       description,
       numberOfPeople,
     },
@@ -53,14 +54,14 @@ const BookForm = ({
 
   const text = mode === "update" ? "Update" : "Create";
 
-  // const reservations = useSelector((state: RootState) => state.reservations);
   const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit: SubmitHandler<ReservationForm> = useCallback(
     async (data) => {
       try {
-        console.log("Data received by onSubmit:", data); // Agregado
-
+  
+        const reservationDateTime = `${data.reservationDate}T${data.reservationTime}:00`;
+  
         data.id = data.id === "" || data.id === null ? null : data.id;
         const reservation: Reservation = {
           id: data.id,
@@ -68,22 +69,21 @@ const BookForm = ({
           email: data.email,
           phoneNumber: data.phoneNumber,
           description: data.description,
-          reservationDate: data.reservationDate,
+          reservationDate: reservationDateTime,
           numberOfPeople: data.numberOfPeople,
         };
-
-        console.log("Reservation object to be dispatched:", reservation); // Agregado
-
+  
+        console.log("Reservation object to be dispatched:", reservation);
+  
         if (mode === "update" && reservation.id !== null) {
           // todo
         } else {
           await dispatch(createReservationAction(reservation));
         }
         dispatch(getReservationsAction());
-
         handleModal();
       } catch (error) {
-        console.error("Error in onSubmit:", error); // Agregado
+        console.error("Error in onSubmit:", error);
         throw new Error("Error creating or updating reservation");
       }
     },
@@ -93,6 +93,7 @@ const BookForm = ({
   const renderErrorMessage = (error: { message?: string }) => {
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
+
 
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
@@ -108,19 +109,26 @@ const BookForm = ({
           <InputField {...register("name")} />
           {renderErrorMessage(errors.name!)}
 
-          <InputField {...register("phoneNumber")} />
+          <InputField {...register("phoneNumber")} placeholder="phone number" />
           {renderErrorMessage(errors.phoneNumber!)}
 
           <InputField {...register("email")} />
           {renderErrorMessage(errors.email!)}
 
-          <InputField {...register("reservationDate")} type="datetime-local" />
+          <InputField {...register("reservationDate")} type="date" />
           {renderErrorMessage(errors.reservationDate!)}
+
+          <InputField {...register("reservationTime")} type="time" />
+          {renderErrorMessage(errors.reservationTime!)}
 
           <InputField {...register("description")} />
           {renderErrorMessage(errors.description!)}
 
-          <InputField {...register("numberOfPeople")} type="number" />
+          <InputField
+            {...register("numberOfPeople")}
+            placeholder="number of people"
+            type="number"
+          />
           {renderErrorMessage(errors.numberOfPeople!)}
 
           <div className="flex gap-4 mt-8">

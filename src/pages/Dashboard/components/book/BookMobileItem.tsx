@@ -9,7 +9,15 @@ import { formatedDate, formatedHour } from "@/utils/dateFormater";
 export type BookingMobileItemProps = { book: Reservation };
 
 const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
-  const { id, name, reservationDate } = book;
+  const {
+    id,
+    name,
+    reservationDate,
+    description,
+    phoneNumber,
+    email,
+    numberOfPeople,
+  } = book;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
@@ -41,6 +49,10 @@ const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
           mode="update"
           handleModal={handleUpdateModal}
           name={name}
+          phoneNumber={phoneNumber}
+          description={description}
+          numberOfPeople={numberOfPeople}
+          email={email}
           reservationDate={reservationDate}
         />
       </Modal>

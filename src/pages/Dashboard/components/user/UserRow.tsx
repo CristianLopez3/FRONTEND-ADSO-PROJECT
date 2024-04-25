@@ -14,7 +14,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
   const {
     id,
     name,
-    lastName,
+    lastname,
     email,
     identification,
     cellphone,
@@ -28,6 +28,8 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
     await dispatch(deleteUserAction(id!));
     await dispatch(getAllUsersAction());
   };
+
+
 
   return (
     <>
@@ -77,8 +79,8 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
             handleUpdateModal={() => setOpenUpdateModal(!openUpdateModal)}
             id={id!}
             name={name}
-            lastName={lastName}
-            username={email}
+            lastname={lastname}
+            email={email}
             cellphone={cellphone}
             identification={identification}
             role={role}

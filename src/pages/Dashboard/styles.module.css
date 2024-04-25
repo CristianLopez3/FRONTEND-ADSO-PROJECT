@@ -1,5 +1,5 @@
 .title {
-    @apply flex items-center  font-bold gap-2 text-2xl text-zinc-300; 
+    @apply flex items-center font-bold gap-2 text-base lg:text-2xl text-zinc-300; 
 }
 
 .title_line {

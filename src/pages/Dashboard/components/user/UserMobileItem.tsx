@@ -11,11 +11,11 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
   const {
     id,
     cellphone,
-    username: email,
+    email,
     name,
     role,
     identification,
-    lastName,
+    lastname,
     password,
   } = user;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -59,12 +59,12 @@ const UserMobileItem: React.FC<UserMobileItemProps> = ({ user }) => {
           mode="update"
           handleUpdateModal={handleUpdateModal}
           name={name}
-          username={email}
+          email={email}
           cellphone={cellphone}
           id={id!}
           role={role}
           identification={identification}
-          lastName={lastName}
+          lastname={lastname}
           password={password}
         />
       </Modal>

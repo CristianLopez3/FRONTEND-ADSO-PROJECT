@@ -28,15 +28,15 @@ const UserForm: React.FC<UserFormProps> = ({
   mode,
   id,
   name,
-  username: email,
+  email,
   role,
   cellphone,
   identification,
-  lastName,
+  lastname,
 }) => {
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
-
+  console.log(email);
   const {
     register,
     handleSubmit,
@@ -45,8 +45,8 @@ const UserForm: React.FC<UserFormProps> = ({
     defaultValues: {
       id,
       name,
-      lastName,
-      username: email,
+      lastname,
+      email,
       identification,
       cellphone,
       role,
@@ -68,8 +68,8 @@ const UserForm: React.FC<UserFormProps> = ({
         const user: User = {
           id: data.id,
           name: data.name,
-          lastName: data.lastName,
-          email: data.username,
+          lastname: data.lastname,
+          email: data.email,
           password: data.password,
           identification: data.identification,
           cellphone: data.cellphone.toString(),
@@ -106,16 +106,20 @@ const UserForm: React.FC<UserFormProps> = ({
               {renderErrorMessage(errors.name!)}
             </div>
             <div className={styles.input_flex}>
-              <InputField {...register("lastName")} />
-              {renderErrorMessage(errors.lastName!)}
+              <InputField {...register("lastname")} type="text" />
+              {renderErrorMessage(errors.lastname!)}
             </div>
           </div>
 
-          <InputField {...register("username")} type="email" />
-          {renderErrorMessage(errors.username!)}
-
-          <InputField {...register("password")} type="password" />
-          {renderErrorMessage(errors.password!)}
+          <InputField {...register("email")} placeholder="email" type="email" />
+          {renderErrorMessage(errors.email!)}
+          {
+            mode === "create" &&<>
+            
+            <InputField {...register("password")} type="password" />
+            {renderErrorMessage(errors.password!)}
+            </>
+          }
 
           <div className="md:flex md:flex-row gap-x-6">
             <div>

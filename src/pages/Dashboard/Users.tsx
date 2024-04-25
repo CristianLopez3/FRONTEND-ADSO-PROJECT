@@ -19,7 +19,7 @@ import Pagination from "@/components/Pagination";
 
 const fetchAllUsers = async (dispatch: AppDispatch, page: number) => {
   try {
-    await dispatch(getAllUsersAction());
+    await dispatch(getAllUsersAction(page));
   } catch (error) {
     console.error("Error fetching all users:", error);
   }
@@ -42,10 +42,9 @@ const Users = () => {
 
   useEffect(() => {
     fetchAllUsers(dispatch, currentPage);
-  }, [dispatch]);
+  }, [dispatch, currentPage]);
 
   const handlePageChange = (page: number) => setCurrentPage(page);
-
 
   return (
     <>

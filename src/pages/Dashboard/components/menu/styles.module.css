@@ -26,7 +26,7 @@
 =============================================*/
 
 .mobile_container {
-  @apply bg-white p-4 rounded-lg shadow;
+  @apply bg-zinc-100 p-4 rounded-lg shadow;
 }
 
 .mobile_text {
@@ -34,9 +34,17 @@
 }
 
 .mobile_description {
-  @apply text-sm text-gray-600 py-2;
+  @apply  text-xs text-gray-700 py-2 ;
+}
+
+.mobile_footer_section {
+  @apply flex justify-between items-center;
 }
 
 .mobile_buttons {
   @apply flex gap-2;
+}
+
+.mobile_price {
+  @apply text-gray-700 py-2 font-bold text-lg flex items-start justify-end ;
 }

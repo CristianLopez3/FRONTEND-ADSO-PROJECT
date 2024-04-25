@@ -17,7 +17,7 @@ const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
   const handleUpdateModal = () => setOpenUpdateModal(!openUpdateModal);
   return (
     <>
-      <article key={id} className="bg-white p-4 rounded-lg shadow">
+      <article key={id} className="bg-zinc-100 p-4 rounded-lg shadow">
         <div className="text-xs flex items-center justify-between space-x-2 md:text-sm gap-x-4">
           <div>{formatedDate(reservationDate)}</div>
           <div>{formatedHour(reservationDate)}</div>

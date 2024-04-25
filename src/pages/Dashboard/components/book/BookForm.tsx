@@ -6,7 +6,7 @@ import {
   Reservation,
   ReservationForm,
   reservationSchema,
-} from "@/types/Reservation";
+} from "@/utils/types/Reservation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";

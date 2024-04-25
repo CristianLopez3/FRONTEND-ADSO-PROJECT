@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import { AppDispatch, RootState } from "@/store/store";
 import { useEffect } from "react";
-import { Category } from "@/types/Menu";
+import { Category } from "@/utils/types/Menu";
 import { getAllCategories } from "@/store/menus/CategoryReducer";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -1,4 +1,4 @@
-import { User, UserReducerState } from "@/types/User";
+import { User, UserReducerState } from "@/utils/types/User";
 import {
   countUsersAction,
   createUserAction,

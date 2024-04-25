@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MenuReducer } from "@/types/Menu";
+import { MenuReducer } from "@/utils/types/Menu";
 import {
   getAllMenusAction,
   addMenuAction,
@@ -9,7 +9,7 @@ import {
   changeStateAction,
   countMenuAction,
 } from "./menuActions";
-import { Menu } from "@/types/Menu";
+import { Menu } from "@/utils/types/Menu";
 
 const initialState: MenuReducer = {
   isLoading: false,

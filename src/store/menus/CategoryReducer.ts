@@ -1,5 +1,5 @@
 import { categoryService } from "@/api/category";
-import { Category } from "@/types/Menu";
+import { Category } from "@/utils/types/Menu";
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type State = {

@@ -11,9 +11,9 @@ import {
   updateMenuAction,
 } from "@/store/menus";
 import { getAllCategories } from "@/store/menus/CategoryReducer";
-import { MenuPost } from "@/types/Menu";
+import { MenuPost } from "@/utils/types/Menu";
 
-import { type MenuForm, menuSchema } from "@/types/Menu";
+import { type MenuForm, menuSchema } from "@/utils/types/Menu";
 
 import { PiPencil } from "react-icons/pi";
 import { InputField } from "@/components/Input";

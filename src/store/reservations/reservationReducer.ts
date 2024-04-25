@@ -5,7 +5,7 @@ import {
   checkedInReservationAction,
   countReservationsAction
 } from "./reservationActions";
-import { Reservation, ReservationReducer } from "@/types/Reservation";
+import { Reservation, ReservationReducer } from "@/utils/types/Reservation";
 import { getUncheckedReservationsAction } from "./reservationActions";
 
 const initialState: ReservationReducer = {

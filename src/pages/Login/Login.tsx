@@ -15,7 +15,7 @@ import { ROUTES } from "@/routes/constants";
 
 import Img from "@/assets/bg-mobile.jpg";
 import { styles } from "./constants";
-import { Auth, AuthTypes, schema } from "@/types/Auth";
+import { Auth, AuthTypes, schema } from "@/utils/types/Auth";
 import { useQueryParam } from "@/utils/hooks/useQueryParam";
 import { removeCookies } from "@/utils/cookies";
 

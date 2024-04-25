@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { changeStateAction, deleteMenuAction } from "@/store/menus/menuActions";
 
-import { Menu } from "@/types/Menu";
+import { Menu } from "@/utils/types/Menu";
 import { Modal, DeleteModal } from "@/components/Modal";
 import MenuForm from "./MenuForm";
 

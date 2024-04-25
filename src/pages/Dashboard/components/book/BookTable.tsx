@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Reservation } from "@/types/Reservation";
+import { Reservation } from "@/utils/types/Reservation";
 import Table from "@/components/Table";
 import BookRow from "./BookRow";
 const BookMobileItem = React.lazy(() => import("./BookMobileItem"));

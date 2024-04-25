@@ -1,6 +1,6 @@
 import React from "react";
 
-import { User } from "@/types/User";
+import { User } from "@/utils/types/User";
 import Table from "@/components/Table";
 import styles from "./styles.module.css";
 

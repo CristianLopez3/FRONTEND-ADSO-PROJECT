@@ -1,5 +1,5 @@
 import { ENDPOINTS, instance } from "./base.api";
-import { MenuPost, MenuStatePatch } from "@/types/Menu";
+import { MenuPost, MenuStatePatch } from "@/utils/types/Menu";
 
 const ENDPOINT = ENDPOINTS.MENU;
 

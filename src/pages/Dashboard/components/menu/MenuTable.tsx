@@ -1,4 +1,4 @@
-import { Menu } from "@/types/Menu";
+import { Menu } from "@/utils/types/Menu";
 import Table from "@/components/Table";
 import MenuMobileItem from "./MenuMobileItem";
 import MenuRow from "./MenuRow";

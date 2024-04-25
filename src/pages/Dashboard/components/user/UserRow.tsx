@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
-import { User } from "@/types/User";
+import { User } from "@/utils/types/User";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { deleteUserAction, getAllUsersAction } from "@/store/user";

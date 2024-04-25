@@ -1,4 +1,4 @@
-import { Menu } from "../../../../types/Menu";
+import { Menu } from "../../../../utils/types/Menu";
 
 export const dataMenus: Menu[] = [
   {

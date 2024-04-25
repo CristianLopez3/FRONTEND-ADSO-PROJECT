@@ -1,5 +1,5 @@
 import { ENDPOINTS, instance } from "./base.api";
-import { User } from "../types/User";
+import { User } from "../utils/types/User";
 
 const ENDPOINT = ENDPOINTS.USERS;
 

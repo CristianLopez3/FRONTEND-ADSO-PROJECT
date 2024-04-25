@@ -1,6 +1,6 @@
 import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
-import { Reservation } from "@/types/Reservation";
+import { Reservation } from "@/utils/types/Reservation";
 import { useCallback, useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";

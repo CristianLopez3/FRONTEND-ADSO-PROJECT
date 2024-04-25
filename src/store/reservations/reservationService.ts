@@ -1,6 +1,6 @@
 import { reservationsService } from "@/api/reservations";
-import { Reservation } from "@/types/Reservation";
-import { CheckReservation } from "@/types/Reservation"; // Import the CheckReservation type
+import { Reservation } from "@/utils/types/Reservation";
+import { CheckReservation } from "@/utils/types/Reservation"; // Import the CheckReservation type
 
 
 

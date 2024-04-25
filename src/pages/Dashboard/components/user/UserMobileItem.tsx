@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "@/components/Button";
 import { PiTrash, PiPencil } from "react-icons/pi";
-import { User } from "@/types/User";
+import { User } from "@/utils/types/User";
 import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
 

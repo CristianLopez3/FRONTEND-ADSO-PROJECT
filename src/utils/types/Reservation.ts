@@ -24,6 +24,12 @@ export const reservationSchema = z.object({
   reservationDate: z.string().refine((value) => !isNaN(Date.parse(value)), {
     message: "Please enter a valid date for the reservation",
   }),
+  reservationTime: z.string().refine((value) => {
+    const timePattern = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return timePattern.test(value);
+  }, {
+    message: "Please enter a valid time for the reservation",
+  }),
   description: z.string(),
   numberOfPeople: z
     .union([

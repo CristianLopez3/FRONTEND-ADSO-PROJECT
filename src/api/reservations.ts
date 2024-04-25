@@ -1,5 +1,5 @@
 import { instance } from "./base.api";
-import { CheckReservation, type Reservation } from "@/types/Reservation";
+import { CheckReservation, type Reservation } from "@/utils/types/Reservation";
 
 const ENDPOINT = "reservations";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Event } from "@/types/Event";
+import { Event } from "@/utils/types/Event";
 const EventMobileItem = React.lazy(() => import("./EventMobileItem"));
 import Table from "@/components/Table";
 import EventRow from "./EventRow";

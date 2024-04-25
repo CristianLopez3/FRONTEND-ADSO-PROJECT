@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Modal, DeleteModal } from "@/components/Modal";
-import { Menu } from "@/types/Menu";
+import { Menu } from "@/utils/types/Menu";
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 import MenuForm from "./MenuForm";

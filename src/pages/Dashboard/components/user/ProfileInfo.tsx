@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "@/types/User";
+import { User } from "@/utils/types/User";
 import { LuPenLine } from "react-icons/lu";
 
 type ProfileInfoProps = Partial<User>;

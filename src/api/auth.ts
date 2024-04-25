@@ -1,4 +1,4 @@
-import { Auth } from "@/types/Auth";
+import { Auth } from "@/utils/types/Auth";
 import { instance } from "./base.api";
 
 const ENDPOINT = "auth";

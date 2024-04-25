@@ -1,5 +1,5 @@
 import { usersService } from "@/api/users";
-import { User } from "@/types/User";
+import { User } from "@/utils/types/User";
 
 
 export const getUsers = async (page = 0) => {

@@ -1,4 +1,4 @@
-import { Event } from "@/types/Event";
+import { Event } from "@/utils/types/Event";
 
 type EventMobileItemProps = {
   event: Event;

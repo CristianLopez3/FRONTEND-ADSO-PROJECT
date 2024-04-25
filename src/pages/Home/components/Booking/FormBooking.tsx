@@ -7,7 +7,7 @@ import {
   Reservation,
   ReservationForm,
   reservationSchema,
-} from "@/types/Reservation";
+} from "@/utils/types/Reservation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -32,6 +32,7 @@ const FormBooking = () => {
       email: "",
       phoneNumber: "",
       reservationDate: "",
+      reservationTime: "",
       description: "",
       numberOfPeople: undefined,
     },
@@ -53,8 +54,6 @@ const FormBooking = () => {
     async (data) => {
       try {
         setIsLoading(true);
-        console.log("Data received by onSubmit:", data); // Agregado
-
         data.id = data.id === "" || data.id === null ? null : data.id;
         const reservation: Reservation = {
           id: data.id,
@@ -62,9 +61,10 @@ const FormBooking = () => {
           email: data.email,
           phoneNumber: data.phoneNumber,
           description: data.description,
-          reservationDate: data.reservationDate,
+          reservationDate: `${data.reservationDate}T${data.reservationTime}:00`,
           numberOfPeople: data.numberOfPeople,
         };
+        console.log(reservation.reservationDate);
         await dispatch(createReservationAction(reservation));
         reset();
         setIsReservationSuccess(true);
@@ -83,6 +83,8 @@ const FormBooking = () => {
       error && <p className="text-red-600 text-sm pl-1">{error.message}</p>
     );
   };
+
+
 
   return (
     <div className="width-full mx-auto">
@@ -107,13 +109,20 @@ const FormBooking = () => {
         />
         {renderErrorMessage(errors.email!)}
 
-        <div className="w-full grid grid-cols-1 items-center gap-4  md:grid-cols-2">
+        <div className="w-full grid grid-cols-1 items-center gap-4  md:grid-cols-3">
           <div className="input-validation">
             <InputField
               {...register("reservationDate")}
-              type="datetime-local"
+              type="date"
             />
             {renderErrorMessage(errors.reservationDate!)}
+          </div>
+          <div className="input-validation">
+            <InputField
+              {...register("reservationTime")}
+              type="time"
+            />
+            {renderErrorMessage(errors.reservationTime!)}
           </div>
           <div className="input-validation">
             <InputField

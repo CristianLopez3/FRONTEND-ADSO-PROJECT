@@ -1,5 +1,5 @@
 import { PiTrash, PiPencil } from "react-icons/pi";
-import { Reservation } from "@/types/Reservation";
+import { Reservation } from "@/utils/types/Reservation";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 import BookForm from "./BookForm";

@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
 
 import { InputField } from "@/components/Input";
-import { User } from "@/types/User";
+import { User } from "@/utils/types/User";
 import { AppDispatch } from "@/store/store";
 
 import {
@@ -13,7 +13,7 @@ import {
   getAllUsersAction,
   updateUserAction,
 } from "@/store/user";
-import { type UserFormTypes, userSchema } from "@/types/User";
+import { type UserFormTypes, userSchema } from "@/utils/types/User";
 import styles from "./styles.module.css";
 
 type UserFormProps = {

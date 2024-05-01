@@ -16,6 +16,7 @@ import DashboardTemplate from "@/layout/DashboardTemplate";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import Profile from "@/pages/Dashboard/components/profile/Profile";
 import Report from "@/pages/Dashboard/components/book/Reports/Report";
+import Events from "@/pages/Home/components/events/Events";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "menu", element: <Menu /> },
       { path: "book", element: <Booking /> },
+      { path: "events", element: <Events />}
     ],
   },
   {

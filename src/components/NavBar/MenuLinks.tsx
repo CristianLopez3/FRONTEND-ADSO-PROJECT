@@ -13,6 +13,7 @@ const MenuLinks = ({ variant, handleHamburgerMenu }: MenuLinksProps) => {
     { path: ROUTES.HOME.ROOT, text: "Home" },
     { path: ROUTES.HOME.MENU, text: "Menu" },
     { path: ROUTES.HOME.BOOK, text: "Book" },
+    {path: ROUTES.HOME.EVENTS, text: "Events"},
     { path: ROUTES.LOGIN, text: "Login" }
   ];
 

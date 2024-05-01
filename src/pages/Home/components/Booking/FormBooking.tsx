@@ -23,7 +23,7 @@ const FormBooking = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted },
+    formState: { errors },
     reset,
   } = useForm<ReservationForm>({
     defaultValues: {

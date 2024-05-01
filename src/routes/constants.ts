@@ -2,7 +2,8 @@ export const ROUTES = {
   HOME: {
     ROOT: "/",
     MENU: "/menu",
-    BOOK: "/book"
+    BOOK: "/book",
+    EVENTS: "/events",
   },
   LOGIN: "/login",
   DASHBOARD: {

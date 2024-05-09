@@ -36,7 +36,7 @@ const UserForm: React.FC<UserFormProps> = ({
 }) => {
   const title = mode === "update" ? "Update User" : "Create User";
   const buttonText = mode === "update" ? "Update" : "Create";
-  console.log(email);
+
   const {
     register,
     handleSubmit,
@@ -60,7 +60,6 @@ const UserForm: React.FC<UserFormProps> = ({
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
 
-  // TODO - Add the logic to create an user with his respective Role.
   const onSubmit: SubmitHandler<UserFormTypes> = useCallback(
     async (data) => {
       try {
@@ -72,11 +71,12 @@ const UserForm: React.FC<UserFormProps> = ({
           email: data.email,
           password: data.password,
           identification: data.identification,
-          cellphone: data.cellphone.toString(),
+          cellphone: "313312334",
           role: data.role,
         };
 
         if (mode === "update") {
+          console.log(user);
           await dispatch(updateUserAction(user));
         } else {
           await dispatch(createUserAction(user));
@@ -121,12 +121,12 @@ const UserForm: React.FC<UserFormProps> = ({
             </>
           }
 
-          <div className="md:flex md:flex-row gap-x-6">
-            <div>
+          <div className="md:flex md:flex-row  gap-x-6">
+            <div className="w-full">
               <InputField {...register("cellphone")} type="number" />
               {renderErrorMessage(errors.cellphone!)}
             </div>
-            <div>
+            <div className="w-full">
               <InputField {...register("identification")} />
               {renderErrorMessage(errors.identification!)}
             </div>

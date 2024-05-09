@@ -21,7 +21,7 @@ export const usersService = {
     return instance.delete(`${ENDPOINT}/${id}`);
   },
 
-  update: function ({ user }: { user: User }) {
+  update:  ({ user }: { user: User }) => {
     return instance.put(`${ENDPOINT}/${user.id!}`, user);
   },
 

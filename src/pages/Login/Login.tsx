@@ -83,18 +83,20 @@ const Login = () => {
             icon={<PiAt />}
             {...register("username")}
             type="email"
+            placeholder="Email Address"
             styles="mb-6"
           />
           {renderErrorMessage(errors.username!)}
           <InputIcon
             icon={<PiKey />}
             {...register("password")}
+            placeholder="Password"
             type="password"
           />
           {renderErrorMessage(errors.password!)}
 
-          <div className="flex flex-col items-center justify-between mt-6 space-y-6 lg:flex-row lg:space-y-0">
-            <div className="font-thing text-black">Forgot Password</div>
+          <div className="flex flex-col items-center justify-around mt-6 space-y-6 lg:flex-row lg:space-y-0">
+            <div className="font-thing text-black">Let's Login</div>
             <Button
               className={`${styles.button} ${
                 isSubmitting && "cursor-not-allowed"

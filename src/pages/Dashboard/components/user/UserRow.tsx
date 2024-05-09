@@ -81,7 +81,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
             name={name}
             lastname={lastname}
             email={email}
-            cellphone={cellphone}
+            cellphone={cellphone.toString()}
             identification={identification}
             role={role}
           />

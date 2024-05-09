@@ -22,7 +22,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const userCookie = getCookies(USER_COOKIE);
 
     if (!token && !userCookie) {
-      navigate("/login?error=There was an error, try sign in again!.");
+      navigate("/login?error=User or password incorrects, try again!.");
     }
   }, [auth, navigate]);
 

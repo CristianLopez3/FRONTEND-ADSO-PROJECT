@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
 import { User } from "@/utils/types/User";
@@ -29,6 +29,9 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
     await dispatch(getAllUsersAction());
   };
 
+  const toggleAddModal = useCallback(() => {
+    setOpenUpdateModal((prevState) => !prevState);
+  }, []);
 
 
   return (
@@ -76,7 +79,7 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
         >
           <UserForm
             mode="update"
-            handleUpdateModal={() => setOpenUpdateModal(!openUpdateModal)}
+            handleUpdateModal={toggleAddModal}
             id={id!}
             name={name}
             lastname={lastname}

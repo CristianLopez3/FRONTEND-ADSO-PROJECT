@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PiSpinnerGapLight } from "react-icons/pi";
 
 import { InputField } from "@/components/Input";
-import { User } from "@/utils/types/User";
+import { User, USER_ROLES } from "@/utils/types/User";
 import { AppDispatch } from "@/store/store";
 
 import {
@@ -59,7 +59,7 @@ const UserForm: React.FC<UserFormProps> = ({
   const renderErrorMessage = (error: { message?: string }) => {
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
-
+  console.log(mode);
   const onSubmit: SubmitHandler<UserFormTypes> = useCallback(
     async (data) => {
       try {
@@ -75,12 +75,9 @@ const UserForm: React.FC<UserFormProps> = ({
           role: data.role,
         };
 
-        if (mode === "update") {
-          console.log(user);
-          await dispatch(updateUserAction(user));
-        } else {
-          await dispatch(createUserAction(user));
-        }
+        mode === "update"
+          ? await dispatch(updateUserAction(user))
+          : await dispatch(createUserAction(user));
 
         await dispatch(getAllUsersAction());
 
@@ -111,15 +108,22 @@ const UserForm: React.FC<UserFormProps> = ({
             </div>
           </div>
 
-          <InputField {...register("email")} placeholder="email" type="email" />
-          {renderErrorMessage(errors.email!)}
-          {
-            mode === "create" &&<>
-            
-            <InputField {...register("password")} type="password" />
-            {renderErrorMessage(errors.password!)}
+          {mode !== "update" && (
+            <>
+              <InputField
+                {...register("email")}
+                placeholder="email"
+                type="email"
+              />
+              {renderErrorMessage(errors.email!)}
+              {mode === "create" && (
+                <>
+                  <InputField {...register("password")} type="password" />
+                  {renderErrorMessage(errors.password!)}
+                </>
+              )}
             </>
-          }
+          )}
 
           <div className="md:flex md:flex-row  gap-x-6">
             <div className="w-full">
@@ -132,7 +136,16 @@ const UserForm: React.FC<UserFormProps> = ({
             </div>
           </div>
 
-          <InputField {...register("role")} />
+          {/* <div className="md:flex md:flex-row gap-x-6"> */}
+          <select {...register("role")}>
+            {!role  && <option value="x">Select a role please...</option> }
+            <option value={USER_ROLES.ADMIN}>Administrador</option>
+            <option value={USER_ROLES.SUB_ADMIN}> Sub Administrator </option>
+            <option value={USER_ROLES.WAITRESS}>Waitress </option>
+            <option value={USER_ROLES.COOK}>Cook</option>
+            <option value={USER_ROLES.BARTENDER}>Bartender</option>
+
+          </select>
           {renderErrorMessage(errors.role!)}
 
           <div className={styles.form_buttons}>

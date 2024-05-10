@@ -11,6 +11,14 @@ export interface User {
   role: string;
 }
 
+export const USER_ROLES = {
+  ADMIN: "ADMIN",
+  SUB_ADMIN: "SUB_ADMIN",
+  WAITRESS: "WAITRESS",
+  BARTENDER: "BARTENDER",
+  COOK: "COOK",
+};
+
 export interface UserAuthResponse {
   id: string | number;
   name: string;
@@ -26,11 +34,10 @@ export interface UserReducerState {
   data: User[];
   count?: number | null;
   isError: boolean;
-  meta?:{
+  meta?: {
     totalPages?: number | null;
-  }
+  };
 }
-
 
 export const userSchema = z.object({
   id: z.union([z.string(), z.number(), z.null()]),
@@ -38,10 +45,11 @@ export const userSchema = z.object({
   lastname: z.string().min(3, "Lastname is required"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password needs at least 8 characteres"),
-  identification: z.string().min(7, "Identification have at least 7 characters"),
+  identification: z
+    .string()
+    .min(7, "Identification have at least 7 characters"),
   cellphone: z.string().min(7, "Cellphone is required"),
   role: z.string().min(4, "Role is required"),
 });
 
 export type UserFormTypes = z.infer<typeof userSchema>;
-

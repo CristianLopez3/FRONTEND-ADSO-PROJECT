@@ -4,19 +4,28 @@ import { CheckReservation, type Reservation } from "@/utils/types/Reservation";
 const ENDPOINT = "reservations";
 
 export const reservationsService = {
-  addReservation: function (reservation: Reservation) {
+  addReservation:  (reservation: Reservation)=> {
     return instance.post(ENDPOINT, reservation);
   },
 
-  getResevations: function (page = 1 ) {
+  updateReservation:  (reservation: Reservation)=> {
+    return instance.put(`${ENDPOINT}/${reservation.id!}`, reservation);
+  },
+
+  deleteReservation:  (id: number)=> {
+    return instance.delete(`${ENDPOINT}/${id!}`);
+  },
+  
+
+  getResevations:  (page = 1 ) => {
     return instance.get(`${ENDPOINT}?page=${page}`);
   },
 
-  getUnCheckedReservations: function () {
+  getUnCheckedReservations:  () => {
     return instance.get(`${ENDPOINT}/unchecked-in`);
   },
 
-  checkinReservation: function ({ id, checkedIn }: CheckReservation) {
+  checkinReservation:  ({ id, checkedIn }: CheckReservation) => {
     return instance.patch(`${ENDPOINT}/check/` + id, { checkedIn });
   },
 

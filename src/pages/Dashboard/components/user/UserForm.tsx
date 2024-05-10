@@ -59,25 +59,26 @@ const UserForm: React.FC<UserFormProps> = ({
   const renderErrorMessage = (error: { message?: string }) => {
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
-  console.log(mode);
+
   const onSubmit: SubmitHandler<UserFormTypes> = useCallback(
     async (data) => {
       try {
-        data.id = data.id === "" || data.id === null ? null : data.id;
         const user: User = {
-          id: data.id,
+          id: data.id ? data.id : null,
           name: data.name,
           lastname: data.lastname,
           email: data.email,
           password: data.password,
           identification: data.identification,
-          cellphone: "313312334",
+          cellphone: data.cellphone,
           role: data.role,
         };
-
-        mode === "update"
-          ? await dispatch(updateUserAction(user))
-          : await dispatch(createUserAction(user));
+        
+        if (mode === "update") {
+          await dispatch(updateUserAction(user));
+        } else {
+          await dispatch(createUserAction(user));
+        }
 
         await dispatch(getAllUsersAction());
 
@@ -144,7 +145,6 @@ const UserForm: React.FC<UserFormProps> = ({
             <option value={USER_ROLES.WAITRESS}>Waitress </option>
             <option value={USER_ROLES.COOK}>Cook</option>
             <option value={USER_ROLES.BARTENDER}>Bartender</option>
-
           </select>
           {renderErrorMessage(errors.role!)}
 

@@ -20,7 +20,7 @@ import Pagination from "@/components/Pagination";
 // Move fetchMenus outside of the component
 const fetchMenus = async (dispatch: AppDispatch, page: number) => {
   try {
-    await dispatch(getAllMenusAction());
+    await dispatch(getAllMenusAction(page));
   } catch (error) {
     console.log(error);
   }
@@ -32,7 +32,6 @@ const Menus = () => {
   const menus = useSelector((state: RootState) => state.menus);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  // Use useCallback to memoize event handlers
   const toggleAddModal = useCallback(() => {
     setAddModal((prevState) => !prevState);
   }, []);

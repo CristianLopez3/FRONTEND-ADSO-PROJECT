@@ -1,20 +1,7 @@
-# Utiliza una imagen base de Node.js con Alpine
-FROM node:alpine
-
-# Establece el directorio de trabajo en el contenedor
+FROM node:20-alpine
 WORKDIR /app
-
-# Copia el archivo package.json y package-lock.json (si está disponible)
-COPY package*.json ./
-
-# Instala las dependencias del proyecto
-RUN npm install
-
-# Copia el código fuente del proyecto al contenedor
+COPY package.json .
+RUN npm i
 COPY . .
-
-# Expone el puerto que tu aplicación utilizará
 EXPOSE 5174
-
-# Comando para iniciar tu aplicación
 CMD [ "npm", "run", "dev" ]

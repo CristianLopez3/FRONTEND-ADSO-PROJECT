@@ -38,7 +38,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
       if (changeStateAction.fulfilled.match(resultAction)) {
         setMenuState(newState);
       }
-      // Update only the changed menu in the state
+    
     } catch (error) {
       console.error("Failed to change menu state:", error);
     }

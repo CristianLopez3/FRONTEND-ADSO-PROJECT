@@ -10,11 +10,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
-import { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import {
   createReservationAction,
   getReservationsAction,
+  updateReservationAction,
 } from "@/store/reservations";
 import Button from "@/components/Button";
 
@@ -23,7 +24,7 @@ type BookFormProps = {
   mode: string;
 } & Partial<ReservationForm>;
 
-const BookForm = ({
+const BookForm: React.FC<BookFormProps> = ({
   handleModal,
   mode,
   id,
@@ -33,7 +34,8 @@ const BookForm = ({
   reservationDate,
   description,
   numberOfPeople,
-}: BookFormProps) => {
+}) => {
+  const [error, setError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -44,8 +46,10 @@ const BookForm = ({
       name,
       phoneNumber,
       email,
-      reservationDate: reservationDate ? reservationDate.split('T')[0] : '', // Divide la fecha
-      reservationTime: reservationDate ? reservationDate.split('T')[1].substring(0, 5) : '', // Divide la hora
+      reservationDate: reservationDate ? reservationDate.split("T")[0] : "", // Divide la fecha
+      reservationTime: reservationDate
+        ? reservationDate.split("T")[1].substring(0, 5)
+        : "", // Divide la hora
       description,
       numberOfPeople,
     },
@@ -59,9 +63,17 @@ const BookForm = ({
   const onSubmit: SubmitHandler<ReservationForm> = useCallback(
     async (data) => {
       try {
-  
         const reservationDateTime = `${data.reservationDate}T${data.reservationTime}:00`;
-  
+        const currentDate = new Date().toISOString().split("T")[0];
+        if (
+          reservationDate &&
+          reservationDate < currentDate &&
+          mode === "update"
+        ) {
+          console.log("error"); 
+          setError("Cannot edit a reservation that has already passed.");
+          return;
+        }
         data.id = data.id === "" || data.id === null ? null : data.id;
         const reservation: Reservation = {
           id: data.id,
@@ -72,11 +84,12 @@ const BookForm = ({
           reservationDate: reservationDateTime,
           numberOfPeople: data.numberOfPeople,
         };
-  
+
         console.log("Reservation object to be dispatched:", reservation);
-  
+
         if (mode === "update" && reservation.id !== null) {
-          // todo
+          reservation.checkedIn = true;
+          await dispatch(updateReservationAction(reservation));
         } else {
           await dispatch(createReservationAction(reservation));
         }
@@ -94,13 +107,13 @@ const BookForm = ({
     return error && <p className="p-1 text-red-700">{error.message}</p>;
   };
 
-
   return (
     <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
       <div className="flex justify-center items-center mb-8">
         <PiPencil size={52} color="orange" />
       </div>
       <h3 className="text-lg font-black text-gray-800">{text}</h3>
+      {error && <p className="p-1 text-red-700 mt-4 bg-red-100 px-4 py-2 rounded-md">{error}</p>}
       <div className="text-left text-sm text-gray-500">
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />

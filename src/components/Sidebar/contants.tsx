@@ -1,11 +1,7 @@
 // menuItems.ts
 import { ROUTES } from "@/routes/constants";
-import { PiBowlFood } from "react-icons/pi";
-import {
-  LuHome,
-  LuUserCircle,
-  LuBook,
-} from "react-icons/lu";
+import { PiBowlFood, PiChartBarDuotone } from "react-icons/pi";
+import { LuHome, LuUserCircle, LuBook } from "react-icons/lu";
 
 type MenuItem = {
   path: string;
@@ -15,9 +11,9 @@ type MenuItem = {
 };
 
 /**
-** getMenuItems it's a function that returns an array of objects with the properties path, icon, text and alert
-** that will be rendering in the SidebarItem component
-*/
+ ** getMenuItems it's a function that returns an array of objects with the properties path, icon, text and alert
+ ** that will be rendering in the SidebarItem component
+ */
 
 export function getMenuItems(reservationAlert: boolean): MenuItem[] {
   return [
@@ -45,7 +41,11 @@ export function getMenuItems(reservationAlert: boolean): MenuItem[] {
       text: "Reservations",
       alert: reservationAlert,
     },
+    {
+      path: ROUTES.DASHBOARD.RESERVATIONS.REPORT,
+      icon: <PiChartBarDuotone size={20} />,
+      text: "Reports",
+      alert: false,
+    },
   ];
 }
-
-

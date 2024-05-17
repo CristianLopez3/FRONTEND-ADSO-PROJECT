@@ -15,6 +15,15 @@ export const createReservation = async (reservation: Reservation) => {
   return response.data;
 };
 
+export const updateReservation = async (reservation: Reservation) => {
+  const response = await reservationsService.updateReservation(reservation);
+  return response.data;
+};
+
+export const deleteReservation = async (id: number) => {
+  const response = await reservationsService.deleteReservation(id);
+  return response.data;
+}
 
 export const getUncheckedReservations = async () => {
   const response = await reservationsService.getUnCheckedReservations();

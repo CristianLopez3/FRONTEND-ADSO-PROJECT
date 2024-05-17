@@ -7,7 +7,7 @@ import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import { formatedDate, formatedHour } from "@/utils/dateFormater";
 import { InputCheck } from "@/components/Input";
-import { checkedInReservationAction } from "@/store/reservations/reservationActions";
+import { checkedInReservationAction, deleteReservationAction } from "@/store/reservations/reservationActions";
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 
@@ -31,10 +31,15 @@ const BookRow = ({ book }: BookRowProps) => {
   const [checked, setChecked] = useState<boolean>(checkedIn!);
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleDeleteModal = useCallback(
-    () => setOpenDeleteModal((prev) => !prev),
-    []
-  );
+  const onDelete = async () => {
+    try {
+      await dispatch(deleteReservationAction(+id!));
+    } catch (error) {
+      console.error("Failed to delete menu:", error);
+    }
+  };
+
+ 
   const handleModal = useCallback(
     () => setOpenUpdateModal((prev) => !prev),
     []
@@ -65,9 +70,7 @@ const BookRow = ({ book }: BookRowProps) => {
 
         <td className="row-table w-fit">
           {email}
-          <span className={styles.tr_span}>
-            {phoneNumber}
-          </span>
+          <span className={styles.tr_span}>{phoneNumber}</span>
         </td>
         <td className="row-table max-w-[300px] text-balance">{description}</td>
         <td className="row-table bg-zinc-800 w-fit">
@@ -96,8 +99,12 @@ const BookRow = ({ book }: BookRowProps) => {
         </td>
       </tr>
 
-      <Modal width="1/4" open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteModal onDelete={handleDeleteModal} name={name} />
+      <Modal
+        width="1/4"
+        open={openDeleteModal}
+        onClose={() => setOpenDeleteModal(!openDeleteModal)}
+      >
+        <DeleteModal onDelete={onDelete} name={name} />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleModal}>

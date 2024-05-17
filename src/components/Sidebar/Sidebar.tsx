@@ -1,12 +1,7 @@
-import {
-  createContext,
-  useState,
-  useMemo,
-  useCallback
-} from "react";
+import { createContext, useState, useMemo, useCallback } from "react";
 
 import { useSelector } from "react-redux";
-import {  RootState } from "@/store/store";
+import { RootState } from "@/store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -19,6 +14,7 @@ import { getCookies, removeCookies } from "@/utils/cookies";
 import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
 
 import styles from "./styles.module.css";
+import { USER_ROLES } from "@/utils/types/User";
 
 export const SidebarContext = createContext<boolean>(true);
 
@@ -29,12 +25,11 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const user = getCookies(USER_COOKIE);
 
-
   const toggleExpanded = useCallback(() => {
     setExpanded((curr) => !curr);
   }, []);
 
-  const hasUncheckedInReservation = reservations.data.some( 
+  const hasUncheckedInReservation = reservations.data.some(
     (reservation) => reservation.checkedIn === false
   );
 
@@ -64,25 +59,32 @@ const Sidebar = () => {
 
         <SidebarContext.Provider value={expanded}>
           <ul className="flex-1 px-3">
-            {menuItems.map((item) => (
-              <SidebarItem
-                key={item.path}
-                path={item.path}
-                icon={item.icon}
-                text={item.text}
-                active={location.pathname === item.path}
-                alert={item.alert}
-              />
-            ))}
+            {menuItems.map((item) => {
+              if(user.role !== USER_ROLES.ADMIN) {
+                if(item.text === "User") {
+                  return null;
+                }
+              }
+              return (
+                <SidebarItem
+                  key={item.path}
+                  path={item.path}
+                  icon={item.icon}
+                  text={item.text}
+                  active={location.pathname === item.path}
+                  alert={item.alert}
+                />
+              );
+            })}
           </ul>
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">
-        <img
-          src={`https://ui-avatars.com/api/?name=${user?.name}+${user?.lastName}&background=808080&color=000000&bold=true`}
-          alt=""
-          className="w-10 h-10 rounded-md"
-        />
+          <img
+            src={`https://ui-avatars.com/api/?name=${user?.name}+${user?.lastName}&background=808080&color=000000&bold=true`}
+            alt=""
+            className="w-10 h-10 rounded-md"
+          />
 
           <div
             className={`

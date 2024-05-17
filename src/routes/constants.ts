@@ -15,6 +15,7 @@ export const ROUTES = {
       REPORT: "/dashboard/reservations/report",
     },
     PROFILE: "/dashboard/profile",
+    EVENTS: "/dashboard/events",
   },
   TEST: "/test",
   PAGE404: "*"

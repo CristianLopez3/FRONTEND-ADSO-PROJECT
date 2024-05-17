@@ -16,7 +16,7 @@ import DashboardTemplate from "@/layout/DashboardTemplate";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import Profile from "@/pages/Dashboard/components/profile/Profile";
 import Report from "@/pages/Dashboard/components/book/Reports/Report";
-import Events from "@/pages/Home/components/events/Events";
+import Events from "@/pages/Dashboard/Events";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "menu", element: <Menu /> },
       { path: "book", element: <Booking /> },
-      { path: "events", element: <Events />}
+      { path: "events", element: <Events /> },
     ],
   },
   {
@@ -94,11 +94,27 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "events",
+        element: (
+          <ProtectedRoute>
+            <Events />
+          </ProtectedRoute>
+        ),
+      }
     ],
   },
   {
     path: "test",
     element: <Test />,
+  },
+  {
+    path: "/unauthorized",
+    element: (
+      <>
+        <h1>Unauthorized</h1>
+      </>
+    ),
   },
   {
     path: "*",

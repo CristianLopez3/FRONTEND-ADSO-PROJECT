@@ -35,7 +35,6 @@ const UserForm: React.FC<UserFormProps> = ({
   lastname,
 }) => {
   const title = mode === "update" ? "Update User" : "Create User";
-  const buttonText = mode === "update" ? "Update" : "Create";
 
   const {
     register,
@@ -74,10 +73,11 @@ const UserForm: React.FC<UserFormProps> = ({
           role: data.role,
         };
         
-        if (mode === "update") {
-          await dispatch(updateUserAction(user));
-        } else {
+        if (mode == "create") {
           await dispatch(createUserAction(user));
+        } else {
+          console.log("update user", user)
+          await dispatch(updateUserAction(user));
         }
 
         await dispatch(getAllUsersAction());
@@ -152,7 +152,7 @@ const UserForm: React.FC<UserFormProps> = ({
             <button
               className={`btn ${
                 mode === "update" ? "btn-warning" : "btn-success"
-              } w-full`}
+              } w-full capitalize`}
               type="submit"
               disabled={isSubmitting}
             >
@@ -161,7 +161,7 @@ const UserForm: React.FC<UserFormProps> = ({
                   <PiSpinnerGapLight className="animate-spin" /> Processing...
                 </div>
               ) : (
-                buttonText
+                mode
               )}
             </button>
             <button

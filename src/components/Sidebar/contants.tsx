@@ -1,7 +1,7 @@
 // menuItems.ts
 import { ROUTES } from "@/routes/constants";
 import { PiBowlFood, PiChartBarDuotone } from "react-icons/pi";
-import { LuHome, LuUserCircle, LuBook } from "react-icons/lu";
+import { LuHome, LuUserCircle, LuBook, LuPenSquare } from "react-icons/lu";
 
 type MenuItem = {
   path: string;
@@ -47,5 +47,11 @@ export function getMenuItems(reservationAlert: boolean): MenuItem[] {
       text: "Reports",
       alert: false,
     },
+    {
+      path: ROUTES.DASHBOARD.EVENTS,
+      icon: <LuPenSquare size={20} />,
+      text: "Settings",
+      alert: false,
+    }
   ];
 }

@@ -8,15 +8,14 @@ import {
 } from "./userActions";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
 const initialState: UserReducerState = {
   isLoading: false,
   data: [],
   count: null,
   isError: false,
   meta: {
-    totalPages: null
-  }
+    totalPages: null,
+  },
 };
 
 // Functios to manage the state of the reducer
@@ -36,16 +35,19 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase(getAllUsersAction.pending, startLoading)
-    .addCase(
-      getAllUsersAction.fulfilled,
-      (state, action: PayloadAction<{content: User[], totalPages: number}>) => {
-        state.isLoading = false;
-        state.data = action.payload.content;
-        state.meta!.totalPages = action.payload.totalPages;
-      }
-    )
-    .addCase(getAllUsersAction.rejected, loadingFailed)
+      .addCase(getAllUsersAction.pending, startLoading)
+      .addCase(
+        getAllUsersAction.fulfilled,
+        (
+          state,
+          action: PayloadAction<{ content: User[]; totalPages: number }>
+        ) => {
+          state.isLoading = false;
+          state.data = action.payload.content;
+          state.meta!.totalPages = action.payload.totalPages;
+        }
+      )
+      .addCase(getAllUsersAction.rejected, loadingFailed)
       .addCase(createUserAction.pending, startLoading)
       .addCase(
         createUserAction.fulfilled,
@@ -65,13 +67,12 @@ const userSlice = createSlice({
       )
       .addCase(deleteUserAction.rejected, loadingFailed)
       .addCase(updateUserAction.pending, startLoading)
-      .addCase(
-        updateUserAction.fulfilled,
-        (state, action: PayloadAction<User[]>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-        }
-      )
+      .addCase(updateUserAction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = state.data.map((users) =>
+          users.id === action.payload.id ? action.payload : users
+        );
+      })
       .addCase(updateUserAction.rejected, loadingFailed)
       /**
        * ADD COUNT USERS

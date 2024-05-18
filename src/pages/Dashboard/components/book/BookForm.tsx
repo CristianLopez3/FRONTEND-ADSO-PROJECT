@@ -70,7 +70,6 @@ const BookForm: React.FC<BookFormProps> = ({
           reservationDate < currentDate &&
           mode === "update"
         ) {
-          console.log("error");
           setError("Cannot edit a reservation that has already passed.");
           return;
         }
@@ -84,8 +83,6 @@ const BookForm: React.FC<BookFormProps> = ({
           reservationDate: reservationDateTime,
           numberOfPeople: data.numberOfPeople,
         };
-
-        console.log("Reservation object to be dispatched:", reservation);
 
         if (mode === "update" && reservation.id !== null) {
           reservation.checkedIn = true;
@@ -154,10 +151,14 @@ const BookForm: React.FC<BookFormProps> = ({
           {renderErrorMessage(errors.numberOfPeople!)}
 
           <div className="flex gap-4 mt-8">
-            <Button variant="dark" className="w-full" content={text} />
+            <Button
+              variant="dark"
+              className="w-full uppercase"
+              content={text}
+            />
             <Button
               variant="light"
-              className="w-full  border border-zinc-400"
+              className="w-full  border border-zinc-400 uppercase"
               onClick={handleModal}
               content="cancel"
             />

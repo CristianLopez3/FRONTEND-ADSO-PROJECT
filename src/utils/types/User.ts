@@ -5,7 +5,7 @@ export interface User {
   name: string;
   lastname: string;
   email: string;
-  password: string;
+  password?: string;
   identification: string;
   cellphone: string;
   role: string;
@@ -46,7 +46,7 @@ export const userSchema = z.object({
   name: z.string().min(3, "Name is required"),
   lastname: z.string().min(3, "Lastname is required"),
   email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password needs at least 8 characteres"),
+  password: z.union([z.string(), z.null()]),
   identification: z
     .string()
     .min(7, "Identification have at least 7 characters"),

@@ -60,9 +60,11 @@ const menuSlice = createSlice({
       .addCase(updateMenuAction.pending, startLoading)
       .addCase(
         updateMenuAction.fulfilled,
-        (state, action: PayloadAction<Menu[]>) => {
+        (state, action) => {
           state.isLoading = false;
-          state.data = action.payload;
+          state.data = state.data.map((menu) =>
+            menu.id === action.payload.id ? action.payload : menu
+          );
         }
       )
       .addCase(updateMenuAction.rejected, loadingFailed)

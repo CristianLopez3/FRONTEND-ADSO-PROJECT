@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PiSpinnerGapLight } from "react-icons/pi";
 
 import { InputField } from "@/components/Input";
 import { User, USER_ROLES } from "@/utils/types/User";
@@ -40,7 +39,7 @@ const UserForm: React.FC<UserFormProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<UserFormTypes>({
     defaultValues: {
       id,
@@ -68,7 +67,7 @@ const UserForm: React.FC<UserFormProps> = ({
           name: data.name,
           lastname: data.lastname,
           email: data.email,
-          password: data.password,
+          password: data.password!,
           identification: data.identification,
           cellphone: data.cellphone,
           role: data.role,
@@ -98,7 +97,32 @@ const UserForm: React.FC<UserFormProps> = ({
       <div className={styles.form_form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
+          {mode === "update" && (
+            <>
+              <InputField
+                {...register("email")}
+                placeholder="email"
+                type="hidden"
+              />
+              {renderErrorMessage(errors.email!)}
 
+              <InputField {...register("password")} type="hidden" />
+              {renderErrorMessage(errors.password!)}
+
+              <select {...register("role")} className="hidden">
+                {!role && <option value="x">Select a role please...</option>}
+                <option value={USER_ROLES.ADMIN}>Administrador</option>
+                <option value={USER_ROLES.SUB_ADMIN}>
+                  {" "}
+                  Sub Administrator{" "}
+                </option>
+                <option value={USER_ROLES.WAITRESS}>Waitress </option>
+                <option value={USER_ROLES.COOK}>Cook</option>
+                <option value={USER_ROLES.BARTENDER}>Bartender</option>
+              </select>
+              {renderErrorMessage(errors.role!)}
+            </>
+          )}
           <div className={styles.form_input_flex}>
             <div className={`block ${styles.input_flex}`}>
               <InputField {...register("name")} />
@@ -124,6 +148,18 @@ const UserForm: React.FC<UserFormProps> = ({
                   {renderErrorMessage(errors.password!)}
                 </>
               )}
+              <select {...register("role")}>
+                {!role && <option value="x">Select a role please...</option>}
+                <option value={USER_ROLES.ADMIN}>Administrador</option>
+                <option value={USER_ROLES.SUB_ADMIN}>
+                  {" "}
+                  Sub Administrator{" "}
+                </option>
+                <option value={USER_ROLES.WAITRESS}>Waitress </option>
+                <option value={USER_ROLES.COOK}>Cook</option>
+                <option value={USER_ROLES.BARTENDER}>Bartender</option>
+              </select>
+              {renderErrorMessage(errors.role!)}
             </>
           )}
 
@@ -138,37 +174,21 @@ const UserForm: React.FC<UserFormProps> = ({
             </div>
           </div>
 
-          {/* <div className="md:flex md:flex-row gap-x-6"> */}
-          <select {...register("role")}>
-            {!role && <option value="x">Select a role please...</option>}
-            <option value={USER_ROLES.ADMIN}>Administrador</option>
-            <option value={USER_ROLES.SUB_ADMIN}> Sub Administrator </option>
-            <option value={USER_ROLES.WAITRESS}>Waitress </option>
-            <option value={USER_ROLES.COOK}>Cook</option>
-            <option value={USER_ROLES.BARTENDER}>Bartender</option>
-          </select>
-          {renderErrorMessage(errors.role!)}
-
           <div className={styles.form_buttons}>
-            <Button
-              variant="dark"
-              type="submit"
-              className="uppercase"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <div>
-                  <PiSpinnerGapLight className="animate-spin" /> Processing...
-                </div>
-              ) : (
-                mode
-              )}
+            <Button variant="dark" type="submit" className="uppercase">
+              {mode}
             </Button>
             <Button
               content="Cancel"
               variant="light"
               className="border border-zinc-500 uppercase"
-              onClick={handleUpdateModal || handleCreateUser}
+              onClick={() => {
+                if (mode === "create") {
+                  handleCreateUser?.();
+                } else {
+                  handleUpdateModal?.();
+                }
+              }}
             />
           </div>
         </form>

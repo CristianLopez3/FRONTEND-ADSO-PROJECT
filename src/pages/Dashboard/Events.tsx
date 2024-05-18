@@ -9,7 +9,6 @@ import EventForm from "./components/event/EventForm";
 
 const Events: React.FC = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
-  console.log(addModal);
 
   const toggleAddModal = useCallback(() => {
     setAddModal((prevState) => !prevState);

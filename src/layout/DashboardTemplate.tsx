@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router";
 import Sidebar from "../components/Sidebar";
 import { getCookies } from "@/utils/cookies";
-import { USER_COOKIE } from "@/store/auth";
+import { USER_COOKIE } from "@/service/store/auth";
 import { useEffect } from "react";
 
 const DashboardTemplate = () => {

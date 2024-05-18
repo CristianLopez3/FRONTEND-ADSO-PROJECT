@@ -2,30 +2,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RiBookOpenLine } from "react-icons/ri";
 import { PiBook } from "react-icons/pi";
-import { AppDispatch, RootState } from "@/store/store";
+import { AppDispatch, RootState } from "@/service/store/store";
 
 import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import Card from "./components/dashboard/Card";
 import Chart from "./components/dashboard/Chart";
 import { useContext, useEffect } from "react";
-import { countMenuAction } from "@/store/menus";
-import { countUsersAction } from "@/store/user";
-import { countReservationsAction } from "@/store/reservations";
+import { countMenuAction } from "@/service/store/menus";
+import { countUsersAction } from "@/service/store/user";
+import { countReservationsAction } from "@/service/store/reservations";
 import Profile from "./components/profile/Profile";
 import { UserContext } from "@/components/Auth/ProtectedRoute";
 
+import MiniTable from "./components/dashboard/MiniTable";
+
+// Move fetchMenus outside of the component
 
 const Dashboard = () => {
-  const user = useContext(UserContext);  
-  const menus = useSelector((state: RootState) => state.menus.count);
+  const user = useContext(UserContext);
+  const menus = useSelector((state: RootState) => state.menus);
+  const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.users.count);
   const reservations = useSelector(
     (state: RootState) => state.reservations.count
   );
-  const users = useSelector((state: RootState) => state.users.count);
-  const dispatch = useDispatch<AppDispatch>();
 
-  
-  
   useEffect(() => {
     const fetchCounts = async () => {
       try {
@@ -39,11 +40,10 @@ const Dashboard = () => {
     fetchCounts();
   }, [dispatch]);
 
-  
-  if(!user) {
-    return <div>Loading...</div>
+  if (!user) {
+    return <div>Loading...</div>;
   }
-  
+
   return (
     <>
       <header>
@@ -57,13 +57,13 @@ const Dashboard = () => {
         </DashboardNavbar>
       </header>
       <main className="px-2 md:px-8 mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+        <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <Profile />
 
           <article className="gap-2 grid lg:grid-cols-2">
             <Card
               title="Menus"
-              count={menus!}
+              count={menus.count!}
               variant="r-right"
               icon={<PiBook />}
             />
@@ -80,10 +80,18 @@ const Dashboard = () => {
               icon={<PiBook />}
             />
           </article>
-        </div>
-        <div className="hidden py-4 w-full overflow-x-scroll lg:block lg:w-1/2">
-          <Chart />
-        </div>
+        </section>
+
+        <section className="grid grid-cols-1 lg:grid-cols-2 w-full gap-4">
+          <article className="flex justify-center items-center w-full p-4  mt-2 rounded-lg">
+            <div className="bg-zinc-800 shadow-lg">
+              <MiniTable />
+            </div>
+          </article>
+          <article className="hidden py-4 w-full overflow-x-scroll lg:block lg:w-full">
+            <Chart />
+          </article>
+        </section>
       </main>
     </>
   );

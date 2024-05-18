@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
-import { changeStateAction, deleteMenuAction } from "@/store/menus/menuActions";
+import { AppDispatch } from "@/service/store/store";
+import { changeStateAction, deleteMenuAction } from "@/service/store/menus/menuActions";
 
 import { Menu } from "@/utils/types/Menu";
 import { Modal, DeleteModal } from "@/components/Modal";
@@ -71,7 +71,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
               <PiPencil />
             </Button>
             <Button
-              variant="danger"
+              variant="light"
               className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >

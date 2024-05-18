@@ -61,6 +61,10 @@
     @apply py-3 w-fit px-3 text-sm bg-zinc-800  border-0 text-zinc-200 whitespace-nowrap;
   }
 
+  .mini-row-table {
+    @apply py-3 w-full px-3 text-base bg-zinc-800  border-0 text-zinc-100 whitespace-nowrap;
+  }
+
   .container-section {
     @apply container mx-auto;
   }

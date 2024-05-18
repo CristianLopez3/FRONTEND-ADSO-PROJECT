@@ -30,7 +30,7 @@
 }
 
 .mobile_text {
-  @apply text-xs flex items-center justify-between space-x-2 md:text-sm gap-x-4;
+  @apply text-base flex items-center justify-between space-x-2 md:text-sm gap-x-4;
 }
 
 .mobile_description {

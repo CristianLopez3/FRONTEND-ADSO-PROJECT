@@ -50,7 +50,7 @@ export function getMenuItems(reservationAlert: boolean): MenuItem[] {
     {
       path: ROUTES.DASHBOARD.EVENTS,
       icon: <LuPenSquare size={20} />,
-      text: "Settings",
+      text: "Events",
       alert: false,
     }
   ];

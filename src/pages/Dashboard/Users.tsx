@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store/store";
-import { getAllUsersAction } from "@/store/user";
+import { AppDispatch, RootState } from "@/service/store/store";
+import { getAllUsersAction } from "@/service/store/user";
 
 import { RiAddFill } from "react-icons/ri";
 

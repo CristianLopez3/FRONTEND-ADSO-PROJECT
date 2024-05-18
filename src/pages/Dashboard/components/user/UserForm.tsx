@@ -6,15 +6,16 @@ import { PiSpinnerGapLight } from "react-icons/pi";
 
 import { InputField } from "@/components/Input";
 import { User, USER_ROLES } from "@/utils/types/User";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch } from "@/service/store/store";
 
 import {
   createUserAction,
   getAllUsersAction,
   updateUserAction,
-} from "@/store/user";
+} from "@/service/store/user";
 import { type UserFormTypes, userSchema } from "@/utils/types/User";
 import styles from "./styles.module.css";
+import Button from "@/components/Button";
 
 type UserFormProps = {
   handleUpdateModal?: () => void;
@@ -72,11 +73,11 @@ const UserForm: React.FC<UserFormProps> = ({
           cellphone: data.cellphone,
           role: data.role,
         };
-        
+
         if (mode == "create") {
           await dispatch(createUserAction(user));
         } else {
-          console.log("update user", user)
+          console.log("update user", user);
           await dispatch(updateUserAction(user));
         }
 
@@ -139,7 +140,7 @@ const UserForm: React.FC<UserFormProps> = ({
 
           {/* <div className="md:flex md:flex-row gap-x-6"> */}
           <select {...register("role")}>
-            {!role  && <option value="x">Select a role please...</option> }
+            {!role && <option value="x">Select a role please...</option>}
             <option value={USER_ROLES.ADMIN}>Administrador</option>
             <option value={USER_ROLES.SUB_ADMIN}> Sub Administrator </option>
             <option value={USER_ROLES.WAITRESS}>Waitress </option>
@@ -149,11 +150,10 @@ const UserForm: React.FC<UserFormProps> = ({
           {renderErrorMessage(errors.role!)}
 
           <div className={styles.form_buttons}>
-            <button
-              className={`btn ${
-                mode === "update" ? "btn-warning" : "btn-success"
-              } w-full capitalize`}
+            <Button
+              variant="dark"
               type="submit"
+              className="uppercase"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -163,13 +163,13 @@ const UserForm: React.FC<UserFormProps> = ({
               ) : (
                 mode
               )}
-            </button>
-            <button
-              className="btn btn-light w-full"
+            </Button>
+            <Button
+              content="Cancel"
+              variant="light"
+              className="border border-zinc-500 uppercase"
               onClick={handleUpdateModal || handleCreateUser}
-            >
-              Cancel
-            </button>
+            />
           </div>
         </form>
       </div>

@@ -1,4 +1,4 @@
-import { usersService } from "@/api/users";
+import { usersService } from "@/service/users";
 import { User } from "@/utils/types/User";
 
 

@@ -1,8 +1,8 @@
 import Button from "@/components/Button";
-import { AppDispatch, RootState } from "@/store/store";
+import { AppDispatch, RootState } from "@/service/store/store";
 import { useEffect } from "react";
 import { Category } from "@/utils/types/Menu";
-import { getAllCategories } from "@/store/menus/CategoryReducer";
+import { getAllCategories } from "@/service/store/menus/CategoryReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 type MenuNavProps = {

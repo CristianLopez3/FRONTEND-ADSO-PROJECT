@@ -2,15 +2,15 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AppDispatch, RootState } from "@/store/store";
+import { AppDispatch, RootState } from "@/service/store/store";
 import { formStyles } from "./constants";
 
 import {
   addMenuAction,
   getAllMenusAction,
   updateMenuAction,
-} from "@/store/menus";
-import { getAllCategories } from "@/store/menus/CategoryReducer";
+} from "@/service/store/menus";
+import { getAllCategories } from "@/service/store/menus/CategoryReducer";
 import { MenuPost } from "@/utils/types/Menu";
 
 import { type MenuForm, menuSchema } from "@/utils/types/Menu";
@@ -165,7 +165,11 @@ const MenuForm = ({
           <div className="md:flex md:flex-row gap-x-6">
             <select {...register("state")}>
               {options.map((option) => (
-                <option key={option.toString()} value={option} defaultValue={"active"}>
+                <option
+                  key={option.toString()}
+                  value={option}
+                  defaultValue={"active"}
+                >
                   {option}
                 </option>
               ))}
@@ -179,7 +183,11 @@ const MenuForm = ({
               <select {...register("idCategory")}>
                 <option value="">Select a category: </option>
                 {categories.data.map((category) => (
-                  <option key={category.id.toString()} value={category.id} defaultValue={1}>
+                  <option
+                    key={category.id.toString()}
+                    value={category.id}
+                    defaultValue={1}
+                  >
                     {category.name}
                   </option>
                 ))}
@@ -189,16 +197,12 @@ const MenuForm = ({
           {renderErrorMessage(errors.idCategory!)}
 
           <div className={formStyles.buttons}>
-            <Button
-              variant={mode === "update" ? "warning" : "success"}
-              className="w-full"
-              content={buttonText}
-            />
+            <Button variant="dark" className="w-full uppercase" content={buttonText} />
             <Button
               variant="light"
-              content="cancel"
+              className="w-full border border-zinc-500"
+              content="CANCEL"
               onClick={handleModal}
-              className="w-full"
             />
           </div>
         </form>

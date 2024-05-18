@@ -6,6 +6,9 @@ import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import Button from "@/components/Button";
 import { formatedDate, formatedHour } from "@/utils/dateFormater";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/service/store/store";
+import { deleteReservationAction } from "@/service/store/reservations";
 export type BookingMobileItemProps = { book: Reservation };
 
 const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
@@ -20,7 +23,15 @@ const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
   } = book;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
 
+  const onDelete = async () => {
+    try {
+      await dispatch(deleteReservationAction(+id!));
+    } catch (error) {
+      console.error("Failed to delete menu:", error);
+    }
+  };
   const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
   const handleUpdateModal = () => setOpenUpdateModal(!openUpdateModal);
   return (
@@ -40,8 +51,9 @@ const BookMobileItem: React.FC<BookingMobileItemProps> = ({ book }) => {
           </Button>
         </div>
       </article>
+
       <Modal open={openDeleteModal} onClose={handleDeleteModal}>
-        <DeleteModal onDelete={handleDeleteModal} name={name} />
+        <DeleteModal onDelete={onDelete} name={name} />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleUpdateModal}>

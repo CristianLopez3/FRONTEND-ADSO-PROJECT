@@ -1,4 +1,4 @@
-import { reservationsService } from "@/api/reservations";
+import { reservationsService } from "@/service/reservations";
 import { Reservation } from "@/utils/types/Reservation";
 import { CheckReservation } from "@/utils/types/Reservation"; // Import the CheckReservation type
 

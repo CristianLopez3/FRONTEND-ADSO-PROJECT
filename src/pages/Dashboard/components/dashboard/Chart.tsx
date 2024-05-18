@@ -1,4 +1,4 @@
-import { getMonthlyReservations } from "@/store/reservations/reservationService";
+import { getMonthlyReservations } from "@/service/store/reservations/reservationService";
 import {
   Chart as ChartJS,
   CategoryScale,

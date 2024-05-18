@@ -1,7 +1,7 @@
 import {
   getReservationsForCurrentMonth,
   getReservationsForPreviousMonth,
-} from "@/store/reservations/reservationService";
+} from "@/service/store/reservations/reservationService";
 import {
   Chart as ChartJS,
   CategoryScale,

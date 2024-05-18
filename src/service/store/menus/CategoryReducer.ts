@@ -1,4 +1,4 @@
-import { categoryService } from "@/api/category";
+import { categoryService } from "@/service/category";
 import { Category } from "@/utils/types/Menu";
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 

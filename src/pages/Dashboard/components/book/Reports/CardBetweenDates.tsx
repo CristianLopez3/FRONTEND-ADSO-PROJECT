@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./styles.module.css";
-import { getReservationsBetweenDates } from "@/store/reservations/reservationService";
+import { getReservationsBetweenDates } from "@/service/store/reservations/reservationService";
 
 const getReservations = async (start: Date, end: Date) => {
   const data = await getReservationsBetweenDates(start, end);

@@ -6,8 +6,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store/store";
-import { loginAction, TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
+import { AppDispatch, RootState } from "@/service/store/store";
+import { loginAction, TOKEN_COOKIE, USER_COOKIE } from "@/service/store/auth";
 
 import { InputIcon } from "@/components/Input";
 import Button from "@/components/Button";

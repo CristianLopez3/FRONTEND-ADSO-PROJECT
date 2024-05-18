@@ -1,7 +1,7 @@
-import { createContext, useState, useMemo, useCallback } from "react";
+import { createContext, useState, useMemo, useCallback, useEffect } from "react";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/service/store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -11,10 +11,11 @@ import { PiArrowSquareIn } from "react-icons/pi";
 import { getMenuItems } from "./contants";
 import { ROUTES } from "@/routes/constants";
 import { getCookies, removeCookies } from "@/utils/cookies";
-import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
+import { TOKEN_COOKIE, USER_COOKIE } from "@/service/store/auth";
 
 import styles from "./styles.module.css";
 import { USER_ROLES } from "@/utils/types/User";
+import { getUncheckedReservationsAction } from "@/service/store/reservations";
 
 export const SidebarContext = createContext<boolean>(true);
 
@@ -24,6 +25,21 @@ const Sidebar = () => {
   const reservations = useSelector((state: RootState) => state.reservations);
   const navigate = useNavigate();
   const user = getCookies(USER_COOKIE);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+     const uncheckedReservations = async () => {
+        try {
+          await dispatch(getUncheckedReservationsAction());
+        } catch(e){
+          console.log(e)
+        }
+     }
+     uncheckedReservations();
+    if(!user) {
+      navigate(ROUTES.LOGIN);
+    }
+  }, [])
 
   const toggleExpanded = useCallback(() => {
     setExpanded((curr) => !curr);
@@ -82,7 +98,7 @@ const Sidebar = () => {
         <div className="border-t flex p-3">
           <img
             src={`https://ui-avatars.com/api/?name=${user?.name}+${user?.lastName}&background=808080&color=000000&bold=true`}
-            alt=""
+            alt="icon"
             className="w-10 h-10 rounded-md"
           />
 

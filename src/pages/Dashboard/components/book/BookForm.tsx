@@ -9,14 +9,14 @@ import {
 } from "@/utils/types/Reservation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch } from "@/service/store/store";
 import React, { useCallback, useState } from "react";
 
 import {
   createReservationAction,
   getReservationsAction,
   updateReservationAction,
-} from "@/store/reservations";
+} from "@/service/store/reservations";
 import Button from "@/components/Button";
 
 type BookFormProps = {
@@ -70,7 +70,7 @@ const BookForm: React.FC<BookFormProps> = ({
           reservationDate < currentDate &&
           mode === "update"
         ) {
-          console.log("error"); 
+          console.log("error");
           setError("Cannot edit a reservation that has already passed.");
           return;
         }
@@ -108,12 +108,16 @@ const BookForm: React.FC<BookFormProps> = ({
   };
 
   return (
-    <div className="mx-auto my-4 w-48 sm:w-56 md:w-72 text-center">
+    <div className="mx-auto my-4 w-48 sm:w-56 md:w-full md:px-8 text-center">
       <div className="flex justify-center items-center mb-8">
         <PiPencil size={52} color="orange" />
       </div>
       <h3 className="text-lg font-black text-gray-800">{text}</h3>
-      {error && <p className="p-1 text-red-700 mt-4 bg-red-100 px-4 py-2 rounded-md">{error}</p>}
+      {error && (
+        <p className="p-1 text-red-700 mt-4 bg-red-100 px-4 py-2 rounded-md">
+          {error}
+        </p>
+      )}
       <div className="text-left text-sm text-gray-500">
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField {...register("id")} type="hidden" />
@@ -122,37 +126,38 @@ const BookForm: React.FC<BookFormProps> = ({
           <InputField {...register("name")} />
           {renderErrorMessage(errors.name!)}
 
-          <InputField {...register("phoneNumber")} placeholder="phone number" />
-          {renderErrorMessage(errors.phoneNumber!)}
-
           <InputField {...register("email")} />
           {renderErrorMessage(errors.email!)}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField {...register("reservationDate")} type="date" />
+            {renderErrorMessage(errors.reservationDate!)}
 
-          <InputField {...register("reservationDate")} type="date" />
-          {renderErrorMessage(errors.reservationDate!)}
-
-          <InputField {...register("reservationTime")} type="time" />
-          {renderErrorMessage(errors.reservationTime!)}
+            <InputField {...register("reservationTime")} type="time" />
+            {renderErrorMessage(errors.reservationTime!)}
+          </div>
 
           <InputField {...register("description")} />
           {renderErrorMessage(errors.description!)}
 
-          <InputField
-            {...register("numberOfPeople")}
-            placeholder="number of people"
-            type="number"
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField
+              {...register("phoneNumber")}
+              placeholder="phone number"
+            />
+            {renderErrorMessage(errors.phoneNumber!)}
+            <InputField
+              {...register("numberOfPeople")}
+              placeholder="number of people"
+              type="number"
+            />
+          </div>
           {renderErrorMessage(errors.numberOfPeople!)}
 
           <div className="flex gap-4 mt-8">
-            <Button
-              variant={`${mode === "update" ? "warning" : "success"}`}
-              className="w-full"
-              content={text}
-            />
+            <Button variant="dark" className="w-full" content={text} />
             <Button
               variant="light"
-              className="w  -full"
+              className="w-full  border border-zinc-400"
               onClick={handleModal}
               content="cancel"
             />

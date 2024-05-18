@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 
-import { RootState } from "@/store/store";
-import { TOKEN_COOKIE, USER_COOKIE } from "@/store/auth";
+import { RootState } from "@/service/store/store";
+import { TOKEN_COOKIE, USER_COOKIE } from "@/service/store/auth";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;

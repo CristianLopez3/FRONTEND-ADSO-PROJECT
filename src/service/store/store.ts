@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userReducer } from "./user";
-import { menuReducer } from "@/store/menus";
+import { menuReducer } from "./menus";
 import CategoryReducer from "./menus/CategoryReducer";
 import { authReducer } from "./auth";
 import { reservationReducer } from "./reservations";

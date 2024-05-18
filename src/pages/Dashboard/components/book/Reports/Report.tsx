@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import {
   getReservationsForCurrentMonth,
   getUncheckedInReserations,
-} from "@/store/reservations/reservationService";
+} from "@/service/store/reservations/reservationService";
 
 const Report = () => {
   const [uncheckedIn, setUncheckedIn] = useState<number>(0);

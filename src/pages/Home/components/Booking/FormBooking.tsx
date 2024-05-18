@@ -1,8 +1,8 @@
 import Button from "@/components/Button";
 import { InputField } from "@/components/Input";
 import { Modal } from "@/components/Modal";
-import { createReservationAction } from "@/store/reservations";
-import { AppDispatch } from "@/store/store";
+import { createReservationAction } from "@/service/store/reservations";
+import { AppDispatch } from "@/service/store/store";
 import {
   Reservation,
   ReservationForm,

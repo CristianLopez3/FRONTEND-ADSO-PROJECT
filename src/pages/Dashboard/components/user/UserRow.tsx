@@ -3,8 +3,8 @@ import { Modal, DeleteModal } from "@/components/Modal";
 import UserForm from "./UserForm";
 import { User } from "@/utils/types/User";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
-import { deleteUserAction, getAllUsersAction } from "@/store/user";
+import { AppDispatch } from "@/service/store/store";
+import { deleteUserAction, getAllUsersAction } from "@/service/store/user";
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 
@@ -54,8 +54,8 @@ const UserRow: React.FC<UserRowProps> = ({ user }) => {
               <PiPencil />
             </Button>
             <Button
-              variant="danger"
-              className="p-2  hover:opacity-105 hover:scale-105 transition-all duration-100"
+              variant="light"
+              className="p-2 border-zinc-500 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
               <PiTrash />

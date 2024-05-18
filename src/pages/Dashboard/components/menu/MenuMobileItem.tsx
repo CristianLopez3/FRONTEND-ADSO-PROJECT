@@ -7,8 +7,9 @@ import Button from "@/components/Button";
 import MenuForm from "./MenuForm";
 import styles from "./styles.module.css";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
-import { deleteMenuAction } from "@/store/menus";
+import { AppDispatch } from "@/service/store/store";
+import { changeStateAction, deleteMenuAction } from "@/service/store/menus";
+import Toggle from "@/components/Toggle";
 
 export type MenuMobileItemProps = { menu: Menu };
 
@@ -16,6 +17,8 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
   const { id, title, description, price, state } = menu;
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+  const [menuState, setMenuState] = useState(state);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const onDelete = async () => {
@@ -26,12 +29,33 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
     }
   };
 
+  const onStateChange = async () => {
+    const newState = !menuState;
+    try {
+      const resultAction = await dispatch(
+        changeStateAction({ id: +id!, state: newState })
+      );
+
+      if (changeStateAction.fulfilled.match(resultAction)) {
+        setMenuState(newState);
+      }
+    } catch (error) {
+      console.error("Failed to change menu state:", error);
+    }
+  };
+
   return (
     <>
       <article key={id} className={styles.mobile_container}>
-        <div className={styles.text}>
+        <div className={`${styles.mobile_text}`}>
           <div className="font-bold text-m\">{title}</div>
-          <div>{state}</div>
+          <div >
+            <Toggle
+              variant="dark"
+              enabled={menuState}
+              setEnabled={onStateChange}
+            />
+          </div>
         </div>
         <div className={styles.mobile_description}>{description}</div>
         <section className={styles.mobile_footer_section}>
@@ -51,9 +75,7 @@ const MenuMobileItem: React.FC<MenuMobileItemProps> = ({ menu }) => {
               <PiTrash />
             </Button>
           </div>
-          <div className={`${styles.mobile_price}  `}>
-            {price}
-          </div>
+          <div className={`${styles.mobile_price}  `}>{price}</div>
         </section>
       </article>
       <Modal

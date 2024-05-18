@@ -1,4 +1,4 @@
-import { TOKEN_COOKIE } from "@/store/auth";
+import { TOKEN_COOKIE } from "@/service/store/auth";
 import { getCookies } from "@/utils/cookies";
 import axios from "axios";
 

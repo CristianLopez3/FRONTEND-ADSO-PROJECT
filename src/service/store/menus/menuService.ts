@@ -1,6 +1,6 @@
-import { menusService } from "@/api/menu";
+import { menusService } from "@/service/menu";
 import { MenuPost } from "@/utils/types/Menu";
-import { MenuStatePatch } from '../../utils/types/Menu';
+import { MenuStatePatch } from '@/utils/types/Menu';
 
 export const getMenus = async (page = 0) => {
   const response = await menusService.getMenus(page);

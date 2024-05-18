@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store/store";
-import { getAllMenusAction } from "@/store/menus";
+import { AppDispatch, RootState } from "@/service/store/store";
+import { getAllMenusAction } from "@/service/store/menus";
 import { CardSkeleton } from "@/components/Skeleton";
 
 const MenuNav = React.lazy(() => import("./MenuNav"));

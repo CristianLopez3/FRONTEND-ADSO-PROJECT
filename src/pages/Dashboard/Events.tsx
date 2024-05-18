@@ -4,9 +4,12 @@ import styles from "./styles.module.css";
 import { RiPencilLine } from "react-icons/ri";
 import { useCallback, useState } from "react";
 import EventCard from "./components/event/EventCard";
+import { Modal } from "@/components/Modal";
+import EventForm from "./components/event/EventForm";
 
 const Events: React.FC = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
+  console.log(addModal);
 
   const toggleAddModal = useCallback(() => {
     setAddModal((prevState) => !prevState);
@@ -35,6 +38,10 @@ const Events: React.FC = () => {
           <EventCard />
         </section>
       </main>
+
+      <Modal open={addModal} onClose={toggleAddModal}>
+        <EventForm  handleModal={toggleAddModal} />
+      </Modal>
     </>
   );
 };

@@ -18,7 +18,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   function InputField({ name, type = "text", styles,  ...props }, ref) {
 
     const defaultStyle =  
-      "block w-full py-3 pl-1 pr-4 border-b border-zinc-400 outline-none text-sm text-black";
+      "block w-full py-3 pl-1 pr-4  outline-none text-sm text-black border-b border-zinc-400";
     const combinedStyles = cn(defaultStyle, styles);
     
     return (

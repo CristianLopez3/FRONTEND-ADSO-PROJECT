@@ -1,4 +1,4 @@
-import { authService } from "@/api/auth"
+import { authService } from "@/service/auth"
 import { Auth } from "@/utils/types/Auth"
 import { cookies } from "@/utils/cookies"
 import { TOKEN_COOKIE, USER_COOKIE } from "./authActions"

@@ -1,4 +1,3 @@
-import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
 import { Reservation } from "@/utils/types/Reservation";
 import { useCallback, useState } from "react";
@@ -7,7 +6,11 @@ import BookForm from "./BookForm";
 import DeleteModal from "@/components/Modal/DeleteModal";
 import { formatedDate, formatedHour } from "@/utils/dateFormater";
 import { InputCheck } from "@/components/Input";
-import { checkedInReservationAction, deleteReservationAction } from "@/store/reservations/reservationActions";
+import { AppDispatch } from "@/service/store/store";
+import {
+  checkedInReservationAction,
+  deleteReservationAction,
+} from "@/service/store/reservations/reservationActions";
 import { PiTrash, PiPencil } from "react-icons/pi";
 import Button from "@/components/Button";
 
@@ -39,7 +42,6 @@ const BookRow = ({ book }: BookRowProps) => {
     }
   };
 
- 
   const handleModal = useCallback(
     () => setOpenUpdateModal((prev) => !prev),
     []
@@ -89,7 +91,7 @@ const BookRow = ({ book }: BookRowProps) => {
               <PiPencil />
             </Button>
             <Button
-              variant="danger"
+              variant="light"
               className="p-2 hover:opacity-105 hover:scale-105 transition-all duration-100"
               onClick={() => setOpenDeleteModal(!openDeleteModal)}
             >
@@ -104,7 +106,11 @@ const BookRow = ({ book }: BookRowProps) => {
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(!openDeleteModal)}
       >
-        <DeleteModal onDelete={onDelete} name={name} />
+        <DeleteModal
+          onDelete={onDelete}
+          message="Make sure you don't need the information of this reservation more, because there is no way to recover it."
+          name={name}
+        />
       </Modal>
 
       <Modal open={openUpdateModal} onClose={handleModal}>

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState, useCallback } from "react";
-import { AppDispatch, RootState } from "@/store/store";
+import { AppDispatch, RootState } from "@/service/store/store";
 
 import { RiAddFill } from "react-icons/ri";
 
@@ -7,7 +7,7 @@ import DashboardNavbar from "./components/dashboard/DashboardNavbar";
 import Modal from "@/components/Modal/Modal";
 import MenuForm from "./components/menu/MenuForm";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMenusAction } from "@/store/menus/menuActions";
+import { getAllMenusAction } from "@/service/store/menus/menuActions";
 import { TableSkeleton } from "@/components/Skeleton";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";

@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const BookTable = React.lazy(() => import("./components/book/BookTable"));
-import { AppDispatch, RootState } from "@/store/store";
-import { getReservationsAction } from "@/store/reservations";
+import { AppDispatch, RootState } from "@/service/store/store";
+import { getReservationsAction } from "@/service/store/reservations";
 
 import { Modal } from "@/components/Modal";
 import BookForm from "./components/book/BookForm";

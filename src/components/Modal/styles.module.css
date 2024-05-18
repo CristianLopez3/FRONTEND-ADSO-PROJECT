@@ -15,7 +15,7 @@
 }
 
 .delete_modal {
-  @apply mx-auto my-4 w-48 text-center;
+  @apply mx-auto my-4 w-64 text-center;
 }
 
 .delete_icon {
@@ -27,7 +27,7 @@
 }
 
 .delete_message {
-  @apply text-sm text-zinc-500;
+  @apply  text-sm text-zinc-500 mt-4;
 }
 
 .delete_button {

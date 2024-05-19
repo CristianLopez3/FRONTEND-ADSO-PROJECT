@@ -9,6 +9,7 @@ export const ENDPOINTS = {
   CATEGORY: "category",
   RESERVATIONS: "reservations",
   USERS: "users",
+  EVENTS: "events"
 };
 
 export const instance = axios.create({
@@ -19,7 +20,8 @@ const PROTECTED_ENDPOINTS = [
   ENDPOINTS.MENU,
   ENDPOINTS.CATEGORY,
   ENDPOINTS.RESERVATIONS,
-  ENDPOINTS.USERS
+  ENDPOINTS.USERS,
+  ENDPOINTS.EVENTS
 ];
 
 instance.interceptors.request.use(

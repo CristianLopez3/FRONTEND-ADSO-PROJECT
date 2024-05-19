@@ -156,7 +156,10 @@ const MenuForm = ({
           <InputField {...register("title")} type="text" />
           {renderErrorMessage(errors.title!)}
 
-          <InputField {...register("description")} type="text" />
+          <textarea
+            {...register("description")}
+            className="block w-full py-3 pl-1 pr-4  outline-none text-sm text-black border rounded-md my-2 border-zinc-400"
+          />
           {renderErrorMessage(errors.description!)}
 
           <InputField {...register("price")} type="number" />
@@ -197,7 +200,11 @@ const MenuForm = ({
           {renderErrorMessage(errors.idCategory!)}
 
           <div className={formStyles.buttons}>
-            <Button variant="dark" className="w-full uppercase" content={buttonText} />
+            <Button
+              variant="dark"
+              className="w-full uppercase"
+              content={buttonText}
+            />
             <Button
               variant="light"
               className="w-full border border-zinc-500"

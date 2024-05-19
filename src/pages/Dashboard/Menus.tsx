@@ -15,12 +15,11 @@ import Button from "@/components/Button";
 const MenuTable = React.lazy(() => import("./components/menu/MenuTable"));
 
 import styles from "./styles.module.css";
-import Pagination from "@/components/Pagination";
 
 // Move fetchMenus outside of the component
-const fetchMenus = async (dispatch: AppDispatch, page: number) => {
+const fetchMenus = async (dispatch: AppDispatch) => {
   try {
-    await dispatch(getAllMenusAction(page));
+    await dispatch(getAllMenusAction());
   } catch (error) {
     console.log(error);
   }
@@ -30,7 +29,6 @@ const Menus = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const menus = useSelector((state: RootState) => state.menus);
-  const [currentPage, setCurrentPage] = useState<number>(0);
 
   const toggleAddModal = useCallback(() => {
     setAddModal((prevState) => !prevState);
@@ -41,10 +39,8 @@ const Menus = () => {
   }, []);
 
   useEffect(() => {
-    fetchMenus(dispatch, currentPage);
+    fetchMenus(dispatch);
   }, [dispatch]);
-
-  const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
     <>
@@ -75,12 +71,6 @@ const Menus = () => {
         ) : (
           <Suspense fallback={<TableSkeleton />}>
             <MenuTable data={menus.data} />
-            <Pagination
-              itemsPerPage={10}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-              pageRange={menus.meta?.totalPages ?? 1}
-            />
           </Suspense>
         )}
       </main>

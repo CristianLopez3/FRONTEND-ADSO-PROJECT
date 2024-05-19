@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const fetchMenus = async (dispatch: AppDispatch) => {
   try {
-    await dispatch(getAllMenusAction(0));
+    await dispatch(getAllMenusAction());
   } catch (error) {
     console.log(error);
   }

@@ -58,7 +58,7 @@ const MenuRow: React.FC<MenuRowProps> = ({ menu }) => {
           {title}
           <span className="block text-[11px]">{category.name}</span>
         </td>
-        <td className="row-table">{description}</td>
+        <td className="row-table text-wrap">{description}</td>
         <td className="row-table">${price}</td>
 
         <td className="row-table w-24">

@@ -36,6 +36,7 @@ const BookForm: React.FC<BookFormProps> = ({
   numberOfPeople,
 }) => {
   const [error, setError] = useState<string | null>(null);
+  
   const {
     register,
     handleSubmit,

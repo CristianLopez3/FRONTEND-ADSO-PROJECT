@@ -4,6 +4,7 @@ import { menuReducer } from "./menus";
 import CategoryReducer from "./menus/CategoryReducer";
 import { authReducer } from "./auth";
 import { reservationReducer } from "./reservations";
+import eventReducer from "./event/eventReducer";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     categories: CategoryReducer,
     reservations: reservationReducer,
     auth: authReducer,
+    events: eventReducer,
   },
 });
 

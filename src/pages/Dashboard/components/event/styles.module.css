@@ -11,10 +11,9 @@
 }
 
 .textarea {
-  @apply border rounded-md border-zinc-400 w-full  max-h-52 h-full p-3 text-sm transition-all duration-200 outline-none;
+  @apply border rounded-md border-zinc-400 w-full  max-h-52 h-full p-3 text-sm md:text-lg transition-all duration-200 outline-none whitespace-normal break-normal text-wrap scroll-auto;
 }
 
 .footer {
-  @apply flex justify-end items-center gap-2 ;
+  @apply flex justify-end items-center gap-2;
 }
-

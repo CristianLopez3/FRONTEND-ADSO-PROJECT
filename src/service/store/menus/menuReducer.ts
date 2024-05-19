@@ -37,16 +37,17 @@ const menuSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    
       .addCase(getAllMenusAction.pending, startLoading)
       .addCase(
         getAllMenusAction.fulfilled,
-        (state, action: PayloadAction<{content: Menu[], totalPages: number}>) => {
+        (state, {payload}) => {
           state.isLoading = false;
-          state.data = action.payload.content;
-          state.meta!.totalPages = action.payload.totalPages;
+          state.data = payload;
         }
       )
       .addCase(getAllMenusAction.rejected, loadingFailed)
+
       .addCase(addMenuAction.pending, startLoading)
       .addCase(
         addMenuAction.fulfilled,
@@ -68,9 +69,9 @@ const menuSlice = createSlice({
         }
       )
       .addCase(updateMenuAction.rejected, loadingFailed)
+
       // * DELETE MENU * //
       .addCase(deleteMenuAction.pending, startLoading)
-
       .addCase(deleteMenuAction.fulfilled, (state, action) => {
         // Obtener el ID del menú eliminado del payload de la acción
         state.isLoading = false;
@@ -88,6 +89,7 @@ const menuSlice = createSlice({
         }
       )
       .addCase(getMenusByCategoryAction.rejected, loadingFailed)
+
       .addCase(changeStateAction.pending, startLoading)
       .addCase(changeStateAction.fulfilled, (state, action) => {
         state.isLoading = false;

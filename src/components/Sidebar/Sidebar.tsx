@@ -1,4 +1,10 @@
-import { createContext, useState, useMemo, useCallback, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/service/store/store";
@@ -28,18 +34,18 @@ const Sidebar = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-     const uncheckedReservations = async () => {
-        try {
-          await dispatch(getUncheckedReservationsAction());
-        } catch(e){
-          console.log(e)
-        }
-     }
-     uncheckedReservations();
-    if(!user) {
+    const uncheckedReservations = async () => {
+      try {
+        await dispatch(getUncheckedReservationsAction());
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    uncheckedReservations();
+    if (!user) {
       navigate(ROUTES.LOGIN);
     }
-  }, [])
+  }, []);
 
   const toggleExpanded = useCallback(() => {
     setExpanded((curr) => !curr);
@@ -76,8 +82,8 @@ const Sidebar = () => {
         <SidebarContext.Provider value={expanded}>
           <ul className="flex-1 px-3">
             {menuItems.map((item) => {
-              if(user.role !== USER_ROLES.ADMIN) {
-                if(item.text === "User") {
+              if (user.role && user.role !== USER_ROLES.ADMIN) {
+                if (item.text === "User") {
                   return null;
                 }
               }

@@ -1,16 +1,26 @@
 import { z } from "zod";
 
-
 export interface Event {
-    title: string;
-    description: string;
-    image: string;
+  id?: number;
+  title: string;
+  description: string;
+  discount: number;
+  url?: string;
 }
 
 export const eventSchema = z.object({
-    title: z.string(),
-    description: z.string(),
-    Image: z.string()
-})
+  title: z.string().min(8, "Please, provide a more detailed title."),
+  description: z
+    .string()
+    .min(20, "Please, provide a more detailed description."),
+  discount: z.number().int().min(1).max(100),
+  url: z.string(),
+});
 
 export type EventForm = z.infer<typeof eventSchema>;
+
+export interface EventReducerState {
+  isLoading: boolean;
+  data: Event;
+  isError: boolean;
+}

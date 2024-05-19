@@ -34,25 +34,31 @@ const Report = () => {
   return (
     <>
       <main className={styles.main}>
-        <section className={styles.section}>
-          <ChartTwoMonths className="max-w-[600px] flex justify-center items-center  lg:ml-12" />
-          <CardBetweenDates />
-          <Chart className="w-full h-[300px] xl:max-h-[800px]" />
-          <article className="space-y-3 lg:mt-3 order-first lg:-order-none">
-            <Message
-              icon={<LuBadgeCheck color="#e4e4e7" />}
-              title="Unchecked Reservations"
-              description="You have unchecked reservations"
-              data={<div className="text-zinc-50 text-2xl">{uncheckedIn}</div>}
-            />
-            <Message
-              icon={<LuBadgeCheck color="#e4e4e7" />}
-              title="Month Reservations"
-              description={`This month has had ${currentMonth} reservations`}
-              data={<div className="text-zinc-50 text-2xl">{currentMonth}</div>}
-            />
-          </article>
-        </section>
+        <div className="flex justify-center items-center h-full max-h-[80%]">
+          <section className={styles.section}>
+            <ChartTwoMonths className="max-w-[600px] flex justify-center items-center  lg:ml-12" />
+            <CardBetweenDates />
+            <Chart className="w-full h-[300px] xl:max-h-[800px]" />
+            <article className="space-y-3 lg:mt-3 order-first lg:-order-none">
+              <Message
+                icon={<LuBadgeCheck color="#e4e4e7" />}
+                title="Unchecked Reservations"
+                description="You have unchecked reservations"
+                data={
+                  <div className="text-zinc-50 text-2xl">{uncheckedIn}</div>
+                }
+              />
+              <Message
+                icon={<LuBadgeCheck color="#e4e4e7" />}
+                title="Month Reservations"
+                description={`This month has had ${currentMonth} reservations`}
+                data={
+                  <div className="text-zinc-50 text-2xl">{currentMonth}</div>
+                }
+              />
+            </article>
+          </section>
+        </div>
       </main>
     </>
   );

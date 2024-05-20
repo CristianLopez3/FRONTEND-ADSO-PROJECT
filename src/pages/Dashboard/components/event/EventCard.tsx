@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import { IMAGES_URL } from "@/service/base.api";
 import { Event } from "@/utils/types/Event";
 
 
@@ -8,7 +9,7 @@ type EventCardProps = {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const { title, description, discount, url } = event;
-  const image = `http://localhost:8080/api/v1/file/${url}`;
+  const image = `${IMAGES_URL}${url}`;
 
   return (
     <>

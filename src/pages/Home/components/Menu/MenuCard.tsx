@@ -1,3 +1,4 @@
+import { IMAGES_URL } from "@/service/base.api";
 import { type Menu } from "@/utils/types/Menu";
 
 type MenuCardProps = Partial<Menu>;
@@ -18,7 +19,7 @@ const MenuCard: React.FC<MenuCardProps> = ({
         <figure className="w-1/3 h-full">
           <img
             className="object-cover h-36 w-full transition-all"
-            src={`http://localhost:8080/api/v1/file/${imageName}`}
+            src={`${IMAGES_URL}${imageName}`}
             alt="Hamburger"
           />
         </figure>

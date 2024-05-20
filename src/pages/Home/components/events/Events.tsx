@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { ROUTES } from "@/routes/constants";
+import { IMAGES_URL } from "@/service/base.api";
 import { getEventAction } from "@/service/store/event";
 import { AppDispatch, RootState } from "@/service/store/store";
 import { useEffect } from "react";
@@ -43,7 +44,7 @@ const Events = () => {
         </div>
       </article>
       <picture className="my-4  lg:max-w-[50%] flex-center">
-        <img src={`http://localhost:8080/api/v1/file/${url}`} alt={title} loading="lazy" />
+        <img src={`${IMAGES_URL}${url}`} alt={title} loading="lazy" />
       </picture>
     </section>
   );

@@ -2,7 +2,8 @@ import { TOKEN_COOKIE } from "@/service/store/auth";
 import { getCookies } from "@/utils/cookies";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/v1/";
+export const BASE_URL = import.meta.env.VITE_APP_API_URL as string;
+export const IMAGES_URL = import.meta.env.VITE_APP_API_IMAGES as string;
 
 export const ENDPOINTS = {
   MENU: "menus",

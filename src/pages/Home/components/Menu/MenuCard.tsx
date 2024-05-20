@@ -8,7 +8,6 @@ const MenuCard: React.FC<MenuCardProps> = ({
   price,
   imageName
 }) => {
-  const url = "http://localhost:8080/api/v1/file/";
   // console.log(imageName)
   return (
     <>
@@ -19,7 +18,7 @@ const MenuCard: React.FC<MenuCardProps> = ({
         <figure className="w-1/3 h-full">
           <img
             className="object-cover h-36 w-full transition-all"
-            src={url + imageName}
+            src={`http://localhost:8080/api/v1/file/${imageName}`}
             alt="Hamburger"
           />
         </figure>

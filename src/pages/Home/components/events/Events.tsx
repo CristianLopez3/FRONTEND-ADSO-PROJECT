@@ -22,7 +22,6 @@ const Events = () => {
     fetchEvents();
   }, [dispatch]);
 
-  console.log(events.data);
   return (
     <section className="mt-28 lg:flex justify-between text-zinc-300">
       <article className="text-center lg:text-start lg:max-w-[50%] flex-center flex-col p-4 lg:p-6 lg:pr-12 gap-y-4">
@@ -44,7 +43,7 @@ const Events = () => {
         </div>
       </article>
       <picture className="my-4  lg:max-w-[50%] flex-center">
-        <img src={`http://localhost:8080/api/v1/file/${url}`} alt="events" loading="lazy" />
+        <img src={`http://localhost:8080/api/v1/file/${url}`} alt={title} loading="lazy" />
       </picture>
     </section>
   );

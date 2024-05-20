@@ -16,4 +16,12 @@ export const eventService = {
     });
   },
 
+  updateEventPicture: (formData: FormData) => {
+    return instance.put(`${ENDPOINT}/1/picture`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
+
 };

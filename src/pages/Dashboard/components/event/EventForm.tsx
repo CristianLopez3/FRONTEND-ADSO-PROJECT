@@ -1,7 +1,7 @@
 import { InputField } from "@/components/Input";
 import styles from "./styles.module.css";
 import Button from "@/components/Button";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/service/store/store";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ import {
 } from "@/utils/types/Event";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getEventAction, updateEventAction } from "@/service/store/event";
+import PictureForm from "./PictureForm";
 
 type EventFormProps = {
   handleModal: () => void;
@@ -19,12 +20,13 @@ type EventFormProps = {
 };
 
 const EventForm: React.FC<EventFormProps> = ({ handleModal, event }) => {
-  const { title, description, discount, url } = event;
   const [image, setImage] = useState<File | null>(null);
+  const { title, description, discount, url } = event;
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<EventFormTypes>({
     defaultValues: {
       title,
@@ -55,16 +57,14 @@ const EventForm: React.FC<EventFormProps> = ({ handleModal, event }) => {
         description: data.description,
         discount: Number(data.discount),
       };
-      if(image){
-        formData.append("image", image);
-      }
       formData.append("event", JSON.stringify(event));
       try {
         await dispatch(updateEventAction(formData));
         dispatch(getEventAction());
-        handleModal();
       } catch (error) {
         console.error("Error creating or updating menu", error);
+      } finally {
+        reset();
       }
     },
     [dispatch, handleModal]
@@ -79,17 +79,10 @@ const EventForm: React.FC<EventFormProps> = ({ handleModal, event }) => {
       <div className={styles.header}>
         <h1>Update The event</h1>
       </div>
+      <PictureForm image={image} handleImage={setImage} />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <InputField
-              type="file"
-              accept="image/*"
-              max={1}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setImage(e.target.files![0] ? e.target.files![0] : null);
-              }}
-            />
             <InputField
               {...register("title")}
               placeholder="title"

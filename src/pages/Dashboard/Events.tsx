@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/service/store/store";
 import { getEventAction } from "@/service/store/event";
 
+
 const Events: React.FC = () => {
   const [addModal, setAddModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -49,14 +50,14 @@ const Events: React.FC = () => {
         </DashboardNavbar>
       </header>
 
-      <main className="px-2 md:px-8 mx-auto flex items-center  h-full max-h-[80%]">
+      <main className="px-2 mt-8 md:px-8 mx-auto flex items-center  h-full max-h-[80%]">
         <section className="flex justify-center items-center">
           <EventCard event={event} />
         </section>
       </main>
 
       <Modal open={addModal} onClose={toggleAddModal}>
-        <EventForm handleModal={toggleAddModal} event={event} />
+        <EventForm handleModal={toggleAddModal} event={event}  />
       </Modal>
     </>
   );

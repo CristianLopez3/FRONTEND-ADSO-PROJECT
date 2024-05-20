@@ -1,6 +1,6 @@
 import { EventReducerState } from "@/utils/types/Event";
 import { createSlice } from "@reduxjs/toolkit";
-import { getEventAction, updateEventAction } from "./eventActions";
+import { getEventAction, updateEventAction, updateEventPictureAction } from "./eventActions";
 
 const initialState: EventReducerState = {
   isLoading: false,
@@ -42,7 +42,17 @@ const eventSlice = createSlice({
         state.isLoading = false;
         state.data = payload;
       })
-      .addCase(updateEventAction.rejected, loadingFailed);
+      .addCase(updateEventAction.rejected, loadingFailed)
+
+
+      .addCase(updateEventPictureAction.pending, startLoading)
+      .addCase(updateEventPictureAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.data = payload;
+      })
+      .addCase(updateEventPictureAction.rejected, loadingFailed)
+
+      
   },
 });
 

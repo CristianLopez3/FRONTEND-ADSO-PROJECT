@@ -17,3 +17,7 @@
 .footer {
   @apply flex justify-end items-center gap-2;
 }
+
+.pictureForm {
+  @apply w-full flex justify-center items-center gap-2;
+}

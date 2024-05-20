@@ -12,7 +12,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 
   return (
     <>
-      <section className="xl:flex justify-between text-zinc-300">
+      <section className="mt-8 xl:flex justify-between text-zinc-300">
         <article className="text-center lg:text-start xl:max-w-[50%] flex-center flex-col p-4 lg:p-6 lg:pr-12 gap-y-4">
           <h2 className="text-zinc-200 text-2xl lg:text-4xl font-semibold">
             {title}

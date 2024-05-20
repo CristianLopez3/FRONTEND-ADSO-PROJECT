@@ -10,3 +10,8 @@ export const updateEvent = async (formData: FormData) => {
     const response = await eventService.updateEvent(formData);
     return response.data;
 }
+
+export const updateEventPicture = async (formData: FormData) => {
+    const response = await eventService.updateEventPicture(formData);
+    return response.data;
+}

@@ -4,7 +4,6 @@ import KnowUs from "./components/KnowUs";
 
 
 const Home = () => {
-
   return (
     <div className="relative pb-0">
       <header>

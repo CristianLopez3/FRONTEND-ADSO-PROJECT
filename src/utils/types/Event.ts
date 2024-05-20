@@ -17,7 +17,12 @@ export const eventSchema = z.object({
   url: z.string(),
 });
 
+
 export type EventForm = z.infer<typeof eventSchema>;
+
+export const eventPictureSchema = z.object({});
+
+export type EventPictureForm = z.infer<typeof eventPictureSchema>;
 
 export interface EventReducerState {
   isLoading: boolean;

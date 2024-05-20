@@ -16,9 +16,9 @@ const MenuCard: React.FC<MenuCardProps> = ({
         key={title}
         className="relative max-w-11/12  flex hover:scale-[1.02] transition-all   overflow-hidden  rounded-sm shadow-xl dark:bg-gray-800"
       >
-        <figure className="w-1/3 h-full">
+        <figure className="w-1/3 h-full flex items-center justify-center">
           <img
-            className="object-cover h-36 w-full transition-all"
+            className="object-cover overflow- h-36 w-full transition-all"
             src={`${IMAGES_URL}${imageName}`}
             alt="Hamburger"
           />

@@ -40,7 +40,7 @@ const PictureForm: React.FC<PictureFormProps> = ({ image, handleImage }) => {
       <InputField
         type="file"
         name="image"
-        className="border-2 border-zinc-600 rounded-lg p-2 w-[80%] cursor-pointer"
+        className="border-2 border-zinc-600 rounded-lg p-2  cursor-pointer flex justify-center items-center w-full"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           handleImage(e.target.files![0] && e.target.files![0]);
         }}

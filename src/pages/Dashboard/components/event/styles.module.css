@@ -19,5 +19,5 @@
 }
 
 .pictureForm {
-  @apply w-full flex justify-center items-center gap-2;
+  @apply w-full flex justify-center items-center flex-col gap-2 md:flex-row;
 }

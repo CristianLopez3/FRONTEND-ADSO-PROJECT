@@ -1,6 +1,11 @@
 import { EventReducerState } from "@/utils/types/Event";
 import { createSlice } from "@reduxjs/toolkit";
-import { getEventAction, updateEventAction, updateEventPictureAction } from "./eventActions";
+import {
+  getEventAction,
+  getEventPictureAction,
+  updateEventAction,
+  updateEventPictureAction,
+} from "./eventActions";
 
 const initialState: EventReducerState = {
   isLoading: false,
@@ -10,6 +15,7 @@ const initialState: EventReducerState = {
     discount: 0,
     url: "",
   },
+  picture: null,
   isError: false,
 };
 
@@ -44,15 +50,18 @@ const eventSlice = createSlice({
       })
       .addCase(updateEventAction.rejected, loadingFailed)
 
-
       .addCase(updateEventPictureAction.pending, startLoading)
-      .addCase(updateEventPictureAction.fulfilled, (state, { payload }) => {
+      .addCase(updateEventPictureAction.fulfilled, (state) => {
         state.isLoading = false;
-        state.data = payload;
       })
       .addCase(updateEventPictureAction.rejected, loadingFailed)
 
-      
+      .addCase(getEventPictureAction.pending, startLoading)
+      .addCase(getEventPictureAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.picture = payload;
+      })
+      .addCase(getEventPictureAction.rejected, loadingFailed);
   },
 });
 

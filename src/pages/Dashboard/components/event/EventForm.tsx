@@ -13,7 +13,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getEventAction, updateEventAction } from "@/service/store/event";
 import PictureForm from "./PictureForm";
-import { IMAGES_URL } from "@/service/base.api";
 
 type EventFormProps = {
   handleModal: () => void;
@@ -107,7 +106,7 @@ const EventForm: React.FC<EventFormProps> = ({ handleModal, event }) => {
             />
           ) : (
             <img
-              src={`${IMAGES_URL}${url}`}
+              src={`http://localhost:8080/api/v1/events/1/picture`}
               alt="events image"
               className="w-56 h-56 mx-auto"
             />

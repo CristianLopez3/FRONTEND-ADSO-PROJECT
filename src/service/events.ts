@@ -24,4 +24,8 @@ export const eventService = {
     });
   },
 
+  getEventPicture: () => {
+    return instance.get(`${ENDPOINT}/1/picture`);
+  }
+
 };

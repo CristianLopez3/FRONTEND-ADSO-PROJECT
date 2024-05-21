@@ -5,7 +5,7 @@ import { AppDispatch } from "@/service/store/store";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { EventPictureForm, eventPictureSchema } from "@/utils/types/Event";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { updateEventPictureAction } from "@/service/store/event";
+import { getEventAction, updateEventPictureAction } from "@/service/store/event";
 import styles from "./styles.module.css";
 
 type PictureFormProps = {
@@ -26,6 +26,7 @@ const PictureForm: React.FC<PictureFormProps> = ({ image, handleImage }) => {
       formData.append("image", image!);
       try {
         await dispatch(updateEventPictureAction(formData));
+        await dispatch(getEventAction());
       } catch (error) {
         console.error("Error updating event picture", error);
       } finally {

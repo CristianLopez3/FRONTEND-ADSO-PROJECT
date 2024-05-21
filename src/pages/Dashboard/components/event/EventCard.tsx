@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
-import { IMAGES_URL } from "@/service/base.api";
 import { Event } from "@/utils/types/Event";
+import { useEffect, useState } from "react";
 
 
 type EventCardProps = {
@@ -8,8 +8,17 @@ type EventCardProps = {
 };
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  const { title, description, discount, url } = event;
-  const image = `${IMAGES_URL}${url}`;
+  const { title, description, discount } = event;
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/v1/events/1/picture')
+        .then(response => response.blob())
+        .then(blob => {
+            const objectUrl = URL.createObjectURL(blob);
+            setImageUrl(objectUrl);
+        });
+}, []);
 
   return (
     <>
@@ -32,15 +41,17 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           </div>
         </article>
         <picture className="my-4 xl:max-w-[50%] flex-center">
-          <img
-            src={image}
+        <img
+            src={imageUrl!}
             alt="events"
             loading="lazy"
             className="max-h-[700px]"
-          />
+        />
         </picture>
       </section>
     </>
   );
 };
 export default EventCard;
+
+

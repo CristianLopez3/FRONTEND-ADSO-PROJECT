@@ -28,4 +28,5 @@ export interface EventReducerState {
   isLoading: boolean;
   data: Event;
   isError: boolean;
+  picture: string | null;
 }

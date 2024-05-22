@@ -20,7 +20,6 @@ import { getCookies, removeCookies } from "@/utils/cookies";
 import { TOKEN_COOKIE, USER_COOKIE } from "@/service/store/auth";
 
 import styles from "./styles.module.css";
-import { USER_ROLES } from "@/utils/types/User";
 import { getUncheckedReservationsAction } from "@/service/store/reservations";
 
 export const SidebarContext = createContext<boolean>(true);
@@ -82,11 +81,6 @@ const Sidebar = () => {
         <SidebarContext.Provider value={expanded}>
           <ul className="flex-1 px-3">
             {menuItems.map((item) => {
-              if (user.role && user.role !== USER_ROLES.ADMIN) {
-                if (item.text === "User") {
-                  return null;
-                }
-              }
               return (
                 <SidebarItem
                   key={item.path}

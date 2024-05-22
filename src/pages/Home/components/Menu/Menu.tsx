@@ -44,6 +44,7 @@ const Menu = () => {
               <MenuCard
                 // state={item.state}
                 key={item.title}
+                id={item.id}
                 description={item.description}
                 price={item.price}
                 title={item.title}

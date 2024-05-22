@@ -18,7 +18,7 @@ const MenuCard: React.FC<MenuCardProps> = ({
         <figure className="w-1/3 h-full flex items-center justify-center">
           <img
             className="object-cover overflow- h-36 w-full transition-all"
-            src={`http://localhost:8080/api/v1/menus/${id}/image`}
+            src={`${import.meta.env.VITE_APP_API_URL}menus/${id}/image`}
             alt={imageName}
           />
         </figure>

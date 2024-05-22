@@ -1,6 +1,5 @@
 import Button from "@/components/Button";
 import { Event } from "@/utils/types/Event";
-import { useEffect, useState } from "react";
 
 
 type EventCardProps = {
@@ -9,16 +8,6 @@ type EventCardProps = {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const { title, description, discount } = event;
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch('http://localhost:8080/api/v1/events/1/picture')
-        .then(response => response.blob())
-        .then(blob => {
-            const objectUrl = URL.createObjectURL(blob);
-            setImageUrl(objectUrl);
-        });
-}, []);
 
   return (
     <>
@@ -42,7 +31,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         </article>
         <picture className="my-4 xl:max-w-[50%] flex-center">
         <img
-            src={imageUrl!}
+            src={`${import.meta.env.VITE_APP_API_URL}events/1/picture`}
             alt="events"
             loading="lazy"
             className="max-h-[700px]"

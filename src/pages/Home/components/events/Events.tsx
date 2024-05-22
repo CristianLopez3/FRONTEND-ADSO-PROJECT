@@ -1,6 +1,5 @@
 import Button from "@/components/Button";
 import { ROUTES } from "@/routes/constants";
-import { IMAGES_URL } from "@/service/base.api";
 import { getEventAction } from "@/service/store/event";
 import { AppDispatch, RootState } from "@/service/store/store";
 import { useEffect } from "react";
@@ -23,6 +22,8 @@ const Events = () => {
     fetchEvents();
   }, [dispatch]);
 
+  console.log(url)
+
   return (
     <section className="mt-28 lg:flex justify-between text-zinc-300">
       <article className="text-center lg:text-start lg:max-w-[50%] flex-center flex-col p-4 lg:p-6 lg:pr-12 gap-y-4">
@@ -44,7 +45,7 @@ const Events = () => {
         </div>
       </article>
       <picture className="my-4  lg:max-w-[50%] flex-center">
-        <img src={`${IMAGES_URL}${url}`} alt={title} loading="lazy" />
+        <img src={`${import.meta.env.VITE_APP_API_URL}events/1/picture`} alt={title} loading="lazy" />
       </picture>
     </section>
   );

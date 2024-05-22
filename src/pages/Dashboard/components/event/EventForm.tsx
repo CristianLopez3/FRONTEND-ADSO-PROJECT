@@ -106,7 +106,7 @@ const EventForm: React.FC<EventFormProps> = ({ handleModal, event }) => {
             />
           ) : (
             <img
-              src={`http://localhost:8080/api/v1/events/1/picture`}
+              src={`${import.meta.env.VITE_APP_API_URL}events/1/picture`}
               alt="events image"
               className="w-56 h-56 mx-auto"
             />
